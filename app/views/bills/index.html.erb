@@ -1,0 +1,29 @@
+<h1>Listing bills</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Amount</th>
+    <th>Date</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bills.each do |bill| %>
+  <tr>
+    <td><%= bill.title %></td>
+    <td><%= bill.amount %></td>
+    <td><%= bill.date %></td>
+    <td><%= bill.user_id %></td>
+    <td><%= link_to 'Show', bill %></td>
+    <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
+    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bill', new_bill_path %>
