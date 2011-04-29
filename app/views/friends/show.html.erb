@@ -1,0 +1,12 @@
+<h1>Friends of <%= @user.name%></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @friend.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_friend_path(@user, @friend) %> |
+<%= link_to 'Back', user_friends_path(@user) %>

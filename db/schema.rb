@@ -17,12 +17,18 @@ ActiveRecord::Schema.define(:version => 20110429140329) do
     t.float    "amount"
     t.date     "date"
     t.integer  "user_id"
+    t.integer  "friend_id"
+    t.float    "user_payed"
+    t.float    "friend_payed"
+    t.decimal  "user_ratio",   :precision => 3, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "people", :force => true do |t|
     t.string   "name"
+    t.string   "type"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

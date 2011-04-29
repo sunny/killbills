@@ -1,10 +1,17 @@
+<h1>User <%= @user.name %></h1>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<h2>Friends</h2>
+<%= render @user.friends %>
+<p><%= link_to "New friend", new_user_friend_path(@user) %>
 
+<h2>Bills</h2>
+<%= render @user.bills %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<h2>Debts</h2>
+<% for bill in @user.bills %>
+<div><%= link_to bill.title, bill %> : <%= bill.debt %></div>
+<% end %>
+
+<p><%= link_to 'Edit', edit_user_path(@user) %></p>

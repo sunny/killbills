@@ -12,20 +12,36 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
+    <%= f.label :amount %>
+    <%= f.money_field :amount %>
   </div>
   <div class="field">
-    <%= f.label :date %><br />
+    <%= f.label :date %>
     <%= f.date_select :date %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
+    <%= f.label :user_id %>
+    <%= f.collection_select :user_id, User.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :friend_id %>
+    <%= f.collection_select :friend_id, User.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :user_payed %>
+    <%= f.money_field :user_payed %>
+  </div>
+  <div class="field">
+    <%= f.label :friend_payed %>
+    <%= f.money_field :friend_payed %>
+  </div>
+  <div class="field">
+    <%= f.label :user_ratio %>
+    <%= f.number_field :user_ratio, :size => 4 %>
   </div>
   <div class="actions">
     <%= f.submit %>

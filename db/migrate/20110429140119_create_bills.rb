@@ -6,6 +6,9 @@ class CreateBills < ActiveRecord::Migration
       t.date :date
       t.integer :user_id
       t.integer :friend_id
+      t.float :user_payed
+      t.float :friend_payed
+      t.decimal :user_ratio, :scale => 2, :precision => 3 # -9.99 to 9.99
 
       t.timestamps
     end

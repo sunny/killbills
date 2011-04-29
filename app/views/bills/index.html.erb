@@ -1,4 +1,8 @@
-<h1>Listing bills</h1>
+<h1>Bills</h1>
+
+<p>
+<%= link_to 'New Bill', new_bill_path %>
+</p>
 
 <table>
   <tr>
@@ -6,6 +10,10 @@
     <th>Amount</th>
     <th>Date</th>
     <th>User</th>
+    <th>Friend</th>
+    <th>User payed</th>
+    <th>Friend payed</th>
+    <th>User ratio</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,14 +24,15 @@
     <td><%= bill.title %></td>
     <td><%= bill.amount %></td>
     <td><%= bill.date %></td>
-    <td><%= bill.user_id %></td>
+    <td><%= link_to bill.user.name, bill.user %></td>
+    <td><%= link_to bill.friend.name, bill.friend %></td>
+    <td><%= bill.user_payed %></td>
+    <td><%= bill.friend_payed %></td>
+    <td><%= bill.user_ratio %></td>
     <td><%= link_to 'Show', bill %></td>
     <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Kill', bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Bill', new_bill_path %>

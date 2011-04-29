@@ -2,7 +2,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.all
+    @bills = Bill.all :include => [:user, :friend]
 
     respond_to do |format|
       format.html # index.html.erb

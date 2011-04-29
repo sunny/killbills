@@ -17,7 +17,27 @@
 
 <p>
   <b>User:</b>
-  <%= @bill.user_id %>
+  <%= link_to @bill.user.name, @bill.user %>
+</p>
+
+<p>
+  <b>Friend:</b>
+  <%= link_to @bill.friend.name, @bill.friend %>
+</p>
+
+<p>
+  <b>User payed:</b>
+  <%= @bill.user_payed %>
+</p>
+
+<p>
+  <b>Friend payed:</b>
+  <%= @bill.friend_payed %>
+</p>
+
+<p>
+  <b>User ratio:</b>
+  <%= @bill.user_ratio %>
 </p>
 
 

@@ -1,0 +1,23 @@
+<h1>Friends of <%= @user.name%></h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @friends.each do |friend| %>
+  <tr>
+    <td><%= friend.name %></td>
+    <td><%= link_to 'Show', user_friend_path(@user, friend) %></td>
+    <td><%= link_to 'Edit', edit_user_friend_path(@user, friend) %></td>
+    <td><%= link_to 'Kill', user_friend_path(@user, friend), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Friend', new_user_friend_path(@user) %>
