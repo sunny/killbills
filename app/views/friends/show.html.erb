@@ -1,6 +1,4 @@
-<h1>Friends of <%= @user.name%></h1>
-
-<p id="notice"><%= notice %></p>
+<h1>Friend</h1>
 
 <p>
   <b>Name:</b>
@@ -8,5 +6,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_user_friend_path(@user, @friend) %> |
-<%= link_to 'Back', user_friends_path(@user) %>
+<%= link_to 'Edit', edit_friend_path(@friend) %> |
+<%= link_to 'Back', friends_path %>

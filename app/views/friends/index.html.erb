@@ -1,8 +1,13 @@
-<h1>Friends of <%= @user.name%></h1>
+<h1>Friends</h1>
 
+<p><%= link_to 'New Friend', new_friend_path %></p>
+
+<% unless @friends.empty? %>
 <table>
   <tr>
     <th>Name</th>
+    <th>Your debt</th>
+    <th>Friend debt</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +16,13 @@
 <% @friends.each do |friend| %>
   <tr>
     <td><%= friend.name %></td>
-    <td><%= link_to 'Show', user_friend_path(@user, friend) %></td>
-    <td><%= link_to 'Edit', edit_user_friend_path(@user, friend) %></td>
-    <td><%= link_to 'Kill', user_friend_path(@user, friend), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= friend.user_debt %></td>
+    <td><%= friend.friend_debt %></td>
+    <td><%= link_to 'Show', friend %></td>
+    <td><%= link_to 'Edit', edit_friend_path(friend) %></td>
+    <td><%= link_to 'Delete', friend, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
+<% end %>
 
-<br />
-
-<%= link_to 'New Friend', new_user_friend_path(@user) %>

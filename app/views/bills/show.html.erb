@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h1>Bill</h1>
 
 <p>
   <b>Title:</b>
@@ -7,7 +7,7 @@
 
 <p>
   <b>Amount:</b>
-  <%= @bill.amount %>
+  <%= money @bill.amount %>
 </p>
 
 <p>
@@ -16,23 +16,18 @@
 </p>
 
 <p>
-  <b>User:</b>
-  <%= link_to @bill.user.name, @bill.user %>
-</p>
-
-<p>
-  <b>Friend:</b>
+  <b>With:</b>
   <%= link_to @bill.friend.name, @bill.friend %>
 </p>
 
 <p>
-  <b>User payed:</b>
-  <%= @bill.user_payed %>
+  <b>You payed:</b>
+  <%= money @bill.user_payed %>
 </p>
 
 <p>
   <b>Friend payed:</b>
-  <%= @bill.friend_payed %>
+  <%= money @bill.friend_payed %>
 </p>
 
 <p>
@@ -40,6 +35,15 @@
   <%= @bill.user_ratio %>
 </p>
 
+<p>
+  <b>Your debt:</b>
+  <%= money @bill.user_debt %>
+</p>
+
+<p>
+  <b>Friend debt:</b>
+  <%= money @bill.friend_debt %>
+</p>  
 
 <%= link_to 'Edit', edit_bill_path(@bill) %> |
 <%= link_to 'Back', bills_path %>

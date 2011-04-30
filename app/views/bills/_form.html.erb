@@ -24,15 +24,11 @@
     <%= f.date_select :date %>
   </div>
   <div class="field">
-    <%= f.label :user_id %>
-    <%= f.collection_select :user_id, User.all, :id, :name %>
-  </div>
-  <div class="field">
     <%= f.label :friend_id %>
-    <%= f.collection_select :friend_id, User.all, :id, :name %>
+    <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :user_payed %>
+    <%= f.label :user_payed, "You payed" %>
     <%= f.money_field :user_payed %>
   </div>
   <div class="field">
@@ -40,8 +36,12 @@
     <%= f.money_field :friend_payed %>
   </div>
   <div class="field">
-    <%= f.label :user_ratio %>
-    <%= f.number_field :user_ratio, :size => 4 %>
+    <%= f.label :user_ratio, "Your ratio" %>
+    <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
+  </div>
+  <div class="field">
+    <%= f.label :friend_ratio, "Friend ratio" %>
+    <%= f.number_field :friend_ratio, :size => 4, :min => 0, :max => 1 %>
   </div>
   <div class="actions">
     <%= f.submit %>

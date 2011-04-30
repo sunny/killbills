@@ -1,8 +1,10 @@
 class BillsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.all :include => [:user, :friend]
+    @bills = current_user.bills :include => [:user, :friend]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,7 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.xml
   def show
-    @bill = Bill.find(params[:id])
+    @bill = current_user.bills.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class BillsController < ApplicationController
   # GET /bills/new
   # GET /bills/new.xml
   def new
-    @bill = Bill.new
+    @bill = current_user.bills.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,13 @@ class BillsController < ApplicationController
 
   # GET /bills/1/edit
   def edit
-    @bill = Bill.find(params[:id])
+    @bill = current_user.bills.find(params[:id])
   end
 
   # POST /bills
   # POST /bills.xml
   def create
-    @bill = Bill.new(params[:bill])
+    @bill = current_user.bills.new(params[:bill])
 
     respond_to do |format|
       if @bill.save
@@ -56,7 +58,7 @@ class BillsController < ApplicationController
   # PUT /bills/1
   # PUT /bills/1.xml
   def update
-    @bill = Bill.find(params[:id])
+    @bill = current_user.bills.find(params[:id])
 
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
@@ -72,7 +74,7 @@ class BillsController < ApplicationController
   # DELETE /bills/1
   # DELETE /bills/1.xml
   def destroy
-    @bill = Bill.find(params[:id])
+    @bill = current_user.bills.find(params[:id])
     @bill.destroy
 
     respond_to do |format|

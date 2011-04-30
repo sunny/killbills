@@ -1,8 +1,7 @@
 Fricout::Application.routes.draw do
-  resources :users do
-    resources :friends
-  end
+  devise_for :users
 
+  resources :friends
   resources :bills
 
   # The priority is based upon order of creation:
@@ -54,7 +53,7 @@ Fricout::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "pages#index"
 
   # See how all your routes lay out with "rake routes"
 
