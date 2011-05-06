@@ -1,13 +1,16 @@
+include ApplicationHelper
+
 class Bill < ActiveRecord::Base
   attr_accessible :title, :amount, :date, :friend_id, :user_payed, :friend_payed, :user_ratio
 
   belongs_to :user
   belongs_to :friend
 
+  after_initialize :assign_default_values
 
   # Validations
 
-  validates_presence_of :title, :date, :friend_id, :user_ratio,
+  validates_presence_of :date, :friend_id, :user_ratio,
     :amount, :user_payed, :friend_payed
   validates_associated :friend
 
@@ -21,9 +24,9 @@ class Bill < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => lambda { |b| b.amount },
     :unless => 'amount.blank?'
-  validate :amounts_must_add_up
 
-  after_initialize :default_values
+  validate :amounts_must_add_up
+  validate :creates_a_debt
 
   def user_debt
     friend_ratio * amount - user_payed
@@ -37,13 +40,27 @@ class Bill < ActiveRecord::Base
     1 - user_ratio
   end
 
+  def automatic_title
+    return title unless title.empty?
+    if user_debt != 0
+      "You owe #{money user_debt} to #{friend.name}"
+    else
+      "#{friend.name} owes you #{money friend_debt}"
+    end
+  end
+
   private
   def amounts_must_add_up
     errors.add(:friend_payed, "must add up to the amount payed") if
       amount != user_payed.to_f + friend_payed.to_f
   end
+  
+  def creates_a_debt
+    errors[:base] << "A bill should result in a debt" if
+      user_debt == 0 and friend_debt == 0
+  end
 
-  def default_values
+  def assign_default_values
     self.user_ratio ||= 1
   end
 end

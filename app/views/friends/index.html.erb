@@ -16,8 +16,9 @@
 <% @friends.each do |friend| %>
   <tr>
     <td><%= friend.name %></td>
-    <td><%= friend.user_debt %></td>
-    <td><%= friend.friend_debt %></td>
+    <td><%= money friend.user_debt unless friend.user_debt <= 0 %></td>
+    <td><%= money friend.friend_debt unless friend.friend_debt <= 0 %></td>
+    <td><%= link_to 'New bill', new_bill_path(:bill => { :friend_id => friend}) %></td>
     <td><%= link_to 'Show', friend %></td>
     <td><%= link_to 'Edit', edit_friend_path(friend) %></td>
     <td><%= link_to 'Delete', friend, :confirm => 'Are you sure?', :method => :delete %></td>

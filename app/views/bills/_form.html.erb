@@ -11,38 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %>
-    <%= f.money_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :friend_id %>
-    <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :user_payed, "You payed" %>
-    <%= f.money_field :user_payed %>
-  </div>
-  <div class="field">
-    <%= f.label :friend_payed %>
-    <%= f.money_field :friend_payed %>
-  </div>
-  <div class="field">
-    <%= f.label :user_ratio, "Your ratio" %>
-    <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
-  </div>
-  <div class="field">
-    <%= f.label :friend_ratio, "Friend ratio" %>
-    <%= f.number_field :friend_ratio, :size => 4, :min => 0, :max => 1 %>
-  </div>
+  <section>
+    <h2>Bill</h2>
+    <div class="field">
+      <%= f.label :amount %>
+      <%= f.money_field :amount, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :friend_id %>
+      <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
+    </div>
+  </section>
+  <section>
+    <h2>Who payed?</h2>
+    <div class="field">
+      <%= f.label :user_payed, "You" %>
+      <%= f.money_field :user_payed %>
+    </div>
+    <div class="field">
+      <%= f.label :friend_payed, "Friend" %>
+      <%= f.money_field :friend_payed %>
+    </div>
+  </section>
+  <section>
+    <h2>Who participated?</h2>
+    <div class="field">
+      <%= f.label :user_ratio, "Your ratio" %>
+      <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
+    </div>
+    <div class="field">
+      <%= f.label :friend_ratio, "Friend ratio" %>
+      <%= f.number_field :friend_ratio, :size => 4, :min => 0, :max => 1 %>
+    </div>
+  </section>
+  <section>
+    <h2>Optional</h2>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :date %>
+      <%= f.date_select :date %>
+    </div>
+  </section>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -2,7 +2,7 @@
 
 <p>
   <b>Title:</b>
-  <%= @bill.title %>
+  <%= @bill.automatic_title %>
 </p>
 
 <p>
@@ -20,21 +20,28 @@
   <%= link_to @bill.friend.name, @bill.friend %>
 </p>
 
+<h2>Payments</h2>
 <p>
-  <b>You payed:</b>
+  <b>You:</b>
   <%= money @bill.user_payed %>
 </p>
 
 <p>
-  <b>Friend payed:</b>
+  <b>Friend:</b>
   <%= money @bill.friend_payed %>
 </p>
 
+<h2>Participations</h2>
 <p>
-  <b>User ratio:</b>
+  <b>Your ratio:</b>
   <%= @bill.user_ratio %>
 </p>
+<p>
+  <b>Friend ratio:</b>
+  <%= @bill.friend_ratio %>
+</p>
 
+<h2>Debts</h2>
 <p>
   <b>Your debt:</b>
   <%= money @bill.user_debt %>

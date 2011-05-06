@@ -26,7 +26,7 @@ class BillsController < ApplicationController
   # GET /bills/new
   # GET /bills/new.xml
   def new
-    @bill = current_user.bills.new
+    @bill = current_user.bills.new(params[:bill])
 
     respond_to do |format|
       format.html # new.html.erb

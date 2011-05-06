@@ -13,6 +13,7 @@
 
 <% if user_signed_in? %>
 <p>
+  <%= link_to 'New Bill', new_bill_path %>
   <%= link_to 'Friends', friends_path %>
   <%= link_to 'Bills', bills_path %>
   <%= link_to 'Sign out', destroy_user_session_path %>

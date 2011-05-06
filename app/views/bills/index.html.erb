@@ -7,16 +7,10 @@
 <% unless @bills.empty? %>
 <table>
   <tr>
+    <th>Friend</th>
     <th>Title</th>
     <th>Amount</th>
     <th>Date</th>
-    <th>Friend</th>
-    
-    <th>Your ratio</th>
-    <th>Friend ratio</th>
-    
-    <th>You payed</th>
-    <th>Friend payed</th>
     
     <th>Your debt</th>
     <th>Friend debt</th>
@@ -27,19 +21,13 @@
 
 <% @bills.each do |bill| %>
   <tr>
-    <td><%= bill.title %></td>
-    <td><%= bill.amount %></td>
-    <td><%= bill.date %></td>
     <td><%= link_to bill.friend.name, bill.friend %></td>
+    <td><%= bill.automatic_title %></td>
+    <td><%= money bill.amount %></td>
+    <td><%= bill.date %></td>
     
-    <td><%= bill.user_ratio %></td>
-    <td><%= bill.friend_ratio %></td>
-    
-    <td><%= money bill.user_payed %></td>
-    <td><%= money bill.friend_payed %></td>
-    
-    <td><%= money bill.user_debt %></td>
-    <td><%= money bill.friend_debt %></td>
+    <td><%= money bill.user_debt unless bill.user_debt <= 0 %></td>
+    <td><%= money bill.friend_debt unless bill.friend_debt <= 0 %></td>
     
     <td><%= link_to 'Show', bill %></td>
     <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
