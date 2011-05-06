@@ -2,28 +2,5 @@
 
 <p><%= link_to 'New Friend', new_friend_path %></p>
 
-<% unless @friends.empty? %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Your debt</th>
-    <th>Friend debt</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @friends.each do |friend| %>
-  <tr>
-    <td><%= friend.name %></td>
-    <td><%= money friend.user_debt unless friend.user_debt <= 0 %></td>
-    <td><%= money friend.friend_debt unless friend.friend_debt <= 0 %></td>
-    <td><%= link_to 'New bill', new_bill_path(:bill => { :friend_id => friend}) %></td>
-    <td><%= link_to 'Show', friend %></td>
-    <td><%= link_to 'Edit', edit_friend_path(friend) %></td>
-    <td><%= link_to 'Delete', friend, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-<% end %>
+<%= render @friends %>
 

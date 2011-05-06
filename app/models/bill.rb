@@ -29,11 +29,11 @@ class Bill < ActiveRecord::Base
   validate :creates_a_debt
 
   def user_debt
-    friend_ratio * amount - user_payed
+    (1-friend_ratio) * amount - user_payed
   end
   
   def friend_debt
-    user_ratio * amount - friend_payed
+    (1-user_ratio) * amount - friend_payed
   end
   
   def friend_ratio
@@ -42,11 +42,10 @@ class Bill < ActiveRecord::Base
 
   def automatic_title
     return title unless title.empty?
-    if user_debt != 0
-      "You owe #{money user_debt} to #{friend.name}"
-    else
-      "#{friend.name} owes you #{money friend_debt}"
-    end
+    who_payed = []
+    who_payed << "You" if user_payed > 0
+    who_payed << friend.name if friend_payed > 0
+    "#{who_payed.to_sentence} payed #{money amount}"
   end
 
   private
@@ -57,7 +56,7 @@ class Bill < ActiveRecord::Base
   
   def creates_a_debt
     errors[:base] << "A bill should result in a debt" if
-      user_debt == 0 and friend_debt == 0
+      !user_payed.nil? and !friend_payed.nil? and user_debt == 0 and friend_debt == 0
   end
 
   def assign_default_values

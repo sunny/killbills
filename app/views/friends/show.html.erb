@@ -1,10 +1,14 @@
-<h1>Friend</h1>
+<%= link_to 'Friends >', friends_path %>
 
-<p>
-  <b>Name:</b>
-  <%= @friend.name %>
-</p>
+<h1><%= @friend.name %></h1>
+
+<p><%= link_to 'Edit', edit_friend_path(@friend) %></p>
+
+<h2>Debt: <%=money @friend.debt %></h2>
+<h2>Bills</h2>
+
+<p><%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}) %></p>
+
+<%= render @friend.bills %>
 
 
-<%= link_to 'Edit', edit_friend_path(@friend) %> |
-<%= link_to 'Back', friends_path %>

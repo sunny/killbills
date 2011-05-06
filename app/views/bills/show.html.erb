@@ -1,8 +1,13 @@
-<h1>Bill</h1>
+<%= link_to 'Bills >', bills_path %>
+
+<h1><%=@bill.automatic_title%></h1>
+
+<%= link_to 'Edit', edit_bill_path(@bill) %>
+<%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete %>
 
 <p>
   <b>Title:</b>
-  <%= @bill.automatic_title %>
+  <%= @bill.title %>
 </p>
 
 <p>
@@ -52,5 +57,3 @@
   <%= money @bill.friend_debt %>
 </p>  
 
-<%= link_to 'Edit', edit_bill_path(@bill) %> |
-<%= link_to 'Back', bills_path %>

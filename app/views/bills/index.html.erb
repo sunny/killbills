@@ -1,38 +1,6 @@
 <h1>Bills</h1>
 
-<p>
-<%= link_to 'New Bill', new_bill_path %>
-</p>
+<p><%= link_to 'New Bill', new_bill_path %></p>
 
-<% unless @bills.empty? %>
-<table>
-  <tr>
-    <th>Friend</th>
-    <th>Title</th>
-    <th>Amount</th>
-    <th>Date</th>
-    
-    <th>Your debt</th>
-    <th>Friend debt</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= render @bills %>
 
-<% @bills.each do |bill| %>
-  <tr>
-    <td><%= link_to bill.friend.name, bill.friend %></td>
-    <td><%= bill.automatic_title %></td>
-    <td><%= money bill.amount %></td>
-    <td><%= bill.date %></td>
-    
-    <td><%= money bill.user_debt unless bill.user_debt <= 0 %></td>
-    <td><%= money bill.friend_debt unless bill.friend_debt <= 0 %></td>
-    
-    <td><%= link_to 'Show', bill %></td>
-    <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Kill', bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-<% end %>

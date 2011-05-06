@@ -7,4 +7,8 @@ module ApplicationHelper
     amount += " #{currency}" unless currency.nil?
     amount
   end
+  
+  def datetime(date)
+    date.strftime('%Y-%m-%dT%H:%MZ')
+  end
 end

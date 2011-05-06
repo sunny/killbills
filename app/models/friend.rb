@@ -5,7 +5,7 @@ class Friend < Person
   validates :name, :presence => true
 
   def debt
-    @debt ||= bills.sum('(1-user_ratio) * amount - user_payed').to_f
+    @debt ||= bills.sum('user_ratio * amount - user_payed').to_f
   end
 
   def user_debt
