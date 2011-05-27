@@ -4,9 +4,9 @@ class FriendsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = people(:sunny)
+    @user = Factory(:user)
     sign_in @user
-    @friend = people(:coco)
+    @friend = Factory(:friend, :user => @user)
   end
 
   test "should get index" do

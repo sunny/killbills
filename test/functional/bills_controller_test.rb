@@ -4,9 +4,9 @@ class BillsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = people(:sunny)
+    @user = Factory(:user)
     sign_in @user
-    @bill = bills(:coffee)
+    @bill = Factory(:bill, :user => @user)
   end
 
   test "should get index" do

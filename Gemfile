@@ -18,7 +18,7 @@ group :development, :test do
   gem 'guard-test'
   gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
-  # gem 'factory_girl_rails'
+  gem 'factory_girl_rails'
   # gem 'webrat'
   # gem 'ruby-debug'
   # gem 'ruby-debug19', :require => 'ruby-debug'

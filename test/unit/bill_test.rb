@@ -21,58 +21,61 @@ class BillTest < ActiveSupport::TestCase
   should_not allow_value("-1").for(:user_ratio)
   should_not allow_value("2").for(:user_ratio)
 
-  context "A new Bill" do
+  context "A Bill" do
     should "have a default value for user_ratio" do
       assert_equal 1, Bill.new.user_ratio
     end
-  end
-
-  context "A Bill" do
-    setup do
-      @bill = bills(:coffee)
-    end
 
     should "be valid" do
+      @bill = Factory.build(:bill)
       assert @bill.valid?
-    end
-
-    should "have a friend and a user" do
       assert @bill.friend.is_a? Friend
       assert @bill.user.is_a? User
     end
 
     should "have an automatic title" do
-      assert_match "Coffee", @bill.automatic_title
-      @bill.title = ""
-      assert_match /^You payed 3/, @bill.automatic_title
+      @bill = Factory.build(:bill, :title => "Coffee")
+      assert_equal "Coffee", @bill.automatic_title
+    end
+    
+    should "have an automatic title" do
+      @bill = Factory.build(:bill, :title => "",
+        :user_payed => 42, :friend_payed => 0, :amount => 42)
+      assert_match /^You payed 42/, @bill.automatic_title
+      @bill = Factory.build(:bill, :title => "",
+        :user_payed => 40, :friend_payed => 2, :amount => 42)
+      assert_match /^You and .* payed 42/, @bill.automatic_title
     end
 
     should "calculate the friend_ratio" do
-      @bill.user_ratio = 0.7
+      @bill = Factory.build(:bill, :user_ratio => 0.7)
       assert_equal 0.3, @bill.friend_ratio
     end
 
     should "calculate the user and friend debt" do
-      @bill.amount = 4
-      @bill.user_ratio = 0.5
-      @bill.user_payed = 1
-      @bill.friend_payed = 3
+      @bill = Factory.build(:bill,
+        :amount => 4,
+        :user_ratio => 0.5,
+        :user_payed => 1,
+        :friend_payed => 3)
       assert_equal 1, @bill.user_debt
       assert_equal -1, @bill.friend_debt
     end
 
     should "ensure there is a debt" do
-      @bill.amount = 2
-      @bill.user_ratio = 0.5
-      @bill.friend_payed = 1
-      @bill.user_payed = 1
+      @bill = Factory.build(:bill,
+        :amount => 2,
+        :user_ratio => 0.5,
+        :user_payed => 1,
+        :friend_payed => 1)
       assert !@bill.valid?
     end
 
     should "ensure people paid the total" do
-      @bill.amount = 3
-      @bill.friend_payed = 1
-      @bill.user_payed = 0
+      @bill = Factory.build(:bill,
+        :amount => 3,
+        :user_payed => 0,
+        :friend_payed => 1)
       assert !@bill.valid?
 
       @bill.user_payed = 4
