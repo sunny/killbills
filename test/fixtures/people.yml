@@ -1,0 +1,19 @@
+sunny:
+  name: Sunny
+  type: User
+  email: sunny@sunfox.org
+  # password: fricout
+  encrypted_password: $2a$10$1ItmxkqROCFW7ZTjVcJUbOCM/JsicJnUcXvVzxJKke2Ba7jG/CB8m
+
+coco:
+  name: Coco
+  type: Friend
+  user: sunny
+  email: coco@example.org
+
+kitt:
+  name: Kitt
+  type: Friend
+  user: sunny
+  email: kitt@example.org
+

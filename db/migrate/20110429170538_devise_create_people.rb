@@ -10,11 +10,11 @@ class DeviseCreatePeople < ActiveRecord::Migration
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
 
-      t.index :people, :email
-      t.index :people, :reset_password_token, :unique => true
-      # t.index :people, :confirmation_token,   :unique => true
-      # t.index :people, :unlock_token,         :unique => true
-      # t.index :people, :authentication_token, :unique => true
+      t.index :email
+      t.index :reset_password_token, :unique => true
+      # t.index :confirmation_token,   :unique => true
+      # t.index :unlock_token,         :unique => true
+      # t.index :authentication_token, :unique => true
     end
 
   end
@@ -32,8 +32,8 @@ class DeviseCreatePeople < ActiveRecord::Migration
       t.remove :current_sign_in_ip
       t.remove :last_sign_in_ip
 
-      t.remove_index :people, :email
-      t.remove_index :people, :reset_password_token
+      t.remove_index :email
+      t.remove_index :reset_password_token
     end
   end
 end

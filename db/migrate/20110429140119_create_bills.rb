@@ -12,6 +12,10 @@ class CreateBills < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    # FIXME fix Rails so that t.index inside the create_table works
+    add_index :bills, :user_id
+    add_index :bills, :friend_id
   end
 
   def self.down

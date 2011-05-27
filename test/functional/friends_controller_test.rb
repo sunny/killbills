@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FriendsControllerTest < ActionController::TestCase
   setup do
-    @friend = friends(:one)
+    @friend = people(:coco)
   end
 
   test "should get index" do

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BillsControllerTest < ActionController::TestCase
   setup do
-    @bill = bills(:one)
+    @bill = bills(:coffee)
   end
 
   test "should get index" do
