@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class BillsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
+    @user = people(:sunny)
+    sign_in @user
     @bill = bills(:coffee)
   end
 
