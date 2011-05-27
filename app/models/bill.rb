@@ -1,7 +1,8 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
-  attr_accessible :title, :amount, :date, :friend_id, :user_payed, :friend_payed, :user_ratio
+  attr_accessible :title, :amount, :date, :friend_id, :user_payed,
+    :friend_payed, :user_ratio
 
   belongs_to :user
   belongs_to :friend
@@ -48,7 +49,13 @@ class Bill < ActiveRecord::Base
     "#{who_payed.to_sentence} payed #{money amount}"
   end
 
+  def assign_default_values
+    self.user_ratio ||= 1
+  end
+
+
   private
+
   def amounts_must_add_up
     errors.add(:friend_payed, "must add up to the amount payed") if
       amount != user_payed.to_f + friend_payed.to_f
@@ -56,10 +63,7 @@ class Bill < ActiveRecord::Base
   
   def creates_a_debt
     errors[:base] << "A bill should result in a debt" if
-      !user_payed.nil? and !friend_payed.nil? and user_debt == 0 and friend_debt == 0
-  end
-
-  def assign_default_values
-    self.user_ratio ||= 1
+      !user_payed.nil? and !friend_payed.nil? \
+      and user_debt == 0 and friend_debt == 0
   end
 end
