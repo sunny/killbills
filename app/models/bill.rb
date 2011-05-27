@@ -22,7 +22,8 @@ class Bill < ActiveRecord::Base
   validates_numericality_of :amount,
     :greater_than_or_equal_to => 0
   validates_numericality_of :user_payed, :friend_payed,
-    :greater_than_or_equal_to => 0,
+    :greater_than_or_equal_to => 0
+  validates_numericality_of :user_payed, :friend_payed,
     :less_than_or_equal_to => lambda { |b| b.amount },
     :unless => 'amount.blank?'
 
@@ -42,7 +43,7 @@ class Bill < ActiveRecord::Base
   end
 
   def automatic_title
-    return title unless title.empty?
+    return title unless title.blank?
     who_payed = []
     who_payed << "You" if user_payed > 0
     who_payed << friend.name if friend_payed > 0
@@ -63,7 +64,7 @@ class Bill < ActiveRecord::Base
   
   def creates_a_debt
     errors[:base] << "A bill should result in a debt" if
-      !user_payed.nil? and !friend_payed.nil? \
-      and user_debt == 0 and friend_debt == 0
+      !user_payed.nil? and !friend_payed.nil? and \
+      user_debt == 0 and friend_debt == 0
   end
 end
