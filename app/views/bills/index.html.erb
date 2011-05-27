@@ -1,6 +1,8 @@
 <h1>Bills</h1>
 
-<p><%= link_to 'New Bill', new_bill_path %></p>
+<%= link_to 'New Bill', new_bill_path, :class => 'button' %>
 
-<%= render @bills %>
+<div class="bills">
+  <%= render @bills %>
+</div>
 

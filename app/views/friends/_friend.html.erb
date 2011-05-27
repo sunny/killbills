@@ -1,7 +1,9 @@
-<div>
+<div class="friend">
   <a href="<%= friend_path(friend) %>">
     <h2><%= friend.name %></h2>
-    <%= "You owe #{money friend.user_debt}" unless friend.user_debt <= 0 %></td>
-    <%= "Owes you #{money friend.friend_debt}" unless friend.friend_debt <= 0 %>
+    <div class="owed <%= variation -friend.user_debt %>">
+      <%= "You owe #{money friend.user_debt}" unless friend.user_debt <= 0 %></td>
+      <%= "Owes you #{money friend.friend_debt}" unless friend.friend_debt <= 0 %>
+    </div>
   </a>
 </div>

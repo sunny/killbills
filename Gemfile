@@ -16,6 +16,7 @@ gem 'sqlite3'
 group :development, :test do
   gem 'shoulda'
   gem 'guard-test'
+  gem 'guard-livereload'
   gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'factory_girl_rails'

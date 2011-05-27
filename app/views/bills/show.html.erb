@@ -1,59 +1,63 @@
-<%= link_to 'Bills >', bills_path %>
-
 <h1><%=@bill.automatic_title%></h1>
 
-<%= link_to 'Edit', edit_bill_path(@bill) %>
-<%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete %>
+<%= link_to 'Edit', edit_bill_path(@bill), :class => 'button' %>
+<%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'button delete' %>
 
-<p>
-  <b>Title:</b>
-  <%= @bill.title %>
-</p>
+<h2>Bill</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <td><%= @bill.title %></td>
+  </tr>
+  <tr>
+    <th>Amount</th>
+    <td><%= money @bill.amount %></td>
+  </tr>
+  <tr>
+    <th>Date</th>
+    <td><%= @bill.date %></td>
+  </tr>
+  <tr>
+    <th>With</th>
+    <td><%= link_to @bill.friend.name, @bill.friend %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Amount:</b>
-  <%= money @bill.amount %>
+<% if @bill.user_debt > 0 %>
+<p class="negative result">
+  You owe <%= @bill.friend.name %> <%= money @bill.user_debt %>
 </p>
+<% else %>
+<p class="positive result">
+  <%= @bill.friend.name %> owes you <%= money @bill.user_debt.abs %>
+</p>
+<% end %>
 
-<p>
-  <b>Date:</b>
-  <%= @bill.date %>
-</p>
 
-<p>
-  <b>With:</b>
-  <%= link_to @bill.friend.name, @bill.friend %>
-</p>
+<h2>Payments detail</h2>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Payment</th>
+      <th>Ratio</th>
+      <th>Debt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>You</th>
+      <td><%= money @bill.user_payed %></td>
+      <td><%= ratio @bill.user_ratio %></td>
+      <td class="<%= variation -@bill.user_debt %>"><%= money @bill.user_debt %></td>
+    </tr>
+    <tr>
+      <th><%= @bill.friend.name %></th>
+      <td><%= money @bill.friend_payed %></td>
+      <td><%= ratio @bill.friend_ratio %></td>
+      <td class="<%= variation -@bill.friend_debt %>"><%= money @bill.friend_debt %></td>
+    </tr>
+  </tbody>
+</table>
 
-<h2>Payments</h2>
-<p>
-  <b>You:</b>
-  <%= money @bill.user_payed %>
-</p>
-
-<p>
-  <b>Friend:</b>
-  <%= money @bill.friend_payed %>
-</p>
-
-<h2>Participations</h2>
-<p>
-  <b>Your ratio:</b>
-  <%= @bill.user_ratio %>
-</p>
-<p>
-  <b>Friend ratio:</b>
-  <%= @bill.friend_ratio %>
-</p>
-
-<h2>Debts</h2>
-<p>
-  <b>Your debt:</b>
-  <%= money @bill.user_debt %>
-</p>
-
-<p>
-  <b>Friend debt:</b>
-  <%= money @bill.friend_debt %>
-</p>  
 

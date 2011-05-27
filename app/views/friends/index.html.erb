@@ -1,6 +1,9 @@
 <h1>Friends</h1>
 
-<p><%= link_to 'New Friend', new_friend_path %></p>
+<%= link_to 'New Friend', new_friend_path, :class => 'button' %>
 
-<%= render @friends %>
+
+<div class="friends">
+  <%= render @friends %>
+</div>
 

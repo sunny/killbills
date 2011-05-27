@@ -1,6 +1,5 @@
-<%= link_to 'Bills >', bills_path %>
-<%= link_to @bill.automatic_title + ' >', @bill %>
+<nav id="crumbs"><%= link_to @bill.automatic_title, @bill %></nav>
 
-<h1>Edit bill</h1>
+<h1>Edit</h1>
 
 <%= render 'form' %>

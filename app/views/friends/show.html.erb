@@ -1,13 +1,21 @@
-<%= link_to 'Friends >', friends_path %>
-
 <h1><%= @friend.name %></h1>
 
-<p><%= link_to 'Edit', edit_friend_path(@friend) %></p>
+<%= link_to 'Edit', edit_friend_path(@friend), :class => "button" %>
 
-<h2>Debt: <%=money @friend.debt %></h2>
+<% if @friend.debt > 0 %>
+<p class="debt negative">
+  You owe <%= @friend.name %> <%= money @friend.debt %>
+</p>
+<% else %>
+<p class="debt positive">
+  Owes you <%= money @friend.debt.abs %>
+</p>
+<% end %>
+
+
 <h2>Bills</h2>
 
-<p><%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}) %></p>
+<%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}), :class => "button" %>
 
 <%= render @friend.bills %>
 

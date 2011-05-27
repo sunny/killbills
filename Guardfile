@@ -1,5 +1,9 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
+guard 'livereload' do
+  watch(%r{app/.+\.(erb|haml)})
+  watch(%r{app/helpers/.+\.rb})
+  watch(%r{public/.+\.(css|js|html)})
+  watch(%r{config/locales/.+\.yml})
+end
 
 guard 'test' do
   watch(%r{lib/(.*)\.rb})      { |m| "test/#{m[1]}_test.rb" }
@@ -12,3 +16,4 @@ guard 'test' do
   watch(%r{app/views/.*\.rb})                        { "test/integration" }
   watch('app/controllers/application_controller.rb') { ["test/functional", "test/integration"] }
 end
+

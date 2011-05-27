@@ -7,7 +7,23 @@ module ApplicationHelper
     amount += " #{currency}" unless currency.nil?
     amount
   end
-  
+
+  def ratio(amount)
+    percent = (amount * 100).to_s
+    percent.gsub! /\.0$/, ''
+    "#{percent} %"
+  end
+
+  def variation(amount)
+    if amount > 0
+      :positive
+    elsif amount < 0
+      :negative
+    else
+      :zero
+    end
+  end
+
   def datetime(date)
     date.strftime('%Y-%m-%dT%H:%MZ')
   end
