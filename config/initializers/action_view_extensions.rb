@@ -13,7 +13,7 @@ module ActionView
 
       def money_field(attribute, options={})
         defaults = { :min => 0, :step => 0.01 }
-        number_field(attribute, defaults.merge(options)) + ' € '
+        number_field(attribute, defaults.merge(options)) + ' <span class="currency">€</span> '.html_safe
       end
     end
   end

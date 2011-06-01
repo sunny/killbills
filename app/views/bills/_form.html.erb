@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <section>
+  <section id="bill_info">
     <h2>Bill</h2>
     <div class="field">
       <%= f.label :amount %>
@@ -22,7 +22,7 @@
       <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
     </div>
   </section>
-  <section>
+  <section id="bill_who_payed">
     <h2>Who payed?</h2>
     <div class="field">
       <%= f.label :user_payed, "You" %>
@@ -33,8 +33,8 @@
       <%= f.money_field :friend_payed %>
     </div>
   </section>
-  <section>
-    <h2>Who participated?</h2>
+  <section id="bill_shared">
+    <h2>Shared?</h2>
     <div class="field">
       <%= f.label :user_ratio, "Your ratio" %>
       <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
