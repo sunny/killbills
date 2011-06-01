@@ -31,11 +31,11 @@ class Bill < ActiveRecord::Base
   validate :creates_a_debt
 
   def user_debt
-    (1-friend_ratio) * amount - user_payed
+    user_ratio * amount - user_payed
   end
   
   def friend_debt
-    (1-user_ratio) * amount - friend_payed
+    friend_ratio * amount - friend_payed
   end
   
   def friend_ratio
