@@ -26,23 +26,24 @@ div.actions {
   padding-bottom: 0;
   margin-bottom: 20px;
   background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  li {
+    font-size: 12px;
+    list-style: square;
+  }
 }
 
-#error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
-}
-
-#error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
-}
 
 
 body {
@@ -55,66 +56,68 @@ body {
 
 a {
   color: #8B008B;
-}
-a:visited {
-  color: #690069;
+  &:visited {
+    color: #690069;
+  }
 }
 
 #menu {
   background: #8B008B;
   padding: 10px;
-}
-  #menu ul {
+  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-    #menu li {
+    li {
       display: inline;
-    }
-      #menu a {
+      a {
         color: white;
         text-decoration: none;
         padding: 5px 10px;
         border-radius: 3px;
-      }
-        #menu a:last-of-type {
+
+        &:last-of-type {
           border-right: none;
         }
-        #menu a:hover,
-        #menu a:active,
-        #menu a:focus {
+        &:hover,
+        &:active,
+        &:focus {
           background: #690069;
         }
-
-        #menu li.sign_out {
-          float: right;
-          margin-top: -2px;
-        }
+      }
+      &.sign_out {
+        float: right;
+        margin-top: -2px;
+      }
+    }
+  }
+}
 
 #crumbs {
   float: left;
   margin-right: 5px;
-}
-  #crumbs a {
+
+  a {
     color: #888;
     text-decoration:none;
     padding: 5px;
     display: inline-block;
     border-radius: 3px;
-  }
-    #crumbs a:after {
+
+    &:after {
       content: '>';
       color: #aaa;
       padding-left: 5px;
       font-size: .8em;
     }
-    #crumbs a:hover,
-    #crumbs a:active,
-    #crumbs a:focus {
+    &:hover,
+    &:active,
+    &:focus {
       background: #eee;
       color: #000;
     }
+  }
+}
 
 #content {
   padding: 0 10px 10px 10px;
@@ -123,7 +126,8 @@ a:visited {
 .negative {
   color: darkred;
 }
-.zero, .positive {
+.zero,
+.positive {
   color: darkgreen;
 }
 
@@ -132,16 +136,16 @@ a:visited {
   margin-top: 20px;
 }
 
-.friend a,
-.bill a {
-  border-radius: 3px;
-  text-decoration: none;
-  display: block;
-  margin-top: 10px;
-  margin: 10px 0;
-}
-  .friend h2,
-  .bill h2 {
+.friend,
+.bill {
+  a {
+    border-radius: 3px;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    margin: 10px 0;
+  }
+  h2 {
     font-size: 1.2em;
     line-height: 1.2;
     font-weight: normal;
@@ -149,19 +153,21 @@ a:visited {
     margin: 0;
   }
 
-  .bill time,
-  .friend .owed,
-  .bill .owed {
+  time,
+  .owed {
     opacity: .5;
   }
-  .bill .owed {
+}
+.bill {
+  .owed {
     float: left;
     margin-right: 15px;
   }
-  .bill time {
+  time {
     display: block;
-    color: black;notice
+    color: black;
   }
+}
 
 a.button {
   background: #eee;
@@ -170,16 +176,14 @@ a.button {
   text-decoration: none;
   padding: 3px 6px;
   margin: 10px 0;
-}
-  a.button:visited {
+  &:visited {
     color: #666;
   }
-
-
-
-table {
 }
-  th {
-    text-align: left;
-    padding-right: 1ex;
-  }
+
+
+
+th {
+  text-align: left;
+  padding-right: 1ex;
+}
