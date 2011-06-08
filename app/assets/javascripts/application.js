@@ -34,7 +34,7 @@ jQuery(function($) {
       else if (!friend_payed.val())
         friend_payed.def(total - user)
     }
-    
+
     // Update text summary
     function update_text_result() {
       var total = amount.floatval(),
@@ -43,7 +43,7 @@ jQuery(function($) {
           ratio = user_ratio.intval(),
           user_debt = ratio * total - user,
           friend_debt = (1-ratio) * total - friend
-          
+
       if (!total)
         summary.text('')
       else if (user_debt > 0)
@@ -52,11 +52,11 @@ jQuery(function($) {
         summary.text('Your friend owes you ' + friend_debt + ' €')
       else
         summary.text('')
-      
+
     }
-    
+
     summary.insertAfter($('#bill_who_payed'))
-    
+
     update_who_payed()
     update_text_result()
     $('input').change(update_who_payed)

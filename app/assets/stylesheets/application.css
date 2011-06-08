@@ -86,12 +86,12 @@ a:visited {
         #menu a:focus {
           background: #690069;
         }
-        
+
         #menu li.sign_out {
           float: right;
           margin-top: -2px;
         }
-        
+
 #crumbs {
   float: left;
   margin-right: 5px;
@@ -148,7 +148,7 @@ a:visited {
     padding: 0;
     margin: 0;
   }
-  
+
   .bill time,
   .friend .owed,
   .bill .owed {
