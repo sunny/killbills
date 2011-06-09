@@ -1,7 +1,5 @@
 $ ->
 
-  console.log "foo"
-
   # On bill creation/update page
   amount = $('#bill_amount')
   if amount.length
