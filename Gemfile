@@ -16,6 +16,8 @@ gem 'sqlite3'
 # gem 'capistrano'
 
 group :production do
+  # Gems required by Heroku
+  gem 'pg'
   gem 'therubyracer-heroku'
 end
 
