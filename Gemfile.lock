@@ -122,6 +122,9 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
+    uglifier (0.5.4)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     warden (1.0.4)
       rack (>= 1.0)
 
@@ -141,3 +144,4 @@ DEPENDENCIES
   shoulda
   sqlite3
   therubyracer-heroku
+  uglifier

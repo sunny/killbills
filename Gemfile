@@ -6,6 +6,7 @@ gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => "v3.1.0.rc3"
 gem 'devise'
 gem 'sass'
 gem 'coffee-script'
+gem 'uglifier'
 gem 'jquery-rails'
 # gem 'bj'
 # gem 'nokogiri'
