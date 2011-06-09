@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # gem 'rails', '3.0.7'
-gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => "v3.1.0.rc2"
+gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => "v3.1.0.rc3"
 
 gem 'devise'
 gem 'sass'
