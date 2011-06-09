@@ -15,6 +15,10 @@ gem 'sqlite3'
 # gem 'unicorn'
 # gem 'capistrano'
 
+group :production do
+  gem 'therubyracer-heroku'
+end
+
 group :development, :test do
   gem 'shoulda'
   gem 'guard-test'
