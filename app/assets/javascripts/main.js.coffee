@@ -1,4 +1,7 @@
-$ ->
+jQuery ->
+
+  # encoded "€" because of a CoffeeScript encoding error
+  currency = decodeURIComponent('%E2%82%AC')
 
   # On bill creation/update page
   amount = $('#bill_amount')
@@ -17,9 +20,9 @@ $ ->
       user_payed.def '0'
       friend_payed.def '0'
       if !user_payed.val()
-        user_payed.def(total - friend)
+        user_payed.def total - friend
       else if !friend_payed.val()
-        friend_payed.def(total - user)
+        friend_payed.def total - user
 
     # Update text summary
     update_text_result = ->
@@ -33,9 +36,9 @@ $ ->
       if (!total)
         summary.text ''
       else if user_debt > 0
-        summary.text 'You owe '+user_debt+' euro'
+        summary.text 'You owe '+user_debt+' '+currency
       else if friend_debt > 0
-        summary.text 'Your friend owes you '+friend_debt+' euro'
+        summary.text 'Your friend owes you '+friend_debt+' '+currency
       else
         summary.text ''
 
