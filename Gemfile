@@ -12,6 +12,8 @@ gem 'jquery-rails'
 # gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
+gem 'therubyracer-heroku'
+
 gem 'sqlite3'
 # gem 'unicorn'
 # gem 'capistrano'
@@ -19,15 +21,14 @@ gem 'sqlite3'
 group :production do
   # Gems required by Heroku
   gem 'pg'
-  gem 'therubyracer-heroku'
 end
 
 group :development, :test do
   gem 'shoulda'
   gem 'guard-test'
   gem 'guard-livereload'
-  #gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
-  #gem 'libnotify' if RUBY_PLATFORM =~ /linux/
+  # gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
+  # gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'factory_girl_rails'
   # gem 'webrat'
   # gem 'ruby-debug'
