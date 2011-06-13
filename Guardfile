@@ -1,4 +1,4 @@
-guard 'livereload', :apply_js_live => false do
+guard 'livereload', :apply_js_live => false, :apply_css_live => true do
   watch(%r{app/.+\.(erb|haml)})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{(public/|app/assets).+\.(css|js|html)})
