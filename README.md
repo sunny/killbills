@@ -13,12 +13,13 @@ A bit like billmonk.com, only lighter, open source, HTML5, RESTFUL, …
 Planned
 -------
 
-* Bills with more than one payer
-* Bills with more than two participants
+* Bills with two or more payers (Joe payed 5 €, I payed 15 €)
+* Bills with different participations (Finn payed but he only had a 10 € salad)
 * Recurrent bills
+* Sharing debts between users of the same app
 * Support for several currencies
 * Support for other means of payments than money (he he.)
-* Sharing debts between users
-* Sexy JS+SVG charts and pies
-* Internationalisation, in French
-* A CSS that doesn't break too much on IE (notice how it's not at the top of the list)
+* JS+SVG charts and pies
+* ARIA
+* Adaptative stylesheets (@media)
+* Internationalisation
