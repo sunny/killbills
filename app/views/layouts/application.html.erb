@@ -13,7 +13,7 @@
 <% if user_signed_in? %>
     <li class="friends"><%= link_to 'Friends', friends_path %></li>
     <li class="bills"><%= link_to 'Bills', bills_path %></li>
-    <li class="sign_out"><%= link_to 'Sign out', destroy_user_session_path %></li>
+    <li class="sign_out"><%= link_to 'Sign out', destroy_user_session_path, title: "Sign out from Fricout" %></li>
 <% else %>
     <li class="sign_in"><%= link_to 'Sign in', user_session_path %></li>
 <% end %>
