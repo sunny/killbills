@@ -1,78 +1,12 @@
 @import 'colors';
+@import 'layout';
 
 // Generic html
-body {
-  color: $text;
-  background: $background;
-  font: 15px/18px Verdana, Arial, sans-serif;
-  padding: 0;
-  margin: 0;
-}
-
 a {
   color: $color;
   &:visited {
     color: $darker;
   }
-}
-
-// Main blocks
-#menu {
-  background: $color;
-  padding: 10px;
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    li {
-      display: inline;
-      a {
-        color: white;
-        text-decoration: none;
-        padding: 5px 10px;
-        border-radius: 3px;
-
-        &:hover,
-        &:active,
-        &:focus {
-          background: $darker;
-        }
-      }
-      &.sign_out {
-        float: right;
-        margin-top: -2px;
-      }
-    }
-  }
-}
-
-#crumbs {
-  float: left;
-  margin-right: 5px;
-
-  a {
-    color: $grey;
-    text-decoration:none;
-    padding: 5px;
-    display: inline-block;
-    border-radius: 3px;
-
-    &:after {
-      content: '>';
-      padding-left: 5px;
-      font-size: .8em;
-    }
-    &:hover,
-    &:active,
-    &:focus {
-      background: $lightgrey;
-      color: $text;
-    }
-  }
-}
-
-#content {
-  padding: 0 10px 10px 10px;
 }
 
 
@@ -94,7 +28,6 @@ a.button {
   padding: 3px 6px;
   margin: 10px 0;
 }
-
 
 div.field,
 div.actions {
@@ -147,13 +80,8 @@ div.actions {
 
 
 // Friends and bills lists
-.friends,
-.bills {
+.friends {
   margin-top: 20px;
-}
-
-.friend,
-.bill {
   a {
     border-radius: 3px;
     text-decoration: none;
@@ -174,7 +102,10 @@ div.actions {
     opacity: .5;
   }
 }
-.bill {
+
+.bills {
+  @extend .friends;
+
   .owed {
     float: left;
     margin-right: 15px;
