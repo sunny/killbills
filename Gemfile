@@ -10,6 +10,7 @@ gem 'devise'
 
 # Assets
 gem 'sass'
+gem 'bourbon'
 gem 'therubyracer-heroku'
 gem 'coffee-script'
 gem 'uglifier'

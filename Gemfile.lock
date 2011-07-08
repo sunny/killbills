@@ -54,6 +54,8 @@ GEM
     addressable (2.2.6)
     arel (2.1.1)
     bcrypt-ruby (2.1.4)
+    bourbon (0.0.7)
+      sass (>= 3.1)
     builder (3.0.0)
     coffee-script (2.2.0)
       coffee-script-source
@@ -132,6 +134,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bourbon
   coffee-script
   devise
   factory_girl_rails

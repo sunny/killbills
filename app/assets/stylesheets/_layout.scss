@@ -19,7 +19,7 @@ body {
         color: white;
         text-decoration: none;
         padding: 5px 10px;
-        border-radius: 3px;
+        @include border-radius(3px);
 
         &:hover,
         &:active,
@@ -45,7 +45,7 @@ body {
     text-decoration:none;
     padding: 5px;
     display: inline-block;
-    border-radius: 3px;
+    @include border-radius(3px);
 
     &:after {
       content: '>';
