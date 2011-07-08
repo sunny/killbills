@@ -21,6 +21,9 @@ class Bill
     @user_payed_c.insertBefore   @user_payed_label
     @friend_payed_c.insertBefore @friend_payed_label
 
+    # TODO checked=checked on radios and shared checkbox
+    # need to find present value
+
     # Shared
     @shared_checkbox = $('<input type=checkbox name=shared value=1>')
     @shared_checkbox.insertBefore $('#bill_shared .field')
@@ -112,3 +115,4 @@ class Bill
       @summary ''
 
 window.Bill = Bill
+
