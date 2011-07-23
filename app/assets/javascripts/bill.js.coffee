@@ -6,38 +6,37 @@ class Bill
     @amount_f       = $('#bill_amount')
     @friend_f       = $('#bill_friend_id')
     @user_ratio_f   = $('#bill_user_ratio')
-
-    # Who payed
     @user_payed_f   = $('#bill_user_payed')
     @friend_payed_f = $('#bill_friend_payed')
-    @user_payed_c   = $('<input type=radio name=who_payed value=user id=who_payed_user checked=checked>')
-    @friend_payed_c = $('<input type=radio name=who_payed value=friend id=who_payed_friend>')
     @user_payed_label   = $('label[for="bill_user_payed"]')
     @friend_payed_label = $('label[for="bill_friend_payed"]')
 
-    $('#bill_who_payed').find('input,.currency').hide()
-    @user_payed_label.attr('for', 'who_payed_user')
-    @friend_payed_label.attr('for', 'who_payed_friend')
-    @user_payed_c.insertBefore   @user_payed_label
-    @friend_payed_c.insertBefore @friend_payed_label
+    # Create radio buttons instead of amount fields
+    @user_payed_c   = $('<input type=radio name=who_payed value=user id=who_payed_user>')
+    @friend_payed_c = $('<input type=radio name=who_payed value=friend id=who_payed_friend>')
+    if @user_payed() > 0
+      @user_payed_c.check()
+    else
+      @friend_payed_c.check()
+    $('#bill_who_payed').find('input, .currency').hide()
+    @user_payed_c.insertBefore   @user_payed_label.attr('for', 'who_payed_user')
+    @friend_payed_c.insertBefore @friend_payed_label.attr('for', 'who_payed_friend')
 
-    # TODO checked=checked on radios and shared checkbox
-    # need to find present value
-
-    # Shared
-    @shared_checkbox = $('<input type=checkbox name=shared value=1>')
+    # Create shared checkbox instead of ratio field
+    @shared_checkbox = $('<input id=shared type=checkbox name=shared value=1>')
+    @shared_label = $('<label for=shared>Shared</label>')
+    @shared_checkbox.check() if 1 > @user_ratio() > 0
+    $('#bill_shared .field, #bill_shared h2').hide()
     @shared_checkbox.insertBefore $('#bill_shared .field')
-    $('#bill_shared .field').hide()
+    @shared_label.insertAfter @shared_checkbox
 
-    # Summary
-    @summary_f = $('<div id="summary"></div>')
-    @summary_f.insertAfter $('#bill_shared')
+    # Create a summary field
+    @summary_f = $('<p id="summary"></p>')
+    @summary_f.insertAfter @shared_label
 
-    # Update
+    # Update the automatic data
+    $('.new_bill, .edit_bill').change(@update)
     @update()
-    $('.new_bill,.edit_bill').change(@update)
-
-
 
   amount: () ->
     @amount_f.floatval()
@@ -85,6 +84,7 @@ class Bill
     @update_shared()
     @update_summary()
 
+  # Update the underlying fields
   update_who_payed: ->
     @friend_payed_label.text(@friend_name())
     # Radio buttons decide who payed
@@ -104,6 +104,7 @@ class Bill
     )
 
   # Update text summary
+
   update_summary: ->
     if (!@amount())
       @summary ''
@@ -113,6 +114,7 @@ class Bill
       @summary "#{@friend_name()} owes you #{@friend_debt()} #{@currency}"
     else
       @summary ''
+
 
 window.Bill = Bill
 

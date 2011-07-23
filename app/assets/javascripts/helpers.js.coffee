@@ -1,4 +1,3 @@
-
 # Floating value of an input
 $.fn.floatval = ->
   val = @val()
@@ -14,4 +13,12 @@ $.fn.intval = ->
     parseInt val, 10
   else
     0
+
+# Syntaxic sugar to check html radio and checkboxes
+$.fn.check = ->
+  @attr('checked', 'checked')
+
+# Syntaxic sugar to uncheck html radio and checkboxes
+$.fn.uncheck = ->
+  @attr('checked', '')
 
