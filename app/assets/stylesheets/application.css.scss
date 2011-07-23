@@ -1,4 +1,4 @@
-@import 'bourbon';
+@import 'bourbon/bourbon';
 @import 'colors';
 @import 'layout';
 
@@ -22,17 +22,26 @@ a {
 }
 
 a.button {
-  color: $text;
+/*  color: $text;
   background: $lightgrey;
   border-radius: 3px;
   text-decoration: none;
   padding: 3px 6px;
-  margin: 10px 0;
+  margin: 10px 0;*/
+  @include button(pill, $lightgrey);
+  text-decoration: none;
+  font-size: 13px;
 }
 
 div.field,
 div.actions {
   margin-bottom: 10px;
+}
+
+input[type=submit] {
+  @include button(shiny, $lighter);
+  font-size: inherit;
+  margin-top: 10px;
 }
 
 // Errors
