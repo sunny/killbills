@@ -1,37 +1,38 @@
 source 'http://rubygems.org'
 
-# gem 'rails', '3.0.7'
 gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => "v3.1.0.rc3"
-
 gem 'devise'
-gem 'sass'
-gem 'coffee-script'
-gem 'uglifier'
-gem 'jquery-rails'
 # gem 'bj'
 # gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
-
-gem 'therubyracer-heroku'
-
-gem 'sqlite3'
 # gem 'unicorn'
 # gem 'capistrano'
 
+# Assets
+gem 'sass'
+gem 'therubyracer-heroku'
+gem 'coffee-script'
+gem 'uglifier'
+gem 'jquery-rails'
+
 group :production do
-  # Gems required by Heroku
-  gem 'pg'
+  gem 'pg' # Required by Heroku
 end
 
 group :development, :test do
+  gem 'sqlite3'
+
+  # Tests
   gem 'shoulda'
-  gem 'guard-test'
-  gem 'guard-livereload'
-  # gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
-  # gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'factory_girl_rails'
   # gem 'webrat'
   # gem 'ruby-debug'
   # gem 'ruby-debug19', :require => 'ruby-debug'
+
+  # Guard
+  gem 'guard-test'
+  gem 'guard-livereload'
+  # gem 'rb-inotify' if RUBY_PLATFORM =~ /linux/
+  # gem 'libnotify' if RUBY_PLATFORM =~ /linux/
 end
 
