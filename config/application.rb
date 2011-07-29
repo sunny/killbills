@@ -41,5 +41,9 @@ module Fricout
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Default generators
+    config.generators.stylesheet_engine = :sass
   end
 end
+
