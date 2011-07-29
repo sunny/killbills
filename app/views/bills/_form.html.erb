@@ -26,11 +26,15 @@
     <h2>Who payed?</h2>
     <div class="field">
       <%= f.label :user_payed, "You" %>
-      <%= f.money_field :user_payed %>
+      <span class="payed">
+        <%= f.money_field :user_payed %>
+      </span>
     </div>
     <div class="field">
       <%= f.label :friend_payed, "Friend" %>
-      <%= f.money_field :friend_payed %>
+      <span class="payed">
+        <%= f.money_field :friend_payed %>
+      </span>
     </div>
   </section>
   <section id="bill_shared">
@@ -55,3 +59,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+

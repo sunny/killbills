@@ -26,13 +26,7 @@ h1, h2 {
 }
 
 a.button {
-/*  color: $text;
-  background: $lightgrey;
-  border-radius: 3px;
-  text-decoration: none;
-  padding: 3px 6px;
-  margin: 10px 0;*/
-  @include button(pill, $lightgrey);
+  @include pill($lightgrey);
   text-decoration: none;
   font-size: 13px;
 }
@@ -43,21 +37,22 @@ div.actions {
 }
 
 input[type=submit] {
-  @include button(shiny, $lighter);
+  @include shiny($lighter);
   font-size: inherit;
   margin-top: 10px;
+  padding: 5px 10px;
 }
 
 // Errors
 
 .alert,
 .notice {
-    margin: 0 10px 5px 10px;
-    background: #8B008B;
-    display: inline-block;
-    padding: 0 10px 4px 10px;
-    color: white;
-    opacity: .5;
+  margin: 0 10px 5px 10px;
+  background: #8B008B;
+  display: inline-block;
+  padding: 0 10px 4px 10px;
+  color: white;
+  opacity: .5;
 }
 
 .field_with_errors {
@@ -127,6 +122,42 @@ input[type=submit] {
   time {
     display: block;
     color: $text;
+  }
+}
+
+
+// Bill form
+
+#bill_who_payed {
+  label {
+    font-size: 1.1em;
+  }
+  .payed {
+    font-size: 0.9em;
+    input[type=number] {
+      font: inherit;
+      &:focus {
+        width: 70px !important;
+      }
+    }
+  }
+  &:not(.mixed) {
+    .payed {
+      color: $grey;
+      input[type=number]:not(:focus) {
+        color: inherit;
+        visibility: visible;
+        background: transparent;
+        width: auto;
+        display: inline;
+        cursor: pointer;
+        border-color: transparent;
+        @include border-radius(5px);
+        &:hover {
+          background: $lightgrey;
+        }
+      }
+    }
   }
 }
 

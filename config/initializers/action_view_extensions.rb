@@ -5,8 +5,7 @@ module ActionView
       def number_field(attribute, options={})
         defaults = {
           :size => 5,
-          :type => "number",
-          :maxlength => (options[:size].nil? ? 5 : options[:size])
+          :type => "number"
         }
         text_field(attribute, defaults.merge(options))
       end
