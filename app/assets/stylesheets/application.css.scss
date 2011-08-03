@@ -9,6 +9,9 @@ a {
     color: $darker;
   }
 }
+h1 {
+  @include font-andron;
+}
 
 
 // Generic classes
