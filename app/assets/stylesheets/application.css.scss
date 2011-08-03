@@ -10,7 +10,7 @@ a {
     color: $darker;
   }
 }
-h1 {
+h1, h2 {
   @include font-andron;
 }
 
