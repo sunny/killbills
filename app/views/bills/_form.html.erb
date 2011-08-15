@@ -11,8 +11,8 @@
     </div>
   <% end %>
 
-  <section id="bill_info">
-    <h2>Bill</h2>
+  <fieldset id="bill_info">
+    <legend>Bill</legend>
     <div class="field">
       <%= f.label :amount %>
       <%= f.money_field :amount, :required => true %>
@@ -21,9 +21,9 @@
       <%= f.label :friend_id %>
       <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
     </div>
-  </section>
-  <section id="bill_who_payed">
-    <h2>Who payed?</h2>
+  </fieldset>
+  <fieldset id="bill_who_payed">
+    <legend>Who payed?</legend>
     <div class="field">
       <%= f.label :user_payed, "You" %>
       <span class="payed">
@@ -36,25 +36,25 @@
         <%= f.money_field :friend_payed %>
       </span>
     </div>
-  </section>
-  <section id="bill_shared">
-    <h2>Shared?</h2>
+  </fieldset>
+  <fieldset id="bill_shared">
+    <legend>Shared?</legend>
     <div class="field">
       <%= f.label :user_ratio, "Your ratio" %>
       <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
     </div>
-  </section>
-  <section>
-    <h2>Optional</h2>
+  </fieldset>
+  <fieldset id="bill_optional">
+    <legend>Optional</legend>
     <div class="field">
       <%= f.label :title %>
       <%= f.text_field :title %>
     </div>
     <div class="field">
-      <%= f.label :date %>
+      <%= f.label :date, :for => "bill_date_1i" %>
       <%= f.date_select :date %>
     </div>
-  </section>
+  </fieldset>
   <div class="actions">
     <%= f.submit %>
   </div>

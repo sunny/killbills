@@ -15,6 +15,23 @@ h1, h2 {
   @include font-andron;
 }
 
+fieldset {
+  border: none;
+  padding: 0;
+  margin: .5em 0 0 0;
+
+  legend {
+    margin: 0 0 .5em 0;
+    padding: 0;
+    color: $grey;
+    font-size: 1em;
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
 
 // Generic classes
 .negative {
