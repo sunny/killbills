@@ -25,6 +25,7 @@ group :development, :test do
   # Tests
   gem 'shoulda'
   gem 'factory_girl_rails'
+  gem 'ruby-prof'
   # gem 'webrat'
   # gem 'ruby-debug'
   # gem 'ruby-debug19', :require => 'ruby-debug'

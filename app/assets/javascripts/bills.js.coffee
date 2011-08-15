@@ -1,3 +1,8 @@
+jQuery ->
+  # New Bill
+  new Bill if $('#bill_amount').length
+
+
 class Bill
   # encoded "€" because of a CoffeeScript encoding error
   currency: decodeURIComponent('%E2%82%AC')
@@ -142,7 +147,4 @@ class Bill
       @summary "#{@friend_name()} owes you #{@friend_debt()} #{@currency}"
     else
       @summary ''
-
-
-window.Bill = Bill
 
