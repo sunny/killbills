@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', :git => 'git://github.com/rails/rails.git', :tag => "v3.1.0.rc5"
+gem 'rails', '>= 3.1'
 gem 'devise'
 # gem 'bj'
 # gem 'nokogiri'
