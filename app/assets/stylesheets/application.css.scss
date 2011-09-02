@@ -1,9 +1,15 @@
-@import 'bourbon/bourbon';
 @import 'colors';
 @import 'fonts';
+@import 'mixins';
+@import 'grid';
+@import 'reset';
 @import 'layout';
 
 // Generic html
+
+body {
+  @include font-sans;
+}
 a {
   color: $color;
   &:visited {
@@ -11,27 +17,77 @@ a {
   }
 }
 
-h1, h2 {
-  @include font-andron;
+h1 {
+  font-size: 150%;
 }
 
-fieldset {
-  border: none;
-  padding: 0;
-  margin: .5em 0 0 0;
+h2 {
+  font-size: 110%;
+}
 
-  legend {
-    margin: 0 0 .5em 0;
+$form-side-width: 150px;
+$form-gutter-width: 20px;
+
+// https://github.com/twitter/bootstrap/blob/master/lib/forms.less
+form {
+  margin-bottom: $baseline;
+
+  label,
+  input[type=checkbox],
+  input[type=radio] {
+    cursor: pointer;
+  }
+
+  fieldset {
+    margin-bottom: $baseline;
+    padding-top: $baseline;
+    border: none;
     padding: 0;
-    color: $grey;
-    font-size: 1em;
+
+    legend {
+      padding: 0;
+      color: $darkgrey;
+      display: block;
+      font-size: 20px;
+      line-height: 1;
+      margin-left: $form-side-width + $form-gutter-width;
+    }
+  }
+
+  // Clearfix
+  .line {
+    margin-bottom: $baseline;
+  }
+
+  // Shift over the inside div to align all label's relevant content
+  .input {
+    margin-left: $form-side-width + $form-gutter-width;
+  }
+
+  label, input, select, textarea {
+    @include font-sans;
+    font-size: 13px;
+  }
+
+  // Float labels left
+  label {
+    line-height: $baseline;
+    padding-top: 6px;
+    width: $column-width;
+    display: block;
+    float: left;
+    clear: left;
+    text-align: right;
+    color: $darkgrey;
+    margin-right: $gutter-width;
+  }
+
+
+  .actions {
+    clear: left;
+    margin-left: $column-width + $gutter-width;
   }
 }
-
-label {
-  cursor: pointer;
-}
-
 
 // Generic classes
 .negative {
@@ -44,7 +100,6 @@ label {
 }
 
 a.button {
-  @include pill($lightgrey);
   text-decoration: none;
   font-size: 13px;
 }
@@ -55,8 +110,6 @@ div.actions {
 }
 
 input[type=submit] {
-  @include shiny($lighter);
-  font-size: inherit;
   margin-top: 10px;
   padding: 5px 10px;
 }
@@ -65,11 +118,11 @@ input[type=submit] {
 
 .alert,
 .notice {
-  margin: 0 10px 5px 10px;
-  background: #8B008B;
+  margin: 10px 20px 0;
   display: inline-block;
-  padding: 0 10px 4px 10px;
+  padding: 5px 10px;
   color: white;
+  background: $color;
   opacity: .5;
 }
 
