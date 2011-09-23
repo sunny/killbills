@@ -33,11 +33,11 @@ class Bill < ActiveRecord::Base
   def user_debt
     user_ratio * amount - user_payed
   end
-  
+
   def friend_debt
     friend_ratio * amount - friend_payed
   end
-  
+
   def friend_ratio
     1 - user_ratio
   end
@@ -47,7 +47,7 @@ class Bill < ActiveRecord::Base
     who_payed = []
     who_payed << "You" if user_payed > 0
     who_payed << friend.name if friend_payed > 0
-    "#{who_payed.to_sentence} payed #{money amount}"
+    "#{who_payed.to_sentence} payed #{number_to_currency amount}"
   end
 
   def assign_default_values
@@ -61,10 +61,11 @@ class Bill < ActiveRecord::Base
     errors.add(:friend_payed, "must add up to the amount payed") if
       amount != user_payed.to_f + friend_payed.to_f
   end
-  
+
   def creates_a_debt
     errors[:base] << "A bill should result in a debt" if
       !user_payed.nil? and !friend_payed.nil? and \
       user_debt == 0 and friend_debt == 0
   end
 end
+
