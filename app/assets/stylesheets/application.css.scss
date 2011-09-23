@@ -19,10 +19,16 @@ a {
 
 h1 {
   font-size: 150%;
+  margin: 0 0 .5em;
 }
 
 h2 {
   font-size: 110%;
+  margin: 1em 0 .1em;
+}
+
+p {
+  margin: .5em 0;
 }
 
 $form-side-width: 150px;
