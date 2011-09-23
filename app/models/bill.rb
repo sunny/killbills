@@ -1,6 +1,8 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
+
   attr_accessible :title, :amount, :date, :friend_id, :user_payed,
     :friend_payed, :user_ratio
 
