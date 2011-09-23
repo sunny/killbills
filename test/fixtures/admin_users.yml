@@ -1,0 +1,5 @@
+sunny_admin:
+  email: sunny@sunfox.org
+  # password: fricout
+  encrypted_password: $2a$10$1ItmxkqROCFW7ZTjVcJUbOCM/JsicJnUcXvVzxJKke2Ba7jG/CB8m
+
