@@ -7,8 +7,10 @@ ActiveAdmin.register Bill do
   filter :date
 
   index do
-    column :user
-    column :friend
+    column :user, :sortable => :user_id do |bill|
+      link_to bill.user.email, [:admin, bill.user]
+    end
+    column :friend, :sortable => :friend_id
     column :title
     column :amount
     column :user_ratio
