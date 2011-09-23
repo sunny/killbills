@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <th>Amount</th>
-    <td><%= money @bill.amount %></td>
+    <td><%= number_to_currency @bill.amount %></td>
   </tr>
   <tr>
     <th>Date</th>
@@ -25,11 +25,11 @@
 
 <% if @bill.user_debt > 0 %>
 <p class="negative result">
-  You owe <%= @bill.friend.name %> <%= money @bill.user_debt %>
+  You owe <%= @bill.friend.name %> <%= number_to_currency @bill.user_debt %>
 </p>
 <% else %>
 <p class="positive result">
-  <%= @bill.friend.name %> owes you <%= money @bill.user_debt.abs %>
+  <%= @bill.friend.name %> owes you <%= number_to_currency @bill.user_debt.abs %>
 </p>
 <% end %>
 
@@ -47,17 +47,16 @@
   <tbody>
     <tr>
       <th>You</th>
-      <td><%= money @bill.user_payed %></td>
+      <td><%= number_to_currency @bill.user_payed %></td>
       <td><%= ratio @bill.user_ratio %></td>
-      <td class="<%= variation -@bill.user_debt %>"><%= money @bill.user_debt %></td>
+      <td class="<%= variation -@bill.user_debt %>"><%= number_to_currency @bill.user_debt %></td>
     </tr>
     <tr>
       <th><%= @bill.friend.name %></th>
-      <td><%= money @bill.friend_payed %></td>
+      <td><%= number_to_currency @bill.friend_payed %></td>
       <td><%= ratio @bill.friend_ratio %></td>
-      <td class="<%= variation -@bill.friend_debt %>"><%= money @bill.friend_debt %></td>
+      <td class="<%= variation -@bill.friend_debt %>"><%= number_to_currency @bill.friend_debt %></td>
     </tr>
   </tbody>
 </table>
-
 

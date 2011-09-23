@@ -4,11 +4,11 @@
 
 <% if @friend.debt > 0 %>
 <p class="debt negative">
-  You owe <%= @friend.name %> <%= money @friend.debt %>
+  You owe <%= @friend.name %> <%= number_to_currency @friend.debt %>
 </p>
 <% else %>
 <p class="debt positive">
-  Owes you <%= money @friend.debt.abs %>
+  Owes you <%= number_to_currency @friend.debt.abs %>
 </p>
 <% end %>
 
@@ -18,5 +18,4 @@
 <%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}), :class => "button" %>
 
 <%= render @friend.bills %>
-
 
