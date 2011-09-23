@@ -7,7 +7,7 @@ body {
 }
 
 #menu {
-  background: $color;
+  @include backgroud-vertical-linear-gradient($color, darken($color, 10%));
   padding: 10px $gutter-width;
   ul {
     list-style-type: none;

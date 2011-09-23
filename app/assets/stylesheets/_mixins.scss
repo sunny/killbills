@@ -2,3 +2,18 @@
   border-radius: $r;
 }
 
+@mixin box-shadow($s) {
+  -webkit-box-shadow: $s;
+  -moz-box-shadow: $s;
+  box-shadow: $s;
+}
+
+@mixin backgroud-vertical-linear-gradient($top, $bottom) {
+  background: $top;
+  background: -webkit-gradient(linear, left top, left bottom, from($top), to($bottom));
+  background: -webkit-linear-gradient(top, $top, $bottom);
+  background: -moz-linear-gradient(top, $top, $bottom);
+  background: -ms-linear-gradient(top, $top, $bottom);
+  background: -o-linear-gradient(top, $top, $bottom);
+}
+

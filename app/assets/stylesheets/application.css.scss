@@ -99,9 +99,42 @@ form {
   color: $green;
 }
 
-a.button {
-  text-decoration: none;
+button, .button, a.button {
+  // Box model
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin: .5em 0;
+  padding: .5em 1em;
+
+  // Borders
+  outline: none;
+  border: none;
+  border-top: 2px solid $lighter;
+  @include border-radius(.8em);
+
+  // Box colors
+  @include backgroud-vertical-linear-gradient($color, darken($color, 10%));
+  @include box-shadow(rgba(0, 0, 0, .5) 1px 1px 1px);
+
+  // Text
+  color: white;
   font-size: 13px;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
+  line-height: 1;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $color;
+    background: $color;
+  }
+  &:active,
+  &:focus {
+    border-color: $darker;
+    background: $darker;
+    top: 1px;
+  }
 }
 
 div.field,
@@ -165,7 +198,7 @@ input[type=submit] {
   a {
     @include border-radius(3px);
     text-decoration: none;
-    display: block;
+    display: inline-block;
     margin-top: 10px;
     margin: 10px 0;
   }
