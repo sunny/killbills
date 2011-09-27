@@ -4,7 +4,9 @@ ActiveAdmin.register Friend do
 
   index do
     column :name
-    column :user
+    column :user, :sortable => :user_id do |friend|
+      link_to friend.user.email, [:admin, friend.user]
+    end
     column :created_at
     default_actions
   end
