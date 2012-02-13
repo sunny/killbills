@@ -1,0 +1,123 @@
+<mockup version="1.0" skin="sketch" measuredW="863" measuredH="705" mockupW="721" mockupH="657">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="142" y="48" w="721" h="657" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Fricout%0Ahttp%3A//fricout.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="457" y="173" w="-1" h="-1" measuredW="109" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nouvelle%20note</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="575" y="173" w="-1" h="-1" measuredW="54" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Amis</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Title" x="250" y="211" w="-1" h="-1" measuredW="190" measuredH="37" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>28</size>
+        <text>Nouvelle%20note</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Label" x="254" y="263" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Avec</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::FieldSet" x="250" y="297" w="280" h="82" measuredW="200" measuredH="170" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Paiements</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::TextInput" x="359" y="313" w="56" h="-1" measuredW="29" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>12</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Label" x="415" y="318" w="-1" h="-1" measuredW="17" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%u20AC</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Label" x="307" y="319" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sunny</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::TextInput" x="359" y="342" w="56" h="-1" measuredW="79" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Label" x="415" y="347" w="-1" h="-1" measuredW="17" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%u20AC</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::FieldSet" x="250" y="385" w="279" h="91" measuredW="200" measuredH="170" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Partage</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Button" x="432" y="480" w="-1" h="-1" measuredW="91" measuredH="28" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cr%E9er%20note</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="263" y="402" w="236" h="71" measuredW="225" measuredH="63" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29%20Guillaume%20te%20dois%20le%20total%20%2812%20%u20AC%29%0A%28%20%29%20Guillaume%20te%20dois%20la%20moiti%E9%20%286%20%u20AC%29%0A%28%20%29%20Autre</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="283" y="344" w="-1" h="-1" measuredW="66" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Guillaume</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::TextInput" x="307" y="260" w="157" h="-1" measuredW="74" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Guillaume</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Canvas" x="142" y="111" w="721" h="55" measuredW="100" measuredH="70" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <color>14540253</color>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Paragraph" x="254" y="121" w="329" h="45" measuredW="200" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Vous%20utilisez%20la%20version%20de%20d%E9mo.%0ASi%20vous%20souhaitez%20retrouver%20vos%20dettes%20plus%20tard%20vous%20devriez</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Button" x="613" y="119" w="-1" h="-1" measuredW="127" measuredH="28" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cr%E9er%20un%20compte</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Title" x="250" y="174" w="-1" h="-1" measuredW="66" measuredH="26" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>18</size>
+        <text>Fricout</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Button" x="325" y="173" w="-1" h="-1" measuredW="125" measuredH="28" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tableau%20de%20bord</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Paragraph" x="615" y="146" w="122" h="20" measuredW="200" measuredH="140" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>12</size>
+        <text>en%20une%20%E9tape</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
