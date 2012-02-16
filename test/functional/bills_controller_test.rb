@@ -22,7 +22,7 @@ class BillsControllerTest < ActionController::TestCase
 
   test "should create bill" do
     assert_difference('Bill.count') do
-      post :create, :bill => @bill.attributes
+      post :create, :bill => { title: "Soup", amount: 5, date: 1.day.ago, user_ratio: 1, user_payed: 0, friend_payed: 5, friend_id: Factory(:friend).id }
     end
 
     assert_redirected_to bill_path(assigns(:bill))
@@ -39,7 +39,7 @@ class BillsControllerTest < ActionController::TestCase
   end
 
   test "should update bill" do
-    put :update, :id => @bill.to_param, :bill => @bill.attributes
+    put :update, :id => @bill.to_param, :bill => { title: "Soup", amount: 5, date: Time.now, user_ratio: 1, user_payed: 0, friend_payed: 5 }
     assert_redirected_to bill_path(assigns(:bill))
   end
 
@@ -51,3 +51,4 @@ class BillsControllerTest < ActionController::TestCase
     assert_redirected_to bills_path
   end
 end
+

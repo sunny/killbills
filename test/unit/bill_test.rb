@@ -36,15 +36,14 @@ class BillTest < ActiveSupport::TestCase
     should "have an automatic title" do
       @bill = Factory.build(:bill, :title => "Coffee")
       assert_equal "Coffee", @bill.automatic_title
-    end
-    
-    should "have an automatic title" do
+
       @bill = Factory.build(:bill, :title => "",
         :user_payed => 42, :friend_payed => 0, :amount => 42)
-      assert_match /^You payed 42/, @bill.automatic_title
+      assert_equal "You payed $42.00", @bill.automatic_title
+
       @bill = Factory.build(:bill, :title => "",
         :user_payed => 40, :friend_payed => 2, :amount => 42)
-      assert_match /^You and .* payed 42/, @bill.automatic_title
+      assert_match /^You and .* payed \$42.00$/, @bill.automatic_title
     end
 
     should "calculate the friend_ratio" do
@@ -88,3 +87,4 @@ class BillTest < ActiveSupport::TestCase
   end
 
 end
+

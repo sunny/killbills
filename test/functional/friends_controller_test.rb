@@ -22,7 +22,7 @@ class FriendsControllerTest < ActionController::TestCase
 
   test "should create friend" do
     assert_difference('Friend.count') do
-      post :create, :friend => @friend.attributes
+      post :create, :friend => { :name => "Max" }
     end
 
     assert_redirected_to friend_path(assigns(:friend))
@@ -39,7 +39,7 @@ class FriendsControllerTest < ActionController::TestCase
   end
 
   test "should update friend" do
-    put :update, :id => @friend.to_param, :friend => @friend.attributes
+    put :update, :id => @friend.to_param, :friend => { :name => "Joe" }
     assert_redirected_to friend_path(assigns(:friend))
   end
 
@@ -51,3 +51,4 @@ class FriendsControllerTest < ActionController::TestCase
     assert_redirected_to friends_path
   end
 end
+
