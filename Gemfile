@@ -28,3 +28,8 @@ group :development, :test do
   gem 'guard-livereload'
 end
 
+
+group :linux do
+  gem 'libnotify'
+end
+
