@@ -6,7 +6,11 @@ class BillsControllerTest < ActionController::TestCase
   setup do
     @user = Factory(:user)
     sign_in @user
-    @bill = Factory(:bill, :user => @user)
+    @bill = Factory(:bill, :user => @user, :participations => [
+        Factory(:user_participation, :payment => 42, :owed => :zero),
+        Factory(:friend_participation, :payment => 0, :owed => :all)
+      ]
+    )
   end
 
   test "should get index" do
@@ -22,7 +26,7 @@ class BillsControllerTest < ActionController::TestCase
 
   test "should create bill" do
     assert_difference('Bill.count') do
-      post :create, :bill => { title: "Soup", amount: 5, date: 1.day.ago, user_ratio: 1, user_payed: 0, friend_payed: 5, friend_id: Factory(:friend).id }
+      post :create, :bill => { title: "Soup", date: 1.day.ago }
     end
 
     assert_redirected_to bill_path(assigns(:bill))
@@ -39,7 +43,7 @@ class BillsControllerTest < ActionController::TestCase
   end
 
   test "should update bill" do
-    put :update, :id => @bill.to_param, :bill => { title: "Soup", amount: 5, date: Time.now, user_ratio: 1, user_payed: 0, friend_payed: 5 }
+    put :update, :id => @bill.to_param, :bill => { title: "Soup", date: Time.now }
     assert_redirected_to bill_path(assigns(:bill))
   end
 

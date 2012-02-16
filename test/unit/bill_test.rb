@@ -2,43 +2,30 @@ require 'test_helper'
 
 class BillTest < ActiveSupport::TestCase
   should belong_to(:user)
-  should belong_to(:friend)
+  should have_many(:participations)
 
-  should validate_presence_of(:friend_id)
-  should validate_presence_of(:user_ratio)
-  should validate_presence_of(:amount)
-  should validate_presence_of(:user_payed)
-  should validate_presence_of(:friend_payed)
-
-  should validate_numericality_of(:amount)
-  should validate_numericality_of(:user_ratio)
-  should validate_numericality_of(:user_payed)
-  should validate_numericality_of(:friend_payed)
-
-  should_not allow_value("-1").for(:amount)
-  should_not allow_value("-1").for(:friend_payed)
-  should_not allow_value("-1").for(:user_payed)
-  should_not allow_value("-1").for(:user_ratio)
-  should_not allow_value("2").for(:user_ratio)
+  should validate_presence_of(:date)
 
   context "A Bill" do
-    should "have a default value for user_ratio" do
-      assert_equal 1, Bill.new.user_ratio
+    setup do
+      @you = Factory.build(:user)
+      @friend = Factory.build(:friend)
     end
 
     should "be valid" do
       @bill = Factory.build(:bill)
       assert @bill.valid?
-      assert @bill.friend.is_a? Friend
-      assert @bill.user.is_a? User
     end
 
     should "have an automatic title" do
       @bill = Factory.build(:bill, :title => "Coffee")
       assert_equal "Coffee", @bill.automatic_title
 
-      @bill = Factory.build(:bill, :title => "",
-        :user_payed => 42, :friend_payed => 0, :amount => 42)
+      @bill = Factory(:bill, :participations => [
+          Factory(:user_participation, :payment => 42, :owed => :zero),
+          Factory(:friend_participation, :payment => 0, :owed => :all)
+        ]
+      )
       assert_equal "You payed $42.00", @bill.automatic_title
 
       @bill = Factory.build(:bill, :title => "",
@@ -61,28 +48,7 @@ class BillTest < ActiveSupport::TestCase
       assert_equal -1, @bill.friend_debt
     end
 
-    should "ensure there is a debt" do
-      @bill = Factory.build(:bill,
-        :amount => 2,
-        :user_ratio => 0.5,
-        :user_payed => 1,
-        :friend_payed => 1)
-      assert !@bill.valid?
-    end
 
-    should "ensure people paid the total" do
-      @bill = Factory.build(:bill,
-        :amount => 3,
-        :user_payed => 0,
-        :friend_payed => 1)
-      assert !@bill.valid?
-
-      @bill.user_payed = 4
-      assert !@bill.valid?
-
-      @bill.user_payed = 2
-      assert @bill.valid?
-    end
 
   end
 
