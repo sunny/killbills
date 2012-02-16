@@ -1,15 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.2.1'
 gem 'devise'
 gem 'jquery-rails'
 gem 'activeadmin'
 
 # Assets
-gem 'sass-rails'
+gem 'sass-rails', '~> 3.2.3'
 gem 'therubyracer-heroku'
-gem 'coffee-script'
-gem 'uglifier'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '= 1.0.3'
 
 group :production do
   gem 'pg' # Required by Heroku
