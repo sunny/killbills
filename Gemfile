@@ -19,7 +19,8 @@ group :development, :test do
   gem 'sqlite3'
 
   # Tests
-  gem 'shoulda'
+  gem 'shoulda-context'
+  gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'ruby-prof'
 
