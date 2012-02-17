@@ -3,8 +3,11 @@
   <a href="<%= bill_path(bill) %>">
     <h2><%= bill.automatic_title %></h2>
     <div class="owed <%= variation -bill.user_debt %>">
-      <%= "You owe #{bill.friend.name} #{number_to_currency bill.user_debt}" unless bill.user_debt <= 0 %></td>
-      <%= "#{bill.friend.name} owes you #{number_to_currency bill.friend_debt}" unless bill.friend_debt <= 0 %>
+      <% if bill.user_debt < 0 %>
+        You owe <%= number_to_currency bill.user_debt.abs %>
+      <% else %>
+        Your friends owe you <%= number_to_currency bill.user_debt %>
+      <% end %>
     </div>
     <time pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
       <%= time_ago_in_words bill.date %> ago

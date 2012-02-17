@@ -17,46 +17,5 @@
     <th>Date</th>
     <td><%= @bill.date %></td>
   </tr>
-  <tr>
-    <th>With</th>
-    <td><%= link_to @bill.friend.name, @bill.friend %></td>
-  </tr>
-</table>
-
-<% if @bill.user_debt > 0 %>
-<p class="negative result">
-  You owe <%= @bill.friend.name %> <%= number_to_currency @bill.user_debt %>
-</p>
-<% else %>
-<p class="positive result">
-  <%= @bill.friend.name %> owes you <%= number_to_currency @bill.user_debt.abs %>
-</p>
-<% end %>
-
-
-<h2>Payments detail</h2>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Payment</th>
-      <th>Ratio</th>
-      <th>Debt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>You</th>
-      <td><%= number_to_currency @bill.user_payed %></td>
-      <td><%= ratio @bill.user_ratio %></td>
-      <td class="<%= variation -@bill.user_debt %>"><%= number_to_currency @bill.user_debt %></td>
-    </tr>
-    <tr>
-      <th><%= @bill.friend.name %></th>
-      <td><%= number_to_currency @bill.friend_payed %></td>
-      <td><%= ratio @bill.friend_ratio %></td>
-      <td class="<%= variation -@bill.friend_debt %>"><%= number_to_currency @bill.friend_debt %></td>
-    </tr>
-  </tbody>
 </table>
 

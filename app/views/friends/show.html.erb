@@ -1,6 +1,6 @@
 <h1><%= @friend.name %></h1>
 
-<%= link_to 'Edit', edit_friend_path(@friend), :class => "button" %>
+<%= link_to 'Edit', edit_friend_path(@friend), class: "button" %>
 
 <% if @friend.debt > 0 %>
 <p class="debt negative">
@@ -15,7 +15,5 @@
 
 <h2>Bills</h2>
 
-<%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}), :class => "button" %>
-
-<%= render @friend.bills %>
+<%= link_to 'New bill', new_bill_path(friend_id: @friend), class: "button" %>
 

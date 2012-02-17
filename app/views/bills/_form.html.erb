@@ -11,39 +11,6 @@
     </div>
   <% end %>
 
-  <fieldset id="bill_info">
-    <legend>Bill</legend>
-    <div class="field">
-      <%= f.label :amount %>
-      <%= f.money_field :amount, :required => true %>
-    </div>
-    <div class="field">
-      <%= f.label :friend_id %>
-      <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
-    </div>
-  </fieldset>
-  <fieldset id="bill_who_payed">
-    <legend>Who payed?</legend>
-    <div class="field">
-      <%= f.label :user_payed, "You" %>
-      <span class="payed">
-        <%= f.money_field :user_payed %>
-      </span>
-    </div>
-    <div class="field">
-      <%= f.label :friend_payed, "Friend" %>
-      <span class="payed">
-        <%= f.money_field :friend_payed %>
-      </span>
-    </div>
-  </fieldset>
-  <fieldset id="bill_shared">
-    <legend>Shared?</legend>
-    <div class="field">
-      <%= f.label :user_ratio, "Your ratio" %>
-      <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
-    </div>
-  </fieldset>
   <fieldset id="bill_optional">
     <legend>Optional</legend>
     <div class="field">

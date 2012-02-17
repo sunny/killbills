@@ -12,62 +12,30 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :date
 
-
-  # DEPRECATED
-  def amount
-    participations.sum(:payment)
+  # Whole bill total
+  # FIXME should use participations.sum(:payment) but it returns 0
+  def total
+    participations.to_a.sum(&:payment).to_f
   end
 
-  # DEPRECATED
-  def user_payed
-    participations.where(person_id: user_id).first.try(:payment).to_i
-  end
-
-  # DEPRECATED
-  def user_debt
-    user_ratio * amount - user_payed
-  end
-
-  # DEPRECATED
-  def user_ratio
-    participations.where(person_id: user_id).first.try(:ratio).to_i
-  end
-
-
-
-  # DEPRECATED
-  def friend
-    participations.where("person_id != ?", user_id).first.try(:person)
-  end
-
-  # DEPRECATED
-  def friend_payed
-    participations.where("person_id != ?", user_id).first.try(:payment)
-  end
-
-  # DEPRECATED
-  def friend_debt
-    friend_ratio * amount - friend_payed
-  end
-
-  # DEPRECATED
-  def friend_ratio
-    1 - user_ratio
-  end
-
-
-
+  # Title based on the participations
   def automatic_title
     return title unless title.blank?
-    who_payed = []
-    who_payed << "You" if user_payed > 0
-    who_payed << friend.name if friend_payed > 0
-    "#{who_payed.to_sentence} payed #{number_to_currency amount}"
+    friend_names = participations.friends.map{ |p| p.person.name }
+    "#{number_to_currency total} with #{friend_names.join(', ')}"
   end
 
+  # Debt against the bill creator
+  def user_debt
+    participations.friends.sum(:debt)
+  end
 
-  private
-
-
+  # Calculate what a share is worth
+  def even_share
+    unshared_amount = participations.unshared.sum(&:owed_total)
+    left_for_share = total - unshared_amount
+    shares = participations.shared.count
+    left_for_share / shares
+  end
 end
 

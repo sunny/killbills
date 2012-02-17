@@ -8,48 +8,28 @@ class BillTest < ActiveSupport::TestCase
 
   context "A Bill" do
     setup do
-      @you = Factory.build(:user)
-      @friend = Factory.build(:friend)
+      @bill = Factory(:bill)
+      Factory(:user_giver_participation, :bill => @bill)
+      Factory(:friend_getter_participation, :bill => @bill)
     end
 
     should "be valid" do
-      @bill = Factory.build(:bill)
       assert @bill.valid?
     end
 
     should "have an automatic title" do
-      @bill = Factory.build(:bill, :title => "Coffee")
       assert_equal "Coffee", @bill.automatic_title
-
-      @bill = Factory(:bill, :participations => [
-          Factory(:user_participation, :payment => 42, :owed => :zero),
-          Factory(:friend_participation, :payment => 0, :owed => :all)
-        ]
-      )
-      assert_equal "You payed $42.00", @bill.automatic_title
-
-      @bill = Factory.build(:bill, :title => "",
-        :user_payed => 40, :friend_payed => 2, :amount => 42)
-      assert_match /^You and .* payed \$42.00$/, @bill.automatic_title
+      @bill.title = ""
+      assert_equal "$42.00 with Friend", @bill.automatic_title
     end
 
-    should "calculate the friend_ratio" do
-      @bill = Factory.build(:bill, :user_ratio => 0.7)
-      assert_equal 0.3, @bill.friend_ratio
+    should "calculate total" do
+      assert_equal 42, @bill.total
     end
 
-    should "calculate the user and friend debt" do
-      @bill = Factory.build(:bill,
-        :amount => 4,
-        :user_ratio => 0.5,
-        :user_payed => 1,
-        :friend_payed => 3)
-      assert_equal 1, @bill.user_debt
-      assert_equal -1, @bill.friend_debt
+    should "calculate even_share" do
+      #assert_equal -42, @bill.user_debt
     end
-
-
-
   end
 
 end

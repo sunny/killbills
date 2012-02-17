@@ -1,3 +1,9 @@
+Pull in the database from heroku:
+
+    rake db:drop db:create
+    heroku db:pull --confirm fricout
+    rake db:migrate
+
 After migration create participations, if the model is still in the previous version :
 
     Bill.all.each do |bill|
