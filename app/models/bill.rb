@@ -20,7 +20,7 @@ class Bill < ActiveRecord::Base
 
   # DEPRECATED
   def user_payed
-    participations.where(person_id: user_id).first.try(:payment)
+    participations.where(person_id: user_id).first.try(:payment).to_i
   end
 
   # DEPRECATED
@@ -30,7 +30,7 @@ class Bill < ActiveRecord::Base
 
   # DEPRECATED
   def user_ratio
-    participations.where(person_id: user_id).first.try(:ratio)
+    participations.where(person_id: user_id).first.try(:ratio).to_i
   end
 
 
