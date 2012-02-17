@@ -25,7 +25,7 @@
         <tr>
             <td><%= p.collection_select :person_id, current_user.me_and_my_friends, :id, :name, :include_blank => true %></td>
             <td><%= p.number_field :payment %></td>
-            <td><%= p.select :owed, Participation.owed_for_select, :include_blank => true %>
+            <td><%= p.select :owed, Participation.owed_for_select, :include_blank => true %></td>
         </tr>
         <% end %>
       </tbody>

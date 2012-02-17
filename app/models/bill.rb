@@ -11,7 +11,11 @@ class Bill < ActiveRecord::Base
 
   # Validations
 
-  validates_presence_of :date
+  validates :date, :presence => true
+  validates :user, :presence => true
+  validate :ensure_user_is_in_bill
+  validate :ensure_payments
+  validate :ensure_payments_add_up
 
   # Whole bill total
   # FIXME should use participations.sum(:payment) but it returns 0
@@ -38,6 +42,41 @@ class Bill < ActiveRecord::Base
     left_for_share = total - unshared_amount
     shares = participations.shared.count
     left_for_share / shares
+  end
+
+private
+
+  def ensure_user_is_in_bill
+    unless participations.empty? or \
+           participations.map(&:person).include?(user)
+
+      errors[:"participations.person_id"] = "must contain yourself"
+      participations.each { |p|
+        p.errors[:person_id] = errors[:"participations.person_id"]
+      }
+    end
+  end
+
+  def ensure_payments
+    unless participations.empty? or total > 0
+      errors[:"participations.payment"] = "total must be greater than 0"
+      participations.each { |p|
+        p.errors[:payment] = errors[:"participations.payment"]
+      }
+    end
+  end
+
+  def ensure_payments_add_up
+    unless participations.empty?
+      sum = total
+      debt_sum = participations.map(&:owed_total).sum
+      if total >= 0 and sum != total
+        errors[:"participations.owed"] = "must sum up to #{total} (now #{participations.map(&:debt).sum})"
+        participations.each { |p|
+          p.errors[:owed] = errors[:"participations.owed"]
+        }
+      end
+    end
   end
 end
 

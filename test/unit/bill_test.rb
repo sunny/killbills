@@ -8,9 +8,10 @@ class BillTest < ActiveSupport::TestCase
 
   context "A Bill" do
     setup do
-      @bill = Factory(:bill)
-      Factory(:user_giver_participation, :bill => @bill)
-      Factory(:friend_getter_participation, :bill => @bill)
+      @user = Factory(:user)
+      @bill = Factory(:bill, user: @user)
+      Factory(:user_giver_participation, bill: @bill, person: @user)
+      Factory(:friend_getter_participation, bill: @bill)
     end
 
     should "be valid" do

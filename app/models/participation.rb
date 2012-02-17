@@ -2,9 +2,9 @@ class Participation < ActiveRecord::Base
   belongs_to :bill
   belongs_to :person
 
-  validates :owed,
-    :presence => true,
+  validates :owed, :presence => true,
     :inclusion => { in: %w(even zero all percentage fixed) }
+  validates :payment, numericality: { greater_than_or_equal_to: 0 }
 
   scope :unshared, where('participations.owed != "even"')
   scope :shared, where(owed: "even")
@@ -12,6 +12,8 @@ class Participation < ActiveRecord::Base
   scope :friends, includes(:person).where(people: { type: 'Friend' })
   scope :users,   includes(:person).where(people: { type: 'User' })
 
+  # Depending on the chosen calculation for owed
+  # return the total amount the person owes
   def owed_total
     case owed
       when "even"       then bill.even_share
@@ -24,22 +26,22 @@ class Participation < ActiveRecord::Base
     end
   end
 
+  # What the person needs to pay back
   def debt
     owed_total - payment
   end
 
-  def self.owed_types
+  # Calculation methods to show in a select box
+  # for how much the person owes
+  def self.owed_for_select
     {
       "even"  => "Even share",
       "zero"  => "Nothing",
       "all"   => "Everything",
       "percentage" => "A percentage",
       "fixed" => "Fixed amount",
-    }
+    }.map { |k,v| [v,k] }
   end
 
-  def self.owed_for_select
-    self.owed_types.map { |k,v| [v,k] }
-  end
 end
 

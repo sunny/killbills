@@ -8,9 +8,10 @@ class ParticipationTest < ActiveSupport::TestCase
 
   context "a participation from a bill" do
     setup {
-      @bill = Factory(:bill)
-      @participation = Factory(:participation, :payment => 21, :bill => @bill)
-      @participation2 = Factory(:participation, :payment => 42, :bill => @bill)
+      @user = Factory(:user)
+      @bill = Factory(:bill, user: @user)
+      @participation = Factory(:participation, payment: 21, person: @user, bill: @bill)
+      @participation2 = Factory(:participation, payment: 42, bill: @bill)
     }
 
     context "owed zero" do

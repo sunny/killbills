@@ -6,11 +6,9 @@ class BillsControllerTest < ActionController::TestCase
   setup do
     @user = Factory(:user)
     sign_in @user
-    @bill = Factory(:bill, :user => @user, :participations => [
-        Factory(:user_participation, :payment => 42, :owed => "zero"),
-        Factory(:friend_participation, :payment => 0, :owed => "all")
-      ]
-    )
+    @bill = Factory(:bill, user: @user)
+    Factory(:participation, bill: @bill, person: @user)
+    Factory(:participation, bill: @bill, person: Factory(:friend))
   end
 
   test "should get index" do
