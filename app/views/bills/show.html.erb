@@ -10,12 +10,30 @@
     <td><%= @bill.title %></td>
   </tr>
   <tr>
-    <th>Amount</th>
-    <td><%= number_to_currency @bill.amount %></td>
+    <th>Total</th>
+    <td><%= number_to_currency @bill.total %></td>
   </tr>
   <tr>
     <th>Date</th>
     <td><%= @bill.date %></td>
   </tr>
+</table>
+
+<h3>Participations</h3>
+<table>
+  <thead>
+    <th>Participant</th>
+    <th>Payment</th>
+    <th>Owes</th>
+  </thead>
+  <tbody>
+  <% for participation in @bill.participations %>
+    <tr>
+      <td><%= participation.person.name %></td>
+      <td><%= number_to_currency participation.payment %></td>
+      <td><%= number_to_currency participation.owed_total.to_f %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 

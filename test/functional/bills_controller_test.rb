@@ -7,8 +7,8 @@ class BillsControllerTest < ActionController::TestCase
     @user = Factory(:user)
     sign_in @user
     @bill = Factory(:bill, :user => @user, :participations => [
-        Factory(:user_participation, :payment => 42, :owed => :zero),
-        Factory(:friend_participation, :payment => 0, :owed => :all)
+        Factory(:user_participation, :payment => 42, :owed => "zero"),
+        Factory(:friend_participation, :payment => 0, :owed => "all")
       ]
     )
   end

@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :participation do
     association :bill
     payment 42
-    owed :all
+    owed "all"
     owed_amount nil
     owed_percent nil
   end
@@ -15,7 +15,7 @@ FactoryGirl.define do
 
   factory :user_giver_participation, :parent => :user_participation do
     payment 42
-    owed :all
+    owed "all"
   end
 
   factory :friend_participation, :parent => :participation do
@@ -24,7 +24,7 @@ FactoryGirl.define do
 
   factory :friend_getter_participation, :parent => :friend_participation do
     payment 0
-    owed :zero
+    owed "zero"
   end
 end
 

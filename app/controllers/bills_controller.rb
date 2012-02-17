@@ -27,6 +27,8 @@ class BillsController < ApplicationController
   # GET /bills/new.xml
   def new
     @bill = current_user.bills.new(params[:bill])
+    @bill.participations.build(:person => current_user)
+    @bill.participations.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -83,3 +85,4 @@ class BillsController < ApplicationController
     end
   end
 end
+

@@ -4,7 +4,7 @@ class Participation < ActiveRecord::Base
 
   validates :owed,
     :presence => true,
-    :inclusion => [:zero, :all, :percentage, :fixed, :even]
+    :inclusion => { in: %w(even zero all percentage fixed) }
 
   scope :unshared, where('participations.owed != "even"')
   scope :shared, where(owed: "even")
@@ -13,17 +13,33 @@ class Participation < ActiveRecord::Base
   scope :users,   includes(:person).where(people: { type: 'User' })
 
   def owed_total
-    case owed.to_sym
-      when :zero       then return 0
-      when :all        then return bill.total
-      when :percentage then return bill.total * owed_percent / 100
-      when :fixed      then return owed_amount.to_f
-      when :even       then return bill.even_share
+    case owed
+      when "even"       then bill.even_share
+      when "zero"       then 0
+      when "all"        then bill.total
+      when "percentage" then bill.total * owed_percent / 100
+      when "fixed"      then owed_amount.to_f
+      else
+        owed
     end
   end
 
   def debt
     owed_total - payment
+  end
+
+  def self.owed_types
+    {
+      "even"  => "Even share",
+      "zero"  => "Nothing",
+      "all"   => "Everything",
+      "percentage" => "A percentage",
+      "fixed" => "Fixed amount",
+    }
+  end
+
+  def self.owed_for_select
+    self.owed_types.map { |k,v| [v,k] }
   end
 end
 

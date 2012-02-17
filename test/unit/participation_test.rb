@@ -9,21 +9,19 @@ class ParticipationTest < ActiveSupport::TestCase
   context "a participation from a bill" do
     setup {
       @bill = Factory(:bill)
-      @participation = Factory(:participation,
-        :payment => 21, :bill => @bill)
-      @participation2 = Factory(:participation, :bill => @bill,
-        :payment => 42)
+      @participation = Factory(:participation, :payment => 21, :bill => @bill)
+      @participation2 = Factory(:participation, :payment => 42, :bill => @bill)
     }
 
     context "owed zero" do
-      setup { @participation.owed = :zero }
+      setup { @participation.owed = "zero" }
       should "calculate owed total" do
         assert_equal 0, @participation.owed_total
       end
     end
 
     context "owed all" do
-      setup { @participation.owed = :all }
+      setup { @participation.owed = "all" }
       should "calculate owed total" do
         assert_equal 21+42, @participation.owed_total
       end
@@ -31,7 +29,7 @@ class ParticipationTest < ActiveSupport::TestCase
 
     context "owed percentage" do
       setup {
-        @participation.owed = :percentage
+        @participation.owed = "percentage"
         @participation.owed_percent = 60
       }
       should "calculate owed total" do
@@ -41,7 +39,7 @@ class ParticipationTest < ActiveSupport::TestCase
 
     context "owed fixed" do
       setup {
-        @participation.owed = :fixed
+        @participation.owed = "fixed"
         @participation.owed_amount = 12
       }
       should "calculate owed total" do
@@ -51,8 +49,8 @@ class ParticipationTest < ActiveSupport::TestCase
 
     context "owed even" do
       setup {
-        @participation.owed = :even
-        @participation2.owed = :even
+        @participation.owed = "even"
+        @participation2.owed = "even"
         @participation.save
         @participation2.save
       }

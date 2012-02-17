@@ -3,10 +3,11 @@ include ApplicationHelper
 class Bill < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
 
-  attr_accessible :title, :date
-
   belongs_to :user
-  has_many :participations
+  has_many :participations, :dependent => :destroy
+
+  attr_accessible :title, :date, :participations_attributes
+  accepts_nested_attributes_for :participations
 
   # Validations
 
@@ -15,7 +16,8 @@ class Bill < ActiveRecord::Base
   # Whole bill total
   # FIXME should use participations.sum(:payment) but it returns 0
   def total
-    participations.to_a.sum(&:payment).to_f
+    payments = participations.map { |p| p.payment || 0 }
+    payments.sum.to_f
   end
 
   # Title based on the participations
