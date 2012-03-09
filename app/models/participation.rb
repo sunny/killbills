@@ -12,18 +12,14 @@ class Participation < ActiveRecord::Base
   scope :friends, includes(:person).where(people: { type: 'Friend' })
   scope :users,   includes(:person).where(people: { type: 'User' })
 
+  def shared?
+    owed == "even"
+  end
+
   # Depending on the chosen calculation for owed
   # return the total amount the person owes
   def owed_total
-    case owed
-      when "even"       then bill.even_share
-      when "zero"       then 0
-      when "all"        then bill.total
-      when "percentage" then bill.total * owed_percent / 100
-      when "fixed"      then owed_amount.to_f
-      else
-        owed
-    end
+    bill.participation_owed_total(self)
   end
 
   # What the person needs to pay back

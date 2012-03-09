@@ -19,12 +19,18 @@ class ParticipationTest < ActiveSupport::TestCase
       should "calculate owed total" do
         assert_equal 0, @participation.owed_total
       end
+      should "not be shared" do
+        assert_false @participation.shared?
+      end
     end
 
     context "owed all" do
       setup { @participation.owed = "all" }
       should "calculate owed total" do
         assert_equal 21+42, @participation.owed_total
+      end
+      should "not be shared" do
+        assert_false @participation.shared?
       end
     end
 
@@ -36,6 +42,9 @@ class ParticipationTest < ActiveSupport::TestCase
       should "calculate owed total" do
         assert_equal (21+42)*0.60, @participation.owed_total
       end
+      should "not be shared" do
+        assert_false @participation.shared?
+      end
     end
 
     context "owed fixed" do
@@ -45,6 +54,9 @@ class ParticipationTest < ActiveSupport::TestCase
       }
       should "calculate owed total" do
         assert_equal 12, @participation.owed_total
+      end
+      should "not be shared" do
+        assert_false @participation.shared?
       end
     end
 
@@ -58,6 +70,9 @@ class ParticipationTest < ActiveSupport::TestCase
       should "calculate owed total" do
         assert_equal (21+42)/2.0, @bill.even_share
         assert_equal (21+42)/2.0, @participation.owed_total
+      end
+      should "be shared" do
+        assert @participation.shared?
       end
     end
   end

@@ -38,11 +38,32 @@ class Bill < ActiveRecord::Base
 
   # Calculate what a share is worth
   def even_share
-    unshared_amount = participations.unshared.sum(&:owed_total)
+    shared, unshared = participations.chunk(&:shared?).map(&:last)
+    return 0 if shared.size <= 0
+
+    unshared_amount = unshared ? participations_owed_total(unshared) : 0
     left_for_share = total - unshared_amount
-    shares = participations.shared.count
-    left_for_share / shares
+    left_for_share / shared.size
   end
+
+
+  def participation_owed_total(participation)
+    case participation.owed
+      when "even"       then even_share
+      when "zero"       then 0
+      when "all"        then total
+      when "percentage" then total * participation.owed_percent / 100
+      when "fixed"      then participation.owed_amount.to_f
+      else
+        participation.owed
+    end
+  end
+
+  def participations_owed_total(participations = nil)
+    participations ||= self.participations
+    participations.to_a.sum { |p| participation_owed_total(p) }
+  end
+
 
 private
 
@@ -67,11 +88,9 @@ private
   end
 
   def ensure_payments_add_up
-    unless participations.empty?
-      sum = total
-      debt_sum = participations.map(&:owed_total).sum
-      if total >= 0 and sum != total
-        errors[:"participations.owed"] = "must sum up to #{total} (now #{participations.map(&:debt).sum})"
+    unless participations.empty? or total.zero?
+      if participations_owed_total != total
+        errors[:"participations.owed"] = "must sum up to #{total} (now #{participations_owed_total})"
         participations.each { |p|
           p.errors[:owed] = errors[:"participations.owed"]
         }
