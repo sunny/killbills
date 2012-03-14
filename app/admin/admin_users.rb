@@ -1,3 +1,4 @@
+# encoding: UTF-8
 ActiveAdmin.register AdminUser do
   filter :email
   filter :created_at

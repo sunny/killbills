@@ -1,19 +1,22 @@
+# encoding: UTF-8
 ActiveAdmin.register Bill do
-  #filter :user
-  #filter :friend
+  filter :user, collection: lambda {
+    User.all.map { |u| [u.title, u.id] }
+  }
+  filter :friend_id
   filter :title
   filter :amount
   filter :user_ratio
   filter :date
 
   index do
-    column :user, :sortable => :user_id do |bill|
-      link_to bill.user.email, [:admin, bill.user]
+    column :user, sortable: :user_id do |bill|
+      link_to bill.user.title, [:admin, bill.user]
     end
-    column :friend, :sortable => :friend_id
     column :title
-    column :amount
-    column :user_ratio
+    column :total do |bill|
+      number_to_currency bill.total
+    end
     column :date
     column :created_at
     default_actions
