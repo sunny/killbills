@@ -158,6 +158,8 @@ button, .button, a.button {
   }
 }
 
+// Forms
+
 div.field,
 div.actions {
   margin-bottom: 10px;
@@ -214,6 +216,7 @@ input[type=submit] {
 
 
 // Friends and bills lists
+
 .friends {
   margin-top: 20px;
   a {
@@ -231,58 +234,15 @@ input[type=submit] {
     margin: 0;
   }
 
-  time,
-  .owed {
-    opacity: .5;
-  }
+
 }
 
 .bills {
   @extend .friends;
 
-  .owed {
-    float: left;
-    margin-right: 15px;
-  }
   time {
-    display: block;
     color: $text;
   }
 }
 
-
-// Bill form
-
-#bill_who_payed {
-  label {
-    font-size: 1.1em;
-  }
-  .payed {
-    font-size: 0.9em;
-    input[type=number] {
-      font: inherit;
-      &:focus {
-        width: 70px !important;
-      }
-    }
-  }
-  &:not(.mixed) {
-    .payed {
-      color: $grey;
-      input[type=number]:not(:focus) {
-        color: inherit;
-        visibility: visible;
-        background: transparent;
-        width: auto;
-        display: inline;
-        cursor: pointer;
-        border-color: transparent;
-        @include border-radius(5px);
-        &:hover {
-          background: $lightgrey;
-        }
-      }
-    }
-  }
-}
 
