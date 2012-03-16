@@ -2,13 +2,13 @@
 <article class="bill">
   <a href="<%= bill_path(bill) %>">
     <h2><%= bill.automatic_title %></h2>
-    <div class="owed <%= variation -bill.user_debt %>">
-      <% if bill.user_debt < 0 %>
-        You owe <%= number_to_currency bill.user_debt.abs %>
-      <% else %>
-        Your friends owe you <%= number_to_currency bill.user_debt %>
-      <% end %>
+
+    <% for debt in bill.debts %>
+    <div class="owed <%= variation -debt.diff_for(bill.user) %>">
+      <%= debt_summary debt %></li>
     </div>
+    <% end %>
+
     <time pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
       <%= time_ago_in_words bill.date %> ago
     </time>

@@ -1,4 +1,4 @@
-<h1><%=@bill.automatic_title%></h1>
+<h1><%= @bill.automatic_title %></h1>
 
 <%= link_to 'Edit', edit_bill_path(@bill), :class => 'button' %>
 <%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'button delete' %>
@@ -19,21 +19,36 @@
   </tr>
 </table>
 
-<h3>Participations</h3>
+<h2>Participations</h2>
 <table>
   <thead>
     <th>Participant</th>
     <th>Payment</th>
     <th>Owes</th>
+    <th>Debt</th>
   </thead>
   <tbody>
   <% for participation in @bill.participations %>
     <tr>
-      <td><%= participation.person.name %></td>
+      <td><%= link_to_friend participation.person %></td>
       <td><%= number_to_currency participation.payment %></td>
-      <td><%= number_to_currency participation.owed_total.to_f %></td>
+      <td><%= number_to_currency participation.owed_total %> </td>
+      <td class="<%= variation participation.debt %>">
+        <%= number_to_currency participation.debt %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
+<h2>Debts</h2>
+<ul>
+<% for debt in @bill.debts %>
+  <li>
+    <%= link_to_friend debt.from %>
+    owes
+    <%= link_to_friend debt.to %>
+    <%= number_to_currency debt.amount %>
+  </li>
+<% end %>
+</ul>

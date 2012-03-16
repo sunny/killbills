@@ -24,6 +24,14 @@ class Bill < ActiveRecord::Base
     payments.sum.to_f
   end
 
+  def debts
+    Debt.from_bill(self)
+  end
+
+  def user_diff
+    debts.sum { |debt| debt.diff_for(user) }
+  end
+
   # Title based on the participations
   def automatic_title
     return title unless title.blank?
