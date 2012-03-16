@@ -2,9 +2,22 @@ class Participation < ActiveRecord::Base
   belongs_to :bill
   belongs_to :person
 
-  validates :owed, :presence => true,
-    :inclusion => { in: %w(even zero all percentage fixed) }
+
+  validates :person_id, presence: true, uniqueness: { scope: :bill_id }
+
+  validates :owed, presence: true,
+    inclusion: { in: %w(even zero all percentage fixed) }
+
   validates :payment, numericality: { greater_than_or_equal_to: 0 }
+
+  validates :owed_percent, presence: true, if: :percentage?
+  validates :owed_percent, numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 100,
+      allow_nil: true
+    }, if: :percentage?
+
 
   scope :unshared, where('participations.owed != "even"')
   scope :shared, where(owed: "even")
@@ -14,6 +27,10 @@ class Participation < ActiveRecord::Base
 
   def shared?
     owed == "even"
+  end
+
+  def percentage?
+    owed == "percentage"
   end
 
   # Depending on the chosen calculation for owed
