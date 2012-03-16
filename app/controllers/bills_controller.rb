@@ -27,7 +27,7 @@ class BillsController < ApplicationController
   # GET /bills/new.xml
   def new
     @bill = current_user.bills.new(params[:bill])
-    @bill.participations.build(:person => current_user)
+    @bill.participations.build(person: current_user)
     @bill.participations.build
 
     respond_to do |format|
@@ -48,11 +48,11 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       if @bill.save
-        format.html { redirect_to(@bill, :notice => 'Bill was successfully created.') }
-        format.xml  { render :xml => @bill, :status => :created, :location => @bill }
+        format.html { redirect_to(@bill, notice: 'Bill was successfully created.') }
+        format.xml  { render xml: @bill, status: :created, location: @bill }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @bill.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.xml  { render xml: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,11 +64,11 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
-        format.html { redirect_to(@bill, :notice => 'Bill was successfully updated.') }
+        format.html { redirect_to(@bill, notice: 'Bill was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @bill.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.xml  { render xml: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
