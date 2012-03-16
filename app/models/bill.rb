@@ -21,8 +21,8 @@ class Bill < ActiveRecord::Base
 
 
   # Whole bill total
-  # FIXME should use participations.sum(:payment) but it returns 0
   def total
+    # (should use participations.sum(:payment) but it returns 0)
     payments = participations.map { |p| p.payment || 0 }
     payments.sum.to_f
   end
