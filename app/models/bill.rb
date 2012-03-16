@@ -18,7 +18,7 @@ class Bill < ActiveRecord::Base
   validate :ensure_user_is_in_bill
   validate :ensure_payments
   validate :ensure_payments_add_up
-
+  #validate :ensure_creates_debt
 
   # Whole bill total
   def total
@@ -69,10 +69,10 @@ class Bill < ActiveRecord::Base
       when "zero"       then 0
       when "all"        then total
       when "percentage" then total * participation.owed_percent.to_f / 100
-      when "fixed"      then participation.owed_amount.to_f
+      when "fixed"      then participation.owed_amount
       else
         participation.owed
-    end
+    end.to_f
   end
 
   def participations_owed_total(participations = nil)
@@ -87,31 +87,44 @@ private
     unless participations.empty? or \
            participations.map(&:person).include?(user)
 
-      errors[:"participations.person_id"] = "must contain yourself"
-      participations.each { |p|
-        p.errors[:person_id] = errors[:"participations.person_id"]
-      }
+      errors_on_group(:participations, :person_id, participations, 
+        "must contain yourself")
     end
   end
 
+  
+
   def ensure_payments
     unless participations.empty? or total > 0
-      errors[:"participations.payment"] = "total must be greater than 0"
-      participations.each { |p|
-        p.errors[:payment] = errors[:"participations.payment"]
-      }
+      errors_on_group(:participations, :payment, participations,
+        "total must be greater than 0")
     end
   end
 
   def ensure_payments_add_up
     unless participations.empty? or total.zero?
       if participations_owed_total != total
-        errors[:"participations.owed"] = "must sum up to #{total} (now #{participations_owed_total})"
-        participations.each { |p|
-          p.errors[:owed] = errors[:"participations.owed"]
-        }
+        errors_on_group(:participations, :owed, participations,
+          "must sum up to #{total} (now #{participations_owed_total})")
       end
     end
+  end
+
+  # TODO Add this validation in order not to save bills with no debt
+  # Does not work because it needs the bill to be saved
+  # (because of accessing bill on participations)
+  #def ensure_creates_debt
+  #  unless participations.empty? or debts.size > 0
+  #    errors_on_group(:participations, :owed, participations,
+  #      "must create a debt")
+  #  end
+  #end
+  
+  
+  # Helper to add errors on children
+  def errors_on_group(group, attribute, children, message = "")
+    errors[:"#{group}.#{attribute}"] = message
+    children.each { |child| child.errors[attribute] = message }
   end
 end
 

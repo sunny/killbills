@@ -19,10 +19,14 @@ class Participation < ActiveRecord::Base
     numericality: {
       only_integer: true,
       greater_than_or_equal_to: 0,
-      less_than_or_equal_to: 100,
-      allow_nil: true
+      less_than_or_equal_to: 100
     },
     if: :percentage?
+
+  validates :owed_amount,
+    presence: true,
+    numericality: { greater_than_or_equal_to: 0 },
+    if: :fixed?
 
 
   scope :unshared, where('participations.owed != "even"')
@@ -37,6 +41,10 @@ class Participation < ActiveRecord::Base
 
   def percentage?
     owed == "percentage"
+  end
+
+  def fixed?
+    owed == "fixed"
   end
 
   # Depending on the chosen calculation for owed

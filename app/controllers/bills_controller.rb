@@ -4,7 +4,9 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = current_user.bills.includes(:user, :participations).order(:date).reverse_order
+    @bills = current_user.bills \
+      .includes(:user, :participations) \
+      .order("bills.date DESC, bills.created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
