@@ -14,6 +14,7 @@ class Bill < ActiveRecord::Base
   validates :date, :presence => true
   validates :user, :presence => true
   validates_associated :participations
+
   validate :ensure_user_is_in_bill
   validate :ensure_payments
   validate :ensure_payments_add_up

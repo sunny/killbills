@@ -3,20 +3,26 @@ class Participation < ActiveRecord::Base
   belongs_to :person
 
 
-  validates :person_id, presence: true, uniqueness: { scope: :bill_id }
+  validates :person_id,
+    presence: true,
+    uniqueness: { scope: :bill_id }
 
-  validates :owed, presence: true,
+  validates :owed,
+    presence: true,
     inclusion: { in: %w(even zero all percentage fixed) }
 
-  validates :payment, numericality: { greater_than_or_equal_to: 0 }
+  validates :payment,
+    numericality: { greater_than_or_equal_to: 0 }
 
-  validates :owed_percent, presence: true, if: :percentage?
-  validates :owed_percent, numericality: {
+  validates :owed_percent,
+    presence: true,
+    numericality: {
       only_integer: true,
       greater_than_or_equal_to: 0,
       less_than_or_equal_to: 100,
       allow_nil: true
-    }, if: :percentage?
+    },
+    if: :percentage?
 
 
   scope :unshared, where('participations.owed != "even"')
