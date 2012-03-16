@@ -41,14 +41,9 @@
   </tbody>
 </table>
 
-<h2>Debts</h2>
-<ul>
+<h2>Result</h2>
 <% for debt in @bill.debts %>
-  <li>
-    <%= link_to_friend debt.from %>
-    owes
-    <%= link_to_friend debt.to %>
-    <%= number_to_currency debt.amount %>
-  </li>
+<div class="owed <%= variation -debt.diff_for(@bill.user) %>">
+  <%= debt_summary debt %></li>
+</div>
 <% end %>
-</ul>
