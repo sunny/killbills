@@ -1,5 +1,7 @@
 # encoding: UTF-8
 ActiveAdmin.register AdminUser do
+  menu priority: 20
+
   filter :email
   filter :created_at
 

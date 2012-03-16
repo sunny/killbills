@@ -1,5 +1,7 @@
 # encoding: UTF-8
 ActiveAdmin.register Friend do
+  menu priority: 15
+
   filter :name
   filter :user, collection: lambda {
     User.all.map { |u| [u.title, u.id] }
