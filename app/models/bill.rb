@@ -48,12 +48,17 @@ class Bill < ActiveRecord::Base
 
   # Calculate what a share is worth
   def even_share
-    shared, unshared = participations.chunk(&:shared?).map(&:last)
-    return 0 if shared.size <= 0
+    shared, unshared = participations.partition(&:shared?)
 
-    unshared_amount = unshared ? participations_owed_total(unshared) : 0
-    left_for_share = total - unshared_amount
-    left_for_share / shared.size
+    # No even share if nobody shares
+    return 0 unless shared
+
+    total = self.total
+
+    # If there are any fixed amounts, deduce them
+    total -= participations_owed_total(unshared) if unshared
+
+    total / shared.size
   end
 
 
@@ -62,7 +67,7 @@ class Bill < ActiveRecord::Base
       when "even"       then even_share
       when "zero"       then 0
       when "all"        then total
-      when "percentage" then total * participation.owed_percent / 100
+      when "percentage" then total * participation.owed_percent.to_f / 100
       when "fixed"      then participation.owed_amount.to_f
       else
         participation.owed
