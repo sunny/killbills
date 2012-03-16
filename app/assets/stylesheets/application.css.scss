@@ -2,10 +2,10 @@
 @import 'fonts';
 @import 'mixins';
 @import 'grid';
-@import 'reset';
+@import 'normalize';
 @import 'layout';
 
-// Generic html
+// Generic HTML
 
 body {
   @include font-sans;
@@ -20,12 +20,25 @@ a {
 h1 {
   font-size: 150%;
   margin: 0 0 .5em;
+  font-weight: normal;
 }
 
 h2 {
+  color: $color;
   font-size: 110%;
-  margin: 1em 0 .1em;
+  margin: 1em 0 .1em 0;
 }
+
+h3 {
+  color: black;
+  font-size: 110%;
+  margin: 1em 0 .1em 0;
+}
+
+table {
+  margin: .5em 0;
+}
+
 
 p {
   margin: .5em 0;
@@ -100,7 +113,9 @@ form {
   color: $red;
 }
 
-.zero,
+.zero {
+  color: $grey;
+}
 .positive {
   color: $green;
 }
