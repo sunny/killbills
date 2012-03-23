@@ -11,7 +11,7 @@ class User < Person
   has_many :friends
 
   def me_and_my_friends
-    [self, friends].flatten
+    [self, friends.order(:name)].flatten
   end
 end
 

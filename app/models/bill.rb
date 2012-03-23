@@ -71,7 +71,7 @@ class Bill < ActiveRecord::Base
       when "percentage" then total * participation.owed_percent.to_f / 100
       when "fixed"      then participation.owed_amount
       else
-        participation.owed
+        0
     end.to_f
   end
 

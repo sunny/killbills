@@ -12,20 +12,23 @@ class Participation < ActiveRecord::Base
     inclusion: { in: %w(even zero all percentage fixed) }
 
   validates :payment,
-    numericality: { greater_than_or_equal_to: 0 }
+    numericality: {
+      greater_than_or_equal_to: 0,
+      allow_blank: true
+    }
 
   validates :owed_percent,
-    presence: true,
     numericality: {
       only_integer: true,
       greater_than_or_equal_to: 0,
       less_than_or_equal_to: 100
     },
+    presence: true,
     if: :percentage?
 
   validates :owed_amount,
-    presence: true,
     numericality: { greater_than_or_equal_to: 0 },
+    presence: true,
     if: :fixed?
 
 
@@ -55,7 +58,7 @@ class Participation < ActiveRecord::Base
 
   # What the person needs to pay back
   def debt
-    owed_total - payment
+    owed_total - payment.to_f
   end
 
   # Calculation methods to show in a select box
