@@ -22,10 +22,12 @@
 <h2>Participations</h2>
 <table>
   <thead>
-    <th>Participant</th>
-    <th>Payment</th>
-    <th>Owes</th>
-    <th>Debt</th>
+    <tr>
+      <th>Participant</th>
+      <th>Payment</th>
+      <th>Owes</th>
+      <th>Debt</th>
+    </tr>
   </thead>
   <tbody>
   <% for participation in @bill.participations %>
@@ -44,6 +46,6 @@
 <h2>Result</h2>
 <% for debt in @bill.debts %>
 <div class="owed <%= variation -debt.diff_for(@bill.user) %>">
-  <%= debt_summary debt %></li>
+  <%= debt_summary debt %>
 </div>
 <% end %>
