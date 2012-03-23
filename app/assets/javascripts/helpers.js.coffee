@@ -1,4 +1,14 @@
-# Floating value of an input
+# Console logger
+window.log = ->
+  console?.log?(arguments...)
+
+window.numberToCurrency = (number) ->
+  # encoded "€" because of a CoffeeScript encoding error
+  # currency = decodeURIComponent('%E2%82%AC')
+  currency = '$'
+  currency + number
+
+# Floating value of a field
 $.fn.floatVal = ->
   val = @val()
   if val and val.match(/^\d+(\.\d+)?$/)
@@ -6,7 +16,7 @@ $.fn.floatVal = ->
   else
     0
 
-# Int value of an input
+# Int value of a field
 $.fn.intVal = ->
   val = @val()
   if val and val.match(/^\d+$/)
@@ -24,10 +34,11 @@ $.fn.check = ->
 
 # Syntaxic sugar to uncheck html radio and checkboxes
 $.fn.uncheck = ->
-  @attr('checked', '')
+  @removeAttr('checked')
 
+# Apply a CSS class and remove it from other elements at the same time
 # E.g.: newElems.borrowClass('current', oldElems)
 $.fn.borrowClass = (klass, from) ->
   from.removeClass(klass)
-  this.addClass(klass)
+  @addClass(klass)
 
