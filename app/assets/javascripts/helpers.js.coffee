@@ -2,7 +2,7 @@
 window.log = ->
   console?.log?(arguments...)
 
-window.numberToCurrency = (number) ->
+window.currencize = (number) ->
   # encoded "€" because of a CoffeeScript encoding error
   # currency = decodeURIComponent('%E2%82%AC')
   currency = '$'

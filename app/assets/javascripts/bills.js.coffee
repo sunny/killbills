@@ -6,41 +6,26 @@ class Bill
 
   constructor: (@form) ->
     @form = $('#bill-form')
-    #@participations_people_fields = @form.find('select.people')
-    @participations_payment_fields = @form.find('input.payment')
-    @participations_owed_fields = @form.find('select.owed')
-    @participations_owed_results = @form.find('span.result')
+    @payment_fields = @form.find('input.payment')
+    @owed_fields = @form.find('select.owed')
+    @owed_results = @form.find('span.result')
 
     @collect()
-    @update()
+    @refresh()
 
 
-  even_share: =>
-    log "even_share"
-    shared = []
-    unshared = []
-
-    for owed, i in @owed
-      if owed == "even"
-        shared.push i
-      else
-        unshared.push i
+  even_share_calc: =>
+    shared =   (i for owed, i in @owed when owed == "even")
+    unshared = (i for owed, i in @owed when owed != "even")
     return 0 if shared.length == 0
+    total = @total
+    total -= @owed_calc(i) for i in unshared
+    total / shared.length
 
-    unshared_owed
 
-    # If there are any fixed amounts, deduce them
-    if unshared.length
-      unshared_owed = 0
-      for i in unshared
-        unshared_owed += participation_owed(i)
-
-    (@total - unshared_owed) / shared.length
-
-  participation_owed: (i) =>
-    log "owed:", i, @owed[i]
+  owed_calc: (i) =>
     switch @owed[i]
-      when "even"       then @even_share()
+      when "even"       then @even_share
       when "zero"       then 0
       when "all"        then @total
       #when "percentage" then @total * owed_percent / 100
@@ -48,31 +33,26 @@ class Bill
 
 
   collect: =>
-    # Payments array
-    @payments = []
-    for field in @participations_payment_fields
-      @payments.push $(field).floatVal()
-
-    # Owed array
-    @owed = []
-    for field in @participations_owed_fields
-      @owed.push $(field).val()
-
     # Total
     @total = 0
-    @total += payment for payment in @payments
+    @total += $(field).floatVal() for field in @payment_fields
+
+    # Owed texts
+    @owed = []
+    @owed.push $(field).val() for field in @owed_fields
+
+    # Even share
+    @even_share = @even_share_calc()
     
-    # Owed amounts (needs payments, owed, even_share and total)
+    # Owed amounts (needs owed, even_share and total)
     @owed_amounts = []
-    for owed, i in @owed
-      @owed_amounts.push @participation_owed(i)
+    @owed_amounts.push @owed_calc(i) for owed, i in @owed
 
 
   # Refresh the UI
-  update: =>
-    log "update"
-
+  refresh: =>
     # Owed array
     for amount, i  in @owed_amounts
-      @participations_owed_results.eq(i).text(numberToCurrency amount)
+      @owed_results.eq(i).text(currencize amount)
+
 
