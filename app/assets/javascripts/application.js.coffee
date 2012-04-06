@@ -2,4 +2,5 @@
 //= require jquery_ujs
 //= require helpers
 //= require bills
+//= require bootstrap
 

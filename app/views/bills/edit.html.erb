@@ -1,4 +1,12 @@
-<nav id="crumbs"><%= link_to @bill.automatic_title, @bill %></nav>
+<nav class="crumbs">
+  <ul class="breadcrumb">
+    <li>
+      <%= link_to @bill.automatic_title, @bill %>
+      <span class="divider">/</span>
+    </li>
+    <li class="active">Edit</li>
+  </ul>
+</nav>
 
 <h1>Edit</h1>
 

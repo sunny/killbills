@@ -1,4 +1,9 @@
-<nav id="crumbs"><%= link_to @friend.name, @friend %></nav>
+<nav class="crumbs">
+  <ul class="breadcrumb">
+    <li><%= link_to @friend.name, @friend %></li>
+    <li class="active">Edit</li>
+  </ul>
+</nav>
 
 <h1>Editing friend</h1>
 

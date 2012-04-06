@@ -8,23 +8,67 @@
 </head>
 <body>
 
-<nav id="menu">
-  <ul>
-<% if user_signed_in? %>
-    <li><%= link_to 'Friends', friends_path %></li>
-    <li><%= link_to 'Bills', bills_path %></li>
-    <li id="sign_out"><%= link_to 'Sign out', destroy_user_session_path, title: "Sign out from Fricout" %></li>
-<% else %>
-    <li id="sign_in"><%= link_to 'Sign in', user_session_path %></li>
-<% end %>
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Fricout", root_path, class: "brand" %>
+
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+
+      <div class="nav-collapse">
+       <% if user_signed_in? %>
+        <ul class="nav">
+          <li><%= link_to 'Friends', friends_path %></li>
+          <li><%= link_to 'Bills', bills_path %></li>
+        </ul>
+        <% end %>
+        
+        <ul class="nav pull-right">
+        <% if user_signed_in? %>
+          <li id="sign_out">
+            <%= link_to destroy_user_session_path, title: "Sign out from Fricout" do %>
+              <i class="icon-off icon-white"></i>
+              Sign out
+            <% end %>
+          </li>
+        <% else %>
+          <li id="sign_in">
+            <%= link_to user_session_path do %>
+              <i class="icon-user icon-white"></i>
+              Sign in
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
 </nav>
 
-<% if notice %><p class="notice"><%= notice %></p><% end %>
-<% if alert %><p class="alert"><%= alert %></p><% end %>
 
-<div id="content">
+<div class="container">
 
-<%= yield %>
+  <% if alert %>
+    <div class="alert">
+      <a class="close" data-dismiss="alert">×</a>
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <% if notice %>
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%= yield %>
 
 </div>
 

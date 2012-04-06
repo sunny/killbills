@@ -1,6 +1,6 @@
 <%= form_for(@bill, html: { id: "bill-form" }) do |f| %>
   <% if @bill.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-block alert-error">
       <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
 
       <ul>
@@ -10,8 +10,32 @@
       </ul>
     </div>
   <% end %>
+  
+  <% participants = 0 %>
+  <%= f.fields_for :participations do |p| %>
+  <div class="row">
+    <h3>Participant #<%= participants += 1 %></h3>
+    <%#= p.hidden_field :id %>
+    <div class="span4 control-group">
+      <%= p.label :name %>
+      <%= p.collection_select :person_id, current_user.me_and_my_friends,
+              :id, :name, { include_blank: true }, { class: "people" } %>
+    </div>
+    <div class="span4 control-group">
+      <%= p.label :payment %>
+      <%= p.number_field :payment, placeholder: 0,
+          class: "payment input-mini" %>
+    </div>
+    <div class="span4 control-group">
+      <%= p.label :owed %>
+      <%= p.select :owed, Participation.owed_for_select, {}, { class: "owed" } %>
+      <span class="result"></span>
+    </div>
+  </div>
+  <% end %>
 
-  <fieldset id="participations">
+
+  <!--<fieldset id="participations">
     <table>
       <thead>
         <tr>
@@ -23,36 +47,39 @@
       <tbody>
         <%= f.fields_for :participations do |p| %>
         <tr>
-            <td>
-              <%= p.hidden_field :id %>
-              <%= p.collection_select :person_id, current_user.me_and_my_friends, :id, :name, { include_blank: true }, { class: "people" } %>
-            </td>
-            <td>
-              <%= p.number_field :payment, placeholder: 0, class: "payment" %>
-            </td>
-            <td>
-              <%= p.select :owed, Participation.owed_for_select, {}, { class: "owed" } %>
-              <span class="result"></span>
-            </td>
+          <td>
+            <%= p.hidden_field :id %>
+            <%= p.collection_select :person_id, current_user.me_and_my_friends,
+                :id, :name, { include_blank: true }, { class: "people" } %>
+          </td>
+          <td>
+            <%= p.number_field :payment, placeholder: 0,
+                class: "payment input-mini" %>
+          </td>
+          <td>
+            <%= p.select :owed, Participation.owed_for_select, {}, { class: "owed" } %>
+            <span class="result"></span>
+          </td>
         </tr>
         <% end %>
       </tbody>
     </table>
   </fieldset>
+  -->
 
   <fieldset id="bill_optional">
-    <div class="field">
+    <div class="control-group">
       <%= f.label :title %>
       <%= f.text_field :title %>
     </div>
-    <div class="field">
+    <div class="control-group">
       <%= f.label :date, :for => "bill_date_1i" %>
       <%= f.date_select :date %>
     </div>
   </fieldset>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
 
