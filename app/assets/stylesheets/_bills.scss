@@ -1,0 +1,73 @@
+.bill-results {
+  list-style: none;
+  margin-top: $baseLineHeight;
+  margin-bottom: $baseLineHeight;
+  line-height: 2*$baseLineHeight;
+  font-size: 1.25em;
+
+  &::before {
+    content: '\2937'; // ⤷
+    font-size: 1.25em;
+    line-height: $baseLineHeight;
+    float: left;
+    margin-right: .5ex;
+    color: $grey;
+  }
+}
+
+.bill-title {
+  line-height: 2*$baseLineHeight;
+}
+
+.bill-date {
+  font-size: 1.2em;
+  line-height: 2*$baseLineHeight;
+}
+
+.bill-actions {
+  line-height: 2*$baseLineHeight;
+}
+
+.bill-participations {
+  width: 100%;
+  margin: 1em 0;
+
+  th, td {
+    text-align: right;
+    padding: 10%;
+    font-weight: normal;
+    font-size: 1.2em;
+    text-align: right;
+    padding: 1ex;
+  }
+
+  thead {
+    border-bottom: 1px solid $grey;
+
+  }
+  tbody {
+    .bill-total {
+      border-top: 1px solid $lightgrey;
+      color: $grey;
+    }
+  }
+  
+  .debt-row.positive,
+  .credit-row.negative {
+    visibility: hidden;
+  }
+
+  @media (max-width: 480px) {
+    .debt-row.positive {
+      visibility: hidden;
+    }
+    .credit-row {
+      display: none;
+    }
+    
+    .debt-row.positive,
+    .credit-row.negative {
+      visibility: visible;
+    }
+  }
+}

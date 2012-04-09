@@ -1,51 +1,60 @@
-<h1><%= @bill.automatic_title %></h1>
-
-<%= link_to 'Edit', edit_bill_path(@bill), :class => 'button' %>
-<%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'button delete' %>
-
-<h2>Bill</h2>
-<table>
-  <tr>
-    <th>Title</th>
-    <td><%= @bill.title %></td>
-  </tr>
-  <tr>
-    <th>Total</th>
-    <td><%= number_to_currency @bill.total %></td>
-  </tr>
-  <tr>
-    <th>Date</th>
-    <td><%= @bill.date %></td>
-  </tr>
-</table>
-
-<h2>Participations</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Participant</th>
-      <th>Payment</th>
-      <th>Owes</th>
-      <th>Debt</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% for participation in @bill.participations %>
-    <tr>
-      <td><%= link_to_friend participation.person %></td>
-      <td><%= number_to_currency participation.payment %></td>
-      <td><%= number_to_currency participation.owed_total %> </td>
-      <td class="<%= variation participation.debt %>">
-        <%= number_to_currency participation.debt %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<h2>Result</h2>
-<% for debt in @bill.debts %>
-<div class="owed <%= variation -debt.diff_for(@bill.user) %>">
-  <%= debt_summary debt %>
+<div class="row">
+  <h1 class="bill-title span8">
+    <%= @bill.automatic_title %>
+  </h1>
+  <div class="bill-date span4">
+    <%= time_ago_in_words @bill.date %> ago (<%= @bill.date %>)
+  </div>
 </div>
-<% end %>
+
+<div class="row">
+  <ul class="bill-results span8">
+    <% for debt in @bill.debts %>
+    <li><%= debt_summary debt %></li>
+    <% end %>
+  </ul>
+  <div class="bill-actions span4">
+    <%= link_to 'Edit', edit_bill_path(@bill), :class => 'btn' %>
+    <%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <table class="bill-participations" summary="Bill participations">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Payment</th>
+          <th>Share</th>
+          <th class="debt-row">Debt</th>
+          <th class="credit-row">Credit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for participation in @bill.participations %>
+          <tr>
+            <th><%= link_to_friend participation.person %></th>
+            <td><%= to_currency participation.payment %></td>
+            <td><%= to_currency participation.owed_total %> </td>
+            <td class="debt-row <%= variation -participation.debt %>">
+              <%= to_currency participation.debt %>
+            </td>
+            <td class="<%= variation -participation.debt %> credit-row">
+              <%= to_currency -participation.debt %>
+            </td>
+          </tr>
+        <% end %>
+        <tr class="bill-total">
+          <th>Total</th>
+          <td><%= to_currency @bill.total %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

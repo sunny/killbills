@@ -1,7 +1,7 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
-  include ActionView::Helpers::NumberHelper
+  include FricoutHelper
 
   belongs_to :user
   has_many :participations, :dependent => :destroy
@@ -39,7 +39,7 @@ class Bill < ActiveRecord::Base
   def automatic_title
     return title unless title.blank?
     friend_names = participations.friends.map{ |p| p.person.name }
-    "#{number_to_currency total} with #{friend_names.join(', ')}"
+    "#{currencize total} with #{friend_names.join(', ')}"
   end
 
   # Debt against the bill creator

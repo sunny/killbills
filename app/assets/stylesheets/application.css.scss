@@ -1,9 +1,11 @@
 @import 'config';
-@import 'fonts';
 @import 'mixins';
+@import 'fonts';
 
 @import 'bootstrap';
 @import 'bootstrap-responsive';
+
+@import 'bills';
 
 // Generic classes
 .negative {

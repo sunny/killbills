@@ -1,11 +1,11 @@
 module BillsHelper
   def link_to_friend(person)
-    return person.name if person == current_user
+    return "You" if person == current_user
     link_to person.name, person
   end
 
   def debt_summary(debt)
-    amount = number_to_currency(debt.amount)
+    amount = currencize(debt.amount)
     from = debt.from
     to = debt.to
     if from == current_user
