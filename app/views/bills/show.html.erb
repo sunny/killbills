@@ -35,19 +35,19 @@
         <% for participation in @bill.participations %>
           <tr>
             <th><%= link_to_friend participation.person %></th>
-            <td><%= to_currency participation.payment %></td>
-            <td><%= to_currency participation.owed_total %> </td>
+            <td><%= currencize participation.payment %></td>
+            <td><%= currencize participation.owed_total %> </td>
             <td class="debt-row <%= variation -participation.debt %>">
-              <%= to_currency participation.debt %>
+              <%= currencize participation.debt %>
             </td>
             <td class="<%= variation -participation.debt %> credit-row">
-              <%= to_currency -participation.debt %>
+              <%= currencize -participation.debt %>
             </td>
           </tr>
         <% end %>
         <tr class="bill-total">
           <th>Total</th>
-          <td><%= to_currency @bill.total %></td>
+          <td><%= currencize @bill.total %></td>
           <td></td>
           <td></td>
           <td></td>
