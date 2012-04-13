@@ -1,2 +1,8 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Heroku
+======
+
+Pull in the database from heroku:
+
+    heroku db:pull --confirm fricout
+    rake db:migrate
+

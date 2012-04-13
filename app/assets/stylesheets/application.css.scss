@@ -1,273 +1,136 @@
-@import 'colors';
-@import 'fonts';
+@import 'config';
 @import 'mixins';
-@import 'grid';
-@import 'reset';
-@import 'layout';
+@import 'fonts';
 
-// Generic html
+@import 'bootstrap';
+@import 'bootstrap-responsive';
 
-body {
-  @include font-sans;
-}
-a {
-  color: $color;
-  &:visited {
-    color: $darker;
-  }
-}
+@import 'bills';
 
-h1 {
-  font-size: 150%;
-  margin: 0 0 .5em;
-}
 
-h2 {
-  font-size: 110%;
-  margin: 1em 0 .1em;
-}
+// Fix to bootstrap-responsive
+// ---------------------------
 
-p {
-  margin: .5em 0;
-}
-
-$form-side-width: 150px;
-$form-gutter-width: 20px;
-
-// https://github.com/twitter/bootstrap/blob/master/lib/forms.less
-form {
-  margin-bottom: $baseline;
-
-  label,
-  input[type=checkbox],
-  input[type=radio] {
-    cursor: pointer;
-  }
-
-  fieldset {
-    margin-bottom: $baseline;
-    padding-top: $baseline;
-    border: none;
-    padding: 0;
-
-    legend {
-      padding: 0;
-      color: $darkgrey;
-      display: block;
-      font-size: 20px;
-      line-height: 1;
-      margin-left: $form-side-width + $form-gutter-width;
-    }
-  }
-
-  // Clearfix
-  .line {
-    margin-bottom: $baseline;
-  }
-
-  // Shift over the inside div to align all label's relevant content
-  .input {
-    margin-left: $form-side-width + $form-gutter-width;
-  }
-
-  label, input, select, textarea {
-    @include font-sans;
-    font-size: 13px;
-  }
-
-  // Float labels left
-  label {
-    line-height: $baseline;
-    padding-top: 6px;
-    width: $column-width;
-    display: block;
-    float: left;
+// Tablets and Below
+@media (max-width: 979px) {
+  .navbar .nav {
     clear: left;
-    text-align: right;
-    color: $darkgrey;
-    margin-right: $gutter-width;
-  }
-
-
-  .actions {
-    clear: left;
-    margin-left: $column-width + $gutter-width;
   }
 }
+
 
 // Generic classes
+// ---------------
+
 .negative {
   color: $red;
 }
 
-.zero,
+.zero {
+  color: $grey;
+}
 .positive {
   color: $green;
 }
 
-button, .button, a.button {
-  // Box model
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  margin: .5em 0;
-  padding: .5em 1em;
 
-  // Borders
-  outline: none;
-  border: none;
-  border-top: 2px solid $lighter;
-  @include border-radius(.8em);
+// Result
+// ------
 
-  // Box colors
-  @include backgroud-vertical-linear-gradient($color, darken($color, 10%));
-  @include box-shadow(rgba(0, 0, 0, .5) 1px 1px 1px);
+.result {
+  list-style: none;
+  font-size: 1.25em;
 
-  // Text
-  color: white;
-  font-size: 13px;
-  text-decoration: none;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
-  line-height: 1;
-
-  &:hover {
-    cursor: pointer;
-    border-color: $color;
-    background: $color;
-  }
-  &:active,
-  &:focus {
-    border-color: $darker;
-    background: $darker;
-    top: 1px;
+  &::before {
+    // Arrow left of the text
+    content: '\2937'; // ⤷
+    font-size: 1.25em;
+    line-height: $baseLineHeight;
+    float: left;
+    margin-right: .5ex;
+    color: $grey;
   }
 }
-
-div.field,
-div.actions {
-  margin-bottom: 10px;
-}
-
-input[type=submit] {
-  margin-top: 10px;
-  padding: 5px 10px;
-}
-
-// Errors
-
-.alert,
-.notice {
-  margin: 10px 20px 0;
-  display: inline-block;
-  padding: 5px 10px;
-  color: white;
-  background: $color;
-  opacity: .5;
-}
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
+.results {
+  list-style: none;
+  margin: 0;
 
   li {
-    font-size: 12px;
-    list-style: square;
+    @extend .result;
   }
 }
 
 
-
-// Friends and bills lists
-.friends {
-  margin-top: 20px;
-  a {
-    @include border-radius(3px);
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
-    margin: 10px 0;
-  }
-  h2 {
-    font-size: 1.2em;
-    line-height: 1.2;
-    font-weight: normal;
-    padding: 0;
-    margin: 0;
-  }
-
-  time,
-  .owed {
-    opacity: .5;
-  }
+// Form magic
+// ----------
+label {
+  cursor: pointer;
 }
 
-.bills {
-  @extend .friends;
+// Radio buttons that look like buttons
+// HTML needed:
+//   <li><input type="radio" name="truth" value="1"><span class="btn">Yes</span></li>
+//   <li><input type="radio" name="truth" value="0"><span class="btn">No</span></li>
+.radio-toggles {
+  list-style: none;
+  margin: 0;
 
-  .owed {
+  li {
     float: left;
-    margin-right: 15px;
-  }
-  time {
-    display: block;
-    color: $text;
+
+    // Hide the radio inputs
+    input {
+      position: absolute;
+      top: -5em;
+    }
+
+    // Buttons
+    span.btn {
+      border-radius: 0;
+    }
+
+    // Checked buttons
+    input:checked + span.btn {
+      @extend .active;
+    }
+
+    // First button
+    &:first-child span.btn {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    
+    // Last button
+    &:last-child span.btn {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
   }
 }
 
 
-// Bill form
+// Articles (bills and friends)
+// ----------------------------
 
-#bill_who_payed {
-  label {
-    font-size: 1.1em;
+article > a {
+  display: block;
+  h2 {
+    font-size: 18px;
+    display: inline;
+    font-weight: normal;
+    color: $color;
+    border-bottom: 1px solid $lightgrey;//lighten(desaturate($color, 60%), 60%);
   }
-  .payed {
-    font-size: 0.9em;
-    input[type=number] {
-      font: inherit;
-      &:focus {
-        width: 70px !important;
-      }
-    }
+  &:visited h2 {
+    color: darken($color, 10%);
   }
-  &:not(.mixed) {
-    .payed {
-      color: $grey;
-      input[type=number]:not(:focus) {
-        color: inherit;
-        visibility: visible;
-        background: transparent;
-        width: auto;
-        display: inline;
-        cursor: pointer;
-        border-color: transparent;
-        @include border-radius(5px);
-        &:hover {
-          background: $lightgrey;
-        }
-      }
-    }
+  &:hover h2 {
+    color: darken($color, 20%);
+    border-bottom-color: inherit;
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 }
 

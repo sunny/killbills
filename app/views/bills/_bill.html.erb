@@ -1,12 +1,19 @@
 
 <article class="bill">
-  <a href="<%= bill_path(bill) %>">
-    <h2><%= bill.automatic_title %></h2>
-    <div class="owed <%= variation -bill.user_debt %>">
-      <%= "You owe #{bill.friend.name} #{number_to_currency bill.user_debt}" unless bill.user_debt <= 0 %></td>
-      <%= "#{bill.friend.name} owes you #{number_to_currency bill.friend_debt}" unless bill.friend_debt <= 0 %>
+  <a href="<%= bill_path(bill) %>" class="row">
+    <div class="title span6">
+      <h2><%= bill.automatic_title %></h2>
     </div>
-    <time pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
+
+    <ul class="debts span3">
+      <% for debt in bill.debts %>
+      <li class="owed <%= variation -debt.diff_for(bill.user) %>">
+        <%= debt_summary debt %>
+      </li>
+      <% end %>
+    </ul>
+
+    <time class="span3" pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
       <%= time_ago_in_words bill.date %> ago
     </time>
    </a>

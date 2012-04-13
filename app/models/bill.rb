@@ -1,73 +1,134 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
-  include ActionView::Helpers::NumberHelper
-
-  attr_accessible :title, :amount, :date, :friend_id, :user_payed,
-    :friend_payed, :user_ratio
+  include FricoutHelper
 
   belongs_to :user
-  belongs_to :friend
+  has_many :participations, dependent: :destroy
 
-  after_initialize :assign_default_values
+  attr_accessible :title, :date, :participations_attributes
+  accepts_nested_attributes_for :participations
 
   # Validations
+  before_validation :assign_default_date
 
-  validates_presence_of :date, :friend_id, :user_ratio,
-    :amount, :user_payed, :friend_payed
-  validates_associated :friend
+  validates :date, presence: true
+  validates :user, presence: true
+  validates_associated :participations
 
-  validates_numericality_of :user_ratio,
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 1
+  validate :ensure_user_is_in_bill
+  validate :ensure_payments
+  validate :ensure_payments_add_up
+  #validate :ensure_creates_debt
 
-  validates_numericality_of :amount,
-    :greater_than_or_equal_to => 0
-  validates_numericality_of :user_payed, :friend_payed,
-    :greater_than_or_equal_to => 0
-  validates_numericality_of :user_payed, :friend_payed,
-    :less_than_or_equal_to => lambda { |b| b.amount },
-    :unless => 'amount.blank?'
-
-  validate :amounts_must_add_up
-  validate :creates_a_debt
-
-  def user_debt
-    user_ratio * amount - user_payed
+  # Whole bill total
+  def total
+    # (should use participations.sum(:payment) but it returns 0)
+    payments = participations.map { |p| p.payment || 0 }
+    payments.sum.to_f
   end
 
-  def friend_debt
-    friend_ratio * amount - friend_payed
+  def debts
+    Debt.from_bill(self)
   end
 
-  def friend_ratio
-    1 - user_ratio
+  def user_diff
+    debts.sum { |debt| debt.diff_for(user) }
   end
 
+  # Title based on the participations
   def automatic_title
     return title unless title.blank?
-    who_payed = []
-    who_payed << "You" if user_payed > 0
-    who_payed << friend.name if friend_payed > 0
-    "#{who_payed.to_sentence} payed #{number_to_currency amount}"
+    friend_names = participations.friends.map{ |p| p.person.name }
+    "#{currencize total} with #{friend_names.join(', ')}"
   end
 
-  def assign_default_values
-    self.user_ratio ||= 1
+  # Debt against the bill creator
+  def user_debt
+    participations.friends.sum(:debt)
+  end
+
+  # Calculate what a share is worth
+  def even_share
+    shared, unshared = participations.partition(&:shared?)
+
+    # No even share if nobody shares
+    return 0 unless shared
+
+    total = self.total
+
+    # If there are any fixed amounts, deduce them
+    total -= participations_owed_total(unshared) if unshared
+
+    total / shared.size
   end
 
 
-  private
-
-  def amounts_must_add_up
-    errors.add(:friend_payed, "must add up to the amount payed") if
-      amount != user_payed.to_f + friend_payed.to_f
+  def participation_owed_total(participation)
+    case participation.owed
+      when "even"       then even_share
+      when "zero"       then 0
+      when "all"        then total
+      when "percentage" then total * participation.owed_percent.to_f / 100
+      when "fixed"      then participation.owed_amount
+      else
+        0
+    end.to_f
   end
 
-  def creates_a_debt
-    errors[:base] << "A bill should result in a debt" if
-      !user_payed.nil? and !friend_payed.nil? and \
-      user_debt == 0 and friend_debt == 0
+  def participations_owed_total(participations = nil)
+    participations ||= self.participations
+    participations.to_a.sum { |p| participation_owed_total(p) }
+  end
+
+
+private
+
+  def ensure_user_is_in_bill
+    unless participations.empty? or \
+           participations.map(&:person).include?(user)
+
+      errors_on_group(:participations, :person_id, participations, 
+        "must contain yourself")
+    end
+  end
+
+  
+
+  def ensure_payments
+    unless participations.empty? or total > 0
+      errors_on_group(:participations, :payment, participations,
+        "total must be greater than 0")
+    end
+  end
+
+  def ensure_payments_add_up
+    unless participations.empty? or total.zero?
+      if participations_owed_total != total
+        errors_on_group(:participations, :owed, participations,
+          "must sum up to #{total} (now #{participations_owed_total})")
+      end
+    end
+  end
+
+  # TODO Add this validation in order not to save bills with no debt
+  # Does not work because it needs the bill to be saved
+  # (because of accessing bill on participations)
+  #def ensure_creates_debt
+  #  unless participations.empty? or debts.size > 0
+  #    errors_on_group(:participations, :owed, participations,
+  #      "must create a debt")
+  #  end
+  #end
+
+  # Helper to add errors on children
+  def errors_on_group(group, attribute, children, message = "")
+    errors[:"#{group}.#{attribute}"] = message
+    children.each { |child| child.errors[attribute] = message }
+  end
+
+  def assign_default_date
+    self.date ||= Time.now.to_date
   end
 end
 

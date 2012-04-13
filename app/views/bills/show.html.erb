@@ -1,62 +1,66 @@
-<h1><%=@bill.automatic_title%></h1>
+<div class="bill">
+  <div class="row">
+    <h1 class="title span8">
+      <%= @bill.automatic_title %>
+    </h1>
+    
+    <div class="actions span4">
+      <%= link_to 'Edit', edit_bill_path(@bill), :class => 'btn' %>
+      <%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'btn btn-danger' %>
+    </div>
+    
+  </div>
 
-<%= link_to 'Edit', edit_bill_path(@bill), :class => 'button' %>
-<%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'button delete' %>
+  <div class="row">
+    <div class="span8">
+      <ul class="results">
+        <% for debt in @bill.debts %>
+        <li><%= debt_summary debt %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="date span4">
+      <%= time_ago_in_words @bill.date %> ago (<%= @bill.date %>)
+    </div>
+  </div>
 
-<h2>Bill</h2>
-<table>
-  <tr>
-    <th>Title</th>
-    <td><%= @bill.title %></td>
-  </tr>
-  <tr>
-    <th>Amount</th>
-    <td><%= number_to_currency @bill.amount %></td>
-  </tr>
-  <tr>
-    <th>Date</th>
-    <td><%= @bill.date %></td>
-  </tr>
-  <tr>
-    <th>With</th>
-    <td><%= link_to @bill.friend.name, @bill.friend %></td>
-  </tr>
-</table>
+  <div class="row">
+    <div class="span8">
+      <table class="participations" summary="Bill participations">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Payment</th>
+            <th>Share</th>
+            <th class="debt-row">Debt</th>
+            <th class="credit-row">Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for participation in @bill.participations %>
+            <tr>
+              <th><%= link_to_friend participation.person %></th>
+              <td><%= currencize participation.payment %></td>
+              <td><%= currencize participation.owed_total %> </td>
+              <td class="debt-row <%= variation -participation.debt %>">
+                <%= currencize participation.debt %>
+              </td>
+              <td class="<%= variation -participation.debt %> credit-row">
+                <%= currencize -participation.debt %>
+              </td>
+            </tr>
+          <% end %>
+          <tr class="bill-total">
+            <th>Total</th>
+            <td><%= currencize @bill.total %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<% if @bill.user_debt > 0 %>
-<p class="negative result">
-  You owe <%= @bill.friend.name %> <%= number_to_currency @bill.user_debt %>
-</p>
-<% else %>
-<p class="positive result">
-  <%= @bill.friend.name %> owes you <%= number_to_currency @bill.user_debt.abs %>
-</p>
-<% end %>
-
-
-<h2>Payments detail</h2>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Payment</th>
-      <th>Ratio</th>
-      <th>Debt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>You</th>
-      <td><%= number_to_currency @bill.user_payed %></td>
-      <td><%= ratio @bill.user_ratio %></td>
-      <td class="<%= variation -@bill.user_debt %>"><%= number_to_currency @bill.user_debt %></td>
-    </tr>
-    <tr>
-      <th><%= @bill.friend.name %></th>
-      <td><%= number_to_currency @bill.friend_payed %></td>
-      <td><%= ratio @bill.friend_ratio %></td>
-      <td class="<%= variation -@bill.friend_debt %>"><%= number_to_currency @bill.friend_debt %></td>
-    </tr>
-  </tbody>
-</table>
+</div>
 

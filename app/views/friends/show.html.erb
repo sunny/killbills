@@ -1,21 +1,24 @@
-<h1><%= @friend.name %></h1>
-
-<%= link_to 'Edit', edit_friend_path(@friend), :class => "button" %>
+<div class="row">
+  <h1 class="title span8">
+    <%= @friend.name %>
+  </h1>
+  <div class="actions span4">
+    <%= link_to 'Edit', edit_friend_path(@friend), class: "btn" %>
+    <%= link_to 'Delete', @friend, :confirm => 'Are you sure you want to delete that friend?', :method => :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
 
 <% if @friend.debt > 0 %>
-<p class="debt negative">
+<p class="result debt negative">
   You owe <%= @friend.name %> <%= number_to_currency @friend.debt %>
 </p>
 <% else %>
-<p class="debt positive">
+<p class="result debt positive">
   Owes you <%= number_to_currency @friend.debt.abs %>
 </p>
 <% end %>
 
-
 <h2>Bills</h2>
 
-<%= link_to 'New bill', new_bill_path(:bill => { :friend_id => @friend}), :class => "button" %>
-
-<%= render @friend.bills %>
+<p><%= link_to 'New bill', new_bill_path(friend: @friend.name), class: "btn" %></p>
 

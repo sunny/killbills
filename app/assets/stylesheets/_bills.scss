@@ -1,0 +1,127 @@
+// Bill list
+// ---------
+
+article.bill > a {
+  .debts {
+    margin: 0;
+    list-style: none;
+
+    li {
+      line-height: 33px;
+    }
+  }
+
+  time {
+    display: block;
+    line-height: 33px;
+    color: $textColor;
+  }
+}
+
+
+// Bill form
+// ---------
+#bill-form {
+  .participations {
+    margin-top: 1em;
+
+    .people {
+      // Below portrait tablet (without columns)
+      @media (max-width: 767px) {
+        label {
+          font-size: 1.5em;
+          padding: .5em 0;
+        }
+      }
+      select {
+        width: 100%;
+      }
+    }
+    .payment {
+      input {
+        width: 100%;
+
+        // Fix for width 100% not working correctly
+        @include border-box;
+        height: $baseLineHeight + 4*2;
+      }
+    }
+    .owed {
+      .owed-result {
+        line-height: 29px;
+        margin-left: 1ex;
+        float: left;
+      }
+    }
+  }
+
+  .bill-optional {
+    margin-top: 2em;
+
+    .date input {
+      width: auto;
+    }
+  }
+
+}
+
+
+// Bill Show
+// ---------
+
+.bill {
+  .results {
+    margin-top: 1em;
+    line-height: 2*$baseLineHeight;
+  }
+
+  .date {
+    font-size: 1.2em;
+    line-height: 2*$baseLineHeight;
+  }
+
+  .participations {
+    width: 100%;
+    margin: 1em 0;
+
+    th, td {
+      text-align: right;
+      padding: 10%;
+      font-weight: normal;
+      font-size: 1.2em;
+      text-align: right;
+      padding: 1ex;
+    }
+
+    thead {
+      border-bottom: 1px solid $grey;
+
+    }
+    tbody {
+      .bill-total {
+        border-top: 1px solid $lightgrey;
+        color: $grey;
+      }
+    }
+    
+    .debt-row.positive,
+    .credit-row.negative {
+      visibility: hidden;
+    }
+
+    // Small screens
+    @media (max-width: 480px) {
+      .debt-row.positive {
+        visibility: hidden;
+      }
+      .credit-row {
+        display: none;
+      }
+      
+      .debt-row.positive,
+      .credit-row.negative {
+        visibility: visible;
+      }
+    }
+  }
+}

@@ -1,23 +1,25 @@
 <h2>Sign in</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="field">
+  <div class="control-group">
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
 
-  <div class="field">
+  <div class="control-group">
     <%= f.label :password %>
     <%= f.password_field :password %>
   </div>
 
-  <div class="field">
-    <%= f.label :remember_me %>
-    <%= f.check_box :remember_me %>
+  <div class="control-group">
+    <%= f.label :remember_me, class: "checkbox" do %>
+      <%= f.check_box :remember_me %>
+      Remember me
+    <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign in" %>
+  <div class="form-actions">
+    <%= f.submit "Sign in", class: "btn btn-primary" %>
   </div>
 <% end %>
 

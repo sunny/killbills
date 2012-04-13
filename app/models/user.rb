@@ -9,4 +9,9 @@ class User < Person
 
   has_many :bills
   has_many :friends
+
+  def me_and_my_friends
+    [self, friends.order(:name)].flatten
+  end
 end
+

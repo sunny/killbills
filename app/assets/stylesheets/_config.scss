@@ -1,3 +1,5 @@
+// Colors
+
 $color: #8B008B;
 $darker: darken($color, 5%);
 $lighter: lighten($color, 5%);
@@ -9,6 +11,9 @@ $darkgrey: #404040;
 $text: #333;
 $background: #fafafa;
 
-$red: darkred;
-$green: darkgreen;
+
+// Bootstrap config
+
+$linkColor: $color;
+
 

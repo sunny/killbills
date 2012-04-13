@@ -1,5 +1,7 @@
 # encoding: utf-8
 module ApplicationHelper
+  include FricoutHelper
+
   def ratio(amount)
     number_to_percentage(amount*100, :precision => 0)
   end
@@ -16,6 +18,12 @@ module ApplicationHelper
 
   def datetime(date)
     date.strftime('%Y-%m-%dT%H:%MZ')
+  end
+
+  def incrementer(name = :default)
+    @incrementer ||= {}
+    @incrementer[name] ||= 0
+    @incrementer[name] += 1
   end
 end
 

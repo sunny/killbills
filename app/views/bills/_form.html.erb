@@ -1,6 +1,6 @@
-<%= form_for(@bill) do |f| %>
+<%= form_for(@bill, html: { id: "bill-form" }) do |f| %>
   <% if @bill.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-block alert-error">
       <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
 
       <ul>
@@ -10,53 +10,52 @@
       </ul>
     </div>
   <% end %>
+  
+  <fieldset class="participations">
+    <%= f.fields_for :participations do |p| %>
+    <div class="row">
+      <div class="people span4">
+        <%= p.label :person_id, "Participant #{incrementer}"  %>
+        <%= p.collection_select :person_id, current_user.me_and_my_friends,
+                :id, :name, { include_blank: p.object.person_id.nil? } %>
+      </div>
+      <div class="payment span2">
+        <%= p.label :payment %>
+        <%= p.number_field :payment, placeholder: 0, min: 0 %>
+      </div>
+      <div class="owed span6">
+        <%= p.label :owed_even, "Owed" %>
+        <ul class="radio-toggles">
+        <% Participation.owed_for_select.each do |text, value| %>
+          <li>
+            <label>
+              <%= p.radio_button :owed, value %>
+              <span class="btn"><%= text %></span>
+            </label>
+          </li>
+        <% end %>
+        </ul>
+        <div class="owed-result"></div>
+      </div>
+    </div>
+    <% end %>
+  </fieldset>
 
-  <fieldset id="bill_info">
-    <legend>Bill</legend>
-    <div class="field">
-      <%= f.label :amount %>
-      <%= f.money_field :amount, :required => true %>
-    </div>
-    <div class="field">
-      <%= f.label :friend_id %>
-      <%= f.collection_select :friend_id, current_user.friends, :id, :name %>
-    </div>
-  </fieldset>
-  <fieldset id="bill_who_payed">
-    <legend>Who payed?</legend>
-    <div class="field">
-      <%= f.label :user_payed, "You" %>
-      <span class="payed">
-        <%= f.money_field :user_payed %>
-      </span>
-    </div>
-    <div class="field">
-      <%= f.label :friend_payed, "Friend" %>
-      <span class="payed">
-        <%= f.money_field :friend_payed %>
-      </span>
-    </div>
-  </fieldset>
-  <fieldset id="bill_shared">
-    <legend>Shared?</legend>
-    <div class="field">
-      <%= f.label :user_ratio, "Your ratio" %>
-      <%= f.number_field :user_ratio, :size => 4, :min => 0, :max => 1 %>
-    </div>
-  </fieldset>
-  <fieldset id="bill_optional">
-    <legend>Optional</legend>
-    <div class="field">
+  <fieldset class="bill-optional">
+    <div class="title control-group">
       <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, placeholder: "Optional description" %>
     </div>
-    <div class="field">
-      <%= f.label :date, :for => "bill_date_1i" %>
-      <%= f.date_select :date %>
+    <div class="date control-group">
+      <%= f.label :date %>
+      <%= f.text_field :date, type: "date", size: 10,
+        max: Time.now.to_date, placeholder: Time.now.to_date %>
     </div>
   </fieldset>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary", disable_with: "Updating…", autocomplete: "off" %>
+    <%= link_to "Cancel", :back, class: "btn", disable_with: "Cancel…" %>
   </div>
 <% end %>
 

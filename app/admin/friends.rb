@@ -1,11 +1,17 @@
+# encoding: UTF-8
 ActiveAdmin.register Friend do
+  menu priority: 15
+
   filter :name
-  #filter :user
+  filter :user, collection: lambda {
+    User.all.map { |u| [u.title, u.id] }
+  }
+  filter :created_at, as: :date_range
 
   index do
     column :name
-    column :user, :sortable => :user_id do |friend|
-      link_to friend.user.email, [:admin, friend.user]
+    column :user, sortable: :user_id do |friend|
+      link_to friend.user.title, [:admin, friend.user]
     end
     column :created_at
     default_actions

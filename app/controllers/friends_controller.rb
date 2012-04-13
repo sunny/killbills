@@ -6,7 +6,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @friends }
+      format.xml  { render xml: @friends }
     end
   end
 
@@ -16,7 +16,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @friend }
+      format.xml  { render xml: @friend }
     end
   end
 
@@ -26,7 +26,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @friend }
+      format.xml  { render xml: @friend }
     end
   end
 
@@ -41,11 +41,11 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to(@friend, :notice => 'Friend was successfully created.') }
-        format.xml  { render :xml => @friend, :status => :created, :location => @friend }
+        format.html { redirect_to(@friend, notice: 'Friend was successfully created.') }
+        format.xml  { render xml: @friend, status: :created, location: @friend }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @friend.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.xml  { render xml: @friend.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,11 +56,11 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.update_attributes(params[:friend])
-        format.html { redirect_to(@friend, :notice => 'Friend was successfully updated.') }
+        format.html { redirect_to(@friend, notice: 'Friend was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @friend.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.xml  { render xml: @friend.errors, status: :unprocessable_entity }
       end
     end
   end

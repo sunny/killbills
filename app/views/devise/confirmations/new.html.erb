@@ -1,17 +1,18 @@
 <h2>Resend confirmation instructions</h2>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name),
+  html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="control-group">
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="form-actions">
+    <%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render partial: "devise/shared/links" %>
 

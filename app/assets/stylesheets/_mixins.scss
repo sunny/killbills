@@ -1,19 +1,26 @@
-@mixin border-radius($r) {
-  border-radius: $r;
+// Linear gradient with two colors
+// Examples:
+//   @include linear-gradient-2-colors(#fff, #000);
+//   @include linear-gradient-2-colors(red, blue, 25%, 60%);
+@mixin linear-gradient-2-colors($color1, $color2, $stop1: 0%, $stop2: 100%) {
+  background-color: $color1;
+  background-image: -o-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -ms-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -webkit-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -moz-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  
+  background-image: -webkit-gradient(
+	  linear,
+	  left top,
+	  left bottom,
+	  color-stop($stop1, $color1),
+	  color-stop($stop2, $color2)
+  );
 }
 
-@mixin box-shadow($s) {
-  -webkit-box-shadow: $s;
-  -moz-box-shadow: $s;
-  box-shadow: $s;
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-@mixin backgroud-vertical-linear-gradient($top, $bottom) {
-  background: $top;
-  background: -webkit-gradient(linear, left top, left bottom, from($top), to($bottom));
-  background: -webkit-linear-gradient(top, $top, $bottom);
-  background: -moz-linear-gradient(top, $top, $bottom);
-  background: -ms-linear-gradient(top, $top, $bottom);
-  background: -o-linear-gradient(top, $top, $bottom);
-}
-
