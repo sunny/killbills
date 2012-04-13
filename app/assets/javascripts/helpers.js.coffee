@@ -29,21 +29,24 @@ $.fn.intVal = ->
   else
     0
 
-# Shorter call to change opacity
-$.fn.opacity = (val) ->
-  @css('opacity', val)
+# Change CSS opacity
+# Example: $('input').opacity(0.5)
+#$.fn.opacity = (val) ->
+#  @css('opacity', val)
 
-# Syntaxic sugar to check html radio and checkboxes
-$.fn.check = ->
-  @attr('checked', 'checked')
+# Check radios and checkboxes
+# Example: $('input').check()
+#$.fn.check = ->
+#  @attr('checked', 'checked')
 
-# Syntaxic sugar to uncheck html radio and checkboxes
-$.fn.uncheck = ->
-  @removeAttr('checked')
+# Uncheck html radio and checkboxes
+# Example: $('input').uncheck()
+#$.fn.uncheck = ->
+#  @removeAttr('checked')
 
 # Apply a CSS class and remove it from other elements at the same time
-# E.g.: newElems.borrowClass('current', oldElems)
-$.fn.borrowClass = (klass, from) ->
-  from.removeClass(klass)
-  @addClass(klass)
+# Example: newElems.takeClass('current', oldElems)
+#$.fn.takeClass = (klass, from) ->
+#  from.removeClass(klass)
+#  @addClass(klass)
 
