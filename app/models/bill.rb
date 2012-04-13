@@ -4,15 +4,16 @@ class Bill < ActiveRecord::Base
   include FricoutHelper
 
   belongs_to :user
-  has_many :participations, :dependent => :destroy
+  has_many :participations, dependent: :destroy
 
   attr_accessible :title, :date, :participations_attributes
   accepts_nested_attributes_for :participations
 
   # Validations
+  before_validation :assign_default_date
 
-  validates :date, :presence => true
-  validates :user, :presence => true
+  validates :date, presence: true
+  validates :user, presence: true
   validates_associated :participations
 
   validate :ensure_user_is_in_bill
@@ -119,12 +120,15 @@ private
   #      "must create a debt")
   #  end
   #end
-  
-  
+
   # Helper to add errors on children
   def errors_on_group(group, attribute, children, message = "")
     errors[:"#{group}.#{attribute}"] = message
     children.each { |child| child.errors[attribute] = message }
+  end
+
+  def assign_default_date
+    self.date ||= Time.now.to_date
   end
 end
 
