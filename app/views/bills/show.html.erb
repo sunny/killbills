@@ -1,60 +1,66 @@
-<div class="row">
-  <h1 class="bill-title span8">
-    <%= @bill.automatic_title %>
-  </h1>
-  <div class="bill-date span4">
-    <%= time_ago_in_words @bill.date %> ago (<%= @bill.date %>)
+<div class="bill">
+  <div class="row">
+    <h1 class="title span8">
+      <%= @bill.automatic_title %>
+    </h1>
+    
+    <div class="actions span4">
+      <%= link_to 'Edit', edit_bill_path(@bill), :class => 'btn' %>
+      <%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'btn btn-danger' %>
+    </div>
+    
   </div>
-</div>
 
-<div class="row">
-  <ul class="bill-results span8">
-    <% for debt in @bill.debts %>
-    <li><%= debt_summary debt %></li>
-    <% end %>
-  </ul>
-  <div class="bill-actions span4">
-    <%= link_to 'Edit', edit_bill_path(@bill), :class => 'btn' %>
-    <%= link_to 'Delete', @bill, :confirm => 'Are you sure you want to kill bill?', :method => :delete, :class => 'btn btn-danger' %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span8">
-    <table class="bill-participations" summary="Bill participations">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Payment</th>
-          <th>Share</th>
-          <th class="debt-row">Debt</th>
-          <th class="credit-row">Credit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for participation in @bill.participations %>
-          <tr>
-            <th><%= link_to_friend participation.person %></th>
-            <td><%= currencize participation.payment %></td>
-            <td><%= currencize participation.owed_total %> </td>
-            <td class="debt-row <%= variation -participation.debt %>">
-              <%= currencize participation.debt %>
-            </td>
-            <td class="<%= variation -participation.debt %> credit-row">
-              <%= currencize -participation.debt %>
-            </td>
-          </tr>
+  <div class="row">
+    <div class="span8">
+      <ul class="results">
+        <% for debt in @bill.debts %>
+        <li><%= debt_summary debt %></li>
         <% end %>
-        <tr class="bill-total">
-          <th>Total</th>
-          <td><%= currencize @bill.total %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+      </ul>
+    </div>
+    <div class="date span4">
+      <%= time_ago_in_words @bill.date %> ago (<%= @bill.date %>)
+    </div>
   </div>
-</div>
 
+  <div class="row">
+    <div class="span8">
+      <table class="participations" summary="Bill participations">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Payment</th>
+            <th>Share</th>
+            <th class="debt-row">Debt</th>
+            <th class="credit-row">Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for participation in @bill.participations %>
+            <tr>
+              <th><%= link_to_friend participation.person %></th>
+              <td><%= currencize participation.payment %></td>
+              <td><%= currencize participation.owed_total %> </td>
+              <td class="debt-row <%= variation -participation.debt %>">
+                <%= currencize participation.debt %>
+              </td>
+              <td class="<%= variation -participation.debt %> credit-row">
+                <%= currencize -participation.debt %>
+              </td>
+            </tr>
+          <% end %>
+          <tr class="bill-total">
+            <th>Total</th>
+            <td><%= currencize @bill.total %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
 

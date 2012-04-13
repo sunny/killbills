@@ -69,77 +69,59 @@ article.bill > a {
 // Bill Show
 // ---------
 
-.bill-results {
-  list-style: none;
-  margin-top: $baseLineHeight;
-  margin-bottom: $baseLineHeight;
-  line-height: 2*$baseLineHeight;
-  font-size: 1.25em;
-
-  &::before {
-    content: '\2937'; // ⤷
-    font-size: 1.25em;
-    line-height: $baseLineHeight;
-    float: left;
-    margin-right: .5ex;
-    color: $grey;
+.bill {
+  .results {
+    margin-top: 1em;
+    line-height: 2*$baseLineHeight;
   }
-}
 
-.bill-title {
-  line-height: 2*$baseLineHeight;
-}
-
-.bill-date {
-  font-size: 1.2em;
-  line-height: 2*$baseLineHeight;
-}
-
-.bill-actions {
-  line-height: 2*$baseLineHeight;
-}
-
-.bill-participations {
-  width: 100%;
-  margin: 1em 0;
-
-  th, td {
-    text-align: right;
-    padding: 10%;
-    font-weight: normal;
+  .date {
     font-size: 1.2em;
-    text-align: right;
-    padding: 1ex;
+    line-height: 2*$baseLineHeight;
   }
 
-  thead {
-    border-bottom: 1px solid $grey;
+  .participations {
+    width: 100%;
+    margin: 1em 0;
 
-  }
-  tbody {
-    .bill-total {
-      border-top: 1px solid $lightgrey;
-      color: $grey;
+    th, td {
+      text-align: right;
+      padding: 10%;
+      font-weight: normal;
+      font-size: 1.2em;
+      text-align: right;
+      padding: 1ex;
     }
-  }
-  
-  .debt-row.positive,
-  .credit-row.negative {
-    visibility: hidden;
-  }
 
-  // Small screens
-  @media (max-width: 480px) {
-    .debt-row.positive {
-      visibility: hidden;
+    thead {
+      border-bottom: 1px solid $grey;
+
     }
-    .credit-row {
-      display: none;
+    tbody {
+      .bill-total {
+        border-top: 1px solid $lightgrey;
+        color: $grey;
+      }
     }
     
     .debt-row.positive,
     .credit-row.negative {
-      visibility: visible;
+      visibility: hidden;
+    }
+
+    // Small screens
+    @media (max-width: 480px) {
+      .debt-row.positive {
+        visibility: hidden;
+      }
+      .credit-row {
+        display: none;
+      }
+      
+      .debt-row.positive,
+      .credit-row.negative {
+        visibility: visible;
+      }
     }
   }
 }

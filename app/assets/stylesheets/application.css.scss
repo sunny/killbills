@@ -33,6 +33,34 @@
   color: $green;
 }
 
+
+// Result
+// ------
+
+.result {
+  list-style: none;
+  font-size: 1.25em;
+
+  &::before {
+    // Arrow left of the text
+    content: '\2937'; // ⤷
+    font-size: 1.25em;
+    line-height: $baseLineHeight;
+    float: left;
+    margin-right: .5ex;
+    color: $grey;
+  }
+}
+.results {
+  list-style: none;
+  margin: 0;
+
+  li {
+    @extend .result;
+  }
+}
+
+
 // Form magic
 // ----------
 label {
