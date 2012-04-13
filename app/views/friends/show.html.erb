@@ -8,7 +8,8 @@
   </div>
 </div>
 
-<% if @friend.debt > 0 %>
+<% if @friend.debt == 0 %>
+<% elsif @friend.debt > 0 %>
 <p class="result debt negative">
   You owe <%= @friend.name %> <%= number_to_currency @friend.debt %>
 </p>
@@ -17,8 +18,6 @@
   Owes you <%= number_to_currency @friend.debt.abs %>
 </p>
 <% end %>
-
-<h2>Bills</h2>
 
 <p><%= link_to 'New bill', new_bill_path(friend: @friend.name), class: "btn" %></p>
 
