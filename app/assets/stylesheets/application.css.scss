@@ -33,3 +33,27 @@
   color: $green;
 }
 
+// Articles (bills and friends)
+
+article > a {
+  display: block;
+  h2 {
+    font-size: 18px;
+    display: inline;
+    font-weight: normal;
+    color: $color;
+    border-bottom: 1px solid $lightgrey;//lighten(desaturate($color, 60%), 60%);
+  }
+  &:visited h2 {
+    color: darken($color, 10%);
+  }
+  &:hover h2 {
+    color: darken($color, 20%);
+    border-bottom-color: inherit;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
