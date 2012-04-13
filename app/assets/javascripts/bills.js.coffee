@@ -6,12 +6,12 @@ class Bill
   constructor: (@form) ->
     @form = $('#bill-form')
     @payment_fields = @form.find('.payment input')
-    @owed_fields = @form.find('.owed select')
+    @owed_fields = @form.find('.owed')
     @owed_results = @form.find('.owed-result')
 
     # Events
     @update()
-    @form.on 'change', 'select', @update
+    @form.click @update
     @form.keyup @update
 
   even_share_calc: =>
@@ -35,6 +35,7 @@ class Bill
     @collect()
     @calculate()
     @refresh()
+    log @owed
 
   # Get the data from the form
   collect: =>
@@ -44,7 +45,7 @@ class Bill
 
     # Owed texts
     @owed = []
-    @owed.push $(field).val() for field in @owed_fields
+    @owed.push $(field).val() for field in @owed_fields.find(':checked')
 
   # Calculate from the data collected
   calculate: =>

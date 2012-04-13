@@ -23,11 +23,20 @@
         <%= p.label :payment %>
         <%= p.number_field :payment, placeholder: 0, min: 0 %>
       </div>
-      <div class="owed span4">
-        <%= p.label :owed %>
-        <%= p.select :owed, Participation.owed_for_select %>
+      <div class="owed span6">
+        <%= p.label :owed_even, "Owed" %>
+        <ul class="radio-toggles">
+        <% Participation.owed_for_select.each do |text, value| %>
+          <li>
+            <label>
+              <%= p.radio_button :owed, value %>
+              <span class="btn"><%= text %></span>
+            </label>
+          </li>
+        <% end %>
+        </ul>
+        <div class="owed-result"></div>
       </div>
-      <div class="span2 owed-result"></div>
     </div>
     <% end %>
   </fieldset>

@@ -47,18 +47,10 @@ article.bill > a {
       }
     }
     .owed {
-      select {
-        width: 100%;
-      }
-    }
-    .owed-result {
-      // To occupy enough space before the js fills it in
-      min-height: $baseLineHeight;
-
-      // Portrait tablets and up (with columns)
-      // Move it down to appear next to the owed select
-      @media (min-width: 768px) {
-        padding-top: 27px;
+      .owed-result {
+        line-height: 29px;
+        margin-left: 1ex;
+        float: left;
       }
     }
   }
