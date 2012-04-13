@@ -30,6 +30,10 @@ group :development, :test do
   # Guard
   gem 'guard-test'
   gem 'guard-livereload'
+
+  # Maintenance
+  gem 'heroku'
+  gem 'taps'
 end
 
 
