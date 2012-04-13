@@ -1,18 +1,18 @@
 jQuery ->
   new Bill if $('#bill-form').length
 
-
 class Bill
 
   constructor: (@form) ->
     @form = $('#bill-form')
-    @payment_fields = @form.find('.payment select')
+    @payment_fields = @form.find('.payment input')
     @owed_fields = @form.find('.owed select')
     @owed_results = @form.find('.owed-result')
 
-    @collect()
-    @refresh()
-
+    # Events
+    @update()
+    @form.on 'change', 'select', @update
+    @form.keyup @update
 
   even_share_calc: =>
     shared =   (i for owed, i in @owed when owed == "even")
@@ -22,7 +22,6 @@ class Bill
     total -= @owed_calc(i) for i in unshared
     total / shared.length
 
-
   owed_calc: (i) =>
     switch @owed[i]
       when "even"       then @even_share
@@ -31,7 +30,13 @@ class Bill
       #when "percentage" then @total * owed_percent / 100
       #when "fixed"      then owed_amount
 
+  # Update
+  update: =>
+    @collect()
+    @calculate()
+    @refresh()
 
+  # Get the data from the form
   collect: =>
     # Total
     @total = 0
@@ -41,13 +46,14 @@ class Bill
     @owed = []
     @owed.push $(field).val() for field in @owed_fields
 
+  # Calculate from the data collected
+  calculate: =>
     # Even share
     @even_share = @even_share_calc()
-    
-    # Owed amounts (needs owed, even_share and total)
+
+    # Owed amounts
     @owed_amounts = []
     @owed_amounts.push @owed_calc(i) for owed, i in @owed
-
 
   # Refresh the UI
   refresh: =>

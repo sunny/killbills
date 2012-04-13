@@ -68,8 +68,8 @@ class Participation < ActiveRecord::Base
       "even"  => "Even share",
       "zero"  => "Nothing",
       "all"   => "Everything",
-      "percentage" => "A percentage",
-      "fixed" => "Fixed amount",
+      #"percentage" => "A percentage",
+      #"fixed" => "Fixed amount",
     }.map { |k,v| [v,k] }
   end
 
