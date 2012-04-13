@@ -7,7 +7,21 @@
 
 @import 'bills';
 
+
+// Fix to bootstrap-responsive
+// ---------------------------
+
+// Tablets and Below
+@media (max-width: 979px) {
+  .navbar .nav {
+    clear: left;
+  }
+}
+
+
 // Generic classes
+// ---------------
+
 .negative {
   color: $red;
 }

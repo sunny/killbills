@@ -1,15 +1,17 @@
 
 <article class="bill">
-  <a href="<%= bill_path(bill) %>">
-    <h2><%= bill.automatic_title %></h2>
+  <a href="<%= bill_path(bill) %>" class="row">
+    <h2 class="span6"><%= bill.automatic_title %></h2>
 
-    <% for debt in bill.debts %>
-    <div class="owed <%= variation -debt.diff_for(bill.user) %>">
-      <%= debt_summary debt %></li>
+    <div class="debts span3">
+      <% for debt in bill.debts %>
+      <div class="owed <%= variation -debt.diff_for(bill.user) %>">
+        <%= debt_summary debt %></li>
+      </div>
+      <% end %>
     </div>
-    <% end %>
 
-    <time pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
+    <time class="span3" pubdate datetime="<%= datetime bill.date %>" title="<%= bill.date %>">
       <%= time_ago_in_words bill.date %> ago
     </time>
    </a>

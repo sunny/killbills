@@ -1,0 +1,45 @@
+
+// Linear gradient with three colors and three color stops
+// Example :
+//   @include linear-gradient-3-colors(#D4CCD4, #D9D9D9, #F7F7F7, 25%, 35%, 60%);
+
+@mixin linear-gradient-3-colors($color1, $color2, $color3, $stop1: 25%, $stop2: 42%, $stop3: 60%) {
+  background-color: $color1;
+  background-image: -o-linear-gradient(top, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+  background-image: -ms-linear-gradient(top, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+  background-image: -webkit-linear-gradient(top, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+  background-image: -moz-linear-gradient(top, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+  background-image: linear-gradient(top, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+  
+  background-image: -webkit-gradient(
+	  linear,
+	  left top,
+	  left bottom,
+	  color-stop($stop1, $color1),
+	  color-stop($stop2, $color2),
+	  color-stop($stop3, $color3)
+  );
+}
+
+
+@mixin linear-gradient-2-colors($color1, $color2, $stop1: 0%, $stop2: 100%) {
+  background-color: $color1;
+  background-image: -o-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -ms-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -webkit-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: -moz-linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  background-image: linear-gradient(top, $color1 $stop1, $color2 $stop2);
+  
+  background-image: -webkit-gradient(
+	  linear,
+	  left top,
+	  left bottom,
+	  color-stop($stop1, $color1),
+	  color-stop($stop2, $color2)
+  );
+}
+
+@mixin lighten-gradient($color) {
+  @include linear-gradient-2-colors($color,
+    lighten($color, 5%));
+}

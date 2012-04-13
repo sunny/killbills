@@ -1,3 +1,32 @@
+// Bill list
+// ---------
+
+article.bill a {
+  display: block;
+
+  h2 {
+    font-size: 17px;
+  }
+  .debts {
+    line-height: 33px;
+  }
+  time {
+    display: block;
+    line-height: 33px;
+    color: $textColor;
+  }
+  
+  &:hover {
+    text-decoration: none;
+    h2 {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Bill Show
+// ---------
+
 .bill-results {
   list-style: none;
   margin-top: $baseLineHeight;
