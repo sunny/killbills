@@ -28,9 +28,10 @@ class BillsController < ApplicationController
   # GET /bills/new
   # GET /bills/new.xml
   def new
-    @bill = current_user.bills.new(params[:bill])
-    @bill.participations.build(person: current_user)
-    @bill.participations.build
+    friend = params[:friend] ? current_user.friends.where(name: params[:friend]).first : nil
+    @bill = current_user.bills.new
+    @bill.participations.build(owed: :even, person: current_user)
+    @bill.participations.build(owed: :even, person: friend)
 
     respond_to do |format|
       format.html # new.html.erb
