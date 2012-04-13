@@ -39,6 +39,62 @@ article.bill a {
   }
 }
 
+
+// Bill form
+// ---------
+#bill-form {
+  .participations {
+    margin-top: 1em;
+
+    .people {
+      // Below portrait tablet (without columns)
+      @media (max-width: 767px) {
+        label {
+          font-size: 1.5em;
+          padding: .5em 0;
+        }
+      }
+      select {
+        width: 100%;
+      }
+    }
+    .payment {
+      input {
+        width: 100%;
+
+        // Fix for width 100% not working correctly
+        @include border-box;
+        height: $baseLineHeight + 4*2;
+      }
+    }
+    .owed {
+      select {
+        width: 100%;
+      }
+    }
+    .owed-result {
+      // To occupy enough space before the js fills it in
+      min-height: $baseLineHeight;
+
+      // Portrait tablets and up (with columns)
+      // Move it down to appear next to the owed select
+      @media (min-width: 768px) {
+        padding-top: 27px;
+      }
+    }
+  }
+
+  .bill-optional {
+    margin-top: 2em;
+
+    .date input {
+      width: auto;
+    }
+  }
+
+}
+
+
 // Bill Show
 // ---------
 
@@ -101,6 +157,7 @@ article.bill a {
     visibility: hidden;
   }
 
+  // Small screens
   @media (max-width: 480px) {
     .debt-row.positive {
       visibility: hidden;

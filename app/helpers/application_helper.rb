@@ -19,5 +19,11 @@ module ApplicationHelper
   def datetime(date)
     date.strftime('%Y-%m-%dT%H:%MZ')
   end
+
+  def incrementer(name = :default)
+    @incrementer ||= {}
+    @incrementer[name] ||= 0
+    @incrementer[name] += 1
+  end
 end
 

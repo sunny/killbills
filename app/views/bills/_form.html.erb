@@ -11,75 +11,42 @@
     </div>
   <% end %>
   
-  <% participants = 0 %>
-  <%= f.fields_for :participations do |p| %>
-  <div class="row">
-    <h3>Participant #<%= participants += 1 %></h3>
-    <%#= p.hidden_field :id %>
-    <div class="span4 control-group">
-      <%= p.label :name %>
-      <%= p.collection_select :person_id, current_user.me_and_my_friends,
-              :id, :name, { include_blank: true }, { class: "people" } %>
+  <fieldset class="participations">
+    <%= f.fields_for :participations do |p| %>
+    <div class="row">
+      <div class="people span4">
+        <%= p.label :person_id, "Participant #{incrementer}"  %>
+        <%= p.collection_select :person_id, current_user.me_and_my_friends,
+                :id, :name, { include_blank: p.object.person_id.nil? } %>
+      </div>
+      <div class="payment span2">
+        <%= p.label :payment %>
+        <%= p.number_field :payment, placeholder: 0, min: 0 %>
+      </div>
+      <div class="owed span4">
+        <%= p.label :owed %>
+        <%= p.select :owed, Participation.owed_for_select %>
+      </div>
+      <div class="span2 owed-result"></div>
     </div>
-    <div class="span4 control-group">
-      <%= p.label :payment %>
-      <%= p.number_field :payment, placeholder: 0,
-          class: "payment input-mini" %>
-    </div>
-    <div class="span4 control-group">
-      <%= p.label :owed %>
-      <%= p.select :owed, Participation.owed_for_select, {}, { class: "owed" } %>
-      <span class="result"></span>
-    </div>
-  </div>
-  <% end %>
-
-
-  <!--<fieldset id="participations">
-    <table>
-      <thead>
-        <tr>
-          <th>Participant</th>
-          <th>Payment</th>
-          <th>Owes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= f.fields_for :participations do |p| %>
-        <tr>
-          <td>
-            <%= p.hidden_field :id %>
-            <%= p.collection_select :person_id, current_user.me_and_my_friends,
-                :id, :name, { include_blank: true }, { class: "people" } %>
-          </td>
-          <td>
-            <%= p.number_field :payment, placeholder: 0,
-                class: "payment input-mini" %>
-          </td>
-          <td>
-            <%= p.select :owed, Participation.owed_for_select, {}, { class: "owed" } %>
-            <span class="result"></span>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% end %>
   </fieldset>
-  -->
 
-  <fieldset id="bill_optional">
-    <div class="control-group">
+  <fieldset class="bill-optional">
+    <div class="title control-group">
       <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, placeholder: "Optionnal description" %>
     </div>
-    <div class="control-group">
-      <%= f.label :date, :for => "bill_date_1i" %>
-      <%= f.date_select :date %>
+    <div class="date control-group">
+      <%= f.label :date %>
+      <%= f.text_field :date, type: "date", size: 10,
+        max: Time.now.to_date, placeholder: Time.now.to_date %>
     </div>
   </fieldset>
 
   <div class="form-actions">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary", disable_with: "Updating…", autocomplete: "off" %>
+    <%= link_to "Cancel", :back, class: "btn", disable_with: "Cancel…" %>
   </div>
 <% end %>
 

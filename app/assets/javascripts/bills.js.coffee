@@ -6,9 +6,9 @@ class Bill
 
   constructor: (@form) ->
     @form = $('#bill-form')
-    @payment_fields = @form.find('input.payment')
-    @owed_fields = @form.find('select.owed')
-    @owed_results = @form.find('span.result')
+    @payment_fields = @form.find('.payment select')
+    @owed_fields = @form.find('.owed select')
+    @owed_results = @form.find('.owed-result')
 
     @collect()
     @refresh()
