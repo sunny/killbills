@@ -13,5 +13,9 @@ class User < Person
   def me_and_my_friends
     [self, friends.order(:name)].flatten
   end
+
+  def name
+    "You"
+  end
 end
 
