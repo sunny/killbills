@@ -29,6 +29,32 @@ $.fn.intVal = ->
   else
     0
 
+# Adds an option to a select that prompts for a new value
+#
+# Example:
+#   $('select').selectNewValue("New product...", "Please enter product name:")
+$.fn.selectNewValue = (select_text = 'Add new...', prompt_text = 'New value') ->
+  $(this).each ->
+    option = $('<option value="new">').text(select_text)
+    $(this).append option
+    $(this).change ->
+      # If last element is selected
+      return if @selectedIndex != @options.length - 1
+
+      # And a name is given
+      person_name = prompt(prompt_text)
+      return @selectedIndex = 0 if !person_name
+
+      # Remove previous custom name if any
+      $(this).find('option:not([value])').remove()
+
+      # Create a new option
+      option = $('<option />').text(person_name)
+      
+      # Insert and select it
+      option.insertBefore $(this).find('option:last')
+      @selectedIndex = @options.length - 2
+
 # Change CSS opacity
 # Example: $('input').opacity(0.5)
 #$.fn.opacity = (val) ->

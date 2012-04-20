@@ -1,10 +1,6 @@
-jQuery ->
-  new Bill if $('#bill-form').length
-
-class Bill
+class window.Bill
 
   constructor: (@form) ->
-    @form = $('#bill-form')
     @payment_fields = @form.find('.payment input')
     @owed_fields = @form.find('.owed')
     @owed_results = @form.find('.owed-result')

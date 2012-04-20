@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :create_new_friends
 
   # GET /bills
   # GET /bills.xml
@@ -85,6 +86,22 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(bills_url) }
       format.xml  { head :ok }
+    end
+  end
+
+
+private
+
+  
+  def create_new_friends
+    if params[:bill] and params[:bill][:participations_attributes]
+      params[:bill][:participations_attributes].each do |k, participation|
+        person_id = participation[:person_id]
+        if !person_id.blank? and person_id !~ /^[0-9]+$/
+          friend = current_user.friends.find_or_create_by_name(person_id)
+          params[:bill][:participations_attributes][k][:person_id] = friend.id
+        end
+      end
     end
   end
 end

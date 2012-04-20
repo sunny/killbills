@@ -22,7 +22,9 @@
               ' Participant
               span.increment = incrementer()
 
-            .you You
+            .you
+              | You
+              = p.hidden_field :person_id
 
           - else
 

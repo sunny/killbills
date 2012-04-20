@@ -5,3 +5,10 @@
 //= require helpers
 //= require bills
 
+jQuery ->
+  billForm = $('#bill-form')
+  if billForm.length
+    new Bill(billForm)
+    billForm.find(".people select")
+             .selectNewValue("New friend...", "Enter name")
+
