@@ -28,10 +28,15 @@ article.bill > a {
     .people {
       // Below portrait tablet (without columns)
       @media (max-width: 767px) {
+        .column-label,
         label {
           font-size: 1.5em;
           padding: .5em 0;
         }
+      }
+
+      .you {
+        padding: 6px 0;
       }
       select {
         width: 100%;

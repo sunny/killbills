@@ -35,7 +35,6 @@ class Bill
     @collect()
     @calculate()
     @refresh()
-    log @owed
 
   # Get the data from the form
   collect: =>

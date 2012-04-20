@@ -15,9 +15,17 @@
     = f.fields_for :participations do |p|
       .row
         .span4.people
-          = p.label :person_id, "Participant #{incrementer}"
-          = p.collection_select :person_id, current_user.me_and_my_friends, \
-            :id, :name, { include_blank: p.object.person_id.nil? }
+
+          - if p.object.person_id == current_user.id
+
+            .column-label Participant #{incrementer}
+            .you You
+
+          - else
+            = p.label :person_id, "Participant #{incrementer}"
+            = p.collection_select :person_id, \
+              current_user.friends, :id, :name, \
+              include_blank: p.object.person_id.nil?
 
         .span2.payment
           = p.label :payment
