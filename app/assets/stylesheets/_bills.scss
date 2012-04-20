@@ -25,11 +25,22 @@ article.bill > a {
   .participations {
     margin-top: 1em;
 
+    // Over portrait tablet size (with columns)
+    // hide all column labels except the first line.
+    @media (min-width: 766px) {
+      .column-label, .increment {
+        display: none;
+      }
+      .row:first-child .column-label {
+        display: block;
+      }
+    }
+
     .people {
+
       // Below portrait tablet (without columns)
       @media (max-width: 767px) {
-        .column-label,
-        label {
+        .column-label {
           font-size: 1.5em;
           padding: .5em 0;
         }

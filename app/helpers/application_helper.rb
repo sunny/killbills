@@ -20,10 +20,29 @@ module ApplicationHelper
     date.strftime('%Y-%m-%dT%H:%MZ')
   end
 
-  def incrementer(name = :default)
-    @incrementer ||= {}
-    @incrementer[name] ||= 0
-    @incrementer[name] += 1
+  # Increment and return an integer, starting at 1.
+  #
+  # Argument:
+  #   - scope: Name of the increment scope.
+  #            Defaults to :default.
+  #
+  # Examples:
+  #   incrementer!() #=> 1
+  #   incrementer!() #=> 2
+  #   incrementer!(:foo) #=> 1
+  #   incrementer!(:foo) #=> 2
+  #
+  #   incrementer() #=> 2
+  #   incrementer() #=> 2
+  #   incrementer(:foo) #=> 2
+  #   incrementer(:foo) #=> 2
+  def incrementer!(scope = :default)
+    @incrementer ||= Hash.new(0)
+    @incrementer[scope] += 1
+  end
+  def incrementer(scope = :default)
+    @incrementer ||= Hash.new(0)
+    @incrementer[scope] ||= 0
   end
 end
 

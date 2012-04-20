@@ -13,26 +13,34 @@
   
   fieldset.participations
     = f.fields_for :participations do |p|
-      .row
+      .row class="participation-#{incrementer!()}'
         .span4.people
 
           - if p.object.person_id == current_user.id
 
-            .column-label Participant #{incrementer}
+            .column-label
+              ' Participant
+              span.increment = incrementer()
+
             .you You
 
           - else
-            = p.label :person_id, "Participant #{incrementer}"
+
+
+            = p.label :person_id, class: "column-label" do
+              ' Participant
+              span.increment = incrementer()
+
             = p.collection_select :person_id, \
               current_user.friends, :id, :name, \
               include_blank: p.object.person_id.nil?
 
         .span2.payment
-          = p.label :payment
+          = p.label :payment, class: "column-label"
           = p.number_field :payment, placeholder: 0, min: 0
 
         .span6.owed
-          = p.label :owed_even, "Owed"
+          = p.label :owed_even, "Owed", class: "column-label"
           
           ul.radio-toggles
             - Participation.owed_for_select.each do |text, value|
