@@ -9,7 +9,9 @@ h1 Resend confirmation instructions
     = f.email_field :email
 
   .form-actions
-    = f.submit "Resend confirmation instructions", class: "btn btn-primary"
+    = f.submit "Resend confirmation instructions", \
+      class: "btn btn-primary", autocomplete="off", \
+      disable_with: "Resending..."
 
 = render partial: "devise/shared/links"
 

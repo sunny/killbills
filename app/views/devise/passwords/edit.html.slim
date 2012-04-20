@@ -13,7 +13,8 @@ h1 Change your password
     = f.password_field :password_confirmation
 
   .form-actions
-    = f.submit "Change my password", class: "btn btn-primary"
+    = f.submit "Change my password", autocomplete: "off", \
+      class: "btn btn-primary", disable_with: "Changing..."
 
 = render partial: "devise/shared/links"
 

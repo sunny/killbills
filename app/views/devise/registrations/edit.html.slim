@@ -22,7 +22,8 @@ h1 Account settings
     span.help-inline (we need your current password to confirm your changes)
 
   .form-actions
-    =' f.submit "Update", class: "btn btn-primary"
+    =' f.submit "Update", class: "btn btn-primary", \
+      autocomplete: "off", disable_with: "Updating…"
     = link_to "Back", :back, class: "btn"
 
 h2 Destroy account

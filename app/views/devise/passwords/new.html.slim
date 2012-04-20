@@ -9,6 +9,7 @@ h1 Forgot your password?
 
   .form-actions
     = f.submit "Send me reset password instructions", \
+      disable_with: "Sending...", autocomplete: "off", \
       class: "btn btn-primary"
 
 = render partial: "devise/shared/links"

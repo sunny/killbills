@@ -1,4 +1,4 @@
-h1 Sign up
+h1 Create an account
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -11,12 +11,10 @@ h1 Sign up
     = f.label :password
     = f.password_field :password
 
-  .control-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-
   .form-actions
-    = f.submit "Sign up and create bills", class: "btn btn-primary"
+    = f.submit "Create an account and sign in", \
+      class: "btn btn-primary", autocomplete: "off", \
+      disable_with: "Creating account…"
 
 = render partial: "devise/shared/links"
 

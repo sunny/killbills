@@ -8,7 +8,8 @@ h1 Resend unlock instructions
     = f.email_field :email
 
   .actions
-    = f.submit "Resend unlock instructions"
+    = f.submit "Resend unlock instructions", \
+      autocomplete="off", disable_with: "Resending..."
 
 = render partial: "devise/shared/links"
 
