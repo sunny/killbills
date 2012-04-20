@@ -4,10 +4,11 @@ article.friend
     .span6.title
       h2 = friend.name
 
-    .span3.owed class=variation(-friend.user_debt)
-      - unless friend.user_debt <= 0
-        | You owe #{number_to_currency friend.user_debt}
-      - unless friend.friend_debt <= 0
-        | Owes you #{number_to_currency friend.friend_debt}
+    - if friend.debt != 0
+      .span3.owed class=variation(-friend.debt)
+        - if friend.debt > 0
+          | You owe #{currencize friend.debt}
+        - if friend.debt < 0
+          | Owes you #{currencize friend.debt.abs}
 
 

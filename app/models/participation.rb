@@ -2,7 +2,6 @@ class Participation < ActiveRecord::Base
   belongs_to :bill
   belongs_to :person
 
-
   validates :person_id,
     presence: true,
     uniqueness: { scope: :bill_id }
@@ -30,7 +29,6 @@ class Participation < ActiveRecord::Base
     numericality: { greater_than_or_equal_to: 0 },
     presence: true,
     if: :fixed?
-
 
   scope :unshared, where('participations.owed != "even"')
   scope :shared, where(owed: "even")
@@ -72,6 +70,5 @@ class Participation < ActiveRecord::Base
       #"fixed" => "Fixed amount",
     }.map { |k,v| [v,k] }
   end
-
 end
 

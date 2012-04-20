@@ -11,14 +11,6 @@ class Friend < Person
     participations.sum(:debt)
   end
 
-  def user_debt
-    debt > 0 ? debt : 0
-  end
-
-  def friend_debt
-    debt < 0 ? debt.abs : 0
-  end
-
 private
 
   def destroy_bills
