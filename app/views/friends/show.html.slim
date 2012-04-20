@@ -14,6 +14,9 @@
   p.result.debt.positive
     |Owes you #{number_to_currency @friend.debt.abs}
 
+h2 Bills
 
-p = link_to 'New bill', new_bill_path(friend: @friend.name), class: "btn"
+p = link_to 'New Bill', new_bill_path(friend: @friend.name), class: "btn"
+
+= render @bills
 
