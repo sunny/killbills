@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @friends = current_user.friends
+    @friends = current_user.friends.order(:name)
 
     respond_to do |format|
       format.html # index.html.erb

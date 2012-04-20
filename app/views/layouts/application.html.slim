@@ -15,8 +15,9 @@ body
 
         - if user_signed_in?
           ul.nav
-            li = link_to 'Friends', friends_path
+            li = link_to 'New Bill', new_bill_path
             li = link_to 'Bills', bills_path
+            li = link_to 'Friends', friends_path
 
         ul.nav.pull-right
           li

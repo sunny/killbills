@@ -5,8 +5,7 @@
   - if user_signed_in?
     p Start tracking debts!
     p
-      =' link_to "New friend", new_friend_path, class: "btn btn-primary btn-large"
-      = link_to "New bill", new_bill_path, class: "btn btn-primary btn-large"
+      = link_to "Create a new bill", new_bill_path, class: "btn btn-primary btn-large"
 
   - else
     p The web app that remembers debts for you.
