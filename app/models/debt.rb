@@ -2,13 +2,14 @@ class Debt
   attr_accessor :from, :to, :amount
 
   def initialize(from, to, amount)
+    raise ArgumentError.new("from cannot not be nil") if from.nil?
+    raise ArgumentError.new("to cannot be nil") if to.nil?
     @from = from
     @to = to
     @amount = amount
   end
 
-  def inspect(full = false)
-    return super() if full
+  def inspect
     "<Debt $#{amount} #{from.name} to #{to.name}>"
   end
 
@@ -26,9 +27,10 @@ class Debt
     debts = []
 
     # Create a hash of participation diffs
-    # Example: {<Person> => -5, <Person> => 5}
+    # Example: {<Person1> => -5, <Person2> => 5}
     diffs = {}
     bill.participations.each { |p|
+      next if p.person.nil?
       diffs[p.person] = p.debt
     }
 
