@@ -1,14 +1,20 @@
 //= require jquery
 //= require jquery_ujs
+
 //= require bootstrap-alert
 //= require bootstrap-button
+
+//= require raphael
+//= require g.raphael
+//= require g.pie
+//= require pies
+
 //= require helpers
 //= require bills
 
 jQuery ->
-  billForm = $('#bill-form')
-  if billForm.length
-    new Bill(billForm)
-    billForm.find(".people select")
-             .selectNewValue("New friend...", "Enter name")
+  new Bill($('#bill-form'))
+  $('#bill-form select').selectNewValue('New friend...', 'Enter name')
+  $('#pies').friendsPies('.friend')
+  $('html').removeClass('nojs').addClass('jsloaded')
 

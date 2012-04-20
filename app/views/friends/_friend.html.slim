@@ -1,11 +1,11 @@
 
-article.friend
+article.friend data-debt=friend.debt
   = link_to friend_path(friend), class: "row" do
-    .span6.title
+    .span4.title
       h2 = friend.name
 
     - if friend.debt != 0
-      .span3.owed class=variation(-friend.debt)
+      .span4.owed class=variation(-friend.debt)
         - if friend.debt > 0
           | You owe #{currencize friend.debt}
         - if friend.debt < 0

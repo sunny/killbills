@@ -1,6 +1,8 @@
 class window.Bill
 
   constructor: (@form) ->
+    return if !@form.length
+
     @payment_fields = @form.find('.payment input')
     @owed_fields = @form.find('.owed')
     @owed_results = @form.find('.owed-result')
