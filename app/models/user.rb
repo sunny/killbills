@@ -7,8 +7,8 @@ class User < Person
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :bills
-  has_many :friends
+  has_many :bills, dependent: :destroy
+  has_many :friends, dependent: :destroy
 
   def me_and_my_friends
     [self, friends.order(:name)].flatten
