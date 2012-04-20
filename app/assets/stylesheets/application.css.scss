@@ -18,6 +18,10 @@
   }
 }
 
+.navbar-inner {
+  border-radius: 0;
+}
+
 
 // Generic classes
 // ---------------
@@ -134,3 +138,11 @@ article > a {
   }
 }
 
+// Auth
+
+nav.auth {
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+}
