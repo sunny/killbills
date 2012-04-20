@@ -9,6 +9,7 @@ class User < Person
 
   has_many :bills, dependent: :destroy
   has_many :friends, dependent: :destroy
+  has_many :participations, dependent: :destroy
 
   def me_and_my_friends
     [self, friends.order(:name)].flatten
