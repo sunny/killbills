@@ -1,0 +1,13 @@
+
+article.friend
+  = link_to friend_path(friend), class: "row" do
+    .span6.title
+      h2 = friend.name
+
+    .span3.owed class=variation(-friend.user_debt)
+      - unless friend.user_debt <= 0
+        | You owe #{number_to_currency friend.user_debt}
+      - unless friend.friend_debt <= 0
+        | Owes you #{number_to_currency friend.friend_debt}
+
+

@@ -1,0 +1,56 @@
+= form_for(@bill, html: { id: "bill-form" }) do |f|
+
+  - if @bill.errors.any?
+    .alert.alert-block.alert-error
+      h2
+        =' pluralize(@bill.errors.count, "error")
+        | prohibited this bill from being saved:
+
+      ul
+        - @bill.errors.full_messages.each do |msg|
+          li = msg
+
+  
+  fieldset.participations
+    = f.fields_for :participations do |p|
+      .row
+        .span4.people
+          = p.label :person_id, "Participant #{incrementer}"
+          = p.collection_select :person_id, current_user.me_and_my_friends, \
+            :id, :name, { include_blank: p.object.person_id.nil? }
+
+        .span2.payment
+          = p.label :payment
+          = p.number_field :payment, placeholder: 0, min: 0
+
+        .span6.owed
+          = p.label :owed_even, "Owed"
+          
+          ul.radio-toggles
+            - Participation.owed_for_select.each do |text, value|
+              li
+                label
+                  = p.radio_button :owed, value
+                  span.btn = text
+
+          .owed-result
+
+  fieldset.bill-optional
+    .title.control-group
+      = f.label :title
+      = f.text_field :title, placeholder: "Optional description"
+
+    .date.control-group
+      = f.label :date
+      = f.text_field :date, type: "date", size: 10, \
+        max: Time.now.to_date, \
+        placeholder: Time.now.to_date
+
+
+  .form-actions
+    =' f.submit class: "btn btn-primary", \
+      disable_with: "Updating…", autocomplete: "off"
+    = link_to "Cancel", :back, class: "btn", \
+      disable_with: "Cancel…"
+
+

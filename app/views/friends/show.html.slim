@@ -1,0 +1,19 @@
+.row
+  h1.span8.title = @friend.name
+  .span4.actions
+    =' link_to 'Edit', edit_friend_path(@friend), class: "btn"
+    = link_to 'Delete', @friend, :method => :delete, \
+      :confirm => 'Are you sure you want to delete that friend?', \
+      :class => 'btn btn-danger'
+
+- if @friend.debt > 0
+  p.result.debt.negative
+    | You owe #{@friend.name} #{number_to_currency @friend.debt}
+
+- elsif @friend.debt < 0
+  p.result.debt.positive
+    |Owes you #{number_to_currency @friend.debt.abs}
+
+
+p = link_to 'New bill', new_bill_path(friend: @friend.name), class: "btn"
+

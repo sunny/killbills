@@ -1,0 +1,50 @@
+doctype html
+html
+head
+  title Fricout
+  = stylesheet_link_tag "application"
+  = csrf_meta_tag
+  meta name="viewport" content="width=device-width, initial-scale=1"
+
+body
+
+  nav.navbar
+    .navbar-inner
+      .container
+        = link_to "Fricout", root_path, class: "brand"
+
+        - if user_signed_in?
+          ul.nav
+            li = link_to 'Friends', friends_path
+            li = link_to 'Bills', bills_path
+
+        ul.nav.pull-right
+          li
+            - if user_signed_in?
+              = link_to destroy_user_session_path, title: "Sign out from Fricout" do
+                i.icon-off.icon-white
+                '
+                | Sign out
+            - else
+              = link_to user_session_path do
+                i.icon-user.icon-white
+                '
+                | Sign in
+
+  .container
+
+    - if alert
+      .alert
+        a[class="close" data-dismiss="alert"] ×
+        = alert
+
+
+    - if notice
+      .alert.alert-info
+        a[class="close" data-dismiss="alert"] ×
+        = notice
+
+    = yield
+
+  = javascript_include_tag "application", \
+    :debug => Rails.env.development?

@@ -1,0 +1,22 @@
+h1 Sign in
+
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+
+  .control-group
+    = f.label :email
+    = f.email_field :email
+
+  .control-group
+    = f.label :password
+    = f.password_field :password
+
+  .control-group
+    = f.label :remember_me, class: "checkbox" do
+      = f.check_box :remember_me
+      | Remember me
+
+  .form-actions
+    = f.submit "Sign in", class: "btn btn-primary"
+
+= render :partial => "devise/shared/links"
+

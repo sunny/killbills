@@ -1,0 +1,15 @@
+
+article.bill
+  = link_to bill_path(bill), class: "row" do
+    .span6.title
+      h2 = bill.automatic_title
+
+    ul.debts.span3
+      - for debt in bill.debts
+        li class="owed #{variation -debt.diff_for(bill.user)}"
+          = debt_summary debt
+
+    time.span3[pubdate datetime=datetime(bill.date) title=bill.date]
+      | #{time_ago_in_words bill.date} ago
+
+
