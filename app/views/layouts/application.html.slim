@@ -1,11 +1,10 @@
 doctype html
-html
+html.nojs
 head
   title Fricout
   = stylesheet_link_tag "application"
   = csrf_meta_tag
   meta name="viewport" content="width=device-width, initial-scale=1"
-
 body
 
   nav.navbar
@@ -46,6 +45,10 @@ body
         = notice
 
     = yield
+
+  coffee:
+    html = document.getElementsByTagName('html')[0]
+    html.className = html.className.replace(/nojs/, 'js')
 
   = javascript_include_tag "application", \
     :debug => Rails.env.development?

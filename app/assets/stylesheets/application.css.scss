@@ -6,7 +6,8 @@
 @import 'bootstrap-responsive';
 
 @import 'bills';
-
+@import 'friends';
+@import 'loading';
 
 // Fix to bootstrap-responsive
 // ---------------------------
@@ -146,3 +147,5 @@ nav.auth {
     margin: 0;
   }
 }
+
+
