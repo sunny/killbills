@@ -1,0 +1,22 @@
+// Fix to bootstrap-responsive
+// ---------------------------
+
+// Tablets and Below
+@media (max-width: 979px) {
+  .navbar .nav {
+    clear: left;
+  }
+}
+
+.navbar-inner {
+  border-radius: 0.0;
+}
+
+// In order to be able to @extend .span1, .span2, etc.
+@for $i from 1 through $gridColumns {
+  .span#{$i} {
+    @extend [class*="span"];
+  }
+}
+
+

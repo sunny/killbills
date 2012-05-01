@@ -4,24 +4,12 @@
 
 @import 'bootstrap';
 @import 'bootstrap-responsive';
+@import 'bootstrap-fix';
 
 @import 'bills';
 @import 'friends';
 @import 'loading';
 
-// Fix to bootstrap-responsive
-// ---------------------------
-
-// Tablets and Below
-@media (max-width: 979px) {
-  .navbar .nav {
-    clear: left;
-  }
-}
-
-.navbar-inner {
-  border-radius: 0;
-}
 
 
 // Generic classes
