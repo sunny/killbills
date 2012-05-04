@@ -2,7 +2,12 @@
 // ---------
 
 article.bill > a {
+  @extend .row;
+  .title {
+    @extend .span6;
+  }
   .debts {
+    @extend .span3;
     margin: 0;
     list-style: none;
 
@@ -12,6 +17,7 @@ article.bill > a {
   }
 
   time {
+    @extend .span3;
     display: block;
     line-height: 33px;
     color: $textColor;
