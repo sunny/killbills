@@ -1,80 +1,85 @@
 require 'test_helper'
 
 class ParticipationTest < ActiveSupport::TestCase
-  should belong_to(:bill)
-  should belong_to(:person)
 
-  should validate_presence_of(:owed)
+  should "be valid" do
+    assert FactoryGirl.create(:participation).valid?
+  end
 
-  context "a participation from a bill" do
-    setup {
-      @user = Factory(:user)
-      @bill = Factory(:bill, user: @user)
-      @participation = Factory(:participation, payment: 21, person: @user, bill: @bill)
-      @participation2 = Factory(:participation, payment: 42, bill: @bill)
-    }
+  should "have shared and unshared scopes" do
+    even = FactoryGirl.create :participation, owed: "even"
+    zero = FactoryGirl.create :participation, owed: "zero"
+    all = FactoryGirl.create :participation, owed: "all"
 
-    context "owed zero" do
-      setup { @participation.owed = "zero" }
-      should "calculate owed total" do
-        assert_equal 0, @participation.owed_total
-      end
-      should "not be shared" do
-        assert_false @participation.shared?
-      end
-    end
+    assert_equal Participation.unshared, [zero, all]
+    assert_equal Participation.shared, [even]
+  end
 
-    context "owed all" do
-      setup { @participation.owed = "all" }
-      should "calculate owed total" do
-        assert_equal 21+42, @participation.owed_total
-      end
-      should "not be shared" do
-        assert_false @participation.shared?
-      end
-    end
+  should "have friends and user scopes" do
+    friend = FactoryGirl.create :participation
+    user = FactoryGirl.create :participation, :from_user
 
-    context "owed percentage" do
-      setup {
-        @participation.owed = "percentage"
-        @participation.owed_percent = 60
-      }
-      should "calculate owed total" do
-        assert_equal (21+42)*0.60, @participation.owed_total
-      end
-      should "not be shared" do
-        assert_false @participation.shared?
-      end
-    end
+    assert Participation.friends.include?(friend)
+    assert Participation.users.include?(user)
+    assert_false Participation.friends.include?(user)
+    assert_false Participation.users.include?(friend)
+  end
 
-    context "owed fixed" do
-      setup {
-        @participation.owed = "fixed"
-        @participation.owed_amount = 12
-      }
-      should "calculate owed total" do
-        assert_equal 12, @participation.owed_total
-      end
-      should "not be shared" do
-        assert_false @participation.shared?
-      end
-    end
-
-    context "owed even" do
-      setup {
-        @participation.owed = "even"
-        @participation2.owed = "even"
-        @participation.save
-        @participation2.save
-      }
-      should "calculate owed total" do
-        assert_equal (21+42)/2.0, @bill.even_share
-        assert_equal (21+42)/2.0, @participation.owed_total
-      end
-      should "be shared" do
-        assert @participation.shared?
-      end
+  should "#shared?" do
+    assert FactoryGirl.build(:participation, owed: "even").shared?
+    %w(percentage fixed zero all).each do |owed|
+      assert_false FactoryGirl.build(:participation, owed: owed).shared?
     end
   end
+
+  should "#percentage?" do
+    assert FactoryGirl.build(:participation, owed: "percentage").percentage?
+    %w(even fixed zero all).each do |owed|
+      assert_false FactoryGirl.build(:participation, owed: owed).percentage?
+    end
+  end
+
+  should "#fixed?" do
+    assert FactoryGirl.build(:participation, owed: "fixed").fixed?
+    %w(even percentage zero all).each do |owed|
+      assert_false FactoryGirl.build(:participation, owed: owed).fixed?
+    end
+  end
+
+
+  should "have #owed_total return 0 for owed=zero" do
+    p = FactoryGirl.create :participation, owed: "zero"
+    assert_equal 0, p.owed_total
+  end
+
+  should "have #owed_total return total for owed=all" do
+    bill = FactoryGirl.create :bill
+    FactoryGirl.create :participation, bill: bill, payment: 222
+    p = FactoryGirl.create :participation, bill: bill, payment: 333,
+      owed: "all"
+    assert_equal 222+333, p.owed_total
+  end
+
+  should "have #owed_total return a % for owed=percentage" do
+    bill = FactoryGirl.create :bill
+    FactoryGirl.create :participation, bill: bill, payment: 444
+    p = FactoryGirl.create :participation, bill: bill, payment: 555,
+      owed: "percentage", owed_percent: 60
+    assert_equal (444+555)*0.60, p.owed_total
+  end
+
+  should "have #owed_total return the fixed amount for owed=fixed" do
+    p = FactoryGirl.create :participation, owed: "fixed", owed_amount: 666
+    assert_equal 666, p.owed_total
+  end
+
+  should "have #owed_total return half the amount for owed=even" do
+    bill = FactoryGirl.create :bill
+    p1 = FactoryGirl.create :participation, bill: bill, owed: "even", payment: 7
+    p2 = FactoryGirl.create :participation, bill: bill, owed: "even", payment: 8
+    assert_equal (7+8)/2.0, p1.owed_total
+    assert_equal (7+8)/2.0, p2.owed_total
+  end
+
 end
 

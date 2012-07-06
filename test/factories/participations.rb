@@ -7,24 +7,24 @@ FactoryGirl.define do
     owed "all"
     owed_amount nil
     owed_percent nil
+    association :person, factory: :friend
   end
 
-  factory :user_participation, :parent => :participation do
-    association :person, :factory => :user
+  trait :from_user do
+    association :person, factory: :user
   end
 
-  factory :user_giver_participation, :parent => :user_participation do
+  trait :paying do
     payment 42
     owed "all"
   end
-
-  factory :friend_participation, :parent => :participation do
-    association :person, :factory => :friend
-  end
-
-  factory :friend_getter_participation, :parent => :friend_participation do
+  trait :getting do
     payment 0
     owed "zero"
   end
+  trait :shared do
+    owed "even"
+  end
+
 end
 

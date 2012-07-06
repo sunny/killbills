@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  should have_many(:bills)
-  should have_many(:friends)
-  should have_many(:participations)
+  should "be valid" do
+    assert FactoryGirl.create(:user).valid?
+  end
+
+  should "be You" do
+    assert_equal "You", FactoryGirl.build(:user, :name => "Joe").name
+  end
 end
 

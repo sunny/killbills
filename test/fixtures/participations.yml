@@ -1,0 +1,37 @@
+rent_sunny:
+  bill: rent
+  person: sunny
+  payment: 1200
+  owed: even # zero even all
+
+rent_coco:
+  bill: rent
+  person: coco
+  owed: even
+
+
+restaurant_sunny:
+  bill: restaurant
+  person: sunny
+  payment: 0
+  owed: all
+
+restaurant_coco:
+  bill: restaurant
+  person: coco
+  payment: 42
+  owed: zero
+
+
+coffee_sunny:
+  bill: coffee
+  person: sunny
+  payment: 3
+  owed: zero
+
+coffee_kitt:
+  bill: coffee
+  person: kitt
+  payment: 0
+  owed: all
+

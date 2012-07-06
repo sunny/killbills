@@ -7,10 +7,31 @@ FactoryGirl.define do
     #date
   end
 
-  trait :with_user_giving_friend do
+  trait :with_debt_user_to_friend do
     after :create do |bill|
-      FactoryGirl.create :user_giver_participation, :bill => bill
-      FactoryGirl.create :friend_getter_participation, :bill => bill
+      FactoryGirl.create :participation, :getting, bill: bill
+      FactoryGirl.create :participation, :paying, :from_user, bill: bill
+    end
+  end
+
+  trait :with_debt_friend_to_user do
+    after :create do |bill|
+      FactoryGirl.create :participation, :paying, bill: bill
+      FactoryGirl.create :participation, :getting, :from_user, bill: bill
+    end
+  end
+
+  trait :with_debt_friend_and_user do
+    after :create do |bill|
+      FactoryGirl.create :participation, :paying, bill: bill
+      FactoryGirl.create :participation, :paying, :from_user, bill: bill
+    end
+  end
+
+  trait :with_debt_three_friends_and_user do
+    after :create do |bill|
+      3.times { FactoryGirl.create :participation, :paying, bill: bill }
+      FactoryGirl.create :participation, :paying, :from_user, bill: bill
     end
   end
 end
