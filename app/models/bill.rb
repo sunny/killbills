@@ -3,18 +3,19 @@ include ApplicationHelper
 class Bill < ActiveRecord::Base
   include FricoutHelper
 
+  # Associations
   belongs_to :user
   has_many :participations, dependent: :destroy
 
+  # Attributes
   attr_accessible :title, :date, :participations_attributes
   accepts_nested_attributes_for :participations
 
   # Hooks
-  after_save :cache_debts
-
-  # Validations
+  # after_save :cache_debts
   before_validation :assign_default_date
 
+  # Validations
   validates :date, presence: true
   validates :user, presence: true
   validates_associated :participations
@@ -24,65 +25,67 @@ class Bill < ActiveRecord::Base
   validate :ensure_payments_add_up
   #validate :ensure_creates_debt
 
-  # Whole bill total
-  def total
-    # (should use participations.sum(:payment) but it returns 0)
-    payments = participations.map { |p| p.payment || 0 }
-    payments.sum.to_f
-  end
-
-  def debts
-    Debt.from_bill(self)
-  end
-
-  def user_diff
-    debts.sum { |debt| debt.diff_for(user) }
-  end
 
   # Title based on the participations
+  # Examples:
+  #   "Debt from O-Ren" : O-Ren payed
+  #   "Debt to Beatrix" : you payed
+  #   "Debt with Budd" : both payed
+  #   "Debt to Vernita and Nikki" : you payed
   def automatic_title
-    return title unless title.blank?
     friend_names = participations.friends.map{ |p| p.person.name }
-    "#{currencize total} with #{friend_names.join(', ')}"
+    user_payed = participations.users.sum(:payment) > 0
+    friend_payed = participations.friends.sum(:payment) > 0
+    direction = case
+      when user_payed && friend_payed then "with"
+      when user_payed then "from"
+      when friend_payed then "to"
+    end
+    "Debt #{direction} #{friend_names.to_sentence}"
   end
 
-  # Debt against the bill creator
-  def user_debt
-    participations.friends.sum(:debt)
+  # Fallback to automatic_title
+  def title
+    super.blank? ? automatic_title : super
+  end
+
+
+  #### Participations
+
+  # Total payments
+  def total
+    participations.sum(:payment)
   end
 
   # Calculate what a share is worth
   def even_share
-    shared, unshared = participations.partition(&:shared?)
+    shared, unshared = participations.all.partition(&:shared?)
 
     # No even share if nobody shares
-    return 0 unless shared
+    return 0 if shared.empty?
 
     total = self.total
-
-    # If there are any fixed amounts, deduce them
-    total -= participations_owed_total(unshared) if unshared
-
+    # deduce fixed amounts if any
+    total -= unshared.map(&:owed_total).sum
     total / shared.size
   end
 
 
-  def participation_owed_total(participation)
-    case participation.owed
-      when "even"       then even_share
-      when "zero"       then 0
-      when "all"        then total
-      when "percentage" then total * participation.owed_percent.to_f / 100
-      when "fixed"      then participation.owed_amount
-      else
-        0
-    end.to_f
-  end
+  #### Debts
 
-  def participations_owed_total(participations = nil)
-    participations ||= self.participations
-    participations.to_a.sum { |p| participation_owed_total(p) }
-  end
+  # def debts
+  #   Debt.from_bill(self)
+  # end
+
+  # def user_diff
+  #   debts.sum { |debt| debt.diff_for(user) }
+  # end
+
+  # Debt against the bill creator
+  # def user_debt
+  #   participations.friends.sum(:debt)
+  # end
+
 
 
 private
@@ -91,12 +94,10 @@ private
     unless participations.empty? or \
            participations.map(&:person).include?(user)
 
-      errors_on_group(:participations, :person_id, participations, 
+      errors_on_group(:participations, :person_id, participations,
         "must contain yourself")
     end
   end
-
-  
 
   def ensure_payments
     unless participations.empty? or total > 0
@@ -134,20 +135,20 @@ private
     self.date ||= Time.now.to_date
   end
 
-  # Save debt to participations column
-  def cache_debts
-    friends_debt = debts.collect do |debt|
-      if debt.from == user
-        [debt.to, debt.amount]
-      elsif debt.to == user
-        [debt.from, - debt.amount]
-      end
-    end
-    friends_debt.compact.each do |friend, debt|
-      part = participations.where(person_id: friend).first
-      part.debt = debt
-      part.save
-    end
-  end
+  # # Save debt to participations column
+  # def cache_debts
+  #   friends_debt = debts.collect do |debt|
+  #     if debt.from == user
+  #       [debt.to, debt.amount]
+  #     elsif debt.to == user
+  #       [debt.from, - debt.amount]
+  #     end
+  #   end
+  #   friends_debt.compact.each do |friend, debt|
+  #     part = participations.where(person_id: friend).first
+  #     part.debt = debt
+  #     part.save
+  #   end
+  # end
 end
 

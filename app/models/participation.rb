@@ -1,7 +1,9 @@
 class Participation < ActiveRecord::Base
+  # Associations
   belongs_to :bill
   belongs_to :person
 
+  # Validations
   validates :person_id,
     presence: true,
     uniqueness: { scope: :bill_id }
@@ -30,6 +32,7 @@ class Participation < ActiveRecord::Base
     presence: true,
     if: :fixed?
 
+  # Scopes
   scope :unshared, where('participations.owed != "even"')
   scope :shared, where(owed: "even")
 
@@ -51,7 +54,15 @@ class Participation < ActiveRecord::Base
   # Depending on the chosen calculation for owed
   # return the total amount the person owes
   def owed_total
-    bill.participation_owed_total(self)
+    case owed
+      when "even"       then bill.even_share
+      when "zero"       then 0
+      when "all"        then bill.total
+      when "percentage" then bill.total * owed_percent.to_f / 100
+      when "fixed"      then owed_amount
+      else
+        0
+    end.to_f
   end
 
   # What the person needs to pay back

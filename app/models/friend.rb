@@ -1,22 +1,27 @@
 class Friend < Person
+  # Associations
   belongs_to :user
   has_many :participations, foreign_key: :person_id
 
-  validates :name, presence: true
-
+  # Hooks
   before_destroy :destroy_bills
 
+  # Validations
+  validates :name, presence: true
 
   def debt
     participations.sum(:debt)
   end
 
-private
-
-  def destroy_bills
-    user.bills_with_friend(self).destroy_all
-    participations.destroy_all
+  def bills
+    Bill.joins(participations: :person).where(participations: { person_id: id })
   end
+
+  private
+
+    def destroy_bills
+      bills.destroy_all
+    end
 
 end
 
