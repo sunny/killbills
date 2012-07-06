@@ -29,7 +29,7 @@ class Debt
     # Create a hash of participation diffs
     # Example: {<Person1> => -5, <Person2> => 5}
     diffs = {}
-    bill.participations.each { |p|
+    bill.participations.all.each { |p|
       next if p.person.nil?
       diffs[p.person] = p.debt
     }
@@ -49,14 +49,13 @@ class Debt
         # Create a debt
         debts << Debt.new(person, poorest, amount)
 
-        # Lessen the respective diffs for next calculations
+        # Lessen the respective diffs for next turn
         diffs[poorest] -= amount
         diffs[person] -= amount
       end
     end
 
     debts
-
   end
 end
 

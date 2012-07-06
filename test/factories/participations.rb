@@ -18,13 +18,14 @@ FactoryGirl.define do
     payment 42
     owed "all"
   end
+
   trait :getting do
     payment 0
     owed "zero"
   end
-  trait :shared do
+
+  trait :even do
     owed "even"
   end
-
 end
 
