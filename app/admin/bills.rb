@@ -5,7 +5,6 @@ ActiveAdmin.register Bill do
   }
   filter :friend_id
   filter :title
-  filter :amount
   filter :user_ratio
   filter :date
 

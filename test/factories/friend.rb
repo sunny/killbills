@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :friend do
     name 'Friend'
-    association :user
+    user
   end
 end
 

@@ -9,11 +9,9 @@ coco:
   name: Coco
   type: Friend
   user: sunny
-  email: coco@example.org
 
 kitt:
   name: Kitt
   type: Friend
   user: sunny
-  email: kitt@example.org
 

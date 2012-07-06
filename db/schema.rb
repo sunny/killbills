@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314131141) do
+ActiveRecord::Schema.define(:version => 20120706122157) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -47,19 +47,13 @@ ActiveRecord::Schema.define(:version => 20120314131141) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "bills", :force => true do |t|
-    t.string    "title"
-    t.float     "amount"
-    t.date      "date"
-    t.integer   "user_id"
-    t.integer   "friend_id"
-    t.float     "user_payed"
-    t.float     "friend_payed"
-    t.decimal   "user_ratio"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "title"
+    t.date     "date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "bills", ["friend_id"], :name => "index_bills_on_friend_id"
   add_index "bills", ["user_id"], :name => "index_bills_on_user_id"
 
   create_table "participations", :force => true do |t|
