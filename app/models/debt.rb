@@ -1,3 +1,7 @@
+# A Debt represents what a person owes to someone else.
+# For example, that your friend Hattori owes you 5 € after
+#
+# Debts can be generated from bill participations.
 class Debt
   include FricoutHelper # for currencize
 
