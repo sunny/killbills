@@ -14,12 +14,14 @@ class Friend < Person
   end
 
   def debt
-    # TODO Holy Shmoly this is expensive n+galore
-    bills.to_a.sum { |bill|
-      bill.debts.sum { |debt|
-        debt.diff_for(self)
+    Rails.cache([friend, :debt]) do
+      # FIXME Holy shmoly requests n+galore
+      bills.to_a.sum { |bill|
+        bill.debts.sum { |debt|
+          debt.diff_for(self)
+        }
       }
-    }
+    end
   end
 
   def bills

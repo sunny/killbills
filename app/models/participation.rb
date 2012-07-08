@@ -1,7 +1,7 @@
 class Participation < ActiveRecord::Base
   # Associations
-  belongs_to :bill
-  belongs_to :person
+  belongs_to :bill, touch: true
+  belongs_to :person, touch: true
 
   # Validations
   validates :person_id,

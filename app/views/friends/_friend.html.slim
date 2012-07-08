@@ -1,14 +1,13 @@
 
-article.friend data-debt=friend.debt
-  = link_to friend_path(friend), class: "row" do
-    .span4.title
-      h2 = friend.name
+- cache(friend) do
+  article.friend data-debt=friend.debt
+    = link_to friend_path(friend), class: "row" do
+      .span4.title
+        h2 = friend.name
 
-    - if friend.debt != 0
-      .span4.owed class=variation(-friend.debt)
-        - if friend.debt > 0
-          | You owe #{currencize friend.debt}
-        - if friend.debt < 0
-          | Owes you #{currencize friend.debt.abs}
-
-
+      - if friend.debt != 0
+        .span4.owed class=variation(-friend.debt)
+          - if friend.debt > 0
+            | You owe #{currencize friend.debt}
+          - if friend.debt < 0
+            | Owes you #{currencize friend.debt.abs}

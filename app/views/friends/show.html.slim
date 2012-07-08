@@ -1,18 +1,19 @@
-.row
-  h1.span8.title = @friend.name
-  .span4.actions
-    =' link_to 'Rename', edit_friend_path(@friend), class: "btn"
-    = link_to 'Delete', @friend, :method => :delete, \
-      :confirm => 'Are you sure you want to delete this friend and all of his (or her) bills?', \
-      :class => 'btn btn-danger'
+- cache([:show, @friend]) do
+  .row
+    h1.span8.title = @friend.name
+    .span4.actions
+      =' link_to 'Rename', edit_friend_path(@friend), class: "btn"
+      = link_to 'Delete', @friend, :method => :delete, \
+        :confirm => 'Are you sure you want to delete this friend and all of his (or her) bills?', \
+        :class => 'btn btn-danger'
 
-- if @friend.debt > 0
-  p.result.debt.negative
-    | You owe #{@friend.name} #{number_to_currency @friend.debt}
+  - if @friend.debt > 0
+    p.result.debt.negative
+      | You owe #{@friend.name} #{number_to_currency @friend.debt}
 
-- elsif @friend.debt < 0
-  p.result.debt.positive
-    |Owes you #{number_to_currency @friend.debt.abs}
+  - elsif @friend.debt < 0
+    p.result.debt.positive
+      |Owes you #{number_to_currency @friend.debt.abs}
 
 h2 Bills
 
