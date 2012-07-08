@@ -1,7 +1,7 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
-  include FricoutHelper
+  include FricoutHelper # For currencize
 
   # Associations
   belongs_to :user

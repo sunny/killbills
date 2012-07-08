@@ -1,4 +1,6 @@
 class Debt
+  include FricoutHelper # for currencize
+
   attr_accessor :from, :to, :amount
 
   def initialize(from, to, amount)
@@ -6,11 +8,11 @@ class Debt
     raise ArgumentError.new("to cannot be nil") if to.nil?
     @from = from
     @to = to
-    @amount = amount
+    @amount = amount.to_f.round(2)
   end
 
   def inspect
-    "<Debt $#{amount} #{from.name} to #{to.name}>"
+    "<Debt #{currencize(amount)} #{from.name} to #{to.name}>"
   end
 
   def diff_for(person)
@@ -29,9 +31,8 @@ class Debt
     # Create a hash of participation diffs
     # Example: {<Person1> => -5, <Person2> => 5}
     diffs = {}
-    bill.participations.all.each { |p|
-      next if p.person.nil?
-      diffs[p.person] = p.debt
+    bill.participations.all.each { |participation|
+      diffs[participation.person] = participation.owed_total - participation.payment.to_f
     }
 
     # For each participant
