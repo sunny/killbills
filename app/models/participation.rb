@@ -65,11 +65,10 @@ class Participation < ActiveRecord::Base
     end.to_f
   end
 
-  # Does not work well with the "cached" debt...
   # What the person needs to pay back
-  # def debt
-  #   owed_total - payment.to_f
-  # end
+  def debt
+    owed_total - payment.to_f
+  end
 
   # Calculation methods to show in a select box
   # for how much the person owes

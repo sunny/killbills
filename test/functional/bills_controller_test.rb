@@ -4,11 +4,11 @@ class BillsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = Factory(:user)
+    @user = FactoryGirl.create :user
+    @bill = FactoryGirl.create :bill, user: @user
+    FactoryGirl.create :participation, bill: @bill, person: @user
+    FactoryGirl.create :participation, bill: @bill, person: FactoryGirl.create(:friend)
     sign_in @user
-    @bill = Factory(:bill, user: @user)
-    Factory(:participation, bill: @bill, person: @user)
-    Factory(:participation, bill: @bill, person: Factory(:friend))
   end
 
   test "should get index" do
@@ -26,7 +26,6 @@ class BillsControllerTest < ActionController::TestCase
     assert_difference('Bill.count') do
       post :create, :bill => { title: "Soup", date: 1.day.ago }
     end
-
     assert_redirected_to bill_path(assigns(:bill))
   end
 

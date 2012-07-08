@@ -32,7 +32,7 @@ class Debt
     # Example: {<Person1> => -5, <Person2> => 5}
     diffs = {}
     bill.participations.all.each { |participation|
-      diffs[participation.person] = participation.owed_total - participation.payment.to_f
+      diffs[participation.person] = participation.debt
     }
 
     # For each participant
