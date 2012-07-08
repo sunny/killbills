@@ -12,18 +12,16 @@ class Bill < ActiveRecord::Base
   accepts_nested_attributes_for :participations
 
   # Hooks
-  # after_save :cache_debts
   before_validation :assign_default_date
 
   # Validations
   validates :date, presence: true
   validates :user, presence: true
   validates_associated :participations
-
-  validate :ensure_user_is_in_bill
-  validate :ensure_payments
-  validate :ensure_payments_add_up
-  #validate :ensure_creates_debt
+  # validate :ensure_user_is_in_bill
+  # validate :ensure_payments
+  # validate :ensure_payments_add_up
+  # validate :ensure_creates_debt
 
 
   # Title based on the participations
@@ -90,30 +88,36 @@ class Bill < ActiveRecord::Base
 
 private
 
-  def ensure_user_is_in_bill
-    unless participations.empty? or \
-           participations.map(&:person).include?(user)
+  # Commented hungry validations that most of the time don't work
 
-      errors_on_group(:participations, :person_id, participations,
-        "must contain yourself")
-    end
-  end
+  # def ensure_user_is_in_bill
+  #   participations = participations.all
+  #   unless participations.empty? or \
+  #          participations.map(&:person).include?(user)
 
-  def ensure_payments
-    unless participations.empty? or total > 0
-      errors_on_group(:participations, :payment, participations,
-        "total must be greater than 0")
-    end
-  end
+  #     errors_on_group(:participations, :person_id, participations,
+  #       "must contain yourself")
+  #   end
+  # end
 
-  def ensure_payments_add_up
-    unless participations.empty? or total.zero?
-      if participations_owed_total != total
-        errors_on_group(:participations, :owed, participations,
-          "must sum up to #{total} (now #{participations_owed_total})")
-      end
-    end
-  end
+  # def ensure_payments
+  #   participations = participations.all
+  #   unless participations.empty? or total > 0
+  #     errors_on_group(:participations, :payment, participations,
+  #       "total must be greater than 0")
+  #   end
+  # end
+
+  # def ensure_payments_add_up
+  #   participations = participations.all
+  #   unless participations.empty? or total.zero?
+  #     participations_owed_total = participations.sum(&:owed_total)
+  #     if participations_owed_total != total
+  #       errors_on_group(:participations, :owed, participations,
+  #         "must sum up to #{total} (now #{participations_owed_total})")
+  #     end
+  #   end
+  # end
 
   # TODO Add this validation in order not to save bills with no debt
   # Does not work because it needs the bill to be saved
@@ -134,22 +138,5 @@ private
   def assign_default_date
     self.date ||= Time.now.to_date
   end
-
-  # # Save debt to participations column
-  # def cache_debts
-  #   friends_debt = debts.collect do |debt|
-  #     if debt.from == user
-  #       [debt.to, debt.amount]
-  #     elsif debt.to == user
-  #       [debt.from, - debt.amount]
-  #     end
-  #   end
-
-  #   friends_debt.compact.each do |friend, debt|
-  #     participation = participations.where(person_id: friend).first
-  #     participation.debt = debt
-  #     participation.save!
-  #   end
-  # end
 end
 
