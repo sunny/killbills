@@ -14,7 +14,7 @@ class Friend < Person
   end
 
   def debt
-    Rails.cache([friend, :debt]) do
+    Rails.cache.fetch("#{cache_key}/debt") do
       # FIXME Holy shmoly requests n+galore
       bills.to_a.sum { |bill|
         bill.debts.sum { |debt|
