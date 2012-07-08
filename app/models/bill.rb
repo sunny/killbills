@@ -12,7 +12,7 @@ class Bill < ActiveRecord::Base
   accepts_nested_attributes_for :participations
 
   # Hooks
-  after_save :cache_debts
+  # after_save :cache_debts
   before_validation :assign_default_date
 
   # Validations
@@ -135,21 +135,21 @@ private
     self.date ||= Time.now.to_date
   end
 
-  # Save debt to participations column
-  def cache_debts
-    friends_debt = debts.collect do |debt|
-      if debt.from == user
-        [debt.to, debt.amount]
-      elsif debt.to == user
-        [debt.from, - debt.amount]
-      end
-    end
+  # # Save debt to participations column
+  # def cache_debts
+  #   friends_debt = debts.collect do |debt|
+  #     if debt.from == user
+  #       [debt.to, debt.amount]
+  #     elsif debt.to == user
+  #       [debt.from, - debt.amount]
+  #     end
+  #   end
 
-    friends_debt.compact.each do |friend, debt|
-      participation = participations.where(person_id: friend).first
-      participation.debt = debt
-      participation.save
-    end
-  end
+  #   friends_debt.compact.each do |friend, debt|
+  #     participation = participations.where(person_id: friend).first
+  #     participation.debt = debt
+  #     participation.save!
+  #   end
+  # end
 end
 
