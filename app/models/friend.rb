@@ -14,7 +14,12 @@ class Friend < Person
   end
 
   def debt
-    participations.sum(:debt)
+    # TODO Holy Shmoly this is expensive n+galore
+    bills.to_a.sum { |bill|
+      bill.debts.sum { |debt|
+        debt.diff_for(self)
+      }
+    }
   end
 
   def bills
