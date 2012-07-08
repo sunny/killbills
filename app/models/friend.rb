@@ -9,6 +9,10 @@ class Friend < Person
   # Validations
   validates :name, presence: true
 
+  def display_name
+    name
+  end
+
   def debt
     participations.sum(:debt)
   end

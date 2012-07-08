@@ -14,7 +14,7 @@ class User < Person
     [self, friends.order(:name)].flatten
   end
 
-  def name
+  def display_name
     "You"
   end
 
