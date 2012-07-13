@@ -2,6 +2,7 @@ class Participation < ActiveRecord::Base
   # Associations
   belongs_to :bill, touch: true
   belongs_to :person, touch: true
+  has_one :user, through: :bill
 
   # Validations
   validates :person_id,
