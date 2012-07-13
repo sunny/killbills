@@ -40,7 +40,7 @@ $.fn.friendsPie = (id, debts, names, links) ->
     legend: names,
     legendpos: "east",
     href: links,
-    colors: ['#8B008B']
+    colors: ['#ffdd22', '#bb3322', '#eecc44', '#440000', '#ffff11', '#ff0000', '#000000']
   })
 
   pie.hover(->
@@ -54,5 +54,5 @@ $.fn.friendsPie = (id, debts, names, links) ->
   )
 
   this
-  
+
 
