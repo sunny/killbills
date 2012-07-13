@@ -34,7 +34,7 @@ class Participation < ActiveRecord::Base
     if: :fixed?
 
   # Scopes
-  scope :unshared, where('participations.owed != "even"')
+  scope :unshared, where("participations.owed != 'even'")
   scope :shared, where(owed: "even")
 
   scope :friends, includes(:person).where(people: { type: 'Friend' })
