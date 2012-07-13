@@ -22,12 +22,12 @@ body
           li
             - if user_signed_in?
               = link_to destroy_user_session_path, title: "Sign out from Kill Bills" do
-                i.icon-off.icon-white
+                i.icon-off
                 '
                 | Sign out
             - else
               = link_to user_session_path do
-                i.icon-user.icon-white
+                i.icon-user
                 '
                 | Sign in
 

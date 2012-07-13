@@ -10,7 +10,38 @@
 @import 'friends';
 @import 'loading';
 
+// Generic html
+// ------------
 
+h1 {
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+// Nav
+// ---
+
+.brand {
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.navbar .nav > li > a {
+  text-shadow: none;
+}
+
+.navbar li a:hover {
+  text-decoration: underline;
+}
+
+// Buttons
+// -------
+
+.btn-primary, .btn-primary:hover {
+  color: $black;
+}
 
 // Generic classes
 // ---------------
@@ -92,7 +123,7 @@ label {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
     }
-    
+
     // Last button
     &:last-child span.btn {
       border-top-right-radius: 4px;
