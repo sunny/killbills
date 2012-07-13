@@ -9,7 +9,7 @@ ActiveAdmin.register Friend do
   index do
     column :name
     column :user, sortable: :user_id do |friend|
-      link_to friend.user.title, [:admin, friend.user]
+      link_to friend.user.display_name, [:admin, friend.user]
     end
     column :created_at
     default_actions

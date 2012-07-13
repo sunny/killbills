@@ -14,10 +14,6 @@ class User < Person
     [self, friends.order(:name)].flatten
   end
 
-  def display_name
-    "You"
-  end
-
   def bills_with_friend(friend)
     bills.joins(:participations).where(participations: { person_id: friend.id }) \
       .order("date DESC")

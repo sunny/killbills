@@ -9,10 +9,6 @@ class Friend < Person
   # Validations
   validates :name, presence: true
 
-  def display_name
-    name
-  end
-
   def debt
     Rails.cache.fetch("#{cache_key}/debt") do
       # FIXME Holy shmoly requests n+galore

@@ -8,7 +8,7 @@ ActiveAdmin.register Bill do
 
   index do
     column :user, sortable: :user_id do |bill|
-      link_to bill.user.title, [:admin, bill.user]
+      link_to bill.user.display_name, [:admin, bill.user]
     end
     column :title
     column :total do |bill|

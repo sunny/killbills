@@ -9,11 +9,11 @@ module BillsHelper
     from = debt.from
     to = debt.to
     if from == current_user
-      "You owe #{to.title} #{amount}"
+      "You owe #{to.display_name} #{amount}"
     elsif to == current_user
-      "#{from.title} owes you #{amount}"
+      "#{from.display_name} owes you #{amount}"
     else
-      "#{from.title} owes #{to.title} #{amount}"
+      "#{from.display_name} owes #{to.display_name} #{amount}"
     end
   end
 end

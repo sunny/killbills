@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  def title
+  def display_name
     name || email
   end
 end

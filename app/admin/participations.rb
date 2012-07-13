@@ -15,11 +15,11 @@ ActiveAdmin.register Participation do
 
   index do
     column :bill, :sortable => :bill_id
-    column "Creator" do |p|
-      link_to p.bill.user.title, [:admin, p.bill.user]
+    column :user do |p|
+      link_to p.bill.user.display_name, [:admin, p.bill.user]
     end
     column :person, :sortable => :person_id do |p|
-      link_to p.person.name || p.person.email, [:admin, p.person]
+      link_to p.person.display_name, [:admin, p.person]
     end
     column :payment, :sortable => :payment do |p|
       number_to_currency p.payment
