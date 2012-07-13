@@ -1,8 +1,6 @@
 # encoding: UTF-8
 ActiveAdmin.register Bill do
-  filter :user, collection: lambda {
-    User.all.map { |u| [u.title, u.id] }
-  }
+  filter :user
   filter :friend_id
   filter :title
   filter :user_ratio

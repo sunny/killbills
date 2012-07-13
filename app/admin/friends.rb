@@ -3,9 +3,7 @@ ActiveAdmin.register Friend do
   menu priority: 15
 
   filter :name
-  filter :user, collection: lambda {
-    User.all.map { |u| [u.title, u.id] }
-  }
+  filter :user
   filter :created_at, as: :date_range
 
   index do
