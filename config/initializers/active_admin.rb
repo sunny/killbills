@@ -5,15 +5,15 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Fricout"
+  config.site_title = "KillBills"
 
 
   # == Default Namespace
   #
   # Set the default namespace each administration resource
-  # will be added to. 
+  # will be added to.
   #
-  # eg: 
+  # eg:
   #   config.default_namespace = :hello_world
   #
   # This will create resources in the HelloWorld module and
@@ -28,8 +28,8 @@ ActiveAdmin.setup do |config|
 
   # == User Authentication
   #
-  # Active Admin will automatically call an authentication 
-  # method in a before filter of all controller actions to 
+  # Active Admin will automatically call an authentication
+  # method in a before filter of all controller actions to
   # ensure that there is a currently logged in admin user.
   #
   # This setting changes the method which Active Admin calls
@@ -81,7 +81,7 @@ ActiveAdmin.setup do |config|
   # == Controller Filters
   #
   # You can add before, after and around filters to all of your
-  # Active Admin resources from here. 
+  # Active Admin resources from here.
   #
   # config.before_filter :do_something_awesome
 

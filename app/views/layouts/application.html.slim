@@ -1,7 +1,7 @@
 doctype html
 html.nojs
 head
-  title Fricout
+  title KillBills
   = stylesheet_link_tag "application"
   = csrf_meta_tag
   meta name="viewport" content="width=device-width, initial-scale=1"
@@ -10,7 +10,7 @@ body
   nav.navbar
     .navbar-inner
       .container
-        = link_to "Fricout", root_path, class: "brand"
+        = link_to "KillBills", root_path, class: "brand"
 
         - if user_signed_in?
           ul.nav
@@ -21,7 +21,7 @@ body
         ul.nav.pull-right
           li
             - if user_signed_in?
-              = link_to destroy_user_session_path, title: "Sign out from Fricout" do
+              = link_to destroy_user_session_path, title: "Sign out from KillBills" do
                 i.icon-off.icon-white
                 '
                 | Sign out

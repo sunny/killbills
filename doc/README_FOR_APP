@@ -1,8 +1,16 @@
-Heroku
-======
+Various Application tidbits
+===========================
+
+Heroku config
+-------------
+
+  heroku config:add BUNDLE_WITHOUT="development:test:linux"
+
+Heroku pull
+-----------
 
 Pull in the database from heroku:
 
-    heroku db:pull --confirm fricout
+    heroku db:pull --confirm killbills
     rake db:migrate
 

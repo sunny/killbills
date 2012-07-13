@@ -1,4 +1,4 @@
-module FricoutHelper
+module KillBillsHelper
   include ActionView::Helpers::NumberHelper
 
   def currencize(number)

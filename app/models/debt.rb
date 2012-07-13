@@ -3,7 +3,7 @@
 #
 # Debts can be generated from bill participations.
 class Debt
-  include FricoutHelper # for currencize
+  include KillBillsHelper # for currencize
 
   attr_accessor :from, :to, :amount
 

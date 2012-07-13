@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Fricout::Application.load_tasks
+KillBills::Application.load_tasks

@@ -1,15 +1,14 @@
-FricOut
-=======
+Kill Bills
+==========
 
-> Le fric, c'est chic.
+See it running on http://killbills.heroku.com/
 
-See it running on http://fricout.heroku.com/
+A Rails web app to remember the debts you have between friends.
 
-A Rails 3.1 web app to remember the money you owe and who owes you money.
-Write debts once, forget about them and even out with you friends when you want.
+Enter who payed for what, forget about it, and later on know for each of your friends what your current debt is.
 
-Like billmonk.com, only lighter, open source, HTML5, RESTFUL, …
+A bit like billmonk.com, only with more swords.
 
-![Screenshot of Friends page](http://sunny.github.com/fricout/screenshots/friends.png)
-![Screenshot of Bills page](http://sunny.github.com/fricout/screenshots/bills.png)
+![Screenshot of Friends page](http://sunny.github.com/killbills/screenshots/friends.png)
+![Screenshot of Bills page](http://sunny.github.com/killbills/screenshots/bills.png)
 

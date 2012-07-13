@@ -1,4 +1,4 @@
-Fricout::Application.routes.draw do
+KillBills::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
