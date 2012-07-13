@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.1'
-gem 'activeadmin', '0.4.1'
+gem 'activeadmin', '0.4.4'
 gem 'devise'
 gem 'slim'
 gem 'dalli'
