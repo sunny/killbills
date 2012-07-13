@@ -41,6 +41,7 @@ module KillBills
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.initialize_on_precompile = false
 
     # Default generators
     config.generators.stylesheet_engine = :sass
