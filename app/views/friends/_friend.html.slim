@@ -6,8 +6,8 @@
         h2 = friend.name
 
       - if friend.debt != 0
-        .span4.owed class=variation(-friend.debt)
-          - if friend.debt > 0
-            | You owe #{currencize friend.debt}
+        .span4.owed class=variation(friend.debt)
           - if friend.debt < 0
+            | You owe #{currencize friend.debt.abs}
+          - if friend.debt > 0
             | Owes you #{currencize friend.debt.abs}

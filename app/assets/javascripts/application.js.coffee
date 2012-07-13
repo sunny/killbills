@@ -13,8 +13,11 @@
 //= require bills
 
 jQuery ->
+
   new Bill($('#bill-form'))
   $('#bill-form select').selectNewValue('New friend...', 'Enter name')
+
   $('#pies').friendsPies('.friend')
+
   $('html').removeClass('nojs').addClass('jsloaded')
 
