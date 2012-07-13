@@ -12,8 +12,8 @@ KillBills::Application.configure do
   # Show full error reports
   config.consider_all_requests_local       = true
 
-  # Enable caching
-  config.action_controller.perform_caching = true
+  # Disable caching
+  config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
