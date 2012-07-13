@@ -1,8 +1,11 @@
-// Colors
+// Colors http://bit.ly/P4Chd6
 
-$color: #8B008B;
-$darker: darken($color, 5%);
+$color: #fd2;
+$darker: #ec4; //darken($color, 5%);
 $lighter: lighten($color, 5%);
+
+$red: #b32;
+$black: #200;
 
 $grey: #888;
 $lightgrey: #eee;
@@ -13,9 +16,9 @@ $background: #fafafa;
 
 // Bootstrap config
 
-$linkColor: $color;
+$linkColor: $darker;
 $navbarBackground: $darker;
 $navbarBackgroundHighlight: $color;
-$navbarLinkColor: $lightgrey;
-$navbarLinkColorHover: white;
+$navbarLinkColor: $black;
+$navbarLinkColorHover: $red;
 
