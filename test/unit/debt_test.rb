@@ -59,11 +59,12 @@ class DebtTest < ActiveSupport::TestCase
 
     assert_equal 2, debts.size
 
-    assert_equal "Hattori", debts[0].from.name
+    # Sorted because debts is an unsorted hash
+    assert_equal ["B.B.", "Hattori"], debts.map{ |d| d.from.name }.sort
+
     assert_equal "Sofie",   debts[0].to.name
     assert_equal 33.33,     debts[0].amount
 
-    assert_equal "B.B.",    debts[1].from.name
     assert_equal "Sofie",   debts[1].to.name
     assert_equal 33.33,     debts[1].amount
   end
