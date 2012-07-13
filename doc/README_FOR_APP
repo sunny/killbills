@@ -4,12 +4,20 @@ Installing
 Setup
 -----
 
+# Postgresql
+
+Install postgres package, then with a user allowed to administrate psql :
+
+    $ createuser killbills
+    $ createdb -Okillbills -Eutf8 killbills_development
+    $ createdb -Okillbills -Eutf8 killbills_test
+
 # Ruby 1.9.2
 
 Install rvm, then :
 
-   $ rvm install 1.9.2
-   $ rvm gemset create killbills
+    $ rvm install 1.9.2
+    $ rvm gemset create killbills
 
 # Download
 

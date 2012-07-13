@@ -5,6 +5,8 @@ gem 'activeadmin', '0.4.4'
 gem 'devise'
 gem 'slim'
 gem 'dalli'
+gem 'thin'
+gem 'pg'
 
 # Assets
 gem 'sass-rails', '~> 3.2.3'
@@ -13,11 +15,6 @@ gem 'jquery-rails'
 gem 'uglifier', '= 1.0.3'
 gem 'coffee-rails', '~> 3.2.1'
 
-gem 'thin'
-
-group :production do
-  gem 'pg' # Required by Heroku
-end
 
 group :development, :test do
   gem 'therubyracer'
