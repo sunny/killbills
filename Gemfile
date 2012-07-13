@@ -4,6 +4,7 @@ gem 'rails', '3.2.1'
 gem 'activeadmin', '0.4.1'
 gem 'devise'
 gem 'slim'
+gem 'dalli'
 
 # Assets
 gem 'sass-rails', '~> 3.2.3'

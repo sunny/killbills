@@ -39,8 +39,13 @@ module KillBills
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    # Cache store
+    config.cache_store = :dalli_store
+
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar#troubleshooting
     config.assets.initialize_on_precompile = false
 
     # Default generators

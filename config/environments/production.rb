@@ -4,8 +4,10 @@ KillBills::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
-  # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  # Full error reports are disabled
+  config.consider_all_requests_local = false
+
+  # Caching turned on
   config.action_controller.perform_caching = true
 
   # Enable Rails's static asset server (don't if Apache or nginx already do this)
@@ -21,6 +23,20 @@ KillBills::Application.configure do
   # (comment out if your front-end server doesn't support this)
   config.action_dispatch.x_sendfile_header = "X-Sendfile" # Use 'X-Accel-Redirect' for nginx
 
+  # Use Rack Cache with Dalli
+  # https://devcenter.heroku.com/articles/rack-cache-memcached-static-assets-rails31
+  config.action_dispatch.rack_cache = {
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+  }
+
+  # Rack Cache will know that static files should stay in cache forever
+  config.static_cache_control = "public, max-age=2592000"
+
+  # Add a hash digest in the static assets file names
+  config.assets.digest = true
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -31,7 +47,7 @@ KillBills::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
+  # config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
