@@ -15,9 +15,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'thin'
 
 group :production do
-  # Required by Heroku
-  gem 'pg'
-  gem 'therubyracer-heroku', platforms: :ruby
+  gem 'pg' # Required by Heroku
 end
 
 group :development, :test do
