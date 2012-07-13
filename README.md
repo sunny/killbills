@@ -9,7 +9,4 @@ Enter who payed for what, forget about it, and later on know for each of your fr
 
 A bit like billmonk.com, only with more swords.
 
-![Screenshot of Friends page](http://sunny.github.com/killbills/screenshots/friends.png)
-![Screenshot of Bills page](http://sunny.github.com/killbills/screenshots/bills.png)
-
 For install instructions, check out doc/README_FOR_APP
