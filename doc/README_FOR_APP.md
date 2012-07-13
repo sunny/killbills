@@ -4,7 +4,7 @@ Installing
 Setup
 -----
 
-# Postgresql
+### Postgresql
 
 Install postgres package, then with a user allowed to administrate psql :
 
@@ -12,30 +12,30 @@ Install postgres package, then with a user allowed to administrate psql :
     $ createdb -Okillbills -Eutf8 killbills_development
     $ createdb -Okillbills -Eutf8 killbills_test
 
-# Ruby 1.9.2
+### Ruby 1.9.2
 
 Install rvm, then :
 
     $ rvm install 1.9.2
     $ rvm gemset create killbills
 
-# Download
+### Download
 
     $ git clone https://github.com/sunny/killbills.git
     $ cd killbills
 
-# Install
+### Install
 
     $ bundle
 
-# Create an admin user
+### Create an admin user
 
 In a rails console, type :
 
     $ rails console
     AdminUser.create! email: "email@example.org", password: "foobarspam"
 
-# Launch it
+### Launch it
 
     $ rails server
 
