@@ -66,9 +66,7 @@
 
 
   .form-actions
-    =' f.disabling_submit nil, "Updating…", class: "btn btn-primary", \
-      data: { "disable-with" => "Updating…" }
-    = link_to "Cancel", :back, class: "btn", \
-      data: { "disable-with" => "Cancel…" }
+    =' f.submit "Updating…", class: "btn btn-primary", data: { "disable-with" => "Updating…" }
+    = link_to "Cancel", :back, class: "btn", data: { "disable-with" => "Cancel…" }
 
 
