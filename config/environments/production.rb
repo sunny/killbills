@@ -26,9 +26,9 @@ KillBills::Application.configure do
   # Use Rack Cache with Dalli
   # https://devcenter.heroku.com/articles/rack-cache-memcached-static-assets-rails31
   config.action_dispatch.rack_cache = {
-    :metastore    => Dalli::Client.new,
-    :entitystore  => 'file:tmp/cache/rack/body',
-    :allow_reload => false
+    metastore:    Dalli::Client.new,
+    entitystore:  'file:tmp/cache/rack/body',
+    allow_reload: false
   }
 
   # Rack Cache will know that static files should stay in cache forever
@@ -55,10 +55,22 @@ KillBills::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
+  # SMTP Settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address:              "smtp.gmail.com",
+    :port:                 587,
+    :domain:               ENV['GMAIL_SMTP_USER'],
+    :user_name:            ENV['GMAIL_SMTP_USER'],
+    :password:             ENV['GMAIL_SMTP_PASSWORD'],
+    :authentication:       'plain',
+    :enable_starttls_auto: true
+  }
+
+  config.action_mailer.default_url_options = { host: 'killbills.me' }
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-
-  config.action_mailer.default_url_options = { :host => 'killbills.me' }
 
   # Enable threaded mode
   # config.threadsafe!
