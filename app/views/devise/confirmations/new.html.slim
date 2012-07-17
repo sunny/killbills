@@ -10,8 +10,7 @@ h1 Resend confirmation instructions
 
   .form-actions
     = f.submit "Resend confirmation instructions", \
-      class: "btn btn-primary", autocomplete="off", \
-      disable_with: "Resending..."
+      class: "btn btn-primary", data: { "disable-with" => "Resending…" }
 
 = render partial: "devise/shared/links"
 

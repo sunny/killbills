@@ -12,9 +12,8 @@ h1 Create an account
     = f.password_field :password
 
   .form-actions
-    = f.submit "Create an account and sign in", \
-      class: "btn btn-primary", autocomplete: "off", \
-      disable_with: "Creating account…"
+    = f.submit "Create an account and sign in", class: "btn btn-primary", \
+      data: { "disable-with" => "Creating account…" }
 
 = render partial: "devise/shared/links"
 

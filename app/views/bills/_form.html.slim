@@ -10,7 +10,7 @@
         - @bill.errors.full_messages.each do |msg|
           li = msg
 
-  
+
   fieldset.participations
     = f.fields_for :participations do |p|
       .row class="participation-#{incrementer!()}'
@@ -43,7 +43,7 @@
 
         .span6.owed
           = p.label :owed_even, "Owed", class: "column-label"
-          
+
           ul.radio-toggles
             - Participation.owed_for_select.each do |text, value|
               li
@@ -66,9 +66,9 @@
 
 
   .form-actions
-    =' f.submit class: "btn btn-primary", \
-      disable_with: "Updating…", autocomplete: "off"
+    =' f.disabling_submit nil, "Updating…", class: "btn btn-primary", \
+      data: { "disable-with" => "Updating…" }
     = link_to "Cancel", :back, class: "btn", \
-      disable_with: "Cancel…"
+      data: { "disable-with" => "Cancel…" }
 
 
