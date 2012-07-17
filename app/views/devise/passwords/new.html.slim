@@ -8,8 +8,9 @@ h1 Forgot your password?
     = f.email_field :email
 
   .form-actions
-    = f.submit "Send me reset password instructions", "Sending…", \
-      class: "btn btn-primary"
+    = f.submit "Send me reset password instructions", class: "btn btn-primary", \
+      data: { "disable-with" => "Sending..." }
+
 
 = render partial: "devise/shared/links"
 

@@ -14,10 +14,15 @@
 
 jQuery ->
 
+  # Bill form
   new Bill($('#bill-form'))
   $('#bill-form select').selectNewValue('New friend...', 'Enter name')
 
+  # Friends list
   $('#pies').friendsPies('.friend')
 
-  $('html').removeClass('nojs').addClass('jsloaded')
+  # Make sure hitting "Previous page" does not show the disabled text
+  $('input[data-disable-with]').attr('autocomplete', 'off')
 
+  # Add jsloaded class
+  $('html').removeClass('nojs').addClass('jsloaded')
