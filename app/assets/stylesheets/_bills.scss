@@ -59,7 +59,7 @@ article.bill > a {
         width: 100%;
       }
     }
-    .payment {
+    .payment, .owed_amount {
       input {
         width: 100%;
 
@@ -125,7 +125,7 @@ article.bill > a {
         color: $grey;
       }
     }
-    
+
     .debt-row.positive,
     .credit-row.negative {
       visibility: hidden;
@@ -139,7 +139,7 @@ article.bill > a {
       .credit-row {
         display: none;
       }
-      
+
       .debt-row.positive,
       .credit-row.negative {
         visibility: visible;

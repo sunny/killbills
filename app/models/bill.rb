@@ -47,6 +47,9 @@ class Bill < ActiveRecord::Base
     super.blank? ? automatic_title : super
   end
 
+  def kind
+    "Debt"
+  end
 
   #### Participations
 

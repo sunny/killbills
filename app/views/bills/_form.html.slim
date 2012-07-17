@@ -10,11 +10,18 @@
         - @bill.errors.full_messages.each do |msg|
           li = msg
 
+  fieldset.kind
+    ul.radio-toggles.row
+      - %w(Debt Payment Shared).each do |kind|
+        li
+          label
+            = f.radio_button :kind, kind
+            span.btn = kind
 
   fieldset.participations
     = f.fields_for :participations do |p|
       .row class="participation-#{incrementer!()}'
-        .span4.people
+        .span3.people
 
           - if p.object.person_id == current_user.id
 
@@ -41,7 +48,7 @@
           = p.label :payment, class: "column-label"
           = p.number_field :payment, placeholder: 0, min: 0
 
-        .span6.owed
+        .span3.owed
           = p.label :owed_even, "Owed", class: "column-label"
 
           ul.radio-toggles
@@ -53,7 +60,14 @@
 
           .owed-result
 
+        .span2.owed_amount
+          = p.label :owed_amount, class: "column-label"
+          = p.number_field :owed_amount, placeholder: 0, min: 0
+
+
+
   fieldset.bill-optional
+
     .title.control-group
       = f.label :title
       = f.text_field :title, placeholder: "Optional description"
