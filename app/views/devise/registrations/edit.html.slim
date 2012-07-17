@@ -28,5 +28,7 @@ h1 Account settings
 h2 Destroy account
 
 .form-actions
-  = link_to("Delete my account, remove friends, kill bills", registration_path(resource_name), class: "btn btn-danger", confirm: "Are you really sure? This cannot be undone!", method: :delete)
+  = link_to "Delete my account, remove friends, kill all bills", registration_path(resource_name), \
+    method: :delete, class: "btn btn-danger", \
+    data: { confirm: "Are you really sure? This cannot be undone!" }
 
