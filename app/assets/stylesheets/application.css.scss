@@ -14,18 +14,14 @@
 // ------------
 
 h1 {
-  font-family: Impact, sans-serif;
-  font-weight: normal;
-  text-transform: uppercase;
+  @include font-impact;
 }
 
 // Nav
 // ---
 
 .brand {
-  font-family: Impact, sans-serif;
-  font-weight: normal;
-  text-transform: uppercase;
+  @include font-impact;
 }
 
 .navbar .nav > li > a {
