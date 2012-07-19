@@ -1,12 +1,18 @@
 Installing
 ==========
 
-Setup
------
+Development Setup
+-----------------
 
 ### Postgresql
 
-Install postgres package, then with a user allowed to administrate psql :
+Install the postgres package for your system. For example on OSX with the brew package manager:
+
+    $ brew install postgres
+
+Follow install instructions.
+
+Then, create the development database and user:
 
     $ createuser killbills
     $ createdb -Okillbills -Eutf8 killbills_development
@@ -14,7 +20,7 @@ Install postgres package, then with a user allowed to administrate psql :
 
 ### Ruby 1.9.2
 
-Install rvm, then :
+Install rvm with rubygems, then :
 
     $ rvm install 1.9.2
     $ rvm gemset create killbills
@@ -26,19 +32,27 @@ Install rvm, then :
 
 ### Install
 
+    $ gem install bundler
     $ bundle
 
-### Create an admin user
+### Setup database
 
-In a rails console, type :
+    $ rake db:setup
 
-    $ rails console
-    AdminUser.create! email: "email@example.org", password: "foobarspam"
-
-### Launch it
+### Launch
 
     $ rails server
 
+
+Administration
+--------------
+
+Administration is handled by active_admin and accessible via /admin/.
+
+To create an administrator open a rails console:
+
+    $ rails console
+    AdminUser.create! email: "email@example.org", password: "foobarspam"
 
 Heroku
 ------
