@@ -59,9 +59,9 @@ Heroku
 
 ### Config
 
-    $ heroku config:add BUNDLE_WITHOUT="development:test:linux"
-    $ heroku config:add GMAIL_SMTP_USER="username@gmail.com"
-    $ heroku config:add GMAIL_SMTP_PASSWORD="yourpassword"
+    $ heroku config:set BUNDLE_WITHOUT="development:test:linux"
+    $ heroku config:set GMAIL_SMTP_USER="username@gmail.com"
+    $ heroku config:set GMAIL_SMTP_PASSWORD="yourpassword"
 
 ### Pulling the database
 
