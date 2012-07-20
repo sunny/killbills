@@ -1,8 +1,12 @@
 p Hello #{@resource.email}!
 
-p Your account has been locked due to an excessive amount of unsuccessful sign in attempts.
+p Your Kill Bills account has been locked due to an excessive amount of unsuccessful sign in attempts.
 
 p Click the link below to unlock your account:
 
-p = link_to 'Unlock my account', \
+p = link_to 'Unlock my Kill Bills account', \
   unlock_url(@resource, unlock_token: @resource.unlock_token
+
+p Cheers,
+p Kill Bills
+p link_to root_url, root_url
