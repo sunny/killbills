@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720131146) do
+ActiveRecord::Schema.define(:version => 20120724200614) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20120720131146) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "genre",      :default => "Debt"
+    t.string   "genre",      :default => "debt"
   end
 
   add_index "bills", ["user_id"], :name => "index_bills_on_user_id"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120720131146) do
     t.integer  "bill_id",      :null => false
     t.integer  "person_id"
     t.float    "payment"
-    t.string   "owed"
+    t.string   "owed_type"
     t.float    "owed_amount"
     t.integer  "owed_percent"
     t.float    "debt"

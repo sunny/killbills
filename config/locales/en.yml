@@ -10,6 +10,6 @@ en:
         shared: "Shared"
     participation:
       owed_type:
-        even: "Even"
-        zero: "Zero"
-        all: "Everything"
+        even: "Even share"
+        zero: "Nothing owed"
+        all: "Owes everything"

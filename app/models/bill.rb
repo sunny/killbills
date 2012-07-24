@@ -10,7 +10,7 @@ class Bill < ActiveRecord::Base
 
   # Attributes
   enumerize :genre, in: [:debt, :payment, :shared], default: :debt
-  attr_accessible :title, :date, :participations_attributes
+  attr_accessible :title, :date, :genre, :participations_attributes
   accepts_nested_attributes_for :participations
 
   # Hooks
@@ -28,10 +28,10 @@ class Bill < ActiveRecord::Base
 
   # Title based on the participations
   # Examples:
-  #   "Debt from O-Ren" : O-Ren payed
-  #   "Debt to Beatrix" : you payed
-  #   "Debt with Budd" : both payed
-  #   "Debt to Vernita and Nikki" : you payed
+  #   "Debt from O-Ren" if O-Ren payed
+  #   "Debt to Beatrix" if you payed
+  #   "Debt with Budd" if both payed
+  #   "Debt to Vernita and Nikki" if you payed
   def automatic_title
     friend_names = participations.friends.map{ |p| p.person.name }
     user_payed = participations.users.sum(:payment) > 0

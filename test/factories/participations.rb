@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :participation do
     association :bill
     payment 42
-    owed "all"
+    owed_type "all"
     owed_amount nil
     owed_percent nil
     association :person, factory: :friend
@@ -16,16 +16,16 @@ FactoryGirl.define do
 
   trait :paying do
     payment 42
-    owed "zero"
+    owed_type "zero"
   end
 
   trait :getting do
     payment 0
-    owed "all"
+    owed_type "all"
   end
 
   trait :even do
-    owed "even"
+    owed_type "even"
   end
 end
 

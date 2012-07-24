@@ -40,42 +40,33 @@
               ' Participant
               span.increment = incrementer()
 
-            = p.collection_select :person_id, \
-              current_user.friends, :id, :name, \
-              include_blank: p.object.person_id.nil?
+            = p.collection_select :person_id, current_user.friends, :id, :name, \
+              { include_blank: p.object.person_id.nil? }, \
+              { data: { 'new-value' => 'New friend...', 'new-value-prompt' => 'Enter name' } }
 
         .span2.payment
           = p.label :payment, class: "column-label"
           = p.number_field :payment, placeholder: 0, min: 0
 
-        .span3.owed
+        .span3.owed_type
           = p.label :owed_even, "Owed", class: "column-label"
-
-          ul.radio-toggles
-            - Participation.owed_for_select.each do |text, value|
-              li
-                label
-                  = p.radio_button :owed, value
-                  span.btn = text
-
-          .owed-result
+          = p.select :owed_type, Participation.owed_type.options
 
         .span2.owed_amount
           = p.label :owed_amount, class: "column-label"
           = p.number_field :owed_amount, placeholder: 0, min: 0
+          .owed-result
 
 
 
   fieldset.bill-optional
-
     .title.control-group
       = f.label :title
       = f.text_field :title, placeholder: "Optional description"
 
     .date.control-group
       = f.label :date
-      = f.text_field :date, type: "date", size: 10, \
-        max: Time.now.to_date, \
+      = f.text_field :date, type: "date", size: 10, max: Time.now.to_date, \
         placeholder: Time.now.to_date
 
 

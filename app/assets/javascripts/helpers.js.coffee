@@ -85,3 +85,7 @@ $.fn.selectNewValue =->
 #  from.removeClass(klass)
 #  @addClass(klass)
 
+# Adds a class and removes the given classes
+$.fn.replaceClasses = (newClass = '', classes) ->
+    @removeClass(klass) for klass in classes when klass != 'newClass'
+    @addClass(newClass)

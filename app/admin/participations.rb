@@ -9,7 +9,7 @@ ActiveAdmin.register Participation do
   filter :user, as: :select
   filter :person, as: :select
   filter :payment
-  filter :owed, as: :check_boxes, collection: Participation.owed_for_select
+  filter :owed, as: :check_boxes, collection: Participation.owed_type.options
   filter :owed_amount
   filter :owed_percent
   filter :debt

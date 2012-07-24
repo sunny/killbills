@@ -28,6 +28,23 @@ article.bill > a {
 // Bill form
 // ---------
 #bill-form {
+
+  // Automatic hiding of fields via JavaScript
+  &.debt {
+    .payment,
+    .owed_type,
+    .owed-result { display: none; }
+  }
+  &.payment {
+    .owed_type,
+    .owed_amount { display: none; }
+  }
+  &.shared {
+    .owed_amount.owed-calculated input,
+    .owed_amount.owed-fixed     .owed-result { display: none; }
+  }
+
+
   .participations {
     margin-top: 1em;
 
