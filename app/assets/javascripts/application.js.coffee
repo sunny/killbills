@@ -16,7 +16,7 @@ jQuery ->
 
   # Bill form
   new Bill($('#bill-form'))
-  $('#bill-form select').selectNewValue('New friend...', 'Enter name')
+  $('select[data-new-value]').selectNewValue()
 
   # Friends list
   $('#pies').friendsPies('.friend')
