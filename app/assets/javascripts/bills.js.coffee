@@ -3,20 +3,22 @@ class window.Bill
   constructor: (@form) ->
     return if !@form.length
 
-    @kind_fields = @form.find('.kind input')
+    @genre_fields = @form.find('.genre input')
     @payment_fields = @form.find('.payment input')
     @owed_amount_fields = @form.find('.owed_amount input')
     @owed_fields = @form.find('.owed')
     @owed_results = @form.find('.owed-result')
 
     # Events
+    @refresh_genre()
     @update()
+    @genre_fields.click @refresh_genre
     @form.click @update
     @form.keyup @update
 
-  # Return the selected kind via the radio buttons
-  kind: =>
-    @kind_fields.filter(':checked').val()
+  # Return the selected genre via the radio buttons
+  genre: =>
+    @genre_fields.filter(':checked').val()
 
   even_share_calc: =>
     shared =   (i for owed, i in @owed when owed == "even")
@@ -59,24 +61,24 @@ class window.Bill
     @owed_amounts = []
     @owed_amounts.push @owed_calc(i) for owed, i in @owed
 
+  refresh_genre: =>
+    switch @genre()
+      when 'debt'
+        $('.payment').hide()
+        $('.owed').hide()
+        $('.owed_amount').show()
+      when 'payment'
+        $('.payment').show()
+        $('.owed').hide()
+        $('.owed_amount').hide()
+      when 'shared'
+        $('.payment').show()
+        $('.owed').show()
+        $('.owed_amount').show()
+
   # Refresh the UI
   refresh: =>
     # Kind
-    kind = @kind()
-    if kind == 'Debt'
-      $('.payment').hide()
-      $('.owed').hide()
-      $('.owed_amount').show()
-    else if kind == 'Payment'
-      $('.payment').show()
-      $('.owed').hide()
-      $('.owed_amount').hide()
-    else
-      $('.payment').show()
-      $('.owed').show()
-      $('.owed_amount').show()
-
-    # Owed array
     for amount, i  in @owed_amounts
       @owed_results.eq(i).text(currencize amount)
 

@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :bill do
     user
+    genre "shared"
     #title "Title"
     #date
   end

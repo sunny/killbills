@@ -1,8 +1,16 @@
 class Participation < ActiveRecord::Base
+  #include Enumerize
+
   # Associations
   belongs_to :bill, touch: true
   belongs_to :person, touch: true
   has_one :user, through: :bill
+
+  # Attributes
+  #enumerize :owed_type, in: [:even, :zero, :all], default: :even
+
+  # Hooks
+  before_save :remove_unused_attributes
 
   # Validations
   validates :person_id,
@@ -81,6 +89,13 @@ class Participation < ActiveRecord::Base
       #"percentage" => "A percentage",
       #"fixed" => "Fixed amount",
     }.map { |k,v| [v,k] }
+  end
+
+  def remove_unused_attributes
+    if bill
+      self.owed_amount = nil if bill.genre.payment?
+      self.payment = nil     if bill.genre.debt?
+    end
   end
 end
 

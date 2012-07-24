@@ -6,6 +6,15 @@ class BillTest < ActiveSupport::TestCase
     assert FactoryGirl.build(:bill).valid?
   end
 
+  should "genre should default to Debt" do
+    assert Bill.new.genre.debt?
+  end
+
+  should "genre should be a restricted attribute" do
+    assert FactoryGirl.build(:bill, genre: :payment).valid?
+    assert_false FactoryGirl.build(:bill, genre: :foo).valid?
+  end
+
   should "generate #title where friend pays" do
     bill = FactoryGirl.create :bill, :with_debt_user_to_friend
     assert_equal "Debt from Friend", bill.title

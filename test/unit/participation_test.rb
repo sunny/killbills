@@ -81,5 +81,18 @@ class ParticipationTest < ActiveSupport::TestCase
     assert_equal (7+8)/2.0, p2.owed_total
   end
 
+
+  should "remove payment with Debt bills" do
+    bill = FactoryGirl.create :bill, genre: :debt
+    participation = FactoryGirl.create :participation, bill: bill, owed: "even", payment: 4
+    assert_nil participation.payment
+  end
+
+  should "remove owed_amount field with Payment bills" do
+    bill = FactoryGirl.create :bill, genre: :payment
+    participation = FactoryGirl.create :participation, bill: bill, owed: "even", owed_amount: 4
+    assert_nil participation.owed_amount
+  end
+
 end
 

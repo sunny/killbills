@@ -10,13 +10,13 @@
         - @bill.errors.full_messages.each do |msg|
           li = msg
 
-  fieldset.kind
+  fieldset.genre
     ul.radio-toggles.row
-      - %w(Debt Payment Shared).each do |kind|
+      - Bill.genre.options.each do |genre_text, genre|
         li
           label
-            = f.radio_button :kind, kind
-            span.btn = kind
+            = f.radio_button :genre, genre
+            span.btn = genre_text
 
   fieldset.participations
     = f.fields_for :participations do |p|

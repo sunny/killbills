@@ -7,6 +7,7 @@ gem 'slim'
 gem 'dalli'
 gem 'thin'
 gem 'pg'
+gem 'enumerize'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
