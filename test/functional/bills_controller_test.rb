@@ -4,10 +4,10 @@ class BillsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = FactoryGirl.create :user
-    @bill = FactoryGirl.create :bill, user: @user
-    FactoryGirl.create :participation, bill: @bill, person: @user
-    FactoryGirl.create :participation, bill: @bill, person: FactoryGirl.create(:friend)
+    @user = create :user
+    @bill = create :bill, user: @user
+    create :participation, bill: @bill, person: @user
+    create :participation, bill: @bill, person: create(:friend)
     sign_in @user
   end
 
