@@ -21,6 +21,7 @@ class Friend < Person
   end
 
   def bills
+    # has_many :bills, through: :participations, dependant: destroy
     Bill.joins(participations: :person).where(participations: { person_id: id })
   end
 

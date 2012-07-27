@@ -8,31 +8,40 @@ FactoryGirl.define do
     #date
   end
 
-  trait :with_debt_user_to_friend do
+  trait :debt do
+    genre "debt"
+  end
+
+  trait :shared do
+    genre "shared"
+  end
+
+  trait :payment do
+    genre "payment"
+  end
+
+  trait :with_friend do
     after :create do |bill|
-      FactoryGirl.create :participation, :getting, bill: bill
-      FactoryGirl.create :participation, :paying, :from_user, bill: bill
+      create :participation, bill: bill
     end
   end
 
-  trait :with_debt_friend_to_user do
+  trait :with_paying_friend do
     after :create do |bill|
-      FactoryGirl.create :participation, :paying, bill: bill
-      FactoryGirl.create :participation, :getting, :from_user, bill: bill
+      create :participation, bill: bill, payment: 42
     end
   end
 
-  trait :with_debt_friend_and_user do
+  trait :with_user do
     after :create do |bill|
-      FactoryGirl.create :participation, :paying, bill: bill
-      FactoryGirl.create :participation, :paying, :from_user, bill: bill
+      create :participation, bill: bill, person: bill.user
     end
   end
 
-  trait :with_debt_three_friends_and_user do
+  trait :with_paying_user do
     after :create do |bill|
-      3.times { FactoryGirl.create :participation, :paying, bill: bill }
-      FactoryGirl.create :participation, :paying, :from_user, bill: bill
+      create :participation, bill: bill, person: bill.user, payment: 42
     end
   end
+
 end

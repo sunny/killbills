@@ -70,6 +70,7 @@ class Participation < ActiveRecord::Base
   end
 
   # What the person needs to pay back
+  # FIXME does not account for different genres on Bill
   def debt
     owed_total - payment.to_f
   end

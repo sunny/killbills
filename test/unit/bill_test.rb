@@ -1,86 +1,147 @@
 require 'test_helper'
 
 class BillTest < ActiveSupport::TestCase
-
-  should "be valid" do
-    assert FactoryGirl.build(:bill).valid?
-  end
+  # TODO should destroy participations
 
   should "genre should default to Debt" do
     assert Bill.new.genre.debt?
   end
 
-  should "genre should be a restricted attribute" do
-    assert FactoryGirl.build(:bill, genre: :payment).valid?
-    assert_false FactoryGirl.build(:bill, genre: :foo).valid?
+  should "genre should be restricted to authorized values" do
+    assert build(:bill, genre: :payment).valid?
+    assert_false build(:bill, genre: :foo).valid?
   end
 
-  should "generate #title where friend pays" do
-    bill = FactoryGirl.create :bill, :with_debt_user_to_friend
-    assert_equal "Debt from Friend", bill.title
+  context "A Payment Bill" do
+    context "with a paying friend" do
+      setup {
+        @bill = create :bill, genre: :payment
+        create(:participation, bill: @bill, payment: 42)
+        create(:participation, bill: @bill, payment: 0, person: @bill.user)
+      }
+      should("generate #title") { assert_equal "Payment from Friend", @bill.title }
+    end
+
+    context "with a paying user" do
+      setup {
+        @bill = create :bill, genre: :payment
+        create(:participation, bill: @bill, payment: 42, person: @bill.user)
+        create(:participation, bill: @bill,payment: 0)
+      }
+      should("generate #title") { assert_equal "Payment to Friend", @bill.title }
+    end
   end
 
-  should "generate #title where user pays" do
-    bill = FactoryGirl.create :bill, :with_debt_friend_to_user
-    assert_equal "Debt to Friend", bill.title
-  end
-
-  should "generate #title where user and friend pay" do
-    bill = FactoryGirl.create :bill, :with_debt_friend_and_user
-    assert_equal "Debt with Friend", bill.title
-  end
-
-  should "generate #title with several friends" do
-    bill = FactoryGirl.create :bill, :with_debt_three_friends_and_user
-    assert_equal "Debt with Friend, Friend, and Friend", bill.title
+  context "A Shared Bill" do
+    setup { @bill = create :bill, :shared, :with_paying_user, :with_friend, :with_friend, :with_friend }
+    should("generate #title") { assert_equal "Shared with Friend, Friend, and Friend", @bill.title }
   end
 
   should "accept a title" do
-    bill = FactoryGirl.build :bill, title: "New title"
+    bill = build :bill, title: "New title"
     assert_equal "New title", bill.title
   end
 
   should "calculate #total" do
-    bill = FactoryGirl.create :bill
-    FactoryGirl.create :participation, bill: bill, payment: 40
-    FactoryGirl.create :participation, bill: bill, payment: 2
+    bill = create :bill
+    create :participation, bill: bill, payment: 40
+    create :participation, bill: bill, payment: 2
     assert_equal 42, bill.total
   end
 
   should "calculate #even_share" do
-    bill = FactoryGirl.create :bill
-    FactoryGirl.create :participation, :even, bill: bill, payment: 40
-    FactoryGirl.create :participation, :even, bill: bill, payment:  2
+    bill = create :bill
+    create :participation, :even, bill: bill, payment: 40
+    create :participation, :even, bill: bill, payment:  2
     assert_equal (40+2)/2.0, bill.even_share
   end
 
-  context "A bill with a debt" do
+  context "A payment bill" do
     setup {
-      @beatrix = FactoryGirl.create :user
-      @vernita = FactoryGirl.create :friend
+      beatrix = create :user,   name: "Beatrix"
+      vernita = create :friend, name: "Vernita"
 
-      @bill = FactoryGirl.create :bill, user: @beatrix
-      FactoryGirl.create :participation, :even, bill: @bill, person: @beatrix, payment: 2
-      FactoryGirl.create :participation, :even, bill: @bill, person: @vernita, payment: 8
-
-      # Total : 2+8 = 10
-      # Even share : 10/2 = 5
-      # Beatrix needs : 2-5 = -3
-      # Oren needs :    8-5 = +3
+      # Beatrix is smallest payer 2<8
+      # Beatrix owes Vernita      8-2 = 6
+      @bill = create :bill, genre: :payment, user: beatrix
+      create :participation, :even, bill: @bill, person: beatrix, payment: 2
+      create :participation, :even, bill: @bill, person: vernita, payment: 8
     }
 
-    should "return #debts" do
-      assert_equal 1, @bill.debts.size
-      assert_equal @beatrix, @bill.debts.first.from
-      assert_equal @vernita, @bill.debts.first.to
-      assert_equal 3.0,  @bill.debts.first.amount
+    should "generate #title" do
+      assert_equal "Payment from Vernita", @bill.title
     end
 
-    should "return only user's diff in #user_diff" do
-      # Should be Beatrix's debt
-      assert_equal 3.0, @bill.user_diff
+    should "return #debts" do
+      debts = @bill.debts
+      assert_equal 1,         debts.size
+      assert_equal "Beatrix", debts[0].from.name
+      assert_equal "Vernita", debts[0].to.name
+      assert_equal 6,         debts[0].amount
     end
   end
 
+  context "A debt bill" do
+    setup {
+      bb     = create :user,   name: "B.B."
+      paimei = create :friend, name: "Pai-Mei"
+
+      # B.B. is biggest ower 4>2
+      # B.B. owes Pai-Mei    4-2 = 2
+      @bill = create :bill, :debt, user: bb
+      create :participation, :even, bill: @bill, person: bb,     owed_amount: 4
+      create :participation, :even, bill: @bill, person: paimei, owed_amount: 2
+    }
+
+    should "generate #title" do
+      assert_equal "Debt to Pai-Mei", @bill.title
+    end
+
+    should "return #debts" do
+      debts = @bill.debts
+      assert_equal 1,         debts.size
+      assert_equal "B.B.",    debts[0].from.name
+      assert_equal "Pai-Mei", debts[0].to.name
+      assert_equal 2,         debts[0].amount
+    end
+  end
+
+  context "A shared bill with three participations" do
+    setup {
+      bb =      create :user,   name: "B.B."
+      sofie =   create :friend, name: "Sofie"
+      hattori = create :friend, name: "Hattori"
+
+      # Total               100+0+0 = 100
+      # Even share            100/3 = 33.33333333
+      # Sofie needs   100-33.333333 = 66.6666666
+      # Hattori needs   0-33.333333 = -33.333333
+      # B.B. needs      0-33.333333 = -33.333333
+      # Hattori owes Sofie            33.33
+      # B.B. owes Sofie               33.33
+      @bill = create :bill, :shared, user: bb
+      create :participation, :even, bill: @bill, payment: 0,   person: bb
+      create :participation, :even, bill: @bill, payment: 100, person: sofie
+      create :participation, :even, bill: @bill, payment: 0,   person: hattori
+    }
+
+    should "generate #title" do
+      assert_equal "Shared with Hattori and Sofie", @bill.title
+    end
+
+    should "return #debts" do
+      debts = @bill.debts.sort_by { |d| d.from.name } # Sorted for our asserts
+
+      assert_equal 2, debts.size
+
+      assert_equal "B.B.",    debts[0].from.name
+      assert_equal "Sofie",   debts[0].to.name
+      assert_equal 33.33,     debts[0].amount
+
+      assert_equal "Hattori", debts[1].from.name
+      assert_equal "Sofie",   debts[1].to.name
+      assert_equal 33.33,     debts[1].amount
+    end
+  end
 end
 

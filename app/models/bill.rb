@@ -19,7 +19,7 @@ class Bill < ActiveRecord::Base
   # Validations
   validates :date, presence: true
   validates :user, presence: true
-  validates_associated :participations
+  # validates_associated :participations
   # validate :ensure_user_is_in_bill
   # validate :ensure_payments
   # validate :ensure_payments_add_up
@@ -27,22 +27,41 @@ class Bill < ActiveRecord::Base
 
 
   # Title based on the participations
+  #
   # Examples:
-  #   "Debt from O-Ren" if O-Ren payed
-  #   "Debt to Beatrix" if you payed
-  #   "Debt with Budd" if both payed
-  #   "Debt to Vernita and Nikki" if you payed
+  # - "Payment from O-Ren"
+  # - "Payment with Budd"
+  # - "Payment to Beatrix"
+  # - "Debt from Pai-Mei"
+  # - "Debt with B.B."
+  # - "Debt to Bill"
+  # - "Shared to Vernita and Nikki"
   def automatic_title
-    friend_names = participations.friends.map{ |p| p.person.name }
-    user_payed = participations.users.sum(:payment) > 0
-    friend_payed = participations.friends.sum(:payment) > 0
-    direction = case
-      when user_payed && friend_payed then "with"
-      when user_payed then "from"
-      when friend_payed then "to"
+    friend_names = participations.friends.map{ |p| p.person.name }.sort
+
+    if genre.debt?
+      direction = debts.first.to == user ? "from" : "to"
+    elsif genre.payment?
+      direction = debts.first.to == user ? "to" : "from"
+    else
+      direction = "with"
     end
-    "Debt #{direction} #{friend_names.to_sentence}"
+
+    "#{genre.text} #{direction} #{friend_names.to_sentence}"
   end
+
+def test
+@bill = Bill.last
+friend_names = @bill.participations.friends.map{ |p| p.person.name }.sort
+if @bill.genre.shared?
+  direction = "with"
+else
+  direction = @bill.debts.first.to == @bill.user ? "from" : "to"
+end
+"#{@bill.genre.text} #{direction} #{friend_names.to_sentence}"
+@bill.automatic_title
+end
+
 
   # Fallback to automatic_title
   def title
@@ -73,17 +92,79 @@ class Bill < ActiveRecord::Base
   #### Debts
 
   def debts
-    Debt.from_bill(self)
+
+    # Debt
+    if genre.debt?
+      min_ower, max_ower = participations.all.sort_by { |p| p.owed_amount.to_f }
+      debt = max_ower.owed_amount.to_f - min_ower.owed_amount.to_f
+      return [Debt.new(max_ower.person, min_ower.person, debt)]
+    end
+
+    # Payment
+    if genre.payment?
+      min_payer, max_payer = self.participations.all.sort_by { |p| p.payment.to_f }
+      debt = max_payer.payment.to_f - min_payer.payment.to_f
+      return [Debt.new(min_payer.person, max_payer.person, debt)]
+    end
+
+    # Shared
+
+    # Create a hash of participation diffs
+    # Example: {<Person1> => -5, <Person2> => 5}
+    diffs = {}
+
+    participations.map { |participation|
+      owed = case participation.owed_type
+        when "even"       then even_share
+        when "zero"       then 0
+        when "all"        then total
+        when "percentage" then total * participation.owed_percent.to_f / 100
+        when "fixed"      then participation.owed_amount
+        else 0
+      end
+
+      owed = owed.to_f - participation.payment.to_f
+
+      diffs[participation.person] = owed if owed
+    }
+
+
+    debts = []
+
+    # For each participant
+    diffs.each do |person, |
+
+      # If that person (still) has a debt
+      while diffs[person] > 0
+
+        # Person who should get payed the most
+        poorest, = diffs.min_by { |k,v| v }
+
+        # Amount that can be transferred
+        amount = [diffs[poorest].abs, diffs[person]].min
+
+        # Create a debt
+        debts << Debt.new(person, poorest, amount)
+
+        # Lessen the respective diffs for next turn
+        diffs[poorest] -= amount
+        diffs[person] -= amount
+      end
+    end
+
+    debts
   end
 
-  def user_diff
-    debts.sum { |debt| debt.diff_for(user) }
-  end
+  #def user_diff
+  #  -debts.sum { |debt| debt.diff_for(user) }
+  #end
 
   # Debt against the bill creator
   def user_debt
     participations.friends.sum(:debt)
   end
+
+
 
 private
 
