@@ -64,8 +64,8 @@ class BillTest < ActiveSupport::TestCase
       # Beatrix is smallest payer 2<8
       # Beatrix owes Vernita      8-2 = 6
       @bill = create :bill, genre: :payment, user: beatrix
-      create :participation, :even, bill: @bill, person: beatrix, payment: 2
-      create :participation, :even, bill: @bill, person: vernita, payment: 8
+      create :participation, bill: @bill, person: beatrix, payment: 2
+      create :participation, bill: @bill, person: vernita, payment: 8
     }
 
     should "generate #title" do
@@ -89,8 +89,8 @@ class BillTest < ActiveSupport::TestCase
       # B.B. is biggest ower 4>2
       # B.B. owes Pai-Mei    4-2 = 2
       @bill = create :bill, :debt, user: bb
-      create :participation, :even, bill: @bill, person: bb,     owed_amount: 4
-      create :participation, :even, bill: @bill, person: paimei, owed_amount: 2
+      create :participation, bill: @bill, person: bb,     owed_amount: 4
+      create :participation, bill: @bill, person: paimei, owed_amount: 2
     }
 
     should "generate #title" do
