@@ -172,7 +172,6 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    ruby-prof (0.11.2)
     rubyzip (0.9.9)
     sass (3.1.20)
     sass-rails (3.2.5)
@@ -236,7 +235,6 @@ DEPENDENCIES
   libnotify
   pg
   rails (= 3.2.6)
-  ruby-prof
   sass-rails (~> 3.2.3)
   shoulda-context
   shoulda-matchers
