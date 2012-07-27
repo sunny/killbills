@@ -7,6 +7,7 @@ gem 'slim'
 gem 'dalli'
 gem 'thin'
 gem 'pg'
+gem 'enumerize'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -24,7 +25,6 @@ group :development, :test do
   gem 'shoulda-context'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'ruby-prof'
 
   # Guard
   gem 'guard-test'

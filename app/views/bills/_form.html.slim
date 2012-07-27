@@ -10,11 +10,18 @@
         - @bill.errors.full_messages.each do |msg|
           li = msg
 
+  fieldset.genre
+    ul.radio-toggles.row
+      - Bill.genre.options.each do |genre_text, genre|
+        li
+          label
+            = f.radio_button :genre, genre
+            span.btn = genre_text
 
   fieldset.participations
     = f.fields_for :participations do |p|
       .row class="participation-#{incrementer!()}'
-        .span4.people
+        .span3.people
 
           - if p.object.person_id == current_user.id
 
@@ -33,25 +40,24 @@
               ' Participant
               span.increment = incrementer()
 
-            = p.collection_select :person_id, \
-              current_user.friends, :id, :name, \
-              include_blank: p.object.person_id.nil?
+            = p.collection_select :person_id, current_user.friends, :id, :name, \
+              { include_blank: p.object.person_id.nil? }, \
+              { data: { 'new-value' => 'New friend...', 'new-value-prompt' => 'Enter name' } }
 
         .span2.payment
           = p.label :payment, class: "column-label"
           = p.number_field :payment, placeholder: 0, min: 0
 
-        .span6.owed
+        .span3.owed_type
           = p.label :owed_even, "Owed", class: "column-label"
+          = p.select :owed_type, Participation.owed_type.options
 
-          ul.radio-toggles
-            - Participation.owed_for_select.each do |text, value|
-              li
-                label
-                  = p.radio_button :owed, value
-                  span.btn = text
-
+        .span2.owed_amount
+          = p.label :owed_amount, class: "column-label"
+          = p.number_field :owed_amount, placeholder: 0, min: 0
           .owed-result
+
+
 
   fieldset.bill-optional
     .title.control-group
@@ -60,8 +66,7 @@
 
     .date.control-group
       = f.label :date
-      = f.text_field :date, type: "date", size: 10, \
-        max: Time.now.to_date, \
+      = f.text_field :date, type: "date", size: 10, max: Time.now.to_date, \
         placeholder: Time.now.to_date
 
 

@@ -4,8 +4,8 @@ class FriendsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = FactoryGirl.create :user
-    @friend = FactoryGirl.create :friend, :user => @user
+    @user = create :user
+    @friend = create :friend, :user => @user
     sign_in @user
   end
 

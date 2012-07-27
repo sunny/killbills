@@ -2,4 +2,14 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  enumerize:
+    bill:
+      genre:
+        debt: "Debt"
+        participation: "Payment"
+        shared: "Shared"
+    participation:
+      owed_type:
+        even: "Even share"
+        zero: "Nothing owed"
+        all: "Owes everything"

@@ -15,7 +15,7 @@ class DevisePasswordsControllerTest < ActionController::TestCase
 
   # Submit from "Forgot your password?" page
   should "post /users/password should redirect to /users/sign_in" do
-    user = FactoryGirl.create(:user)
+    user = create(:user)
     post :create, { user: { email: user.email } }
     assert_redirected_to new_user_session_path
   end

@@ -10,7 +10,9 @@ class Friend < Person
   validates :name, presence: true
 
   def debt
-    Rails.cache.fetch("#{cache_key}/debt") do
+    # FIXME should not need user.cache_key, but should "touch" all friends from
+    #       the same bill whenever a participation is modified.
+    Rails.cache.fetch("#{user.cache_key}/#{cache_key}/debt") do
       # FIXME Holy shmoly requests n+galore
       bills.to_a.sum { |bill|
         bill.debts.sum { |debt|
@@ -21,6 +23,7 @@ class Friend < Person
   end
 
   def bills
+    # has_many :bills, through: :participations, dependant: destroy
     Bill.joins(participations: :person).where(participations: { person_id: id })
   end
 

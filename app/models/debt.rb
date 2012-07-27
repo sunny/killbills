@@ -3,7 +3,7 @@
 #
 # Debts can be generated from bill participations.
 class Debt
-  include KillBillsHelper # for currencize
+  include KillBillsHelper
 
   attr_accessor :from, :to, :amount
 
@@ -27,40 +27,6 @@ class Debt
     else
       0
     end
-  end
-
-  def self.from_bill(bill)
-    debts = []
-
-    # Create a hash of participation diffs
-    # Example: {<Person1> => -5, <Person2> => 5}
-    diffs = {}
-    bill.participations.all.each { |participation|
-      diffs[participation.person] = participation.debt
-    }
-
-    # For each participant
-    diffs.each do |person, |
-
-      # If that person (still) has a debt
-      while diffs[person] > 0
-
-        # Person who should get payed the most
-        poorest, = diffs.min_by { |k,v| v }
-
-        # Amount that can be transferred
-        amount = [diffs[poorest].abs, diffs[person]].min
-
-        # Create a debt
-        debts << Debt.new(person, poorest, amount)
-
-        # Lessen the respective diffs for next turn
-        diffs[poorest] -= amount
-        diffs[person] -= amount
-      end
-    end
-
-    debts
   end
 end
 

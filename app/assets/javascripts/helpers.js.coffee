@@ -29,12 +29,21 @@ $.fn.intVal = ->
   else
     0
 
-# Adds an option to a select that prompts for a new value
+# Adds an option to a select that prompts for a new value.
+# Set the name of the option and the text on the prompted alert box
+# via "data-new-value" and "data-new-value-prompt" attributes on the select.
 #
 # Example:
-#   $('select').selectNewValue("New product...", "Please enter product name:")
-$.fn.selectNewValue = (select_text = 'Add new...', prompt_text = 'New value') ->
+#   <select data-new-value="New product..." data-new-value-prompt="Please enter product name:">
+#     ...
+#   </select>
+#
+#   $('select').selectNewValue()
+$.fn.selectNewValue =->
   $(this).each ->
+    select_text = $(this).data('new-value') || 'Add new...'
+    prompt_text = $(this).data('new-value-prompt') || 'New value'
+
     option = $('<option value="new">').text(select_text)
     $(this).append option
     $(this).change ->
@@ -50,7 +59,7 @@ $.fn.selectNewValue = (select_text = 'Add new...', prompt_text = 'New value') ->
 
       # Create a new option
       option = $('<option />').text(person_name)
-      
+
       # Insert and select it
       option.insertBefore $(this).find('option:last')
       @selectedIndex = @options.length - 2
@@ -76,3 +85,7 @@ $.fn.selectNewValue = (select_text = 'Add new...', prompt_text = 'New value') ->
 #  from.removeClass(klass)
 #  @addClass(klass)
 
+# Adds a class and removes the given classes
+$.fn.replaceClasses = (newClass = '', classes) ->
+    @removeClass(klass) for klass in classes when klass != 'newClass'
+    @addClass(newClass)

@@ -31,8 +31,8 @@ class BillsController < ApplicationController
   def new
     friend = params[:friend] ? current_user.friends.where(name: params[:friend]).first : nil
     @bill = current_user.bills.new
-    @bill.participations.build(owed: :even, person: current_user)
-    @bill.participations.build(owed: :even, person: friend)
+    @bill.participations.build(person: current_user)
+    @bill.participations.build(person: friend)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -92,7 +92,7 @@ class BillsController < ApplicationController
 
 private
 
-  
+
   def create_new_friends
     if params[:bill] and params[:bill][:participations_attributes]
       params[:bill][:participations_attributes].each do |k, participation|
