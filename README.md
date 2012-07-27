@@ -1,7 +1,7 @@
 Kill Bills
 ==========
 
-See it running on http://killbills.heroku.com/
+See it running on http://killbills.me/
 
 A Rails web app to remember the debts you have between friends.
 
