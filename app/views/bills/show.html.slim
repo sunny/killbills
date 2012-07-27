@@ -8,12 +8,11 @@
           data: { confirm: 'Are you sure you want to kill bill?' }, \
           class: 'btn btn-danger'
 
-
     .row
       .span8
         ul.results
           - for debt in @bill.debts
-            li = debt_summary debt
+            li = debt_summary debt, links: true
 
       .span4.date
         | #{time_ago_in_words @bill.date} ago (#{@bill.date})
