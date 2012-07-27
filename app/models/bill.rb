@@ -128,12 +128,6 @@ private
     #  end
     #end
 
-    # Helper to add errors on children
-    def errors_on_group(group, attribute, children, message = "")
-      errors[:"#{group}.#{attribute}"] = message
-      children.each { |child| child.errors[attribute] = message }
-    end
-
     def assign_default_date
       self.date ||= Time.now.to_date
     end
