@@ -140,6 +140,8 @@ GEM
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-mini-profiler (0.1.9)
+      rack (>= 1.1.3)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
@@ -230,6 +232,7 @@ DEPENDENCIES
   jquery-rails
   libnotify
   pg
+  rack-mini-profiler
   rails (= 3.2.6)
   sass-rails (~> 3.2.3)
   shoulda-context

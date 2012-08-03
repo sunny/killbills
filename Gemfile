@@ -19,6 +19,8 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'rack-mini-profiler'
+
   # Tests
   gem 'shoulda-context'
   gem 'shoulda-matchers'
