@@ -11,9 +11,8 @@ class Friend < Person
   validates :name, presence: true
 
   def debt
-    # FIXME should not need user.cache_key, but a participation should "touch"
-    #       all friends from the same bill whenever modified.
-    Rails.cache.fetch("#{user.cache_key}/#{cache_key}/debt") do
+    # TODO use a memoize-like class method to add this cache
+    Rails.cache.fetch("#{cache_key}/debt") do
       bills.to_a.sum { |bill| bill.debt_for(id) }
     end
   end

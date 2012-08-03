@@ -3,7 +3,7 @@ class Participation < ActiveRecord::Base
 
   # Associations
   belongs_to :bill, touch: true
-  belongs_to :person, touch: true
+  belongs_to :person
   has_one :user, through: :bill
 
   # Attributes

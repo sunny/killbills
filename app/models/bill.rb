@@ -7,6 +7,7 @@ class Bill < ActiveRecord::Base
   # Associations
   belongs_to :user
   has_many :participations, dependent: :destroy
+  has_many :people, through: :participations
 
   # Attributes
   enumerize :genre, in: [:debt, :payment, :shared], default: :debt
@@ -15,6 +16,7 @@ class Bill < ActiveRecord::Base
 
   # Hooks
   before_validation :assign_default_date
+  after_touch :touch_people
 
   # Validations
   validates :date, presence: true
@@ -196,6 +198,10 @@ private
 
     def assign_default_date
       self.date ||= Time.now.to_date
+    end
+
+    def touch_people
+      people.touch_all
     end
 end
 
