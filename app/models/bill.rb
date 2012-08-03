@@ -50,18 +50,6 @@ class Bill < ActiveRecord::Base
     "#{genre.text} #{direction} #{friend_names.to_sentence}"
   end
 
-def test
-@bill = Bill.last
-friend_names = @bill.participations.friends.map{ |p| p.person.name }.sort
-if @bill.genre.shared?
-  direction = "with"
-else
-  direction = @bill.debts.first.to == @bill.user ? "from" : "to"
-end
-"#{@bill.genre.text} #{direction} #{friend_names.to_sentence}"
-@bill.automatic_title
-end
-
 
   # Fallback to automatic_title
   def title
@@ -155,16 +143,11 @@ end
     debts
   end
 
-  #def user_diff
-  #  -debts.sum { |debt| debt.diff_for(user) }
-  #end
 
   # Debt against the bill creator
   def user_debt
     participations.friends.sum(:debt)
   end
-
-
 
 private
 
