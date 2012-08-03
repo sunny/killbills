@@ -14,9 +14,14 @@ KillBills::Application.configure do
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
 
-  # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  # Show full error reports
+  config.consider_all_requests_local = true
+
+  # Disable caching in controllers
   config.action_controller.perform_caching = false
+
+  # Disable caching everywhere
+  config.cache_store = BlackHoleStore.new
 
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
@@ -41,6 +46,6 @@ KillBills::Application.configure do
   config.active_support.deprecation = :stderr
 
   # Raise exception on mass assignment protection for Active Record models
-config.active_record.mass_assignment_sanitizer = :strict
+  config.active_record.mass_assignment_sanitizer = :strict
 end
 

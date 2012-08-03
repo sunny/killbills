@@ -10,10 +10,13 @@ KillBills::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
 
-  # Disable caching
+  # Disable caching in controllers
   config.action_controller.perform_caching = false
+
+  # Disable caching everywhere
+  config.cache_store = BlackHoleStore.new
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
@@ -24,7 +27,8 @@ KillBills::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # Action Mailer options
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   # Do not compress assets
   config.assets.compress = false
