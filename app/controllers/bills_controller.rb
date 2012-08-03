@@ -6,7 +6,7 @@ class BillsController < ApplicationController
   # GET /bills.xml
   def index
     @bills = current_user.bills \
-      .includes(:user, :participations) \
+      .includes(:user, participations: :person) \
       .order("bills.date DESC, bills.created_at DESC")
 
     respond_to do |format|

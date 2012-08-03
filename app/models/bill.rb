@@ -37,7 +37,9 @@ class Bill < ActiveRecord::Base
   # - "Debt to Bill"
   # - "Shared to Vernita and Nikki"
   def automatic_title
-    friend_names = participations.friends.map{ |p| p.person.name }.sort
+    # Equivalent to participations.friends without n+1 when using includes()
+    friends = participations.reject { |p| p.person_id == user_id }.map(&:person)
+    friend_names = friends.map(&:name).sort.to_sentence
 
     if genre.debt?
       direction = debts.first.to == user_id ? "from" : "to"
@@ -47,7 +49,7 @@ class Bill < ActiveRecord::Base
       direction = "with"
     end
 
-    "#{genre.text} #{direction} #{friend_names.to_sentence}"
+    "#{genre.text} #{direction} #{friend_names}"
   end
 
 
