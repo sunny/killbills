@@ -19,8 +19,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'sqlite3'
-
   # Tests
   gem 'shoulda-context'
   gem 'shoulda-matchers'
