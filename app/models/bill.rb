@@ -60,12 +60,12 @@ class Bill < ActiveRecord::Base
 
   # Total payments
   def total
-    participations.sum(:payment)
+    participations.to_a.sum{ |p| p.payment.to_f }
   end
 
   # Calculate what a share is worth
   def even_share
-    shared, unshared = participations.all.partition(&:shared?)
+    shared, unshared = participations.to_a.partition(&:shared?)
 
     # No even share if nobody shares
     return 0 if shared.empty?
@@ -81,16 +81,18 @@ class Bill < ActiveRecord::Base
 
   def debts
 
+    participations = self.participations.to_a
+
     # Debt
     if genre.debt?
-      min_ower, max_ower = participations.all.sort_by { |p| p.owed_amount.to_f }
+      min_ower, max_ower = participations.sort_by { |p| p.owed_amount.to_f }
       debt = max_ower.owed_amount.to_f - min_ower.owed_amount.to_f
       return [Debt.new(max_ower.person_id, min_ower.person_id, debt)]
     end
 
     # Payment
     if genre.payment?
-      min_payer, max_payer = self.participations.all.sort_by { |p| p.payment.to_f }
+      min_payer, max_payer = participations.sort_by { |p| p.payment.to_f }
       debt = max_payer.payment.to_f - min_payer.payment.to_f
       return [Debt.new(min_payer.person_id, max_payer.person_id, debt)]
     end

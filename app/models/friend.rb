@@ -14,7 +14,6 @@ class Friend < Person
     # FIXME should not need user.cache_key, but a participation should "touch"
     #       all friends from the same bill whenever modified.
     Rails.cache.fetch("#{user.cache_key}/#{cache_key}/debt") do
-      # FIXME Holy shmoly requests n+galore
       bills.to_a.sum { |bill| bill.debt_for(id) }
     end
   end
