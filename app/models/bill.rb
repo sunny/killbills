@@ -85,14 +85,14 @@ class Bill < ActiveRecord::Base
     if genre.debt?
       min_ower, max_ower = participations.all.sort_by { |p| p.owed_amount.to_f }
       debt = max_ower.owed_amount.to_f - min_ower.owed_amount.to_f
-      return [Debt.new(max_ower.person, min_ower.person, debt)]
+      return [Debt.new(max_ower.person_id, min_ower.person_id, debt)]
     end
 
     # Payment
     if genre.payment?
       min_payer, max_payer = self.participations.all.sort_by { |p| p.payment.to_f }
       debt = max_payer.payment.to_f - min_payer.payment.to_f
-      return [Debt.new(min_payer.person, max_payer.person, debt)]
+      return [Debt.new(min_payer.person_id, max_payer.person_id, debt)]
     end
 
     # Shared
@@ -113,40 +113,38 @@ class Bill < ActiveRecord::Base
 
       owed = owed.to_f - participation.payment.to_f
 
-      diffs[participation.person] = owed if owed
+      diffs[participation.person_id] = owed if owed
     }
 
 
     debts = []
 
     # For each participant
-    diffs.each do |person, |
+    diffs.each do |person_id, |
 
       # If that person (still) has a debt
-      while diffs[person] > 0
+      while diffs[person_id] > 0
 
         # Person who should get payed the most
-        poorest, = diffs.min_by { |k,v| v }
+        poorest_id, = diffs.min_by { |k,v| v }
 
         # Amount that can be transferred
-        amount = [diffs[poorest].abs, diffs[person]].min
+        amount = [diffs[poorest_id].abs, diffs[person_id]].min
 
         # Create a debt
-        debts << Debt.new(person, poorest, amount)
+        debts << Debt.new(person_id, poorest_id, amount)
 
         # Lessen the respective diffs for next turn
-        diffs[poorest] -= amount
-        diffs[person] -= amount
+        diffs[poorest_id] -= amount
+        diffs[person_id] -= amount
       end
     end
 
     debts
   end
 
-
-  # Debt against the bill creator
-  def user_debt
-    participations.friends.sum(:debt)
+  def debt_for(id)
+    debts.sum { |debt| debt.diff_for(id) }
   end
 
 private

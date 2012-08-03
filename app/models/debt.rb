@@ -19,10 +19,10 @@ class Debt
     "<Debt #{currencize(amount)} #{from.name} to #{to.name}>"
   end
 
-  def diff_for(person)
-    if from == person
+  def diff_for(person_id)
+    if from == person_id
       amount
-    elsif to == person
+    elsif to == person_id
       -amount
     else
       0

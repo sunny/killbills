@@ -15,11 +15,7 @@ class Friend < Person
     #       all friends from the same bill whenever modified.
     Rails.cache.fetch("#{user.cache_key}/#{cache_key}/debt") do
       # FIXME Holy shmoly requests n+galore
-      bills.to_a.sum { |bill|
-        bill.debts.sum { |debt|
-          debt.diff_for(self)
-        }
-      }
+      bills.to_a.sum { |bill| bill.debt_for(id) }
     end
   end
 
