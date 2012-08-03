@@ -6,8 +6,8 @@ module BillsHelper
 
   def debt_summary(debt, options = {})
     amount = currencize(debt.amount)
-    from = debt.from
-    to = debt.to
+    from = debt.from_person
+    to = debt.to_person
 
     if options[:links] == true
       method = method(:sprintf_friends_links)

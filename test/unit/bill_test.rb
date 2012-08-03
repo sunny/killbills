@@ -26,7 +26,7 @@ class BillTest < ActiveSupport::TestCase
       setup {
         @bill = create :bill, genre: :payment
         create(:participation, bill: @bill, payment: 42, person: @bill.user)
-        create(:participation, bill: @bill,payment: 0)
+        create(:participation, bill: @bill, payment: 0)
       }
       should("generate #title") { assert_equal "Payment to Friend", @bill.title }
     end
@@ -75,8 +75,8 @@ class BillTest < ActiveSupport::TestCase
     should "return #debts" do
       debts = @bill.debts
       assert_equal 1,         debts.size
-      assert_equal "Beatrix", debts[0].from.name
-      assert_equal "Vernita", debts[0].to.name
+      assert_equal "Beatrix", debts[0].from_person.name
+      assert_equal "Vernita", debts[0].to_person.name
       assert_equal 6,         debts[0].amount
     end
   end
@@ -100,8 +100,8 @@ class BillTest < ActiveSupport::TestCase
     should "return #debts" do
       debts = @bill.debts
       assert_equal 1,         debts.size
-      assert_equal "B.B.",    debts[0].from.name
-      assert_equal "Pai-Mei", debts[0].to.name
+      assert_equal "B.B.",    debts[0].from_person.name
+      assert_equal "Pai-Mei", debts[0].to_person.name
       assert_equal 2,         debts[0].amount
     end
   end
@@ -130,16 +130,16 @@ class BillTest < ActiveSupport::TestCase
     end
 
     should "return #debts" do
-      debts = @bill.debts.sort_by { |d| d.from.name } # Sorted for our asserts
+      debts = @bill.debts.sort_by { |d| d.from_person.name } # Sorted for our asserts
 
       assert_equal 2, debts.size
 
-      assert_equal "B.B.",    debts[0].from.name
-      assert_equal "Sofie",   debts[0].to.name
+      assert_equal "B.B.",    debts[0].from_person.name
+      assert_equal "Sofie",   debts[0].to_person.name
       assert_equal 33.33,     debts[0].amount
 
-      assert_equal "Hattori", debts[1].from.name
-      assert_equal "Sofie",   debts[1].to.name
+      assert_equal "Hattori", debts[1].from_person.name
+      assert_equal "Sofie",   debts[1].to_person.name
       assert_equal 33.33,     debts[1].amount
     end
   end

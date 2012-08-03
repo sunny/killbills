@@ -5,6 +5,12 @@
 class Debt
   include KillBillsHelper
 
+  # TODO rename:
+  #   from -> from_id
+  #   from_person -> from
+  #   to -> to_id
+  #   to_person -> to
+
   attr_accessor :from, :to, :amount
 
   def initialize(from, to, amount)
@@ -16,7 +22,7 @@ class Debt
   end
 
   def inspect
-    "<Debt #{currencize(amount)} #{from.name} to #{to.name}>"
+    "<Debt #{currencize(amount)} #{from_person.name} to #{to_person.name}>"
   end
 
   def diff_for(person_id)
@@ -27,6 +33,14 @@ class Debt
     else
       0
     end
+  end
+
+  def from_person
+    Person.find(from)
+  end
+
+  def to_person
+    Person.find(to)
   end
 end
 

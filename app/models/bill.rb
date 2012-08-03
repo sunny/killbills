@@ -40,9 +40,9 @@ class Bill < ActiveRecord::Base
     friend_names = participations.friends.map{ |p| p.person.name }.sort
 
     if genre.debt?
-      direction = debts.first.to == user ? "from" : "to"
+      direction = debts.first.to == user_id ? "from" : "to"
     elsif genre.payment?
-      direction = debts.first.to == user ? "to" : "from"
+      direction = debts.first.to == user_id ? "to" : "from"
     else
       direction = "with"
     end
