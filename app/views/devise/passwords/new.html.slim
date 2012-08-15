@@ -1,6 +1,7 @@
-h1 Forgot your password?
+h1 = t('.title')
 
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+= form_for(resource, as: resource_name, url: password_path(resource_name), \
+  html: { method: :post }) do |f|
   = devise_error_messages!
 
   .control-group
@@ -8,8 +9,8 @@ h1 Forgot your password?
     = f.email_field :email
 
   .form-actions
-    = f.submit "Send me reset password instructions", class: "btn btn-primary", \
-      data: { "disable-with" => "Sending..." }
+    = f.submit t('.submit'), class: "btn btn-primary", \
+      data: { "disable-with" => t('.submitting') }
 
 
 = render partial: "devise/shared/links"

@@ -27,37 +27,20 @@ class Bill < ActiveRecord::Base
   # validate :ensure_payments_add_up
   # validate :ensure_creates_debt
 
-
-  # Title based on the participations
-  #
-  # Examples:
-  # - "Payment from O-Ren"
-  # - "Payment with Budd"
-  # - "Payment to Beatrix"
-  # - "Debt from Pai-Mei"
-  # - "Debt with B.B."
-  # - "Debt to Bill"
-  # - "Shared to Vernita and Nikki"
-  def automatic_title
-    # Equivalent to participations.friends without n+1 when using includes()
-    friends = participations.reject { |p| p.person_id == user_id }.map(&:person)
-    friend_names = friends.map(&:name).sort.to_sentence
-
+  def direction
     if genre.debt?
-      direction = debts.first.to == user_id ? "from" : "to"
+      debt.to == user_id ? "from" : "to"
     elsif genre.payment?
-      direction = debts.first.to == user_id ? "to" : "from"
+      debt.to == user_id ? "to" : "from"
     else
-      direction = "with"
+      "with"
     end
-
-    "#{genre.text} #{direction} #{friend_names}"
   end
 
-
-  # Fallback to automatic_title
-  def title
-    super.blank? ? automatic_title : super
+  # Equivalent to participations.friends.map(&:name) without n+1 when using includes()
+  def friend_names
+    friends = participations.reject { |p| p.person_id == user_id }.map(&:person)
+    friends.map(&:name).sort
   end
 
   #### Participations
@@ -151,6 +134,10 @@ class Bill < ActiveRecord::Base
 
   def debt_for(id)
     debts.sum { |debt| debt.diff_for(id) }
+  end
+
+  def debt
+    debts.first
   end
 
 private

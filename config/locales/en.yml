@@ -1,15 +1,110 @@
-# Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  locale: en
+  locale_title: "Kill Bills in english"
+
+  app_name: Kill Bills
+  tagline: Never forget a debt.
+
+  time_ago: "%{time} ago"
+  time_ago_long: "%{time} ago (%{date})"
+
+  you: You
+  error: error
+  edit: Edit
+  delete: Delete
+  updating: Updating…
+  cancel: Cancel
+  cancelling: Cancelling…
+  close: Close
+
+  create_account: Create an account
+  sign_in: Sign in
+  sign_out: Sign out
+  sign_out_help: Sign out from Kill Bills
+
+  payment: Payment
+  share: Share
+  debit: Debt
+  credit: Credit
+  total: Total
+
+
+  debt:
+    name:
+      from: "%{genre} from %{friends}"
+      to: "%{genre} to %{friends}"
+      with: "%{genre} with %{friends}"
+    summary:
+      you_owe: "You owe %{to} %{amount}"
+      owes_you: "%{from} owes you %{amount}"
+      owed: "%{from} owes %{to} %{amount}"
+    friend:
+      you_owe: "You owe %{amount}"
+      owes_you: "Owes you %{amount}"
+
+  # Bill
+  bill:
+    title_placeholder: Optional description
+  bills:
+    index:
+      title: Bills
+    show:
+      confirm_delete: 'Are you sure you want to kill bill?'
+    new:
+      title: New bill
+    edit:
+      title: Edit bill
+    form:
+      errors: "Oops, %{errors}:"
+
+
+  # Friends
+  friend:
+    new: New friend ❱
+    new_prompt: Enter name
+
+  friends:
+    index:
+      title: Friends
+    new:
+      title: New friend
+    edit:
+      title: Rename friend
+    show:
+      edit: Rename
+      delete: Delete
+      delete_confirm: Are you sure you want to delete this friend and all of his (or her) bills?
+
+  activerecord:
+    models:
+      bill: Bill
+      friend: Friend
+      user: User
+      person: Person
+    attributes:
+      bill:
+        title: Title
+        date: Date
+      participation:
+        payment: Payment
+        owed_type: Owed
+        owed_amount: Owed amount
+        person_id: Participant
+        person: Participant
+      friend:
+        name: Name
+
   enumerize:
     bill:
       genre:
-        debt: "Debt"
-        participation: "Payment"
-        shared: "Shared"
+        debt: Debt
+        payment: Payment
+        shared: Shared
     participation:
       owed_type:
-        even: "Even share"
-        zero: "Nothing owed"
-        all: "Owes everything"
+        even: Even share
+        zero: Nothing owed
+        all: Owes everything
+        fixed: Fixed amount

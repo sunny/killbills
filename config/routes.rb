@@ -1,12 +1,12 @@
 KillBills::Application.routes.draw do
   ActiveAdmin.routes(self)
-
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :users
-
-  resources :friends
-  resources :bills
+  scope "/(:locale)", locale: /en|fr/ do
+    devise_for :users
+    resources :friends
+    resources :bills
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -57,7 +57,8 @@ KillBills::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "pages#index"
+  match '/:locale' => 'pages#index'
+  root to: 'pages#index'
 
   # See how all your routes lay out with "rake routes"
 

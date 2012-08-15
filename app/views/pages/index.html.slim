@@ -1,17 +1,17 @@
 .hero-unit
 
-  h1 Kill Bills
-  p Never forget a debt.
+  h1 = t :app_name
+  p = t :tagline
 
   - if user_signed_in?
     p
-      = link_to "New Bill", new_bill_path, class: "btn btn-large btn-primary"
+      = link_to t('bills.new.title'), new_bill_path, class: "btn btn-large btn-primary"
 
   - else
     p
-      =' link_to "Create an account", new_user_registration_path, \
+      =' link_to t(:create_account), new_user_registration_path, \
         class: "btn btn-primary btn-large"
-      = link_to "Sign in", new_user_session_path, \
+      = link_to t(:sign_in), new_user_session_path, \
         class: "btn btn-large"
 
 

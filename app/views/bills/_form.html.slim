@@ -3,8 +3,7 @@
   - if @bill.errors.any?
     .alert.alert-block.alert-error
       h2
-        =' pluralize(@bill.errors.count, "error")
-        | prohibited this bill from being saved:
+        =' t '.errors',  errors: pluralize(@bill.errors.count, t(:error))
 
       ul
         - @bill.errors.full_messages.each do |msg|
@@ -26,30 +25,30 @@
           - if p.object.person_id == current_user.id
 
             .column-label
-              ' Participant
+              = Participation.human_attribute_name(:person_id)
               span.increment = incrementer()
 
             .you
-              | You
+              = t :you
               = p.hidden_field :person_id
 
           - else
 
 
             = p.label :person_id, class: "column-label" do
-              ' Participant
+              = Participation.human_attribute_name(:person_id)
               span.increment = incrementer()
 
             = p.collection_select :person_id, current_user.friends, :id, :name, \
               { include_blank: p.object.person_id.nil? }, \
-              { data: { 'new-value' => 'New friend...', 'new-value-prompt' => 'Enter name' } }
+              { data: { 'new-value' => t('friend.new'), 'new-value-prompt' => t('friend.new_prompt') } }
 
         .span2.payment
           = p.label :payment, class: "column-label"
           = p.number_field :payment, placeholder: 0, min: 0
 
         .span3.owed_type
-          = p.label :owed_even, "Owed", class: "column-label"
+          = p.label :owed_type, class: "column-label"
           = p.select :owed_type, Participation.owed_type.options
 
         .span2.owed_amount
@@ -62,7 +61,7 @@
   fieldset.bill-optional
     .title.control-group
       = f.label :title
-      = f.text_field :title, placeholder: "Optional description"
+      = f.text_field :title, placeholder: t('bill.title_placeholder')
 
     .date.control-group
       = f.label :date
@@ -71,7 +70,7 @@
 
 
   .form-actions
-    =' f.submit class: "btn btn-primary", data: { "disable-with" => "Updating…" }
-    = link_to "Cancel", :back, class: "btn", data: { "disable-with" => "Cancel…" }
+    =' f.submit class: "btn btn-primary", data: { "disable-with" => t(:updating) }
+    = link_to t(:cancel), :back, class: "btn", data: { "disable-with" => t(:cancelling) }
 
 

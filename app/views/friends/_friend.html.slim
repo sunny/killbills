@@ -8,6 +8,6 @@
       - if friend.debt != 0
         .span4.owed class=variation(friend.debt)
           - if friend.debt < 0
-            | You owe #{currencize friend.debt.abs}
+            = t 'debt.friend.you_owe', amount: currencize(friend.debt.abs)
           - if friend.debt > 0
-            | Owes you #{currencize friend.debt.abs}
+            = t 'debt.friend.owes_you', amount: currencize(friend.debt.abs)

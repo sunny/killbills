@@ -1,7 +1,7 @@
 doctype html
 html.nojs
 head
-  title Kill Bills
+  title = t(:app_name)
   = stylesheet_link_tag "application"
   = csrf_meta_tag
   meta name="viewport" content="width=device-width, initial-scale=1"
@@ -10,41 +10,49 @@ body
   nav.navbar
     .navbar-inner
       .container
-        = link_to "Kill Bills", root_path, class: "brand"
+        = link_to t(:app_name), root_path, class: "brand"
 
         - if user_signed_in?
           ul.nav
-            li = link_to 'New Bill', new_bill_path
-            li = link_to 'Bills', bills_path
-            li = link_to 'Friends', friends_path
+            li = link_to t('bills.new.title'), new_bill_path
+            li = link_to t('bills.index.title'), bills_path
+            li = link_to t('friends.index.title'), friends_path
 
         ul.nav.pull-right
           li
             - if user_signed_in?
-              = link_to destroy_user_session_path, title: "Sign out from Kill Bills" do
+              = link_to destroy_user_session_path, title: t(:sign_out_help) do
                 i.icon-off
                 '
-                | Sign out
+                = t :sign_out
             - else
               = link_to user_session_path do
                 i.icon-user
                 '
-                | Sign in
+                = t :sign_in
 
   .container
 
     - if alert
       .alert
-        a[class="close" data-dismiss="alert"] ×
+        a[class="close" data-dismiss="alert" title=t(:close)] ×
         = alert
 
 
     - if notice
       .alert.alert-info
-        a[class="close" data-dismiss="alert"] ×
+        a[class="close" data-dismiss="alert" title=t(:close)] ×
         = notice
 
     = yield
+
+    footer
+      nav#locale
+        ul
+          - %w(en fr).each do |l|
+            li = link_to t(:locale, locale: l), { locale: l }, \
+                 title: t(:locale_title, locale: l)
+
 
   coffee:
     html = document.getElementsByTagName('html')[0]

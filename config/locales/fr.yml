@@ -1,0 +1,126 @@
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale for starting points.
+
+fr:
+  locale: fr
+  locale_title: "Kill Bills en français"
+
+  app_name: Kill Bills
+  tagline: N'oubliez aucune dette.
+
+  time_ago: "il y a %{time}"
+  time_ago_long: "il y a %{time} (%{date})"
+
+  you: Vous
+  error: erreur
+  edit: Éditer
+  delete: Supprimer
+  updating: Mise à jour…
+  cancel: Annuler
+  cancelling: Annulation…
+  close: Fermer
+
+  create_account: Créer un compte
+  sign_in: Connexion
+  sign_out: Déconnexion
+  sign_out_help: Se déconnecter de Kill Bills
+
+  payment: Payment
+  share: Share
+  debit: Debt
+  credit: Credit
+  total: Total
+
+
+  debt:
+    name:
+      from: "%{genre} de %{friends}"
+      to: "%{genre} à %{friends}"
+      with: "%{genre} avec %{friends}"
+    summary:
+      you_owe: "Vous devez %{amount} à %{to}"
+      owes_you: "%{from} vous doit %{amount}"
+      owed: "%{from} doit %{amount} à %{to}"
+    friend:
+      you_owe: "Vous devez %{amount}"
+      owes_you: "Vous doit %{amount}"
+
+  # Bill
+  bill:
+    title_placeholder: Description optionnelle
+  bills:
+    index:
+      title: Notes
+    show:
+      confirm_delete: Êtes-vous certain de vouloir supprimer cette note?
+    new:
+      title: Nouvelle note
+    edit:
+      title: Éditer note
+    form:
+      errors: "Oups, %{errors} :"
+
+
+  # Friends
+  friend:
+    new: Ajouter ❱
+    new_prompt: "Nom de votre ami(e) :"
+
+  friends:
+    index:
+      title: Amis
+    new:
+      title: Nouveau ami
+    edit:
+      title: Renommer ami
+    show:
+      edit: Renommer
+      delete: Supprimer
+      delete_confirm: Êtes-vous sûr de vouloir supprimer cet(te) ami(e) ansi que ses notes ?
+
+  activerecord:
+    models:
+      bill: Note
+      friend: Ami
+      user: Utilisateur
+      person: Personne
+    attributes:
+      bill:
+        title: Titre
+        date: Date
+      participation:
+        payment: Paiement
+        owed_type: Dû
+        owed_amount: Montant dû
+        person_id: Participant
+        person: Participant
+      friend:
+        name: Nom
+
+
+    errors:
+      messages:
+      models:
+        bill:
+          attributes:
+            participations:
+              person:
+                blank: "fooo"
+        participation:
+          attributes:
+            person_id:
+              blank: "666 %{model}: %{attribute}"
+      messages:
+        empty: "doit exister"
+
+  enumerize:
+    bill:
+      genre:
+        debt: Dette
+        payment: Paiement
+        shared: Partage
+    participation:
+      owed_type:
+        even: Part égale
+        zero: Ne doit rien
+        all: Doit tout
+        fixed: Montant fixe

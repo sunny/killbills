@@ -53,3 +53,26 @@ en:
       unlock_instructions:
         subject: 'Unlock Instructions'
 
+    # Views
+    sessions:
+      new:
+        title: Who are you?
+        remember_me: Don't forget me
+        submit: That's me
+        submitting: Signing in…
+    registrations:
+      new:
+        title: Create an account
+        submit: Create an account and sign in
+        submitting: Creating account…
+    passwords:
+      new:
+        title: Forgot your password?
+        submit: Send me reset password instructions
+        submitting: Sending you an email…
+      edit:
+        title: Change your password
+        new_password: New password
+        new_password_confirmation: Confirm new password
+        submit: Change my password
+        submitting: Changing password…

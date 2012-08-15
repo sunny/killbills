@@ -1,11 +1,11 @@
 - cache([:show, @bill]) do
   .bill
     .row
-      h1.title.span8 = @bill.automatic_title
+      h1.title.span8 = bill_title @bill
       .actions.span4
-        =' link_to 'Edit', edit_bill_path(@bill), class: 'btn'
-        = link_to 'Delete', @bill, method: :delete, \
-          data: { confirm: 'Are you sure you want to kill bill?' }, \
+        =' link_to t(:edit), edit_bill_path(@bill), class: 'btn'
+        = link_to t(:delete), @bill, method: :delete, \
+          data: { confirm: t('.confirm_delete') }, \
           class: 'btn btn-danger'
 
     .row
@@ -15,7 +15,7 @@
             li = debt_summary debt, links: true
 
       .span4.date
-        | #{time_ago_in_words @bill.date} ago (#{@bill.date})
+        = t :time_ago_long, time: time_ago_in_words(@bill.date), date: @bill.date
 
     - if @bill.genre.shared?
       .row
@@ -24,10 +24,10 @@
             thead
               tr
                 th
-                th Payment
-                th Share
-                th.debt-row Debt
-                th.credit-row Credit
+                th = t :payment
+                th = t :share
+                th.debt-row = t :debit
+                th.credit-row = t :credit
             tbody
               - for participation in @bill.participations
                 tr
@@ -36,12 +36,11 @@
                   td = currencize participation.owed_total
                   td class="debt-row #{variation -participation.debt}"
                     = currencize participation.debt
-
                   td class="credit-row #{variation -participation.debt} %>"
                     = currencize -participation.debt
 
               tr.bill-total
-                th Total
+                th = t :total
                 td = currencize @bill.total
                 td
                 td

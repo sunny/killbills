@@ -1,4 +1,4 @@
-h1 Resend confirmation instructions
+h1 = t('.title')
 
 = form_for(resource, as: resource_name, url: confirmation_path(resource_name), \
   html: { method: :post }) do |f|
@@ -9,8 +9,8 @@ h1 Resend confirmation instructions
     = f.email_field :email
 
   .form-actions
-    = f.submit "Resend confirmation instructions", \
-      class: "btn btn-primary", data: { "disable-with" => "Resending…" }
+    = f.submit t('.submit'), class: "btn btn-primary", \
+      data: { "disable-with" => t('.submitting') }
 
 = render partial: "devise/shared/links"
 

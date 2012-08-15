@@ -3,7 +3,7 @@
   article.bill
     = link_to bill_path(bill), class: "row" do
       .title
-        h2 = bill.automatic_title
+        h2 = bill_title bill
 
       ul.debts
         - for debt in bill.debts
@@ -11,6 +11,6 @@
             = debt_summary debt
 
       time[pubdate datetime=datetime(bill.date) title=bill.date]
-        | #{time_ago_in_words bill.date} ago
+        = t 'time_ago', time: time_ago_in_words(bill.date)
 
 

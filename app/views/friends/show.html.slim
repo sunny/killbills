@@ -1,21 +1,21 @@
 .row
   h1.span8.title = @friend.name
   .span4.actions
-    =' link_to 'Rename', edit_friend_path(@friend), class: "btn"
-    = link_to 'Delete', @friend, method: :delete, \
-      data: { confirm: 'Are you sure you want to delete this friend and all of his (or her) bills?' }, \
+    =' link_to t('.edit'), edit_friend_path(@friend), class: "btn"
+    = link_to t('.delete'), @friend, method: :delete, \
+      data: { confirm: t('.delete_confirm') }, \
       class: 'btn btn-danger'
 
 - if @friend.debt < 0
   p.result.debt.negative
-    | You owe #{@friend.name} #{number_to_currency @friend.debt.abs}
+    = t 'debt.friend.you_owe', amount: number_to_currency(@friend.debt.abs)
 
 - elsif @friend.debt > 0
   p.result.debt.positive
-    | Owes you #{number_to_currency @friend.debt}
+    = t 'debt.friend.owes_you', amount: number_to_currency(@friend.debt.abs)
 
-h2 Bills
-p = link_to 'New Bill', new_bill_path(friend: @friend.name), class: "btn"
+h2 = t('bills.index.title')
+p = link_to t('bills.new.title'), new_bill_path(friend: @friend.name), class: "btn"
 
 = render @bills
 
