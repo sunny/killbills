@@ -45,7 +45,7 @@
 
         .span2.payment
           = p.label :payment, class: "column-label"
-          = p.number_field :payment, placeholder: 0, min: 0
+          = p.currency_field :payment
 
         .span3.owed_type
           = p.label :owed_type, class: "column-label"
@@ -53,7 +53,7 @@
 
         .span2.owed_amount
           = p.label :owed_amount, class: "column-label"
-          = p.number_field :owed_amount, placeholder: 0, min: 0
+          = p.currency_field :owed_amount
           .owed-result
 
 
