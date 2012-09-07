@@ -16,8 +16,6 @@ class ActionView::Helpers::FormBuilder
   #  f.currency_field(:amount, :unit => false, :placeholder => "Amount")
   #  => <input type="number" min="0" step="0.001" size="5" placeholder="Amount" />
   def currency_field(method, options = {})
-    options.symbolize_keys!
-
     defaults = {
       min: 0,
       step: 0.01,
@@ -25,19 +23,17 @@ class ActionView::Helpers::FormBuilder
       placeholder: 0,
       unit: true
     }
+    options.symbolize_keys!
     options = defaults.merge!(options)
-
-    field = number_field(method, options)
-
     unit = options.delete(:unit)
-    unit = I18n.translate(:'number.currency.format.unit') if unit === true
 
     if unit
-      format = I18n.translate(:'number.currency.format.format')
-      format.gsub(/%n/, unit).gsub(/%u/, unit).html_safe
-    else
-      field
+      unit = I18n.translate(:'number.currency.format.unit') if unit === true
+      options[:data] ||= {}
+      options[:data][:unit] = unit
     end
+
+    number_field(method, options)
   end
 end
 
