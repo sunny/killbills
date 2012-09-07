@@ -53,3 +53,27 @@ fr:
         subject: "Instructions pour changer le mot de passe"
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
+
+    # Views
+    sessions:
+      new:
+        title: Qui êtes-vous ?
+        remember_me: Se souvenir de moi
+        submit: C'est moi
+        submitting: Connexion…
+    registrations:
+      new:
+        title: Créer un compte
+        submit: Créer un compte et se connecter
+        submitting: Création du compte…
+    passwords:
+      new:
+        title: Mot de passe oublié ?
+        submit: Envoyez-moi un email pour récupérer mon mot de passe
+        submitting: Envoi de l'email…
+      edit:
+        title: Modifier mon mot de passe
+        new_password: Nouveau mot de passe
+        new_password_confirmation: Confirmer le mot de passe
+        submit: Modifier mon mot de passe
+        submitting: Modification du mot de passe…
