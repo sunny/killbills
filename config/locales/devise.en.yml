@@ -65,6 +65,8 @@ en:
         title: Create an account
         submit: Create an account and sign in
         submitting: Creating account…
+      user:
+        signed_in: "Signed in successfully"
     passwords:
       new:
         title: Forgot your password?

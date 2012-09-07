@@ -61,6 +61,8 @@ fr:
         remember_me: Se souvenir de moi
         submit: C'est moi
         submitting: Connexion…
+      user:
+        signed_in: "Connecté avec succès"
     registrations:
       new:
         title: Créer un compte
