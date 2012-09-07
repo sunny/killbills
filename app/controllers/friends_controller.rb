@@ -2,7 +2,8 @@ class FriendsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @friends = current_user.friends.order(:name).includes(bills: :participations)
+    @friends = current_user.friends.order(:name) \
+      .includes(bills: :participations)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,9 +11,11 @@ class FriendsController < ApplicationController
     end
   end
 
-  # GET /user/1/friends/1
+  # GET /friends/1
   def show
-    @friend = current_user.friends.find(params[:id])
+    @friend = current_user.friends \
+      .includes(bills: :participations) \
+      .find(params[:id])
     @bills = current_user.bills_with_friend(@friend)
 
     respond_to do |format|
@@ -21,7 +24,7 @@ class FriendsController < ApplicationController
     end
   end
 
-  # GET /user/1/friends/new
+  # GET /friends/new
   def new
     @friend = current_user.friends.new
 
@@ -31,12 +34,12 @@ class FriendsController < ApplicationController
     end
   end
 
-  # GET /user/1/friends/1/edit
+  # GET /friends/1/edit
   def edit
     @friend = current_user.friends.find(params[:id])
   end
 
-  # POST /user/1/friends
+  # POST /friends
   def create
     @friend = current_user.friends.new(params[:friend])
 
@@ -51,7 +54,7 @@ class FriendsController < ApplicationController
     end
   end
 
-  # PUT /user/1/friends/1
+  # PUT /friends/1
   def update
     @friend = current_user.friends.find(params[:id])
 
@@ -66,7 +69,7 @@ class FriendsController < ApplicationController
     end
   end
 
-  # DELETE /user/1/friends/1
+  # DELETE /friends/1
   def destroy
     @friend = current_user.friends.find(params[:id])
     @friend.destroy

@@ -46,6 +46,8 @@ GEM
     bourbon (2.1.1)
       sass (>= 3.1)
     builder (3.0.0)
+    bullet (4.1.6)
+      uniform_notifier (~> 1.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -212,6 +214,7 @@ GEM
     uglifier (1.0.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    uniform_notifier (1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -221,6 +224,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (= 0.4.4)
   bootstrap-sass (~> 2.0.2)
+  bullet
   coffee-rails (~> 3.2.1)
   dalli
   devise

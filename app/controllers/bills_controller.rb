@@ -18,7 +18,9 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.xml
   def show
-    @bill = current_user.bills.find(params[:id])
+    @bill = current_user.bills \
+      .includes(participations: :person) \
+      .find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

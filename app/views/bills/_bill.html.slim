@@ -7,7 +7,7 @@
 
       ul.debts
         - for debt in bill.debts
-          li class="owed #{variation -debt.diff_for(bill.user)}"
+          li class="owed #{variation -debt.diff_for(bill.user_id)}"
             = debt_summary debt
 
       time[pubdate datetime=datetime(bill.date) title=bill.date]

@@ -15,7 +15,9 @@ class User < Person
   end
 
   def bills_with_friend(friend)
-    bills.joins(:participations).where(participations: { person_id: friend.id }) \
+    bills.joins(:participations) \
+      .includes(participations: :person) \
+      .where(participations: { person_id: friend.id }) \
       .order("date DESC")
   end
 end

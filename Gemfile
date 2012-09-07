@@ -34,6 +34,8 @@ group :development, :test do
   # Maintenance
   gem 'heroku'
   gem 'taps'
+
+  gem 'bullet'
 end
 
 group :linux do
