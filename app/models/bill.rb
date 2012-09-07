@@ -37,9 +37,8 @@ class Bill < ActiveRecord::Base
   # - "Debt with B.B."
   # - "Debt to Bill"
   # - "Shared to Vernita and Nikki"
-  def auto_title
-    return title unless title.blank?
-    I18n.t("debt.name.#{direction}",
+  def title
+    read_attribute(:title) || I18n.t("debt.name.#{direction}",
       genre: genre.text,
       friends: friend_names.to_sentence)
   end

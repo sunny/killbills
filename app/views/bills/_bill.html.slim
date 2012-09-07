@@ -3,7 +3,7 @@
   article.bill
     = link_to bill_path(bill), class: "row" do
       .title
-        h2 = bill.auto_title
+        h2 = bill.title
 
       ul.debts
         - for debt in bill.debts
