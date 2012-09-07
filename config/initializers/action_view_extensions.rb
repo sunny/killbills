@@ -34,7 +34,7 @@ class ActionView::Helpers::FormBuilder
 
     if unit
       format = I18n.translate(:'number.currency.format.format')
-      format.gsub(/%n/, unit_tag).gsub(/%u/, unit).html_safe
+      format.gsub(/%n/, unit).gsub(/%u/, unit).html_safe
     else
       field
     end
