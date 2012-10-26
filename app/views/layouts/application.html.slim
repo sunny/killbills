@@ -7,6 +7,7 @@ head
   meta name="viewport" content="width=device-width, initial-scale=1"
 body
 
+
   nav.navbar
     .navbar-inner
       .container
@@ -54,30 +55,7 @@ body
                  title: t(:locale_title, locale: l)
 
 
-  coffee:
-    html = document.getElementsByTagName('html')[0]
-    html.className = html.className.replace(/nojs/, 'js')
-
-  coffee[id=IntercomSettingsScriptTag]:
-    window.intercomSettings =
-      app_id: '7uurr05u'
-      email: '#{current_user.email}'
-      created_at: '#{current_user.created_at.to_i}'
-
-  coffee:
-    i = -> i.c(arguments)
-    i.q = []
-    i.c = (args) -> i.q.push(args)
-    window.Intercom = i
-    async_load = ->
-      s = document.createElement('script')
-      s.src = 'https://api.intercom.io/api/js/library.js'
-      x = document.getElementsByTagName('script')[0]
-      x.parentNode.insertBefore(s, x)
-    if window.attachEvent
-      window.attachEvent 'onload', async_load
-    else
-      window.addEventListener 'load', async_load, false
+  = "<script id='IntercomSettingsScriptTag'>window.intercomSettings={app_id: '7uurr05u', email: '#{current_user.email}', created_at: '#{current_user.created_at.to_i}'}</script>".html_safe if current_user
 
   = javascript_include_tag "application", \
     :debug => Rails.env.development?
