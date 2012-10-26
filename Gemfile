@@ -9,6 +9,7 @@ gem 'dalli'
 gem 'thin'
 gem 'pg'
 gem 'enumerize'
+gem 'exception_notification'
 #gem 'cache_digest'
 
 group :assets do
@@ -38,8 +39,3 @@ group :development, :test do
 
   gem 'bullet'
 end
-
-group :linux do
-  gem 'libnotify'
-end
-

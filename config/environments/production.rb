@@ -85,5 +85,10 @@ KillBills::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  # ExceptionNotifier
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[KillBills] ",
+    :sender_address => %{"Sunny" <sunny@sunfox.org>},
+    :exception_recipients => %w{sunny@sunfox.org}
 end
 
