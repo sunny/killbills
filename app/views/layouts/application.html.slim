@@ -55,7 +55,10 @@ body
                  title: t(:locale_title, locale: l)
 
 
-  = "<script id='IntercomSettingsScriptTag'>window.intercomSettings={app_id:'7uurr05u', email:'#{current_user.email}', created_at:#{current_user.created_at.to_i}, user_id: #{current_user.id}}</script>".html_safe if current_user
+          li
+            a#Intercom href="mailto:7uurr05u@incoming.intercom.io" ✉
+
+  = "<script id='IntercomSettingsScriptTag'>window.intercomSettings={app_id:'7uurr05u', email:'#{current_user.email}', created_at:#{current_user.created_at.to_i}, user_id: #{current_user.id}, widget: {activator: '#intercom'}}</script>".html_safe if current_user
 
   = javascript_include_tag "application", \
     :debug => Rails.env.development?
