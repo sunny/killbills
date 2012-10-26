@@ -47,12 +47,7 @@ Install rvm with rubygems, then :
 Administration
 --------------
 
-Administration is handled by active_admin and accessible via /admin/.
-
-To create an administrator open a rails console:
-
-    $ rails console
-    AdminUser.create! email: "email@example.org", password: "foobarspam"
+Administration is handled by active_admin and accessible via `/admin/`. Default login is `email@example.org` and password `foobarspam`.
 
 Heroku
 ------
