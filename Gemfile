@@ -1,4 +1,4 @@
-ruby '1.9.2'
+ruby '1.9.3'
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.6'
@@ -9,6 +9,7 @@ gem 'dalli'
 gem 'thin'
 gem 'pg'
 gem 'enumerize'
+#gem 'cache_digest'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
