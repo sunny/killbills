@@ -20,10 +20,11 @@ Then, create the development database and user:
 
 ### Ruby 1.9.2
 
-Install rvm with rubygems, then :
+Install ruby 1.9.2 with rvm (`rvm install 1.9.2`) or rbenv.
 
-    $ rvm install 1.9.2
-    $ rvm gemset create killbills
+Install bundler on this version of ruby.
+
+    $ gem install bundler
 
 ### Download
 
@@ -32,7 +33,6 @@ Install rvm with rubygems, then :
 
 ### Install
 
-    $ gem install bundler
     $ bundle
 
 ### Setup database
@@ -41,7 +41,7 @@ Install rvm with rubygems, then :
 
 ### Launch
 
-    $ rails server
+    $ rails s
 
 
 Administration
