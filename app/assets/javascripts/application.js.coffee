@@ -1,8 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #
-#= require twitter/bootstrap/alert
-#= require twitter/bootstrap/button
+#= require bootstrap-alert
+#= require bootstrap-button
 #
 #= require raphael
 #= require g.raphael
