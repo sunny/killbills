@@ -13,11 +13,15 @@ gem 'exception_notification'
 #gem 'cache_digest'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'bootstrap-sass', '~> 2.0.2'
+  # CSS
+  gem 'sass-rails'
+  gem 'compass-rails'
+  gem 'bootstrap-sass'
+  gem 'yui-compressor'
 
-  gem 'uglifier', '= 1.0.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  # JS
+  gem 'uglifier'
+  gem 'coffee-rails'
   gem 'jquery-rails'
 end
 
