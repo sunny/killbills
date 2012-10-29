@@ -10,13 +10,9 @@ Install the postgres package for your system. For example on OSX with the brew p
 
     $ brew install postgres
 
-Follow install instructions.
+Follow install instructions. Then, create the development database and user:
 
-Then, create the development database and user:
-
-    $ createuser killbills
-    $ createdb -Okillbills -Eutf8 killbills_development
-    $ createdb -Okillbills -Eutf8 killbills_test
+    $ createuser --createdb killbills
 
 ### Ruby 1.9.2
 
@@ -31,23 +27,11 @@ Install bundler on this version of ruby.
     $ git clone https://github.com/sunny/killbills.git
     $ cd killbills
 
-### Install
+### Install, setup database and launch
 
     $ bundle
-
-### Setup database
-
     $ rake db:setup
-
-### Launch
-
     $ rails s
-
-
-Administration
---------------
-
-Administration is handled by active_admin and accessible via `/admin/`. Default login is `email@example.org` and password `foobarspam`.
 
 Heroku
 ------
