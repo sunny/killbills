@@ -1,7 +1,5 @@
 # A Debt represents what a person owes to someone else.
-# For example, that your friend Hattori owes you 5 € after
-#
-# Debts can be generated from bill participations.
+# For example, that your friend Hattori owes you 5 €
 class Debt
   include KillBillsHelper
 
