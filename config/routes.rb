@@ -1,10 +1,9 @@
 KillBills::Application.routes.draw do
+  # Admin
+  ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   scope "/(:locale)", locale: /en|fr/ do
-    # Admin
-    ActiveAdmin.routes(self)
-    devise_for :admin_users, ActiveAdmin::Devise.config
-
-
     devise_for :users
     resources :friends
     resources :bills

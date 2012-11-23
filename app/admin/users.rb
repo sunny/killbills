@@ -1,5 +1,7 @@
 # encoding: UTF-8
 ActiveAdmin.register User do
+  menu priority: 10, parent: "Person"
+
   filter :email
   filter :name
   filter :sign_in_count
