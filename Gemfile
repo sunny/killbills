@@ -2,7 +2,7 @@ ruby '1.9.3'
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.6'
-gem 'activeadmin', '0.4.4'
+gem 'activeadmin'
 gem 'devise'
 gem 'slim'
 gem 'dalli'
@@ -25,13 +25,9 @@ group :assets do
   gem 'jquery-rails'
 end
 
-group :development, :test do
+group :development do
   gem 'rack-mini-profiler'
-
-  # Tests
-  gem 'shoulda-context'
-  gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
+  gem 'bullet'
 
   # Guard
   gem 'guard-test'
@@ -40,6 +36,10 @@ group :development, :test do
   # Maintenance
   gem 'heroku'
   gem 'taps'
+end
 
-  gem 'bullet'
+group :test do
+  gem 'shoulda-context'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
 end
