@@ -9,6 +9,7 @@ class Friend < Person
 
   # Validations
   validates :name, presence: true
+  validates :user, presence: true
 
   def debt
     # TODO use a memoize-like class method to add this cache
