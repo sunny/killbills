@@ -50,14 +50,21 @@ fr:
   bills:
     index:
       title: Notes
+      empty: Aucune note d'enregistrée pour l'instant.
+
+
     show:
       confirm_delete: Êtes-vous certain de vouloir supprimer cette note?
     new:
+      title: Nouvelle note
+    create:
       title: Nouvelle note
     edit:
       title: Éditer note
     form:
       errors: "Oups, %{errors} :"
+
+
 
 
   # Friends
@@ -68,6 +75,7 @@ fr:
   friends:
     index:
       title: Amis
+      empty: Add a bill to see your friends here.
     new:
       title: Nouveau ami
     edit:
@@ -76,6 +84,10 @@ fr:
       edit: Renommer
       delete: Supprimer
       delete_confirm: Êtes-vous sûr de vouloir supprimer cet(te) ami(e) ansi que ses notes ?
+
+  sessions:
+    new:
+      title: Who are you?
 
   activerecord:
     models:

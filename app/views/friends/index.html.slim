@@ -1,13 +1,20 @@
 h1 = t('.title')
 
-.row#pies
-  .loader
-    .loader-1
-    .loader-2
-    .loader-3
-  .span6#youowe
-  .span6#oweyou
+- if @friends.empty?
 
-#friends
-  = render @friends
+  p = t('.empty')
+  p = link_to t('bills.new.title'), new_bill_path, class: "btn btn-primary"
+
+- else
+
+  .row#pies
+    .loader
+      .loader-1
+      .loader-2
+      .loader-3
+    .span6#youowe
+    .span6#oweyou
+
+  #friends
+    = render @friends
 

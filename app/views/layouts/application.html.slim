@@ -1,7 +1,7 @@
 doctype html
 html.nojs
 head
-  title = t(:app_name)
+  title = page_title
   = stylesheet_link_tag "application"
   = csrf_meta_tag
   meta name="viewport" content="width=device-width, initial-scale=1"
@@ -11,7 +11,7 @@ body
   nav.navbar
     .navbar-inner
       .container
-        = link_to t(:app_name), root_path, class: "brand"
+        = link_to t(:app_name), home_path, class: "brand"
 
         ul.nav
           li = link_to t('bills.new.title'), new_bill_path
@@ -19,17 +19,20 @@ body
           li = link_to t('friends.index.title'), friends_path
 
         ul.nav.pull-right
-          li
-            - if user_signed_in?
-              = link_to destroy_user_session_path, title: t(:sign_out_help) do
-                i.icon-off
-                '
-                = t :sign_out
-            - else
+          - if not user_signed_in?
+            li = link_to t(:create_account), new_user_registration_path
+            li
               = link_to user_session_path do
                 i.icon-user
                 '
                 = t :sign_in
+
+          - else
+            li
+              = link_to destroy_user_session_path, title: t(:sign_out_help) do
+                i.icon-off
+                '
+                = "#{t :sign_out} #{current_user_or_guest.display_name}"
 
   .container
 
@@ -56,6 +59,9 @@ body
 
           li
             a#intercom href="mailto:7uurr05u@incoming.intercom.io" ✉
+          - if current_user.kind_of?(AdminUser)
+            li = link_to "admin", admin_dashboard_path
+
 
   = "<script id='IntercomSettingsScriptTag'>window.intercomSettings={app_id:'7uurr05u', email:'#{current_user.email}', created_at:#{current_user.created_at.to_i}, user_id: #{current_user.id}, widget: {activator: '#intercom'}}</script>".html_safe if current_user and Rails.env.production?
 

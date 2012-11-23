@@ -1,17 +1,7 @@
-.hero-unit
+- title t(:tagline)
 
-  h1 = t :app_name
-  p = t :tagline
-
-  - if user_signed_in?
-    p
-      = link_to t('bills.new.title'), new_bill_path, class: "btn btn-large btn-primary"
-
-  - else
-    p
-      =' link_to t(:create_account), new_user_registration_path, \
-        class: "btn btn-primary btn-large"
-      = link_to t(:sign_in), new_user_session_path, \
-        class: "btn btn-large"
-
-
+.row
+  .hero-unit
+    h1 = t :app_name
+    p = t :tagline
+    p = link_to t('bills.new.title'), new_bill_path, class: "btn btn-large btn-primary"
