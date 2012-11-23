@@ -31,24 +31,14 @@ class ApplicationController < ActionController::Base
     # find guest_user object associated with the current session,
     # creating one as needed
     def guest_user
-      Guest.find(session[:guest_user_id] ||= create_guest_user.id)
+      Guest.find(session[:guest_user_id] ||= Guest.create.id)
     end
 
     # called (once) when the user logs in, insert any code your application needs
     # to hand off from guest_user to current_user.
     def logging_in
-      # For example:
-      # guest_comments = guest_user.comments.all
-      # guest_comments.each do |comment|
-        # comment.user_id = current_user.id
-        # comment.save
-      # end
-    end
-
-
-    def create_guest_user
-      guest = Guest.create
-      guest.save(validate: false)
-      guest
+      guest_user.friends.update_all(user_id: current_user.id)
+      guest_user.bills.update_all(user_id: current_user.id)
+      guest_user.participations.update_all(person_id: current_user.id)
     end
 end

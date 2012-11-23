@@ -54,6 +54,7 @@ fr:
 
 
     show:
+      title: Note
       confirm_delete: Êtes-vous certain de vouloir supprimer cette note?
     new:
       title: Nouvelle note
@@ -87,7 +88,13 @@ fr:
 
   sessions:
     new:
-      title: Who are you?
+      title: Qui êtes-vous ?
+
+  registrations:
+    new:
+      title: Créer un compte
+    create:
+      title: Créer un compte
 
   activerecord:
     models:

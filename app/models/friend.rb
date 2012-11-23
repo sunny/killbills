@@ -1,7 +1,6 @@
 class Friend < Person
   # Associations
   belongs_to :user
-  has_many :participations, foreign_key: :person_id
   has_many :bills, through: :participations
 
   # Hooks

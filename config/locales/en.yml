@@ -52,6 +52,7 @@ en:
       title: Bills
       empty: No bills yet.
     show:
+      title: Bill
       confirm_delete: 'Are you sure you want to kill bill?'
     new:
       title: New bill
@@ -84,7 +85,13 @@ en:
 
   sessions:
     new:
-      title: Qui êtes-vous ?
+      title: Who are you?
+
+  registrations:
+    new:
+      title: Create an account
+    create:
+      title: Create an account
 
   activerecord:
     models:
