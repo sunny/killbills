@@ -7,6 +7,9 @@ class User < Person
   attr_accessible :email, :password, :password_confirmation, :remember_me
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  # Scopes
+  scope :users, where(type: "User")
+
   def me_and_my_friends
     [self, friends.order(:name)].flatten
   end

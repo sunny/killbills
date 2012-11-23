@@ -1,11 +1,10 @@
 class BillsController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :create_new_friends
 
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = current_user.bills \
+    @bills = current_user_or_guest.bills \
       .includes(:user, participations: :person) \
       .order("bills.date DESC, bills.created_at DESC")
 
@@ -18,7 +17,7 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.xml
   def show
-    @bill = current_user.bills \
+    @bill = current_user_or_guest.bills \
       .includes(participations: :person) \
       .find(params[:id])
 
@@ -31,9 +30,9 @@ class BillsController < ApplicationController
   # GET /bills/new
   # GET /bills/new.xml
   def new
-    friend = params[:friend] ? current_user.friends.where(name: params[:friend]).first : nil
-    @bill = current_user.bills.new
-    @bill.participations.build(person: current_user)
+    friend = params[:friend] ? current_user_or_guest.friends.where(name: params[:friend]).first : nil
+    @bill = current_user_or_guest.bills.new
+    @bill.participations.build(person: current_user_or_guest)
     @bill.participations.build(person: friend)
 
     respond_to do |format|
@@ -44,13 +43,13 @@ class BillsController < ApplicationController
 
   # GET /bills/1/edit
   def edit
-    @bill = current_user.bills.find(params[:id])
+    @bill = current_user_or_guest.bills.find(params[:id])
   end
 
   # POST /bills
   # POST /bills.xml
   def create
-    @bill = current_user.bills.new(params[:bill])
+    @bill = current_user_or_guest.bills.new(params[:bill])
 
     respond_to do |format|
       if @bill.save
@@ -66,7 +65,7 @@ class BillsController < ApplicationController
   # PUT /bills/1
   # PUT /bills/1.xml
   def update
-    @bill = current_user.bills.find(params[:id])
+    @bill = current_user_or_guest.bills.find(params[:id])
 
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
@@ -82,7 +81,7 @@ class BillsController < ApplicationController
   # DELETE /bills/1
   # DELETE /bills/1.xml
   def destroy
-    @bill = current_user.bills.find(params[:id])
+    @bill = current_user_or_guest.bills.find(params[:id])
     @bill.destroy
 
     respond_to do |format|
@@ -100,7 +99,7 @@ private
       params[:bill][:participations_attributes].each do |k, participation|
         person_id = participation[:person_id]
         if !person_id.blank? and person_id !~ /^[0-9]+$/
-          friend = current_user.friends.find_or_create_by_name(person_id)
+          friend = current_user_or_guest.friends.find_or_create_by_name(person_id)
           params[:bill][:participations_attributes][k][:person_id] = friend.id
         end
       end

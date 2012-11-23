@@ -54,8 +54,6 @@ GEM
       sass (>= 3.2)
       thor
     builder (3.0.4)
-    bullet (4.1.6)
-      uniform_notifier (~> 1.0.0)
     chunky_png (1.2.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -253,7 +251,6 @@ GEM
     uglifier (1.0.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    uniform_notifier (1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
     yui-compressor (0.9.6)
@@ -265,7 +262,6 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootstrap-sass
-  bullet
   coffee-rails
   compass-rails
   dalli

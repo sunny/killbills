@@ -27,7 +27,7 @@ end
 
 group :development do
   gem 'rack-mini-profiler'
-  gem 'bullet'
+  # gem 'bullet'
 
   # Guard
   gem 'guard-test'

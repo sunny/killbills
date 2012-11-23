@@ -1,5 +1,5 @@
 # encoding: UTF-8
-ActiveAdmin.register Participation do
+ActiveAdmin.register Participation, as: "Participation" do
   scope :all, default: true
   scope :unshared
   scope :shared

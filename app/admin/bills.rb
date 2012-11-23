@@ -1,5 +1,5 @@
 # encoding: UTF-8
-ActiveAdmin.register Bill do
+ActiveAdmin.register Bill, as: "Bill" do
   filter :user
   filter :friend_id
   filter :title

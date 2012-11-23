@@ -1,6 +1,8 @@
 # encoding: UTF-8
-ActiveAdmin.register User do
+ActiveAdmin.register User, as: "User" do
   menu priority: 10, parent: "Person"
+
+  scope :users, default: true
 
   filter :email
   filter :name

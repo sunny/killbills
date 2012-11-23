@@ -22,7 +22,7 @@
       .row class="participation-#{incrementer!()}'
         .span3.people
 
-          - if p.object.person_id == current_user.id
+          - if p.object.person_id == current_user_or_guest.id
 
             .column-label
               = Participation.human_attribute_name(:person_id)
@@ -39,7 +39,7 @@
               = Participation.human_attribute_name(:person_id)
               span.increment = incrementer()
 
-            = p.collection_select :person_id, current_user.friends, :id, :name, \
+            = p.collection_select :person_id, current_user_or_guest.friends, :id, :name, \
               { include_blank: p.object.person_id.nil? }, \
               { data: { 'new-value' => t('friend.new'), 'new-value-prompt' => t('friend.new_prompt') } }
 

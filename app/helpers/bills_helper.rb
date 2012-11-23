@@ -1,6 +1,6 @@
 module BillsHelper
   def link_to_friend(person)
-    person == current_user ? t(:you) : link_to(person.name, person)
+    person == current_user_or_guest ? t(:you) : link_to(person.name, person)
   end
 
   def debt_summary(debt, options = {})
@@ -8,9 +8,9 @@ module BillsHelper
     from = debt.from_person
     to = debt.to_person
 
-    if from == current_user
+    if from == current_user_or_guest
       key = "you_owe"
-    elsif to == current_user
+    elsif to == current_user_or_guest
       key = "owes_you"
     else
       key = "owes"

@@ -1,6 +1,6 @@
 # encoding: UTF-8
-ActiveAdmin.register Friend do
-  menu priority: 15, parent: "Person"
+ActiveAdmin.register Friend, as: "Friend" do
+  menu parent: "Person"
 
   filter :name
   filter :user

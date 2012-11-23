@@ -1,8 +1,6 @@
 class FriendsController < ApplicationController
-  before_filter :authenticate_user!
-
   def index
-    @friends = current_user.friends.order(:name) \
+    @friends = current_user_or_guest.friends.order(:name) \
       .includes(bills: :participations)
 
     respond_to do |format|
@@ -13,10 +11,10 @@ class FriendsController < ApplicationController
 
   # GET /friends/1
   def show
-    @friend = current_user.friends \
+    @friend = current_user_or_guest.friends \
       .includes(bills: :participations) \
       .find(params[:id])
-    @bills = current_user.bills_with_friend(@friend)
+    @bills = current_user_or_guest.bills_with_friend(@friend)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +24,7 @@ class FriendsController < ApplicationController
 
   # GET /friends/new
   def new
-    @friend = current_user.friends.new
+    @friend = current_user_or_guest.friends.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,12 +34,12 @@ class FriendsController < ApplicationController
 
   # GET /friends/1/edit
   def edit
-    @friend = current_user.friends.find(params[:id])
+    @friend = current_user_or_guest.friends.find(params[:id])
   end
 
   # POST /friends
   def create
-    @friend = current_user.friends.new(params[:friend])
+    @friend = current_user_or_guest.friends.new(params[:friend])
 
     respond_to do |format|
       if @friend.save
@@ -56,7 +54,7 @@ class FriendsController < ApplicationController
 
   # PUT /friends/1
   def update
-    @friend = current_user.friends.find(params[:id])
+    @friend = current_user_or_guest.friends.find(params[:id])
 
     respond_to do |format|
       if @friend.update_attributes(params[:friend])
@@ -71,7 +69,7 @@ class FriendsController < ApplicationController
 
   # DELETE /friends/1
   def destroy
-    @friend = current_user.friends.find(params[:id])
+    @friend = current_user_or_guest.friends.find(params[:id])
     @friend.destroy
 
     respond_to do |format|

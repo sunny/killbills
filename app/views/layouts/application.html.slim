@@ -13,11 +13,10 @@ body
       .container
         = link_to t(:app_name), root_path, class: "brand"
 
-        - if user_signed_in?
-          ul.nav
-            li = link_to t('bills.new.title'), new_bill_path
-            li = link_to t('bills.index.title'), bills_path
-            li = link_to t('friends.index.title'), friends_path
+        ul.nav
+          li = link_to t('bills.new.title'), new_bill_path
+          li = link_to t('bills.index.title'), bills_path
+          li = link_to t('friends.index.title'), friends_path
 
         ul.nav.pull-right
           li
