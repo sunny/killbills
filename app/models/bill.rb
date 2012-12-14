@@ -99,6 +99,8 @@ class Bill < ActiveRecord::Base
 
     participations = self.participations.to_a
 
+    return [] if participations.empty?
+
     # Debt
     if genre.debt?
       min_ower, max_ower = participations.sort_by { |p| p.owed_amount.to_f }

@@ -56,6 +56,16 @@ class BillTest < ActiveSupport::TestCase
     assert_equal (40+2)/2.0, bill.even_share
   end
 
+  context "An empty bill" do
+    setup {
+      bill = build :bill
+    }
+
+    should "return empty #debts" do
+      assert bill.debts.empty?
+    end
+  end
+
   context "A payment bill" do
     setup {
       beatrix = create :user,   name: "Beatrix"
