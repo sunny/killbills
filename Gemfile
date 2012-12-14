@@ -23,10 +23,11 @@ group :assets do
   gem 'uglifier'
   gem 'coffee-rails'
   gem 'jquery-rails'
+  gem 'rails-backbone'
 end
 
 group :development do
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   # gem 'bullet'
 
   # Guard

@@ -1,26 +1,28 @@
 #= require comment
-#= require intercom
 #
 #= require jquery
 #= require jquery_ujs
-#
+#= require underscore
+#= require backbone
 #= require bootstrap-alert
 #= require bootstrap-button
 #
+#- require intercom
 #= require raphael
 #= require g.raphael
 #= require g.pie
-#= require pies
 #
 #= require helpers
-#= require bills
+#= require pies
+#= require app/main
 
 jQuery ->
   $('html').removeClass('noJs').addClass('js')
 
   # Bill form
-  new Bill($('#bill-form'))
-  $('select[data-new-value]').selectNewValue()
+  if $('#bill-form')
+    new App.Views.BillForm(model: new App.Models.Bill())
+    $('select[data-new-value]').selectNewValue()
 
   # Friends list
   $('#pies').friendsPies('.friend')
