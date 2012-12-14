@@ -10,7 +10,8 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @bills }
+      format.xml  { render xml: @bills }
+      format.json { render json: @bills }
     end
   end
 
@@ -23,7 +24,8 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @bill }
+      format.xml  { render xml: @bill }
+      format.json { render json: @bill }
     end
   end
 
@@ -38,6 +40,7 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @bill }
+      format.json { render json: @bill }
     end
   end
 
@@ -55,9 +58,11 @@ class BillsController < ApplicationController
       if @bill.save
         format.html { redirect_to(@bill, notice: 'Bill was successfully created.') }
         format.xml  { render xml: @bill, status: :created, location: @bill }
+        format.xml  { render json: @bill, status: :created, location: @bill }
       else
         format.html { render action: "new" }
         format.xml  { render xml: @bill.errors, status: :unprocessable_entity }
+        format.xml  { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,9 +76,11 @@ class BillsController < ApplicationController
       if @bill.update_attributes(params[:bill])
         format.html { redirect_to(@bill, notice: 'Bill was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render action: "edit" }
         format.xml  { render xml: @bill.errors, status: :unprocessable_entity }
+        format.json  { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -87,6 +94,7 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(bills_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 
