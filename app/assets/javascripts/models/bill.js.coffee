@@ -1,4 +1,4 @@
-class App.Models.Bill extends Backbone.Model
+class KillBills.Models.Bill extends Backbone.Model
   GENRES: ['debt', 'payment', 'shared']
 
   defaults:
@@ -6,7 +6,8 @@ class App.Models.Bill extends Backbone.Model
     title: ""
 
   initialize: ->
-    @participations = new App.Collections.ParticipationCollection([], bill: @)
+    @participations = new KillBills.Collections.Participations
+    @friends = new KillBills.Collections.Friends
     @on 'change:participations', @updateOwedResults, this
 
   updateOwedResults: ->

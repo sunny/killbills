@@ -1,4 +1,4 @@
-class App.Views.ParticipationView extends Backbone.View
+class KillBills.Views.ParticipationView extends Backbone.View
   events:
     "keyup .payment input": "paymentTouch"
     "change .payment input": "paymentTouch"
@@ -7,6 +7,8 @@ class App.Views.ParticipationView extends Backbone.View
     "change .owed_type select": "owedTypeTouch"
 
   initialize: ->
+    new KillBills.Views.PeopleSelect(el: @$('.people'), parent: @)
+
     @model.set
       payment: @$('.payment input').floatVal()
       owed_amount: @$('.owed_amount input').floatVal()

@@ -1,4 +1,4 @@
-class App.Models.Participation extends Backbone.Model
+class KillBills.Models.Participation extends Backbone.Model
   defaults:
     owed_amount: 0
     payment: 0
