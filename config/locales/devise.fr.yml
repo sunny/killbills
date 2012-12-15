@@ -20,8 +20,9 @@ fr:
       timeout: "Votre session est expirée, veuillez vous reconnecter pour continuer."
       inactive: "Votre compte n'est pas encore activé."
     sessions:
-      signed_in: "Connecté."
-      signed_out: "Déconnecté."
+      user:
+        signed_in: "Connecté."
+        signed_out: "Déconnecté."
     passwords:
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'
       updated: 'Votre mot de passe a été édité avec succès, vous êtes maintenant connecté'

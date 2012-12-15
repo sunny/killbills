@@ -81,6 +81,8 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    devise_browserid_authenticatable (1.1.2)
+      devise (~> 2.1)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -293,6 +295,7 @@ DEPENDENCIES
   compass-rails
   dalli
   devise
+  devise_browserid_authenticatable
   eco
   enumerize
   exception_notification

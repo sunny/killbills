@@ -13,41 +13,45 @@
         = link_to t(:app_name), home_path, class: "brand"
 
 
-        %ul.nav.pull-left
+        %ul.nav
           %li= link_to t('bills.new.title'), new_bill_path
           %li= link_to t('bills.index.title'), bills_path
           %li= link_to t('friends.index.title'), friends_path
 
-        %div.pull-right
-          %a.btn.btn-small.btn-navbar{ "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
-            %i.icon-bar
-            %i.icon-bar
-            %i.icon-bar
 
-        %ul.nav.pull-right.nav-collapse
+        %ul.nav.pull-right
           - if not user_signed_in?
-            %li= link_to t(:create_account), new_user_registration_path
+
             %li
-              = link_to user_session_path do
+              = link_to '#', data: { 'persona-login' => true } do
                 %i.icon-user
                 = t :sign_in
 
           - else
-            %li
-              = link_to destroy_user_session_path, title: t(:sign_out_help) do
-                %i.icon-off
-                = "#{t :sign_out} #{current_user_or_guest.display_name}"
-
-          %li
-            = link_to edit_options_path do
-              %i.icon-cog
-              = t 'options.edit.title'
-
-          - if user_signed_in?
-            %li
-              = link_to edit_user_registration_path do
+            %li.dropdown
+              %a.dropdown-toggle{ "data-toggle" => "dropdown", "href" => "#" }
                 %i.icon-user
-                = t('registrations.edit.title')
+                %span.nav-user-name
+                  = current_user_or_guest.display_name
+                %i.caret
+
+                %ul.dropdown-menu
+
+                  %li
+                    = link_to edit_user_registration_path do
+                      %i.icon-user
+                      = t('registrations.edit.title')
+
+                  %li
+                    = link_to edit_options_path do
+                      %i.icon-cog
+                      = t 'options.edit.title'
+
+                  %li
+                    = link_to destroy_user_session_path, title: t(:sign_out_help), data: { 'persona-logout' => true } do
+                      %i.icon-off
+                      = t :sign_out
+
 
 
   .container
@@ -81,12 +85,13 @@
           - if current_user.kind_of?(AdminUser)
             %li= link_to "admin", admin_dashboard_path
 
+
   - if current_user_or_guest# and Rails.env.production?
     %script#IntercomSettingsScriptTag
       window.intercomSettings = { app_id: '7uurr05u', email: '#{current_user_or_guest.email}', created_at: #{current_user_or_guest.created_at.to_i}, user_id: #{current_user_or_guest.id} }
 
   = javascript_include_tag "application", debug: Rails.env.development?
-
+  = browserid_js_tag
   %script
     I18n.locale = "#{I18n.locale}"
     KillBills.user_id = #{current_user_or_guest.id}

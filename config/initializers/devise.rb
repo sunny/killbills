@@ -182,9 +182,13 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.failure_app   = AnotherApp
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.default_strategies(:scope => :user).unshift :browserid_authenticatable
+    # manager.browserid_url = "dev.diresworb.org"  # Development (default)
+    # manager.browserid_url = "diresworb.org"      # Beta
+    # manager.browserid_url = "browserid.org"      # Production
+
+    # manager.failure_app   = AnotherApp
+    # manager.intercept_401 = false
+  end
 end

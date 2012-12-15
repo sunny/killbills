@@ -4,4 +4,9 @@
   .hero-unit
     %h1= t :app_name
     %p= t :tagline
-    %p= link_to t('bills.new.title'), new_bill_path, class: "btn btn-large btn-primary"
+    %p
+      - if current_user
+        = link_to t('bills.new.title'), new_bill_path, class: "btn btn-large btn-primary"
+      - else
+        %a.persona-button{ "data-persona-login" => true, "href" => "#"}
+          %span= t('sign_in_with_persona')

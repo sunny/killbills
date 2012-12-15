@@ -24,6 +24,7 @@ fr:
   sign_in: Connexion
   sign_out: Déconnexion
   sign_out_help: Se déconnecter de Kill Bills
+  sign_in_with_persona: Se connecter avec Persona
 
   payment: Payment
   share: Share

@@ -19,4 +19,7 @@ class User < Person
       .where(participations: { person_id: friend.id }) \
       .order("date DESC")
   end
+
+  # Fix for devise_browserid_authenticatable gem who needs this method
+  def skip_confirmation!; end
 end

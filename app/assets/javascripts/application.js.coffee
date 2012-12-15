@@ -9,6 +9,7 @@
 #= require bootstrap-alert
 #= require bootstrap-button
 #= require bootstrap-collapse
+#= require bootstrap-dropdown
 #
 #= require intercom
 #= require raphael
