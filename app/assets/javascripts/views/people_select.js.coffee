@@ -29,40 +29,40 @@ class KillBills.Views.PeopleSelect extends Backbone.View
       @$('select').focus()
 
   render: ->
-    html = """
+    @compiledTemplate ||= _.template """
       <div class="column-label">
-        #{locales.current.participants.participant}
+        <%- locales.current.participants.participant %>
       </div>
-    """
-
-    if @is_me
-      html += """
+      <% if (is_me) { %>
         <div class="you">
           You
           <input id="bill_participations_attributes_0_person_id"
                  name="bill[participations_attributes][0][person_id]"
-                 type="hidden" value="#{user_id}">
+                 type="hidden" value="<%= user_id %>">
         </div>
-      """
-    else
-      html += """
+      <% } else { %>
         <select id="bill_participations_attributes_1_person_id"
                 name="bill[participations_attributes][1][person_id]">
           <option></option>
+          <% _.each(friends, function(friend) { %>
+            <option <% if (friend.selected) { %>selected="selected"<% } %>
+              value="<%- friend.value %>">
+              <%- friend.name %>
+            </option>
+          <% }) %>
+          <option><%- locales.current.participants.new %></option>
+        </select>
+        <% } %>
       """
 
-      for friend in bill.friends.models
-        selected = friend.get('id') == @parent.model.friend
-        value = friend.get('id') || friend.get('name')
-        html += """
-          <option #{if selected then 'selected="selected"'} value="#{value}">
-            #{friend.get('name')}
-          </option>
-        """
+    data =
+      is_me: @is_me
+      friends: []
 
-      html += """
-        <option>#{locales.current.participants.new}</option>
-      </select>
-      """
+    for friend in bill.friends.models
+      data.friends.push
+        selected: friend.get('id') == @parent.model.friend
+        value: friend.get('id') || friend.get('name')
+        name: friend.get('name')
 
-    @$el.html html
+    @$el.html @compiledTemplate(data)
