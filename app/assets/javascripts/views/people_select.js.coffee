@@ -26,17 +26,43 @@ class KillBills.Views.PeopleSelect extends Backbone.View
       friend = bill.friends.add({ name: name })
       @parent.model.set('friend', friend)
       @render()
+      @$('select').focus()
 
   render: ->
-    html = "<div class='column-label'>#{locales.current.participants.participant}</div>"
+    html = """
+      <div class="column-label">
+        #{locales.current.participants.participant}
+      </div>
+    """
+
     if @is_me
-      html += '<div class="you">You<input id="bill_participations_attributes_0_person_id" name="bill[participations_attributes][0][person_id]" type="hidden" value="6"></div>'
+      html += """
+        <div class="you">
+          You
+          <input id="bill_participations_attributes_0_person_id"
+                 name="bill[participations_attributes][0][person_id]"
+                 type="hidden" value="#{user_id}">
+        </div>
+      """
     else
-      html += '<select id="bill_participations_attributes_1_person_id" name="bill[participations_attributes][1][person_id]">'
-      html += '<option value=""></option>'
+      html += """
+        <select id="bill_participations_attributes_1_person_id"
+                name="bill[participations_attributes][1][person_id]">
+          <option></option>
+      """
+
       for friend in bill.friends.models
         selected = friend.get('id') == @parent.model.friend
-        html += "<option#{if selected then " selected='selected'"}>#{friend.get('name')}</option>"
-      html += "<option>#{locales.current.participants.new}</option>"
-      html += '</select>'
+        value = friend.get('id') || friend.get('name')
+        html += """
+          <option #{if selected then 'selected="selected"'} value="#{value}">
+            #{friend.get('name')}
+          </option>
+        """
+
+      html += """
+        <option>#{locales.current.participants.new}</option>
+      </select>
+      """
+
     @$el.html html
