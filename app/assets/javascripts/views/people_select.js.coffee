@@ -18,7 +18,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
   selectTouch: (event) ->
     # If last ("New…")
     if event.target.selectedIndex == event.target.length - 1
-      name = prompt("New friend:")
+      name = prompt(locales.current.participants.new_prompt)
       if !name
         event.target.selectedIndex = 0
         return
@@ -28,7 +28,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
       @render()
 
   render: ->
-    html = "<div class='column-label'>Participant</div>"
+    html = "<div class='column-label'>#{locales.current.participants.participant}</div>"
     if @is_me
       html += '<div class="you">You<input id="bill_participations_attributes_0_person_id" name="bill[participations_attributes][0][person_id]" type="hidden" value="6"></div>'
     else
@@ -37,6 +37,6 @@ class KillBills.Views.PeopleSelect extends Backbone.View
       for friend in bill.friends.models
         selected = friend.get('id') == @parent.model.friend
         html += "<option#{if selected then " selected='selected'"}>#{friend.get('name')}</option>"
-      html += '<option>New…</option>'
+      html += "<option>#{locales.current.participants.new}</option>"
       html += '</select>'
     @$el.html html
