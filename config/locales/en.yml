@@ -23,6 +23,7 @@ en:
   sign_in: Sign in
   sign_out: Sign out
   sign_out_help: Sign out from Kill Bills
+  settings: Settings
 
   payment: Payment
   share: Share
@@ -92,6 +93,8 @@ en:
       title: Create an account
     create:
       title: Create an account
+    edit:
+      title: Settings
 
   activerecord:
     models:
@@ -111,6 +114,7 @@ en:
         person: Participant
       friend:
         name: Name
+
 
   enumerize:
     bill:

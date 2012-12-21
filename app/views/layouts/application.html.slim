@@ -34,6 +34,12 @@ body
                 '
                 = "#{t :sign_out} #{current_user_or_guest.display_name}"
 
+          li
+            = link_to edit_user_registration_path do
+              i.icon-cog
+              '
+              = t :settings
+
   .container
 
     - if alert

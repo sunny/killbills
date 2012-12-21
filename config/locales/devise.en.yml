@@ -67,6 +67,20 @@ en:
         submitting: Creating account…
       user:
         signed_in: "Signed in successfully"
+      edit:
+        title: Settings
+        email_label: Email
+        password_label: Password
+        password_help: (leave empty if you don't want to change it)
+        current_password_label: Current password
+        current_password_help: (we need to check your current password to change your details)
+        submit: Save your settings
+        submitting: Saving…
+        destroy: Destroy my account
+        destroy_submit: "Delete my account, remove friends, and kill all bills"
+        destroy_confirm: "Are you really sure? This cannot be undone!"
+        destroy_submitting: "Killing bills…"
+
     passwords:
       new:
         title: Forgot your password?

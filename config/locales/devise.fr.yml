@@ -15,7 +15,7 @@ fr:
       unauthenticated: "Vous devez vous connecter ou vous inscrire pour continuer."
       unconfirmed: "Vous devez valider votre compte pour continuer."
       locked: "Votre compte est verrouillé."
-      invalid: "Email ou mot de passe incorrect."
+      invalid: "Email ou mot de passe incorrects."
       invalid_token: "Jeton d'authentification incorrect."
       timeout: "Votre session est expirée, veuillez vous reconnecter pour continuer."
       inactive: "Votre compte n'est pas encore activé."
@@ -68,6 +68,20 @@ fr:
         title: Créer un compte
         submit: Créer un compte et se connecter
         submitting: Création du compte…
+      edit:
+        title: Configuration
+        email_label: Email
+        password_label: Mot de passe
+        password_help: (laisser vide si vous ne voulez pas le changer)
+        current_password_label: Mot de passe actuel
+        current_password_help: (on a besoin que vous confirmiez votre mot de passe actuel pour valider les changements)
+        submit: Mettre à jour
+        submitting: Mise à jour…
+        destroy: Supprimer mon compte
+        destroy_submit: "Supprimer mon compte, vider ma liste d'amis, effacer toutes mes notes"
+        destroy_confirm: "Êtes-vous vraiment sûr de ce que vous faites ? Passé cette étape on ne peut rien annuler !"
+        destroy_submitting: "Destruction de compte en cours…"
+
     passwords:
       new:
         title: Mot de passe oublié ?

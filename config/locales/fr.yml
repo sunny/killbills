@@ -23,6 +23,7 @@ fr:
   sign_in: Connexion
   sign_out: Déconnexion
   sign_out_help: Se déconnecter de Kill Bills
+  settings: Configuration
 
   payment: Payment
   share: Share
@@ -95,6 +96,8 @@ fr:
       title: Créer un compte
     create:
       title: Créer un compte
+    edit:
+      title: Configuration
 
   activerecord:
     models:

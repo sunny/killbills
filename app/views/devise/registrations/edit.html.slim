@@ -1,34 +1,31 @@
-h1 Account settings
+h1 = t '.title'
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
 
   .control-group
-    = f.label :email
+    = f.label :email, t('.email_label')
     = f.email_field :email
 
   .control-group
-    = f.label :password
+    = f.label :password, t('.password_label')
     = f.password_field :password
-    span.help-inline (leave blank if you don't want to change it)
+    span.help-inline = t '.password_help'
 
   .control-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-
-  .control-group
-    = f.label :current_password
+    = f.label :current_password, t('.current_password_label')
     = f.password_field :current_password
-    span.help-inline (we need your current password to confirm your changes)
+    span.help-inline = t '.current_password_help'
 
   .form-actions
-    =' f.submit "Update", class: "btn btn-primary", data: { "disable-with" => "Updating…" }
+    =' f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
     = link_to "Back", :back, class: "btn"
 
-h2 Destroy account
+h2 = t('.destroy')
 
 .form-actions
-  = link_to "Delete my account, remove friends, kill all bills", registration_path(resource_name), \
+  = link_to t('.destroy_submit'), registration_path(resource_name), \
     method: :delete, class: "btn btn-danger", \
-    data: { confirm: "Are you really sure? This cannot be undone!" }
+    data: { confirm: t('.destroy_confirm'), \
+    "disable-with" => t('.destroy_submitting') }
 
