@@ -21,7 +21,7 @@ h1 = t '.title'
     =' f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
     = link_to "Back", :back, class: "btn"
 
-h2 = t('.destroy')
+h2.title = t('.destroy')
 
 .form-actions
   = link_to t('.destroy_submit'), registration_path(resource_name), \

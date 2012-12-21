@@ -2,7 +2,8 @@
 
 en:
   locale: en
-  locale_title: "Kill Bills in english"
+  locale_label: English
+  locale_title: Kill Bills in english
 
   app_name: Kill Bills
   tagline: Never forget a debt.

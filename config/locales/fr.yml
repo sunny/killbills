@@ -2,7 +2,8 @@
 
 fr:
   locale: fr
-  locale_title: "Kill Bills en français"
+  locale_label: Français
+  locale_title: Kill Bills en français
 
   app_name: Kill Bills
   tagline: N'oubliez aucune dette.

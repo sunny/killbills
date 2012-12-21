@@ -38,9 +38,12 @@ class Bill < ActiveRecord::Base
   # - "Debt to Bill"
   # - "Shared to Vernita and Nikki"
   def title
-    read_attribute(:title) || I18n.t("debt.name.#{direction}",
-      genre: genre.text,
-      friends: friend_names.to_sentence)
+    title = read_attribute(:title)
+    if title.blank?
+      I18n.t("debt.name.#{direction}", genre: genre.text, friends: friend_names.to_sentence)
+    else
+      title
+    end
   end
 
   # String representing the direction of the bill

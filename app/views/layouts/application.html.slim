@@ -56,10 +56,10 @@ body
     = yield
 
     footer
-      nav#locale
+      nav.foot-links
         ul
           - %w(en fr).each do |l|
-            li = link_to t(:locale, locale: l), { locale: l }, \
+            li = link_to t(:locale_label, locale: l), { locale: l }, \
                  hreflang: l, \
                  title: t(:locale_title, locale: l)
 

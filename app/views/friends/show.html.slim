@@ -17,5 +17,6 @@
 h2 = t('bills.index.title')
 p = link_to t('bills.new.title'), new_bill_path(friend: @friend.name), class: "btn"
 
-= render @bills
+.bills.article-list
+  = render @bills
 

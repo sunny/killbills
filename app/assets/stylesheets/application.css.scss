@@ -1,14 +1,15 @@
-@import 'config';
-@import 'mixins';
-@import 'fonts';
+@import "config";
+@import "mixins";
+@import "fonts";
 
-@import 'bootstrap';
-@import 'bootstrap-responsive';
-@import 'bootstrap-fix';
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "bootstrap-fix";
+@import "compass/css3/images";
 
-@import 'bills';
-@import 'friends';
-@import 'loading';
+@import "bills";
+@import "friends";
+@import "loading";
 
 // Generic html
 // ------------
@@ -17,7 +18,7 @@ body {
   @include font-sans;
 }
 
-h1, h2 {
+h1, h2.title {
   @include font-impact;
 }
 
@@ -28,19 +29,19 @@ h1, h2 {
   @include font-impact;
 }
 
-.navbar .nav > li > a {
+.navbar .nav li a {
   text-shadow: none;
 }
 
-.navbar li a:hover {
+.navbar .nav li a:hover {
   text-decoration: underline;
 }
 
 // Locales
 // ------
 
-nav#locale {
-  margin-top: 2em;
+.foot-links {
+  margin: 2em 0 1em 0;
   ul {
     margin: 0;
     list-style: none;
@@ -85,8 +86,8 @@ nav#locale {
 }
 
 
-// Result
-// ------
+// Bill result with arrow
+// -----------------------
 
 .result {
   list-style: none;
@@ -119,6 +120,7 @@ label {
 }
 
 // Radio buttons that look like buttons
+// ------------------------------------
 // HTML needed:
 //   <li><input type="radio" name="truth" value="1"><span class="btn">Yes</span></li>
 //   <li><input type="radio" name="truth" value="0"><span class="btn">No</span></li>
@@ -160,28 +162,34 @@ label {
 }
 
 
-// Articles (bills and friends)
+// Article lists (bills and friends)
 // ----------------------------
 
-article > a {
-  display: block;
-  h2 {
-    display: inline;
-    border-bottom: 1px solid $lightgrey;
-    color: $color;
-    font-weight: normal;
-    font-size: 18px;//lighten(desaturate($color, 60%), 60%)
-  }
-  &:visited h2 {
-    color: darken($color, 10%);
-  }
-  &:hover h2 {
-    border-bottom-color: inherit;
-    color: darken($color, 20%);
-  }
+.article-list {
+  article > a {
+    line-height: 1;
+    display: block;
 
-  &:hover {
-    text-decoration: none;
+    h2 {
+      line-height: 1;
+      display: inline;
+      border-bottom: 1px solid $lightgrey;
+      color: lighten(desaturate($color, 60%), 60%);
+      font-weight: normal;
+      font-size: 18px;//lighten(desaturate($color, 60%), 60%)
+    }
+    &:visited h2 {
+      color: darken($color, 10%);
+    }
+    &:hover h2 {
+      border-bottom-color: inherit;
+      color: darken($color, 20%);
+    }
+
+    &:hover {
+      text-decoration: none;
+      @include background(linear-gradient(top, #fff, #f8f8f8 10%, #f8f8f8 80%, #fff));
+    }
   }
 }
 
