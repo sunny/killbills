@@ -6,13 +6,12 @@ window.KillBills =
 
 
 $(document).ready ->
-  $('html').removeClass('noJs').addClass('js')
+  $('html').removeClass('nojs').addClass('js')
 
   # Bill form
   if $('#bill-form').length >= 1
     window.bill = new KillBills.Models.Bill()
     new KillBills.Views.BillForm(model: bill)
-    #$('select[data-new-value]').selectNewValue()
 
   # Friends list
   $('#pies').friendsPies('.friend')
@@ -21,4 +20,4 @@ $(document).ready ->
   $('input[data-disable-with]').attr('autocomplete', 'off')
 
   # Add jsloaded class
-  $('html').removeClass('nojs').addClass('jsloaded')
+  $('html').addClass('jsloaded')
