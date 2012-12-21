@@ -13,6 +13,10 @@
 // Generic html
 // ------------
 
+body {
+  @include font-sans;
+}
+
 h1 {
   @include font-impact;
 }
