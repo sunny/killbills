@@ -1,0 +1,27 @@
+<div class="column-label">
+  <%- locales.current.participants.participant %>
+</div>
+
+<% if @is_me: %>
+  <div class="you">
+    You
+    <input id="bill_participations_attributes_0_person_id"
+           name="bill[participations_attributes][0][person_id]"
+           type="hidden" value="<%= user_id %>">
+  </div>
+<% else: %>
+  <select id="bill_participations_attributes_1_person_id"
+          name="bill[participations_attributes][1][person_id]">
+    <option></option>
+
+    <% for friend in @friends: %>
+      <option <% if friend.selected: %>selected="selected"<% end %>
+        value="<%- friend.value %>">
+        <%- friend.name %>
+      </option>
+    <% end %>
+
+    <option><%- locales.current.participants.new %></option>
+  </select>
+
+<% end %>

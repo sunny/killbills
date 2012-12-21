@@ -75,6 +75,11 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
     ejs (1.1.1)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
@@ -270,6 +275,7 @@ DEPENDENCIES
   compass-rails
   dalli
   devise
+  eco
   enumerize
   exception_notification
   factory_girl_rails

@@ -24,6 +24,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'jquery-rails'
   gem 'rails-backbone'
+  gem 'eco'
 end
 
 group :development do
