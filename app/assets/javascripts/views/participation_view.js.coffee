@@ -6,8 +6,8 @@ class KillBills.Views.ParticipationView extends Backbone.View
     "change .owed_amount input": "owedAmountTouch"
     "change .owed_type select": "owedTypeTouch"
 
-  initialize: ->
-    new KillBills.Views.PeopleSelect(el: @$('.people'), parent: @)
+  initialize: (options) ->
+    new KillBills.Views.PeopleSelect(el: @$('.people'), parent: @, index: options.index)
 
     @model.set
       payment: @$('.payment input').floatVal()

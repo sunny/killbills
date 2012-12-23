@@ -5,6 +5,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
   initialize: (options) ->
     @parent = options.parent
     @is_me = !@$('select')[0]
+    @index = options.index
 
     # Initialisation
     for option in @$('option')
@@ -37,13 +38,13 @@ class KillBills.Views.PeopleSelect extends Backbone.View
   render: ->
     data =
       is_me: @is_me
+      index: @index
       friends:
         {
           selected: friend.get('id') == @parent.model.friend
           value: friend.get('id') || friend.get('name')
           name: friend.get('name')
-          index: index
-        } for index, friend in bill.friends.models
+        } for friend in bill.friends.models
 
     html = JST['templates/participations/participants'](data)
     @$el.html html
