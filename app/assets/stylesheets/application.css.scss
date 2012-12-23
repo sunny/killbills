@@ -18,8 +18,10 @@ body {
   @include font-sans;
 }
 
-h1, h2.title {
+h1,
+h2.title {
   @include font-impact;
+  margin: .5ex 0;
 }
 
 // Nav
@@ -174,9 +176,9 @@ label {
       line-height: 1;
       display: inline;
       border-bottom: 1px solid $lightgrey;
-      color: lighten(desaturate($color, 60%), 60%);
+      color: $color;
       font-weight: normal;
-      font-size: 18px;//lighten(desaturate($color, 60%), 60%)
+      font-size: 18px;
     }
     &:visited h2 {
       color: darken($color, 10%);
@@ -188,7 +190,7 @@ label {
 
     &:hover {
       text-decoration: none;
-      @include background(linear-gradient(top, #fff, #f8f8f8 10%, #f8f8f8 80%, #fff));
+      @include background(linear-gradient(top, #fff, #f8f8f8 20%, #f8f8f8 70%, #fff));
     }
   }
 }
