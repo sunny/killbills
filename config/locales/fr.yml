@@ -76,8 +76,6 @@ fr:
 
   # Friends
   friend:
-    new: Ajouter ❱
-    new_prompt: "Nom de votre ami(e) :"
     created: Ami ajouté !
     updated: Ami mis à jour
   friends:

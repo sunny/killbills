@@ -72,8 +72,6 @@ en:
 
   # Friends
   friend:
-    new: New friend ❱
-    new_prompt: Enter name
     created: Friend added!
     updated: Friend updated
   friends:

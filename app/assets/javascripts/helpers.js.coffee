@@ -29,41 +29,6 @@ $.fn.intVal = ->
   else
     0
 
-# Adds an option to a select that prompts for a new value.
-# Set the name of the option and the text on the prompted alert box
-# via "data-new-value" and "data-new-value-prompt" attributes on the select.
-#
-# Example:
-#   <select data-new-value="New product..." data-new-value-prompt="Please enter product name:">
-#     ...
-#   </select>
-#
-#   $('select').selectNewValue()
-$.fn.selectNewValue =->
-  $(this).each ->
-    select_text = $(this).data('new-value') || 'Add new...'
-    prompt_text = $(this).data('new-value-prompt') || 'New value'
-
-    option = $('<option value="new">').text(select_text)
-    $(this).append option
-    $(this).change ->
-      # If last element is selected
-      return if @selectedIndex != @options.length - 1
-
-      # And a name is given
-      person_name = prompt(prompt_text)
-      return @selectedIndex = 0 if !person_name
-
-      # Remove previous custom name if any
-      $(this).find('option:not([value])').remove()
-
-      # Create a new option
-      option = $('<option />').text(person_name)
-
-      # Insert and select it
-      option.insertBefore $(this).find('option:last')
-      @selectedIndex = @options.length - 2
-
 # Change CSS opacity
 # Example: $('input').opacity(0.5)
 #$.fn.opacity = (val) ->
