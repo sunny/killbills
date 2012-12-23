@@ -1,3 +1,15 @@
+guard 'pow' do
+  #watch('.powrc')
+  #watch('.powenv')
+  watch('.rvmrc')
+  watch('Gemfile')
+  watch('Gemfile.lock')
+  watch('config/application.rb')
+  watch('config/environment.rb')
+  watch(%r{^config/environments/.*\.rb$})
+  watch(%r{^config/initializers/.*\.rb$})
+end
+
 guard 'livereload', :apply_js_live => false, :apply_css_live => true do
   watch(%r{app/.+\.(erb|haml)})
   watch(%r{app/helpers/.+\.rb})
@@ -19,4 +31,3 @@ guard 'test' do
   watch(%r{app/views/.*\.rb})                        { "test/integration" }
   watch('app/controllers/application_controller.rb') { ["test/functional", "test/integration"] }
 end
-

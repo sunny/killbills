@@ -34,6 +34,7 @@ group :development do
   # Guard
   gem 'guard-test'
   gem 'guard-livereload'
+  gem 'guard-pow'
 
   # Maintenance
   gem 'heroku'
