@@ -58,11 +58,11 @@ class BillTest < ActiveSupport::TestCase
 
   context "An empty bill" do
     setup {
-      bill = build :bill
+      @bill = build :bill
     }
 
     should "return empty #debts" do
-      assert bill.debts.empty?
+      assert @bill.debts.empty?
     end
   end
 
