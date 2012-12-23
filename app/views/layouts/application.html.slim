@@ -63,9 +63,6 @@ body
                  hreflang: l, \
                  title: t(:locale_title, locale: l)
 
-
-          li
-            a#intercom href="mailto:7uurr05u@incoming.intercom.io" ✉
           - if current_user.kind_of?(AdminUser)
             li = link_to "admin", admin_dashboard_path
 
