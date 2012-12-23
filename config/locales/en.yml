@@ -51,6 +51,8 @@ en:
   # Bill
   bill:
     title_placeholder: Optional description
+    created: Bill created!
+    updated: Bill updated
   bills:
     index:
       title: Bills
@@ -72,7 +74,8 @@ en:
   friend:
     new: New friend ❱
     new_prompt: Enter name
-
+    created: Friend added!
+    updated: Friend updated
   friends:
     index:
       title: Friends

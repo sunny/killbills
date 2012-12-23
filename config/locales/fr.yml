@@ -52,11 +52,12 @@ fr:
   # Bill
   bill:
     title_placeholder: Description optionnelle
+    created: Note créée !
+    updated: Note mise à jour
   bills:
     index:
       title: Notes
       empty: Aucune note d'enregistrée pour l'instant.
-
 
     show:
       title: Note
@@ -77,7 +78,8 @@ fr:
   friend:
     new: Ajouter ❱
     new_prompt: "Nom de votre ami(e) :"
-
+    created: Ami ajouté !
+    updated: Ami mis à jour
   friends:
     index:
       title: Amis

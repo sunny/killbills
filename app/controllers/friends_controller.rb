@@ -45,7 +45,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to(@friend, notice: 'Friend was successfully created.') }
+        format.html { redirect_to(@friend, notice: t('friend.created')) }
         format.xml  { render xml: @friend, status: :created, location: @friend }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.update_attributes(params[:friend])
-        format.html { redirect_to(@friend, notice: 'Friend was successfully updated.') }
+        format.html { redirect_to(@friend, notice: t('friend.updated')) }
         format.xml  { head :ok }
       else
         format.html { render action: "edit" }
