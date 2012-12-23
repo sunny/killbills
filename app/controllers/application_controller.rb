@@ -41,4 +41,10 @@ class ApplicationController < ActionController::Base
       guest_user.bills.update_all(user_id: current_user.id)
       guest_user.participations.update_all(person_id: current_user.id)
     end
+
+    def show_anonymous_warning
+      if current_user.nil?
+        flash.now[:anonymous_warning] = true
+      end
+    end
 end

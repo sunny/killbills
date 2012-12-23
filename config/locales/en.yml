@@ -32,6 +32,8 @@ en:
   credit: Credit
   total: Total
 
+  anonymous_warning: "You are currently anonymous. Please %{link} in if you want the site to remember your bills."
+  anonymous_warning_link: sign in
 
   debt:
     name:

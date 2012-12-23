@@ -42,6 +42,12 @@ body
 
   .container
 
+    - if flash[:anonymous_warning]
+      .alert
+        a[class="close" data-dismiss="alert" title=t(:close)] ×
+        = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), user_session_path))
+
+
     - if alert
       .alert
         a[class="close" data-dismiss="alert" title=t(:close)] ×
@@ -52,6 +58,7 @@ body
       .alert.alert-info
         a[class="close" data-dismiss="alert" title=t(:close)] ×
         = notice
+
 
     = yield
 

@@ -1,4 +1,6 @@
 class FriendsController < ApplicationController
+  before_filter :show_anonymous_warning
+
   def index
     @friends = current_user_or_guest.friends.order(:name) \
       .includes(bills: :participations)

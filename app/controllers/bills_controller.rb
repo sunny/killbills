@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
-  before_filter :create_new_friends
+  before_filter :create_new_friends, on: [:create, :update]
+  before_filter :show_anonymous_warning
 
   # GET /bills
   # GET /bills.xml
