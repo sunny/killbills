@@ -14,24 +14,20 @@ Follow install instructions. Then, create the development database and user:
 
     $ createuser --createdb killbills
 
-### Ruby 1.9.2
+### Ruby 1.9.3
 
-Install ruby 1.9.2 with rvm (`rvm install 1.9.2`) or rbenv.
+Install and use ruby 1.9.3. (Have a look at rbenv or rvm to help you with that.)
 
-Install bundler on this version of ruby.
+If you don't have it already, install the bundler gem on that version of ruby.
 
     $ gem install bundler
-
-### Download
-
-    $ git clone https://github.com/sunny/killbills.git
-    $ cd killbills
 
 ### Install, setup database and launch
 
     $ bundle
     $ rake db:setup
     $ rails s
+
 
 Heroku
 ------
@@ -48,4 +44,3 @@ Pull in the database from heroku:
 
     $ heroku db:pull --confirm killbills
     $ rake db:migrate
-
