@@ -8,8 +8,14 @@ class KillBills.Views.PeopleSelect extends Backbone.View
 
     # Initialisation
     for option in @$('option')
-      friend = { id: $(option).val(), name: $(option).text() }
-      bill.friends.add friend if friend.id
+      friend =
+        id: $(option).val()
+        name: $(option).text()
+
+      if friend.id
+        bill.friends.add friend
+        if $(option).is(':selected')
+          @parent.model.friend = friend.id
 
     @render()
 
@@ -36,7 +42,8 @@ class KillBills.Views.PeopleSelect extends Backbone.View
           selected: friend.get('id') == @parent.model.friend
           value: friend.get('id') || friend.get('name')
           name: friend.get('name')
-        } for friend in bill.friends.models
+          index: index
+        } for index, friend in bill.friends.models
 
     html = JST['templates/participations/participants'](data)
     @$el.html html

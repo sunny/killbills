@@ -5,13 +5,13 @@
 <% if @is_me: %>
   <div class="you">
     You
-    <input id="bill_participations_attributes_0_person_id"
-           name="bill[participations_attributes][0][person_id]"
+    <input id="bill_participations_attributes_<%= @index %>_person_id"
+           name="bill[participations_attributes][<%= @index %>][person_id]"
            type="hidden" value="<%= user_id %>">
   </div>
 <% else: %>
-  <select id="bill_participations_attributes_1_person_id"
-          name="bill[participations_attributes][1][person_id]">
+  <select id="bill_participations_attributes_<%= @index %>_person_id"
+          name="bill[participations_attributes][<%= @index %>][person_id]">
     <option></option>
 
     <% for friend in @friends: %>
