@@ -7,6 +7,7 @@ FactoryGirl.define do
     name "User"
     email
     password "password"
+    currency "USD"
   end
 end
 

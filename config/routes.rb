@@ -1,4 +1,5 @@
 KillBills::Application.routes.draw do
+
   # Admin
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -7,6 +8,7 @@ KillBills::Application.routes.draw do
     devise_for :users
     resources :friends
     resources :bills
+    resource :options, only: [:edit, :update]
   end
 
   # The priority is based upon order of creation:

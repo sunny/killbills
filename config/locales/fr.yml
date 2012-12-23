@@ -24,7 +24,6 @@ fr:
   sign_in: Connexion
   sign_out: Déconnexion
   sign_out_help: Se déconnecter de Kill Bills
-  settings: Configuration
 
   payment: Payment
   share: Share
@@ -92,6 +91,13 @@ fr:
       delete: Supprimer
       delete_confirm: Êtes-vous sûr de vouloir supprimer cet(te) ami(e) ansi que ses notes ?
 
+  options:
+    edit:
+      title: Options
+      updated: Options enregistrées !
+      submit: Enregistrer l'option
+      submitting: Enregistrement…
+
   sessions:
     new:
       title: Qui êtes-vous ?
@@ -102,7 +108,7 @@ fr:
     create:
       title: Créer un compte
     edit:
-      title: Configuration
+      title: Compte
 
   activerecord:
     models:
@@ -114,14 +120,16 @@ fr:
       bill:
         title: Titre
         date: Date
+      friend:
+        name: Nom
       participation:
         payment: Paiement
         owed_type: Dû
         owed_amount: Montant dû
         person_id: Participant
         person: Participant
-      friend:
-        name: Nom
+      user:
+        currency: Unité monétaire
 
 
     errors:
@@ -151,3 +159,7 @@ fr:
         zero: Ne doit rien
         all: Doit tout
         fixed: Montant fixe
+    user:
+      currency:
+        EUR: €
+        USD: $

@@ -1,11 +1,14 @@
 class User < Person
+  include Enumerize
+
   # Associations
   has_many :bills, dependent: :destroy
   has_many :friends, dependent: :destroy
 
   # Attributes
-  attr_accessible :email, :password, :password_confirmation, :remember_me
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  enumerize :currency, in: %w(USD EUR), default: 'USD'
+  attr_accessible :currency, :email, :password, :password_confirmation, :remember_me
 
   # Scopes
   scope :users, where(type: "User")

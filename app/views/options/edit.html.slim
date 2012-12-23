@@ -1,0 +1,9 @@
+h1 = t('.title')
+
+= form_for(@user, as: :user, url: options_path, html: { method: :put }) do |f|
+  .control-group
+    = f.label :currency
+    = f.select :currency, User.currency.options
+
+  .form-actions
+    = f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }

@@ -69,13 +69,13 @@ fr:
         submit: Créer un compte et se connecter
         submitting: Création du compte…
       edit:
-        title: Configuration
+        title: Compte
         email_label: Email
         password_label: Mot de passe
         password_help: (laisser vide si vous ne voulez pas le changer)
         current_password_label: Mot de passe actuel
         current_password_help: (on a besoin que vous confirmiez votre mot de passe actuel pour valider les changements)
-        submit: Mettre à jour
+        submit: Mettre à jour mon compte
         submitting: Mise à jour…
         destroy: Supprimer mon compte
         destroy_submit: "Supprimer mon compte, vider ma liste d'amis, effacer toutes mes notes"

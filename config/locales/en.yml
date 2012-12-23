@@ -24,7 +24,6 @@ en:
   sign_in: Sign in
   sign_out: Sign out
   sign_out_help: Sign out from Kill Bills
-  settings: Settings
 
   payment: Payment
   share: Share
@@ -88,6 +87,12 @@ en:
       delete: Delete
       delete_confirm: Are you sure you want to delete this friend and all of his (or her) bills?
 
+  options:
+    edit:
+      title: Options
+      updated: Options saved!
+      submit: Save your option
+      submitting: Saving…
 
   sessions:
     new:
@@ -99,7 +104,8 @@ en:
     create:
       title: Create an account
     edit:
-      title: Settings
+      title: Account
+
 
   activerecord:
     models:
@@ -111,14 +117,14 @@ en:
       bill:
         title: Title
         date: Date
+      friend:
+        name: Name
       participation:
         payment: Payment
         owed_type: Owed
         owed_amount: Owed amount
         person_id: Participant
         person: Participant
-      friend:
-        name: Name
 
 
   enumerize:
@@ -133,3 +139,7 @@ en:
         zero: Nothing owed
         all: Owes everything
         fixed: Fixed amount
+    user:
+      currency:
+        EUR: €
+        USD: $
