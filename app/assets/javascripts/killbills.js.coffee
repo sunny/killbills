@@ -1,4 +1,4 @@
-window.KillBills =
+@KillBills =
   Models: {}
   Collections: {}
   Routers: {}
