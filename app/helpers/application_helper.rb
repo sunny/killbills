@@ -6,6 +6,10 @@ module ApplicationHelper
     number_to_percentage(amount*100, :precision => 0)
   end
 
+  def user_number_to_currency(number)
+    number_to_currency(number, unit: current_user_or_guest.currency.text)
+  end
+
   def variation(amount)
     if amount > 0
       :positive

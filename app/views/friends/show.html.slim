@@ -8,11 +8,11 @@
 
 - if @friend.debt < 0
   p.result.debt.negative
-    = t 'debt.friend.you_owe', amount: number_to_currency(@friend.debt.abs)
+    = t 'debt.friend.you_owe', amount: user_number_to_currency(@friend.debt.abs)
 
 - elsif @friend.debt > 0
   p.result.debt.positive
-    = t 'debt.friend.owes_you', amount: number_to_currency(@friend.debt.abs)
+    = t 'debt.friend.owes_you', amount: user_number_to_currency(@friend.debt.abs)
 
 h2 = t('bills.index.title')
 p = link_to t('bills.new.title'), new_bill_path(friend: @friend.name), class: "btn"
