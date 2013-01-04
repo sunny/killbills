@@ -11,7 +11,7 @@ class User < Person
   attr_accessible :currency, :email, :password, :password_confirmation, :remember_me
 
   # Scopes
-  scope :users, where(type: "User")
+  scope :users, -> { where(type: "User") }
 
   def me_and_my_friends
     [self, friends.order(:name)].flatten

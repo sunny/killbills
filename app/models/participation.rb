@@ -38,11 +38,11 @@ class Participation < ActiveRecord::Base
     if: :fixed?
 
   # Scopes
-  scope :unshared, where("participations.owed_type != 'even'")
-  scope :shared, where(owed_type: "even")
+  scope :unshared, -> { where("participations.owed_type != 'even'") }
+  scope :shared,   -> { where(owed_type: "even") }
 
-  scope :friends, includes(:person).where(people: { type: 'Friend' })
-  scope :users,   includes(:person).where(people: { type: 'User' })
+  scope :friends, -> { includes(:person).where(people: { type: 'Friend' }) }
+  scope :users,   -> { includes(:person).where(people: { type: 'User' }) }
 
   def shared?
     owed_type == "even"
