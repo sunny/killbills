@@ -1,4 +1,5 @@
-#= require comment
+### Kill Bills
+#= require self
 #
 #= require jquery
 #= require jquery_ujs
