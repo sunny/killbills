@@ -1,8 +1,6 @@
 # A Debt represents what a person owes to someone else.
 # For example, that your friend Hattori owes you 5 €
 class Debt
-  include KillBillsHelper
-
   # TODO rename:
   #   from -> from_id
   #   from_person -> from
@@ -20,7 +18,7 @@ class Debt
   end
 
   def inspect
-    "<Debt #{currencize(amount)} #{from_person.name} to #{to_person.name}>"
+    "<Debt #{amount} #{from_person.name} to #{to_person.name}>"
   end
 
   def diff_for(person_id)

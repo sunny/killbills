@@ -29,7 +29,7 @@ class DebtTest < ActiveSupport::TestCase
     end
 
     should "#inspect" do
-      assert_equal "<Debt $42 O-Ren to Elle>", @debt.inspect
+      assert_equal "<Debt 42.0 O-Ren to Elle>", @debt.inspect
     end
 
     should "#diff_for" do
