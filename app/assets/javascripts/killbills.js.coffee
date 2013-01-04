@@ -1,9 +1,3 @@
-@KillBills =
-  Models: {}
-  Collections: {}
-  Routers: {}
-  Views: {}
-
 
 $(document).ready ->
   $('html').removeClass('nojs').addClass('js')
