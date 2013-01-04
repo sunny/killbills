@@ -1,4 +1,4 @@
-h1 = t '.title'
+%h1= t '.title'
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
@@ -10,21 +10,18 @@ h1 = t '.title'
   .control-group
     = f.label :password, t('.password_label')
     = f.password_field :password
-    span.help-inline = t '.password_help'
+    %span.help-inline= t '.password_help'
 
   .control-group
     = f.label :current_password, t('.current_password_label')
     = f.password_field :current_password
-    span.help-inline = t '.current_password_help'
+    %span.help-inline= t '.current_password_help'
 
   .form-actions
     = f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
 
-h2.title = t('.destroy')
+%h2.title= t('.destroy')
 
 .form-actions
-  = link_to t('.destroy_submit'), registration_path(resource_name), \
-    method: :delete, class: "btn btn-danger", \
-    data: { confirm: t('.destroy_confirm'), \
-    "disable-with" => t('.destroy_submitting') }
+  = link_to t('.destroy_submit'), registration_path(resource_name), method: :delete, class: "btn btn-danger", data: { confirm: t('.destroy_confirm'), "disable-with" => t('.destroy_submitting') }
 

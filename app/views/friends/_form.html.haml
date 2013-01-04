@@ -1,19 +1,17 @@
 = form_for @friend do |f|
   - if @friend.errors.any?
     #error_explanation
-      h2
-        =' pluralize(@friend.errors.count, "error")
-        | prohibited this friend from being saved:
+      %h2= pluralize(@friend.errors.count, "error")
 
-      ul
+      %ul
         - @friend.errors.full_messages.each do |msg|
-          li = msg
+          %li= msg
 
   .control-group
     = f.label :name
     = f.text_field :name
 
   .form-actions
-    =' f.submit class: "btn btn-primary", data: { "disable-with" => t(:updating) }
+    = f.submit class: "btn btn-primary", data: { "disable-with" => t(:updating) }
     = link_to t(:cancel), :back, class: "btn", data: { "disable-with" => t(:cancelling) }
 

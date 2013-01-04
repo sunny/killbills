@@ -1,0 +1,14 @@
+- title t('.title')
+
+%h1= t('.title')
+
+- if @bills.empty?
+
+  %p= t('.empty')
+  %p= link_to t('bills.new.title'), new_bill_path, class: "btn btn-primary"
+
+- else
+
+  .bills.article-list
+    = render @bills
+

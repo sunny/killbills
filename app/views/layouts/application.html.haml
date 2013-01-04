@@ -1,0 +1,86 @@
+!!!
+%html.nojs{ lang: t(:locale) }
+%head
+  %title= page_title
+  = stylesheet_link_tag "application"
+  = csrf_meta_tag
+  %meta(name="viewport" content="width=device-width, initial-scale=1")
+%body
+
+  %nav.navbar
+    .navbar-inner
+      .container
+        = link_to t(:app_name), home_path, class: "brand"
+
+        %ul.nav
+          %li= link_to t('bills.new.title'), new_bill_path
+          %li= link_to t('bills.index.title'), bills_path
+          %li= link_to t('friends.index.title'), friends_path
+
+        %ul.nav.pull-right
+          - if not user_signed_in?
+            %li= link_to t(:create_account), new_user_registration_path
+            %li
+              = link_to user_session_path do
+                %i.icon-user
+                = t :sign_in
+
+          - else
+            %li
+              = link_to destroy_user_session_path, title: t(:sign_out_help) do
+                %i.icon-off
+                = "#{t :sign_out} #{current_user_or_guest.display_name}"
+
+          %li
+            = link_to edit_options_path do
+              %i.icon-cog
+              = t 'options.edit.title'
+
+          %li
+            = link_to edit_user_registration_path do
+              %i.icon-user
+              = t('registrations.edit.title')
+
+
+  .container
+
+    - if flash[:anonymous_warning]
+      .alert
+        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+        = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), user_session_path))
+
+
+    - if alert
+      .alert
+        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+        = alert
+
+
+    - if notice
+      .alert.alert-info
+        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+        = notice
+
+
+    = yield
+
+    %footer
+      %nav.foot-links
+        %ul
+          - %w(en fr).each do |l|
+            %li= link_to t(:locale_label, locale: l), { locale: l }, hreflang: l, title: t(:locale_title, locale: l)
+
+          - if current_user.kind_of?(AdminUser)
+            %li= link_to "admin", admin_dashboard_path
+
+  - if current_user_or_guest# and Rails.env.production?
+    %script#IntercomSettingsScriptTag
+      window.intercomSettings = { app_id: '7uurr05u', email: '#{current_user_or_guest.email}', created_at: #{current_user_or_guest.created_at.to_i}, user_id: #{current_user_or_guest.id} }
+
+  = javascript_include_tag "application", debug: Rails.env.development?
+
+  %script
+    I18n.locale = "#{I18n.locale}"
+    KillBills.user_id = #{current_user_or_guest.id}
+    KillBills.currency = "#{current_user_or_guest.currency.try(:text) || "$"}"
+

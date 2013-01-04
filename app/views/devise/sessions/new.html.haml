@@ -1,4 +1,4 @@
-h1 = t('.title')
+%h1= t('.title')
 
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
@@ -16,8 +16,7 @@ h1 = t('.title')
       = t '.remember_me'
 
   .form-actions
-    = f.submit t('.submit'), class: "btn btn-primary", \
-      data: { "disable-with" => t('.submitting') }
+    = f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
 
 = render :partial => "devise/shared/links"
 

@@ -4,13 +4,14 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.6'
 gem 'activeadmin'
 gem 'devise'
-gem 'slim'
+gem 'haml'
 gem 'dalli'
 gem 'thin'
 gem 'pg'
 gem 'enumerize'
 gem 'exception_notification'
 gem 'strong_parameters'
+#gem 'turbolinks'
 #gem 'cache_digest'
 
 group :assets do
@@ -30,8 +31,10 @@ group :assets do
 end
 
 group :development do
+  # Debugging
   # gem 'rack-mini-profiler'
   # gem 'bullet'
+  # gem 'meta_request'
 
   # Guard
   gem 'guard-test'

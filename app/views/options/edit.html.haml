@@ -1,15 +1,13 @@
-h1 = t('.title')
+%h1= t('.title')
 
 = form_for(@user, as: :user, url: options_path, html: { method: :put }) do |f|
 
   - if @user.errors.any?
     .alert.alert-block.alert-error
-      h2
-        =' t '.errors',  errors: pluralize(@user.errors.count, t(:error))
-
-      ul
+      %h2= t '.errors',  errors: pluralize(@user.errors.count, t(:error))
+      %ul
         - @user.errors.full_messages.each do |msg|
-          li = msg
+          %li= msg
 
   .control-group
     = f.label :currency

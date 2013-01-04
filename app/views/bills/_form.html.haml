@@ -2,31 +2,30 @@
 
   - if @bill.errors.any?
     .alert.alert-block.alert-error
-      h2
-        =' t '.errors',  errors: pluralize(@bill.errors.count, t(:error))
+      %h2= t '.errors',  errors: pluralize(@bill.errors.count, t(:error))
 
-      ul
+      %ul
         - @bill.errors.full_messages.each do |msg|
-          li = msg
+          %li= msg
 
-  fieldset.genre
-    ul.radio-toggles.row
+  %fieldset.genre
+    %ul.radio-toggles.row
       - Bill.genre.options.each do |genre_text, genre|
-        li
-          label
+        %li
+          %label
             = f.radio_button :genre, genre
-            span.btn = genre_text
+            %span.btn= genre_text
 
-  fieldset.participations
+  %fieldset.participations
     = f.fields_for :participations do |p|
-      .row class="participation-#{incrementer!()}"
+      .row{ class: "participation-#{incrementer!()}" }
         .span3.people
 
           - if p.object.person_id == current_user_or_guest.id
 
             .column-label
               = t('bill_form.participant')
-              span.increment = incrementer()
+              %span.increment= incrementer()
 
             .you
               = t :you
@@ -34,13 +33,11 @@
 
           - else
 
-
             = p.label :person_id, class: "column-label" do
               = t('bill_form.participant')
-              span.increment = incrementer()
+              %span.increment = incrementer()
 
-            = p.collection_select :person_id, current_user_or_guest.friends, :id, :name, \
-              { include_blank: p.object.person_id.nil? }
+            = p.collection_select :person_id, current_user_or_guest.friends, :id, :name, { include_blank: p.object.person_id.nil? }
 
         .span2.payment
           = p.label :payment, class: "column-label"
@@ -56,19 +53,15 @@
           .owed-result
 
 
-
-  fieldset.bill-optional
+  %fieldset.bill-optional
     .title.control-group
       = f.label :title
       = f.text_field :title, placeholder: t('bill.title_placeholder')
 
     .date.control-group
       = f.label :date
-      = f.text_field :date, type: "date", size: 10, max: Time.now.to_date, \
-        placeholder: Time.now.to_date
+      = f.text_field :date, type: "date", size: 10, max: Time.now.to_date, placeholder: Time.now.to_date
 
 
   .form-actions
-    =' f.submit class: "btn btn-primary", data: { "disable-with" => t(:updating) }
-
-
+    = f.submit class: "btn btn-primary", data: { "disable-with" => t(:updating) }

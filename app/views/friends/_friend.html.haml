@@ -1,12 +1,11 @@
-
 - cache(friend) do
-  article.friend data-debt=friend.debt
+  %article.friend{ "data-debt" => friend.debt }
     = link_to friend_path(friend), class: "row" do
       .span4.title
-        h2 = friend.name
+        %h2= friend.name
 
       - if friend.debt != 0
-        .span4.owed class=variation(friend.debt)
+        .span4.owed{ class: variation(friend.debt) }
           - if friend.debt < 0
             = t 'debt.friend.you_owe', amount: user_number_to_currency(friend.debt.abs)
           - if friend.debt > 0
