@@ -10,9 +10,9 @@ Install the postgres package for your system. For example on OSX with the brew p
 
     $ brew install postgres
 
-Follow install instructions. Then, create a postgresql user:
+Follow install instructions. Then, create a postgres user:
 
-    $ createuser --createdb postgresql
+    $ createuser --createdb postgres
 
 ### Ruby 1.9.3
 
