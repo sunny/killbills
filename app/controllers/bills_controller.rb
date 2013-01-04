@@ -108,7 +108,7 @@ private
       params[:bill][:participations_attributes].each do |k, participation|
         person_id = participation[:person_id]
         if !person_id.blank? and person_id !~ /^[0-9]+$/
-          friend = current_user_or_guest.friends.find_or_create_by_name(person_id)
+          friend = current_user_or_guest.friends.where(name: person_id).first_or_create!
           params[:bill][:participations_attributes][k][:person_id] = friend.id
         end
       end
