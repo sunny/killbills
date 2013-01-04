@@ -31,6 +31,11 @@ fr:
   credit: Credit
   total: Total
 
+  bill_form:
+    participant: Participant
+    new_participant: Nouveau…
+    new_participation_prompt: "Nom de votre ami :"
+
   anonymous_warning: "Vous êtes actuellement anonyme. Vous devriez %{link} si vous voulez que ce site se souvienne de vos notes pour la prochaine fois."
   anonymous_warning_link: vous connecter
 

@@ -4,7 +4,7 @@ module BillsHelper
   end
 
   def debt_summary(debt, options = {})
-    amount = currencize(debt.amount)
+    amount = user_number_to_currency(debt.amount)
     from = debt.from_person
     to = debt.to_person
 

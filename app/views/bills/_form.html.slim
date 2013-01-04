@@ -25,7 +25,7 @@
           - if p.object.person_id == current_user_or_guest.id
 
             .column-label
-              = Participation.human_attribute_name(:person_id)
+              = t('bill_form.participant')
               span.increment = incrementer()
 
             .you
@@ -36,12 +36,11 @@
 
 
             = p.label :person_id, class: "column-label" do
-              = Participation.human_attribute_name(:person_id)
+              = t('bill_form.participant')
               span.increment = incrementer()
 
             = p.collection_select :person_id, current_user_or_guest.friends, :id, :name, \
-              { include_blank: p.object.person_id.nil? }, \
-              { data: { 'new-value' => t('friend.new'), 'new-value-prompt' => t('friend.new_prompt') } }
+              { include_blank: p.object.person_id.nil? }
 
         .span2.payment
           = p.label :payment, class: "column-label"

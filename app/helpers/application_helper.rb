@@ -1,13 +1,26 @@
 # encoding: utf-8
 module ApplicationHelper
-  include KillBillsHelper
-
   def ratio(amount)
     number_to_percentage(amount*100, :precision => 0)
   end
 
-  def user_number_to_currency(number)
-    number_to_currency(number, unit: current_user_or_guest.currency.text)
+  # Rely on current user to show an amount in the correct unit
+  def user_number_to_currency(number, options = {})
+    options = options.merge({ unit: current_user_or_guest.currency.text })
+    number_to_currency_without_double_zeros(number, options)
+  end
+
+  # number_to_currency that removes trailing .00 but keeps .20
+  def number_to_currency_without_double_zeros(number, options = {})
+    formatted_number = number_to_currency(number, options)
+
+    defaults           = I18n.translate(:'number.format', :locale => options[:locale], :default => {})
+    precision_defaults = I18n.translate(:'number.precision.format', :locale => options[:locale], :default => {})
+    defaults           = defaults.merge(precision_defaults)
+    options = options.reverse_merge(defaults)
+
+    escaped_separator = Regexp.escape(options[:separator])
+    formatted_number.sub(/(#{escaped_separator})00/, '\1').sub(/#{escaped_separator}/, '')
   end
 
   def variation(amount)

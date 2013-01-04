@@ -1,15 +1,13 @@
 # Console logger
-window.log = ->
+@log = ->
   console?.log?(arguments...)
 
 # Number with it's currency
-window.currencize = (number) ->
-  # encoded "€" because of a CoffeeScript encoding error
-  # currency = decodeURIComponent('%E2%82%AC')
-  '$' + round(number)
+@currencize = (number) ->
+  I18n.toCurrency(number, unit: KillBills.currency, strip_insignificant_zeros: true)
 
 # Rounding a number with a given number of decimals
-window.round = (number, decimals = 2) ->
+@round = (number, decimals = 2) ->
   pow = Math.pow(10, decimals)
   Math.round(number * pow) / pow
 

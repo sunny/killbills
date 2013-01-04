@@ -26,6 +26,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'rails-backbone'
   gem 'eco'
+  gem 'i18n-js'
 end
 
 group :development do

@@ -25,7 +25,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
   selectTouch: (event) ->
     # Clicked on "New…"
     if event.target.selectedIndex == event.target.length - 1
-      name = prompt(locales.current.participants.new_prompt)
+      name = prompt(I18n.t('bill_form.new_participation_prompt'))
       if !name
         event.target.selectedIndex = 0
         return

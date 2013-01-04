@@ -17,8 +17,8 @@
 #= require pies
 #= require helpers
 #
-#= require ./locales/locales
-#= require_tree ./locales
+#= require i18n
+#= require i18n/translations
 #
 #= require_tree ./models
 #= require_tree ./collections

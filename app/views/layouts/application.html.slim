@@ -80,10 +80,14 @@ body
           - if current_user.kind_of?(AdminUser)
             li = link_to "admin", admin_dashboard_path
 
-  javascript:
-    window.user_id = #{current_user_or_guest.id}
-
-  - if current_user and Rails.env.production?
-    = "<script id='IntercomSettingsScriptTag'>window.intercomSettings={app_id:'7uurr05u', email:'#{current_user.email}', created_at:#{current_user.created_at.to_i}, user_id: #{current_user.id}, widget: {activator: '#intercom'}}</script>".html_safe
+  - if current_user_or_guest# and Rails.env.production?
+    script#IntercomSettingsScriptTag
+      | window.intercomSettings = { app_id: '7uurr05u', email: '#{current_user_or_guest.email}', created_at: #{current_user_or_guest.created_at.to_i}, user_id: #{current_user_or_guest.id}, widget: { activator: '#intercom' }}
 
   = javascript_include_tag "application", debug: Rails.env.development?
+
+  script
+    | I18n.locale = "#{I18n.locale}";
+    | KillBills.user_id = #{current_user_or_guest.id};
+    | KillBills.currency = "#{current_user_or_guest.currency.text}"
+

@@ -30,6 +30,9 @@ KillBills::Application.configure do
   # Action Mailer options
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
+  # Precompile during dev
+  config.assets.initialize_on_precompile = true
+
   # Do not compress assets
   config.assets.compress = false
 
