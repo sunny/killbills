@@ -9,6 +9,7 @@ Enter who payed for what, forget about it, and later on know for each of your fr
 
 A bit like billmonk.com, only with more ninja swords.
 
+![Travis-CI Status](https://api.travis-ci.org/sunny/killbills.png)
 
 Development Setup
 -----------------
