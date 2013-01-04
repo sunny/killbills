@@ -88,7 +88,7 @@ KillBills::Application.configure do
   # ExceptionNotifier
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[KillBills] ",
-    :sender_address => %{"Sunny" <sunny@sunfox.org>},
-    :exception_recipients => %w{sunny@sunfox.org}
+    :sender_address => %{"Kill Bills" <killbillsapp@gmail.com>},
+    :exception_recipients => %w{killbillsapp@gmail.com}
 end
 

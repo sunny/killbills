@@ -4,10 +4,7 @@ class User < Person
   has_many :friends, dependent: :destroy
 
   # Attributes
-  include Enumerize
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  enumerize :currency, in: %w(USD EUR), default: 'USD'
-  attr_accessible :currency, :email, :password, :password_confirmation, :remember_me
 
   # Scopes
   scope :users, -> { where(type: "User") }

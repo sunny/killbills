@@ -172,7 +172,7 @@ fr:
         zero: Ne doit rien
         all: Doit tout
         fixed: Montant fixe
-    user:
+    person:
       currency:
         EUR: €
         USD: $

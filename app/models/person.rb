@@ -4,6 +4,8 @@ class Person < ActiveRecord::Base
 
   # Attributes
   include ActiveModel::ForbiddenAttributesProtection
+  include Enumerize
+  enumerize :currency, in: %w(USD EUR), default: 'USD'
 
   def display_name
     name || email

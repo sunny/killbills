@@ -6,7 +6,8 @@ module ApplicationHelper
 
   # Rely on current user to show an amount in the correct unit
   def user_number_to_currency(number, options = {})
-    options = options.merge({ unit: current_user_or_guest.currency.text })
+    unit = current_user_or_guest.currency.try(:text) || "$"
+    options = options.merge({ unit: unit })
     number_to_currency_without_double_zeros(number, options)
   end
 
@@ -20,7 +21,7 @@ module ApplicationHelper
     options = options.reverse_merge(defaults)
 
     escaped_separator = Regexp.escape(options[:separator])
-    formatted_number.sub(/(#{escaped_separator})00/, '\1').sub(/#{escaped_separator}/, '')
+    formatted_number.to_s.sub(/(#{escaped_separator})00/, '\1').sub(/#{escaped_separator}/, '')
   end
 
   def variation(amount)

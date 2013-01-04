@@ -151,7 +151,7 @@ en:
         zero: Nothing owed
         all: Owes everything
         fixed: Fixed amount
-    user:
+    person:
       currency:
         EUR: €
         USD: $

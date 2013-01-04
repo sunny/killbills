@@ -89,5 +89,5 @@ body
   script
     | I18n.locale = "#{I18n.locale}";
     | KillBills.user_id = #{current_user_or_guest.id};
-    | KillBills.currency = "#{current_user_or_guest.currency.text}"
+    | KillBills.currency = "#{current_user_or_guest.currency.try(:text) || "$"}"
 

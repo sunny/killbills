@@ -48,6 +48,12 @@ Heroku
     $ heroku config:set GMAIL_SMTP_USER="username@gmail.com"
     $ heroku config:set GMAIL_SMTP_PASSWORD="yourpassword"
 
+### Deploying
+
+Before pushing to heroku, export and commit all js i18n:
+
+    $ rake i18n:js:export
+
 ### Pulling the database
 
 Pull in the database from heroku:
