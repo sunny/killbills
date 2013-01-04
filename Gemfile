@@ -34,7 +34,7 @@ group :development do
   # Debugging
   # gem 'rack-mini-profiler'
   # gem 'bullet'
-  # gem 'meta_request'
+  gem 'meta_request'
 
   # Guard
   gem 'guard-test'
