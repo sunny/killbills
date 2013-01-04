@@ -4,21 +4,21 @@ Installing
 Development Setup
 -----------------
 
-### Postgresql
+### PostgreSQL
 
 Install the postgres package for your system. For example on OSX with the brew package manager:
 
     $ brew install postgres
 
-Follow install instructions. Then, create the development database and user:
+Follow install instructions. Then, create a postgresql user:
 
-    $ createuser --createdb killbills
+    $ createuser --createdb postgresql
 
 ### Ruby 1.9.3
 
-Install and use ruby 1.9.3. (Have a look at rbenv or rvm to help you with that.)
+Install and use ruby 1.9.3. Have a look at rbenv or rvm to help you with that.
 
-If you don't have it already, install the bundler gem on that version of ruby.
+Also, install the bundler gem on that version of ruby.
 
     $ gem install bundler
 
@@ -42,5 +42,5 @@ Heroku
 
 Pull in the database from heroku:
 
-    $ heroku db:pull --confirm killbills
+    $ heroku db:pull
     $ rake db:migrate

@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: killbills
+  username: postgresql
   password:
   database: killbills_development
 
@@ -10,6 +10,6 @@ test:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: killbills
+  username: postgresql
   password:
   database: killbills_test
