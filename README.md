@@ -38,6 +38,14 @@ Also, install the bundler gem on that version of ruby.
     $ rake db:setup
     $ rails s
 
+Memcached
+---------
+
+To test the production cache with Dalli, start by installing memcached. On OSX with brew:
+
+    $ brew install memcached
+
+Follow instructions to launch it. You can then enable caching in `development.rb`.
 
 Heroku
 ------

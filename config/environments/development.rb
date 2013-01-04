@@ -12,11 +12,9 @@ KillBills::Application.configure do
   # Show full error reports
   config.consider_all_requests_local = true
 
-  # Disable caching in controllers
+  # Disable caching
+  config.cache_store = :null_store
   config.action_controller.perform_caching = false
-
-  # Disable caching everywhere
-  config.cache_store = BlackHoleStore.new
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false

@@ -21,7 +21,7 @@ KillBills::Application.configure do
   config.action_controller.perform_caching = false
 
   # Disable caching everywhere
-  config.cache_store = BlackHoleStore.new
+  config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
