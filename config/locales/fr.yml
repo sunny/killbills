@@ -101,6 +101,8 @@ fr:
       updated: Options enregistrées !
       submit: Enregistrer l'option
       submitting: Enregistrement…
+    update:
+      title: Options
 
   sessions:
     new:

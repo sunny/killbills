@@ -97,6 +97,8 @@ en:
       updated: Options saved!
       submit: Save your option
       submitting: Saving…
+    update:
+      title: Options
 
   sessions:
     new:
