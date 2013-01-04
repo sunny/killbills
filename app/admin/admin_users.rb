@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ActiveAdmin.register AdminUser, as: "Administrator" do
-  menu priority: 20, parent: "Person"
+  menu priority: 20, parent: "People"
 
   filter :email
   filter :created_at

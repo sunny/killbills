@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ActiveAdmin.register User, as: "User" do
-  menu priority: 10, parent: "Person"
+  menu parent: "People", priority: 1
 
   scope :users, default: true
 
@@ -10,12 +10,15 @@ ActiveAdmin.register User, as: "User" do
   filter :last_sign_in_at, as: :date_range
   filter :created_at, as: :date_range
 
-  index do
+  index as: :grid do |user|
     column :email
     column :name
     column :sign_in_count
     column :last_sign_in_at
     column :created_at
+        column :bills do |guest|
+      link_to pluralize(guest.bills.count, "Bill"), admin_bills_path(q: { user_id_eq: guest })
+    end
     default_actions
   end
 

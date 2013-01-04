@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ActiveAdmin.register Friend, as: "Friend" do
-  menu parent: "Person"
+  menu parent: "People"
 
   filter :name
   filter :user

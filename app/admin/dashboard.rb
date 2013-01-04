@@ -2,12 +2,17 @@
 ActiveAdmin.register_page "Dashboard" do
   menu priority: 1
 
+  action_item do
+    link_to "View site", "/"
+  end
+
   content do
     section "Numbers" do
       ul do
-        li "#{User.count} users"
-        li "#{Bill.count} bills"
-        li "#{Friend.count} friends"
+        li link_to(pluralize(User.users.count, "user"), admin_users_path)
+        li link_to(pluralize(Guest.count, "guest"), admin_guests_path)
+        li link_to(pluralize(Friend.count, "friend"), admin_friends_path)
+        li link_to(pluralize(Bill.count, "bill"), admin_bills_path)
         li "#{Participation.sum(:payment)}$ shared"
       end
     end
