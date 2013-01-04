@@ -4,7 +4,7 @@ class Guest < User
   end
 
   # Create without user validations
-  def self.create
+  def self.create(*params)
     Guest.new.tap { |g| g.save!(validate: false) }
   end
 end
