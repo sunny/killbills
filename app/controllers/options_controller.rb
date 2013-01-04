@@ -6,7 +6,7 @@ class OptionsController < ApplicationController
   def update
     @user = current_user_or_guest
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         format.html { redirect_to(edit_options_path, notice: t('options.edit.updated')) }
         format.xml  { head :ok }
         format.json  { head :ok }
@@ -17,4 +17,10 @@ class OptionsController < ApplicationController
       end
     end
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:currency)
+    end
 end

@@ -1,17 +1,15 @@
 include ApplicationHelper
 
 class Bill < ActiveRecord::Base
-  include KillBillsHelper
-  include Enumerize
-
   # Associations
   belongs_to :user
   has_many :participations, dependent: :destroy
   has_many :people, through: :participations
 
   # Attributes
+  include ActiveModel::ForbiddenAttributesProtection
+  include Enumerize
   enumerize :genre, in: [:debt, :payment, :shared], default: :debt
-  attr_accessible :title, :date, :genre, :participations_attributes
   accepts_nested_attributes_for :participations
 
   # Hooks

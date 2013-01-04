@@ -1,12 +1,12 @@
 class Participation < ActiveRecord::Base
-  include Enumerize
-
   # Associations
   belongs_to :bill, touch: true
   belongs_to :person
   has_one :user, through: :bill
 
   # Attributes
+  include Enumerize
+  include ActiveModel::ForbiddenAttributesProtection
   enumerize :owed_type, in: [:even, :zero, :all, :fixed], default: :even
 
   # Hooks

@@ -41,7 +41,7 @@ class FriendsController < ApplicationController
 
   # POST /friends
   def create
-    @friend = current_user_or_guest.friends.new(params[:friend])
+    @friend = current_user_or_guest.friends.new(friend_params)
 
     respond_to do |format|
       if @friend.save
@@ -59,7 +59,7 @@ class FriendsController < ApplicationController
     @friend = current_user_or_guest.friends.find(params[:id])
 
     respond_to do |format|
-      if @friend.update_attributes(params[:friend])
+      if @friend.update_attributes(friend_params)
         format.html { redirect_to(@friend, notice: t('friend.updated')) }
         format.xml  { head :ok }
       else
@@ -79,4 +79,10 @@ class FriendsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+    def friend_params
+      params.require(:friend).permit(:name)
+    end
 end

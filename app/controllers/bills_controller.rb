@@ -1,5 +1,4 @@
 class BillsController < ApplicationController
-  before_filter :create_new_friends, on: [:create, :update]
   before_filter :show_anonymous_warning
 
   # GET /bills
@@ -53,7 +52,7 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.xml
   def create
-    @bill = current_user_or_guest.bills.new(params[:bill])
+    @bill = current_user_or_guest.bills.new(bill_params)
 
     respond_to do |format|
       if @bill.save
@@ -74,7 +73,7 @@ class BillsController < ApplicationController
     @bill = current_user_or_guest.bills.find(params[:id])
 
     respond_to do |format|
-      if @bill.update_attributes(params[:bill])
+      if @bill.update_attributes(bill_params)
         format.html { redirect_to(@bill, notice: t('bill.updated')) }
         format.xml  { head :ok }
         format.json  { head :ok }
@@ -102,17 +101,26 @@ class BillsController < ApplicationController
 
 private
 
+  def bill_params
+    # Sanitize params
+    bill_params = params.require(:bill).permit(:title, :date, :genre,
+      participations_attributes: [:person_id, :payment, :owed_type, :owed_amount, :owed_percent, :id]
+    )
 
-  def create_new_friends
-    if params[:bill] and params[:bill][:participations_attributes]
-      params[:bill][:participations_attributes].each do |k, participation|
+    # Create friends if given a name instead of a person_id
+    participations_attributes = bill_params[:participations_attributes]
+
+    if participations_attributes
+      participations_attributes.each do |index, participation|
         person_id = participation[:person_id]
-        if !person_id.blank? and person_id !~ /^[0-9]+$/
+        if person_id !~ /^([0-9]+|)$/
           friend = current_user_or_guest.friends.where(name: person_id).first_or_create!
-          params[:bill][:participations_attributes][k][:person_id] = friend.id
+          participations_attributes[index][:person_id] = friend.id
         end
       end
     end
+
+    bill_params
   end
 end
 

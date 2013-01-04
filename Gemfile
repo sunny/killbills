@@ -10,6 +10,7 @@ gem 'thin'
 gem 'pg'
 gem 'enumerize'
 gem 'exception_notification'
+gem 'strong_parameters'
 #gem 'cache_digest'
 
 group :assets do
