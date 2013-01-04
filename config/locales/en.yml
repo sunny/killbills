@@ -65,6 +65,8 @@ en:
       title: New bill
     edit:
       title: Edit bill
+    update:
+      title: Edit bill
     form:
       errors: "Oops, %{errors}:"
 
@@ -80,6 +82,8 @@ en:
     new:
       title: New friend
     edit:
+      title: Rename friend
+    update:
       title: Rename friend
     show:
       title: Friend
@@ -105,7 +109,8 @@ en:
       title: Create an account
     edit:
       title: Account
-
+    update:
+      title: Account
 
   activerecord:
     models:
