@@ -36,7 +36,7 @@ class Bill < ActiveRecord::Base
   # - "Debt to Bill"
   # - "Shared to Vernita and Nikki"
   def title
-    title = read_attribute(:title)
+    title = self.read_attribute(:title)
     if title.blank?
       I18n.t("debt.name.#{direction}", genre: genre.text, friends: friend_names.to_sentence)
     else
@@ -50,8 +50,11 @@ class Bill < ActiveRecord::Base
   # - "from" : if friend is in debt
   # - "to" : if user is in debt
   # - "with" : if more than one friend
+  # - "other"
   def direction
-    if genre.debt?
+    if debt.nil?
+      "other"
+    elsif genre.debt?
       debt.to == user_id ? "from" : "to"
     elsif genre.payment?
       debt.to == user_id ? "to" : "from"
@@ -97,7 +100,7 @@ class Bill < ActiveRecord::Base
 
     participations = self.participations.to_a
 
-    return [] if participations.empty?
+    return [] if participations.empty? or participations.size == 1
 
     # Debt
     if genre.debt?

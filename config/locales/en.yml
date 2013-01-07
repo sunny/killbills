@@ -44,6 +44,7 @@ en:
       from: "%{genre} from %{friends}"
       to: "%{genre} to %{friends}"
       with: "%{genre} with %{friends}"
+      other: "%{genre}"
     summary:
       you_owe: "You owe %{to} %{amount}"
       owes_you: "%{from} owes you %{amount}"

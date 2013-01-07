@@ -66,7 +66,7 @@ Before pushing to heroku, export and commit all js i18n:
 
 Pull in the database from heroku:
 
-    $ heroku db:pull
+    $ bundle exec heroku db:pull
     $ rake db:migrate
 
 TODO

@@ -10,22 +10,24 @@ ActiveAdmin.register User, as: "User" do
   filter :last_sign_in_at, as: :date_range
   filter :created_at, as: :date_range
 
-  index as: :grid do |user|
+  index as: :table do |user|
     column :email
-    column :name
-    column :sign_in_count
-    column :last_sign_in_at
-    column :created_at
-        column :bills do |guest|
+    column :bills do |guest|
       link_to pluralize(guest.bills.count, "Bill"), admin_bills_path(q: { user_id_eq: guest })
     end
+    column "Signed in", :sign_in_count
+    column :last_sign_in_at
+    column :created_at
     default_actions
   end
 
   show do |user|
     attributes_table do
       row :email
-      row :name
+      row :type
+      row :bills do
+        link_to pluralize(user.bills.count, "Bill"), admin_bills_path(q:{ user_id_eq: user.id })
+      end
       row :created_at
       row :updated_at
       row :reset_password_token
@@ -36,9 +38,6 @@ ActiveAdmin.register User, as: "User" do
       row :last_sign_in_at
       row :current_sign_in_ip
       row :last_sign_in_ip
-      row :bills do
-        link_to "#{user.bills.count} Bills", admin_bills_path(q:{ user_id_eq: 878662715})
-      end
     end
 
     active_admin_comments

@@ -18,15 +18,21 @@ ActiveAdmin.register Participation, as: "Participation" do
   index do
     column :bill, sortable: :bill_id
     column :user do |p|
-      link_to p.user.display_name, [:admin, p.user]
+      if p.user
+        link_to p.user.display_name, admin_user_path(p.user)
+      end
     end
     column :person, sortable: :person_id do |p|
-      link_to p.person.display_name, [:admin, p.person]
+      if p.person_id
+        link_to p.person_id, admin_friend_path(p.person_id)
+      end
     end
     column :payment, sortable: :payment do |p|
       number_to_currency p.payment
     end
-    column :owed
+    column :owed_type, sortable: :owed_type do |p|
+      p.owed_type.text
+    end
     column "Owed ¤", :owed_amount, sortable: :owed_amount do |p|
       number_to_currency p.owed_amount
     end
