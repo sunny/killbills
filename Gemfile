@@ -11,8 +11,8 @@ gem 'pg'
 gem 'enumerize'
 gem 'exception_notification'
 gem 'strong_parameters'
-#gem 'turbolinks'
-#gem 'cache_digest'
+# gem 'turbolinks'
+# gem 'cache_digest'
 
 group :assets do
   # CSS
@@ -32,9 +32,12 @@ end
 
 group :development do
   # Debugging
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
   # gem 'rack-mini-profiler'
   # gem 'bullet'
-  gem 'meta_request'
+  # gem 'debugger'
 
   # Guard
   gem 'guard-test'

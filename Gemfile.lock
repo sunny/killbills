@@ -49,12 +49,17 @@ GEM
       activesupport (>= 3.0.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     bootstrap-sass (2.0.4.0)
     bourbon (2.1.2)
       sass (>= 3.2)
       thor
     builder (3.0.4)
     chunky_png (1.2.6)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -280,6 +285,8 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  better_errors
+  binding_of_caller
   bootstrap-sass
   coffee-rails
   compass-rails
