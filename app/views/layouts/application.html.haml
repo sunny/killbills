@@ -86,10 +86,6 @@
             %li= link_to "admin", admin_dashboard_path
 
 
-  - if current_user_or_guest# and Rails.env.production?
-    %script#IntercomSettingsScriptTag
-      window.intercomSettings = { app_id: '7uurr05u', email: '#{current_user_or_guest.email}', created_at: #{current_user_or_guest.created_at.to_i}, user_id: #{current_user_or_guest.id} }
-
   = javascript_include_tag "application", debug: Rails.env.development?
   = browserid_js_tag
   %script
