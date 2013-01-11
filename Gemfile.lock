@@ -115,6 +115,9 @@ GEM
       faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
     ffi (1.0.11)
+    font-awesome-sass-rails (3.0.0.1)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     fssm (0.2.9)
@@ -227,7 +230,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (0.9.9)
-    sass (3.2.3)
+    sass (3.2.5)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -306,6 +309,7 @@ DEPENDENCIES
   enumerize
   exception_notification
   factory_girl_rails
+  font-awesome-sass-rails
   guard-livereload
   guard-pow
   guard-test
