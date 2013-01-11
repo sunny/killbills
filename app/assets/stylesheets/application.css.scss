@@ -212,3 +212,29 @@ nav.auth {
 }
 
 
+// Fetching
+
+.page-container {
+  @include transition(opacity 1s ease);
+
+  .fetching & {
+    opacity: .3;
+  }
+}
+
+.navbar .fresh {
+  margin: 10px 0;
+  font-size: 22px;
+  color: transparent;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
+
+  .fetching & {
+    .icon-refresh {
+      color: darken($color, 20%);
+    }
+  }
+
+}

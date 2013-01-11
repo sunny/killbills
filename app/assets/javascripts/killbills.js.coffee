@@ -1,4 +1,4 @@
-# Let CSS know about JS presence
+# Let CSS know that there is JS
 $(document).one 'ready', ->
   $('html').removeClass('nojs').addClass('js')
 
@@ -17,6 +17,13 @@ $(document).on "page:change", ->
 # Friends
 $(document).ready ->
   $('#pies').friendsPies('.friend')
+
+
+# Add a fetching class while turbolink operates
+$(document).on 'page:fetch', ->
+  $('html').addClass('fetching')
+$(document).on 'page:change', ->
+  $('html').removeClass('fetching')
 
 
 # Make sure hitting "Previous page" does not show the disabled text

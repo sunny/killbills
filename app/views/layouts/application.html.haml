@@ -5,8 +5,7 @@
   = stylesheet_link_tag "application"
   = csrf_meta_tag
   %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
-%body
-
+%body{ "data-no-turbolink" => request.post? }
   %nav.navbar
     .navbar-inner
       .container
@@ -20,6 +19,9 @@
 
 
         %ul.nav.pull-right
+          %li.fresh
+            %i.icon-refresh.icon-spin
+
           - if not user_signed_in?
 
             %li
@@ -53,8 +55,7 @@
                       = t :sign_out
 
 
-
-  .container
+  .container.page-container
 
     - if flash[:anonymous_warning]
       .alert
