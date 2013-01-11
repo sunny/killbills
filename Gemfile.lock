@@ -59,6 +59,8 @@ GEM
       sass (>= 3.2)
       thor
     builder (3.0.4)
+    cache_digests (0.2.0)
+      actionpack (>= 3.2)
     chunky_png (1.2.6)
     coderay (1.0.8)
     coffee-rails (3.2.2)
@@ -292,6 +294,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  cache_digests
   coffee-rails
   compass-rails
   dalli

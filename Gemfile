@@ -13,7 +13,7 @@ gem 'enumerize'
 gem 'exception_notification'
 gem 'strong_parameters'
 # gem 'turbolinks'
-# gem 'cache_digest'
+gem 'cache_digests'
 
 group :assets do
   # CSS
