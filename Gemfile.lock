@@ -273,6 +273,8 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (0.6.1)
+      coffee-rails
     twitter-stream (0.1.16)
       eventmachine (>= 0.12.8)
       http_parser.rb (~> 0.5.1)
@@ -321,5 +323,6 @@ DEPENDENCIES
   strong_parameters
   taps
   thin
+  turbolinks
   uglifier
   yui-compressor

@@ -20,7 +20,6 @@
     = f.fields_for :participations do |p|
       .row{ class: "participation-#{incrementer!()}" }
         .span3.people
-
           - if p.object.person_id == current_user_or_guest.id
 
             .column-label

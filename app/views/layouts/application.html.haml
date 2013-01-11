@@ -86,7 +86,7 @@
             %li= link_to "admin", admin_dashboard_path
 
 
-  = javascript_include_tag "application", debug: Rails.env.development?
+  = javascript_include_tag "application", debug: Rails.env.development?, data: (Rails.env.production? ? { "turbolinks-track" => true } : nil)
   = browserid_js_tag
   %script
     I18n.locale = "#{I18n.locale}"

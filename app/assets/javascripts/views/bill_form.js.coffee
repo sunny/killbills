@@ -5,6 +5,7 @@ class KillBills.Views.BillForm extends Backbone.View
     "click .radio-toggles input": "tab"
 
   initialize: ->
+    @model = new KillBills.Models.Bill()
     @model.on 'change:genre', @updateGenre, this
     @model.set 'genre', @$('.genre input:checked').val()
     @updateGenre()

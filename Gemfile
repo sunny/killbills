@@ -2,17 +2,18 @@ ruby '1.9.3'
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
+gem 'pg'
 gem 'activeadmin'
+gem 'enumerize'
 gem 'devise'
-gem 'haml'
 gem 'devise_browserid_authenticatable'
+gem 'haml'
 gem 'dalli'
 gem 'thin'
-gem 'pg'
-gem 'enumerize'
 gem 'exception_notification'
+
 gem 'strong_parameters'
-# gem 'turbolinks'
+gem 'turbolinks'
 gem 'cache_digests'
 
 group :assets do

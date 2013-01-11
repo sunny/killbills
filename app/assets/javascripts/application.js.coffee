@@ -2,6 +2,7 @@
 #
 #= require_self
 #
+#// Gems
 #= require jquery
 #= require jquery_ujs
 #= require underscore
@@ -10,27 +11,29 @@
 #= require bootstrap-button
 #= require bootstrap-collapse
 #= require bootstrap-dropdown
+#= require turbolinks
+#= require i18n
+#= require i18n/translations
 #
-#= require intercom
+#// Vendor
 #= require raphael
 #= require g.raphael
 #= require g.pie
 #
+#// Helpers
 #= require pies
 #= require helpers
 #
-#= require i18n
-#= require i18n/translations
-#
+#// App
 #= require_tree ./models
 #= require_tree ./collections
 #= require_tree ./views
 #= require_tree ./templates
 #= require killbills
 
-@KillBills =
+@KillBills ||=
   Models: {}
   Collections: {}
   Routers: {}
   Views: {}
-
+  topView: null
