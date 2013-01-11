@@ -8,6 +8,7 @@
 #= require backbone
 #= require bootstrap-alert
 #= require bootstrap-button
+#= require bootstrap-collapse
 #
 #= require intercom
 #= require raphael

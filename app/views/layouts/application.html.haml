@@ -4,7 +4,7 @@
   %title= page_title
   = stylesheet_link_tag "application"
   = csrf_meta_tag
-  %meta(name="viewport" content="width=device-width, initial-scale=1")
+  %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
 %body
 
   %nav.navbar
@@ -12,12 +12,19 @@
       .container
         = link_to t(:app_name), home_path, class: "brand"
 
-        %ul.nav
+
+        %ul.nav.pull-left
           %li= link_to t('bills.new.title'), new_bill_path
           %li= link_to t('bills.index.title'), bills_path
           %li= link_to t('friends.index.title'), friends_path
 
-        %ul.nav.pull-right
+        %div.pull-right
+          %a.btn.btn-small.btn-navbar{ "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
+            %i.icon-bar
+            %i.icon-bar
+            %i.icon-bar
+
+        %ul.nav.pull-right.nav-collapse
           - if not user_signed_in?
             %li= link_to t(:create_account), new_user_registration_path
             %li
@@ -36,10 +43,11 @@
               %i.icon-cog
               = t 'options.edit.title'
 
-          %li
-            = link_to edit_user_registration_path do
-              %i.icon-user
-              = t('registrations.edit.title')
+          - if user_signed_in?
+            %li
+              = link_to edit_user_registration_path do
+                %i.icon-user
+                = t('registrations.edit.title')
 
 
   .container

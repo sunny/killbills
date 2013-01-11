@@ -1,13 +1,6 @@
 // Fix to bootstrap-responsive
 // ---------------------------
 
-// Tablets and Below
-@media (max-width: 979px) {
-  .navbar .nav {
-    clear: left;
-  }
-}
-
 .navbar-inner {
   border-radius: 0.0;
 }
@@ -19,4 +12,54 @@
   }
 }
 
+
+body {
+  @media (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.container {
+  @media (max-width: 767px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.hero-unit {
+  @media (max-width: 360px) {
+    padding: 1em 10%;
+  }
+}
+.navbar .nav > li > a {
+  @media (max-width: 370px) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+.navbar-inner {
+  @media (max-width: 370px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+.navbar .brand {
+  @media (max-width: 370px) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+.navbar .btn-navbar {
+  margin-bottom: 5px;
+}
+
+.navbar .nav.pull-right.nav-collapse {
+  @media (max-width: 600px) {
+    float: none;
+  }
+  li {
+    clear: left;
+  }
+}
 
