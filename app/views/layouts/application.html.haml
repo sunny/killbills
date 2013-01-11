@@ -59,7 +59,7 @@
     - if flash[:anonymous_warning]
       .alert
         %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
-        = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), user_session_path))
+        = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), '#', data: { 'persona-login' => true }))
 
 
     - if alert
