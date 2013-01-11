@@ -6,7 +6,7 @@ class KillBills.Models.Bill extends Backbone.Model
     title: ""
 
   initialize: ->
-    @participations = new KillBills.Collections.Participations
+    @participations = new KillBills.Collections.Participations([], bill: @)
     @friends = new KillBills.Collections.Friends
     @on 'change:participations', @updateOwedResults, this
 
@@ -34,3 +34,6 @@ class KillBills.Models.Bill extends Backbone.Model
       when "all"        then @total
       when "fixed"      then participation.get('owed_amount')
       #when "percentage" then @total * participation.get('owed_percent') / 100
+
+  teardown: ->
+    @off 'change:participations', @updateOwedResults, this

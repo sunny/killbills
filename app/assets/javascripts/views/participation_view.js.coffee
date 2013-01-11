@@ -33,3 +33,7 @@ class KillBills.Views.ParticipationView extends Backbone.View
   updateOwedResult: (_, value) ->
     text = currencize value
     @$('.owed-result').text(text)
+
+  teardown: ->
+    @model.off 'change:owed_result', @updateOwedResult, this
+    @model.off 'change:owed_type', @updateOwedType, this

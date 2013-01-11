@@ -18,3 +18,6 @@ class KillBills.Views.BillForm extends Backbone.View
 
   updateGenre: ->
     @$el.replaceClasses(@model.get('genre'), @model.GENRES)
+
+  teardown: ->
+    @model.off 'change:genre', @updateGenre

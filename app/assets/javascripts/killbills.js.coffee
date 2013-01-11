@@ -4,8 +4,9 @@ $(document).ready ->
 
   # Bill form
   if $('#bill-form').length >= 1
-    window.bill = new KillBills.Models.Bill()
-    new KillBills.Views.BillForm(model: bill)
+    new KillBills.Views.BillForm(
+      model: new KillBills.Models.Bill()
+    )
 
   # Friends list
   $('#pies').friendsPies('.friend')

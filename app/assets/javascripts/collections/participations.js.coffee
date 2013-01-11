@@ -2,8 +2,9 @@ class KillBills.Collections.Participations extends Backbone.Collection
   model: KillBills.Models.Participation
 
   initialize: (collection, options) ->
+    @bill = options.bill
     @on "change", =>
-      bill.trigger('change:participations')
+      @bill.trigger('change:participations')
 
   totalPayment: ->
     @reduce((memo, participation) ->

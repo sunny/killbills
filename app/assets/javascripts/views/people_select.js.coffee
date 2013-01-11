@@ -6,6 +6,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
     @parent = options.parent
     @is_me = !@$('select')[0]
     @index = options.index
+    @bill = @parent.model.collection.bill
 
     # Initialisation
     for option in @$('option')
@@ -14,13 +15,13 @@ class KillBills.Views.PeopleSelect extends Backbone.View
         name: $(option).text()
 
       if friend.id
-        bill.friends.add friend
+        @bill.friends.add friend
         if $(option).is(':selected')
           @parent.model.friend = friend.id
 
     @render()
 
-    bill.friends.on('change', @render, this)
+    @bill.friends.on('change', @render, this)
 
   selectTouch: (event) ->
     # Clicked on "New…"
@@ -30,7 +31,7 @@ class KillBills.Views.PeopleSelect extends Backbone.View
         event.target.selectedIndex = 0
         return
 
-      friend = bill.friends.add({ name: name })
+      friend = @bill.friends.add({ name: name })
       @parent.model.set('friend', friend)
       @render()
       @$('select').focus()
@@ -44,7 +45,10 @@ class KillBills.Views.PeopleSelect extends Backbone.View
           selected: friend.get('id') == @parent.model.friend
           value: friend.get('id') || friend.get('name')
           name: friend.get('name')
-        } for friend in bill.friends.models
+        } for friend in @bill.friends.models
 
     html = JST['templates/participations/participants'](data)
     @$el.html html
+
+  teardown: ->
+    @bill.friends.off('change', @render, this)
