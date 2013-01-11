@@ -47,6 +47,14 @@ To test the production cache with Dalli, start by installing memcached. On OSX w
 
 Follow instructions to launch it. You can then enable caching in `development.rb`.
 
+I18n
+----
+
+To refresh locale files in JavaScript :
+
+    $ rake i18n:js:export
+
+
 Heroku
 ------
 
@@ -56,11 +64,6 @@ Heroku
     $ heroku config:set GMAIL_SMTP_USER="username@gmail.com"
     $ heroku config:set GMAIL_SMTP_PASSWORD="yourpassword"
 
-### Deploying
-
-Before pushing to heroku, export and commit all js i18n:
-
-    $ rake i18n:js:export
 
 ### Pulling the database
 
