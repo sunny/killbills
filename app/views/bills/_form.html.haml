@@ -8,7 +8,7 @@
         - @bill.errors.full_messages.each do |msg|
           %li= msg
 
-  %fieldset.genre
+  %fieldset.genre.bill-genre-tabs
     %ul.radio-toggles.row
       - Bill.genre.options.each do |genre_text, genre|
         %li
@@ -24,8 +24,7 @@
           - if p.object.person_id == current_user_or_guest.id
 
             .column-label
-              = t('bill_form.participant')
-              %span.increment= incrementer()
+              = t('activerecord.attributes.participation.person_id')
 
             .you
               = t :you
@@ -33,10 +32,7 @@
 
           - else
 
-            = p.label :person_id, class: "column-label" do
-              = t('bill_form.participant')
-              %span.increment = incrementer()
-
+            = p.label :person_id, class: "column-label"
             = p.collection_select :person_id, current_user_or_guest.friends, :id, :name, { include_blank: p.object.person_id.nil? }
 
         .span2.payment

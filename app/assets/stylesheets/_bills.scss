@@ -44,6 +44,22 @@ article.bill > a {
     .owed_amount.owed-fixed     .owed-result { display: none; }
   }
 
+  // Genre tabs
+  .bill-genre-tabs {
+    // Onglets pleine largeur sur petites fenêtres
+    @media (min-width: 250px) and (max-width: 500px) {
+      li {
+        width: 30%;
+        label {
+          width: 100%;
+          span {
+            width: 100%;
+            text-indent: -15%;
+          }
+        }
+      }
+    }
+  }
 
   .participations {
     margin-top: 1em;
@@ -59,18 +75,21 @@ article.bill > a {
       }
     }
 
-    .people {
-
-      // Below portrait tablet (without columns)
-      @media (max-width: 767px) {
-        .column-label {
-          font-size: 1.5em;
-          padding: .5em 0;
-        }
+    // Below portrait tablet (without columns)
+    @media (max-width: 767px) {
+      > div {
+        padding: 1em 1em;
+        margin-bottom: 1em;
+        background: #efefef;
+        @include border-radius(3px);
       }
+    }
 
+    .people {
       .you {
         padding: 6px 0;
+        font-weight: bold;
+        color: #666;
       }
       select {
         width: 100%;

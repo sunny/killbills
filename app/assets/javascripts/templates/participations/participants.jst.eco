@@ -1,15 +1,22 @@
-<div class="column-label">
-  <%- I18n.t('bill_form.participant') %>
-</div>
-
 <% if @is_me: %>
+
+  <div class="column-label">
+    <%= I18n.t('activerecord.attributes.participation.person_id') %>
+  </div>
+
   <div class="you">
-    You
+    <%= I18n.t('you') %>
     <input id="bill_participations_attributes_<%= @index %>_person_id"
            name="bill[participations_attributes][<%= @index %>][person_id]"
            type="hidden" value="<%= KillBills.user_id %>">
   </div>
+
 <% else: %>
+
+  <label class="column-label" for="bill_participations_attributes_<%= @index %>_person_id">
+    <%= I18n.t('activerecord.attributes.participation.person_id') %>
+  </label>
+
   <select id="bill_participations_attributes_<%= @index %>_person_id"
           name="bill[participations_attributes][<%= @index %>][person_id]">
     <option></option>

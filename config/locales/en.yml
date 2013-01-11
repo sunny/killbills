@@ -32,7 +32,6 @@ en:
   total: Total
 
   bill_form:
-    participant: Participant
     new_participant: New…
     new_participation_prompt: "Name of your friend:"
 
