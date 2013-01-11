@@ -31,11 +31,12 @@ class ApplicationController < ActionController::Base
     # find guest_user object associated with the current session,
     # creating one as needed
     def guest_user
-      if !session[:guest_user_id]
-        Guest.create
-      else
-        Guest.where(id: session[:guest_user_id]).first_or_create
+      if session[:guest_user_id]
+        guest = Guest.where(id: session[:guest_user_id]).first
       end
+      guest ||= Guest.create
+      session[:guest_user_id] = guest.id
+      guest
     end
 
     # called (once) when the user logs in, insert any code your application needs
