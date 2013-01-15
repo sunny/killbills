@@ -48,3 +48,7 @@ $(document).on 'click', '[data-persona-login]', ->
 $(document).on 'click', '[data-persona-logout]', ->
   navigator.id.logout()
   on
+
+$(document).ready ->
+  # Turbo-enabled bootstrap dropdown (data-toggler instead of data-toggle)
+  $('[data-toggler]').each -> $(@).dropdown({ toggle: $(@).data('toggler') })
