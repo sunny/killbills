@@ -4,6 +4,7 @@
 #
 #// Gems
 #= require jquery
+#= require turbolinks
 #= require jquery_ujs
 #= require underscore
 #= require backbone
@@ -11,7 +12,6 @@
 #= require bootstrap-button
 #= require bootstrap-collapse
 #= require bootstrap-dropdown
-#= require turbolinks
 #= require i18n
 #= require i18n/translations
 #

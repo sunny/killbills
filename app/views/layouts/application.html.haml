@@ -37,22 +37,22 @@
                   = current_user_or_guest.display_name
                 %i.caret
 
-                %ul.dropdown-menu
+              %ul.dropdown-menu
 
-                  %li
-                    = link_to edit_user_registration_path do
-                      %i.icon-user
-                      = t('registrations.edit.title')
+                %li
+                  = link_to edit_user_registration_path do
+                    %i.icon-user
+                    = t('registrations.edit.title')
 
-                  %li
-                    = link_to edit_options_path do
-                      %i.icon-cog
-                      = t 'options.edit.title'
+                %li
+                  = link_to edit_options_path do
+                    %i.icon-cog
+                    = t 'options.edit.title'
 
-                  %li
-                    = link_to destroy_user_session_path, title: t(:sign_out_help), data: { 'persona-logout' => true } do
-                      %i.icon-off
-                      = t :sign_out
+                %li
+                  = link_to destroy_user_session_path, title: t(:sign_out_help), data: { 'persona-logout' => true } do
+                    %i.icon-off
+                    = t :sign_out
 
 
   .container.page-container
