@@ -1,102 +1,102 @@
 !!!
 %html.nojs{ lang: t(:locale) }
-%head
-  %title= page_title
-  = stylesheet_link_tag "application"
-  = csrf_meta_tag
-  %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
+  %head
+    %title= page_title
+    = stylesheet_link_tag "application"
+    = csrf_meta_tag
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
 
-  = javascript_include_tag "application",                                  |
-      debug: Rails.env.development?,                                       |
-      data: (Rails.env.production? ? { "turbolinks-track" => true } : nil) |
-  = browserid_js_tag
+    = javascript_include_tag "application",                                  |
+        debug: Rails.env.development?,                                       |
+        data: (Rails.env.production? ? { "turbolinks-track" => true } : nil) |
+    = browserid_js_tag
 
-%body
+  %body
 
-  %script
-    I18n.locale = "#{I18n.locale}"
-    KillBills.user_id = #{current_user_or_guest.id}
-    KillBills.currency = "#{current_user_or_guest.currency.try(:text) || "$"}"
+    %script
+      I18n.locale = "#{I18n.locale}"
+      KillBills.user_id = #{current_user_or_guest.id}
+      KillBills.currency = "#{current_user_or_guest.currency.try(:text) || "$"}"
 
-  %nav.navbar
-    .navbar-inner
-      .container
-        = link_to t(:app_name), home_path, class: "brand"
-
-
-        %ul.nav
-          %li= link_to t('bills.new.title'), new_bill_path
-          %li= link_to t('bills.index.title'), bills_path
-          %li= link_to t('friends.index.title'), friends_path
+    %nav.navbar
+      .navbar-inner
+        .container
+          = link_to t(:app_name), home_path, class: "brand"
 
 
-        %ul.nav.pull-right
-          %li.fresh
-            %i.icon-refresh.icon-spin
-
-          - if not user_signed_in?
-
-            %li
-              = link_to '#', data: { 'persona-login' => true } do
-                %i.icon-user
-                = t :sign_in
-
-          - else
-            %li.dropdown
-              %a.dropdown-toggle{ "data-toggler" => "dropdown", "href" => "#" }
-                %i.icon-user
-                %span.nav-user-name
-                  = current_user_or_guest.display_name
-                %i.caret
-
-              %ul.dropdown-menu
-
-                %li
-                  = link_to edit_user_registration_path do
-                    %i.icon-user
-                    = t('registrations.edit.title')
-
-                %li
-                  = link_to edit_options_path do
-                    %i.icon-cog
-                    = t 'options.edit.title'
-
-                %li
-                  = link_to destroy_user_session_path, title: t(:sign_out_help), data: { 'persona-logout' => true } do
-                    %i.icon-off
-                    = t :sign_out
+          %ul.nav
+            %li= link_to t('bills.new.title'), new_bill_path
+            %li= link_to t('bills.index.title'), bills_path
+            %li= link_to t('friends.index.title'), friends_path
 
 
-  .container.page-container
+          %ul.nav.pull-right
+            %li.fresh
+              %i.icon-refresh.icon-spin
 
-    - if flash[:anonymous_warning]
-      .alert
-        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
-        = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), '#', data: { 'persona-login' => true }))
+            - if not user_signed_in?
+
+              %li
+                = link_to '#', data: { 'persona-login' => true } do
+                  %i.icon-user
+                  = t :sign_in
+
+            - else
+              %li.dropdown
+                %a.dropdown-toggle{ "data-toggler" => "dropdown", "href" => "#" }
+                  %i.icon-user
+                  %span.nav-user-name
+                    = current_user_or_guest.display_name
+                  %i.caret
+
+                %ul.dropdown-menu
+
+                  %li
+                    = link_to edit_user_registration_path do
+                      %i.icon-user
+                      = t('registrations.edit.title')
+
+                  %li
+                    = link_to edit_options_path do
+                      %i.icon-cog
+                      = t 'options.edit.title'
+
+                  %li
+                    = link_to destroy_user_session_path, title: t(:sign_out_help), data: { 'persona-logout' => true } do
+                      %i.icon-off
+                      = t :sign_out
 
 
-    - if alert
-      .alert
-        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
-        = alert
+    .container.page-container
+
+      - if flash[:anonymous_warning]
+        .alert
+          %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+          = raw t('anonymous_warning', link: link_to(t('anonymous_warning_link'), '#', data: { 'persona-login' => true }))
 
 
-    - if notice
-      .alert.alert-info
-        %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
-        = notice
+      - if alert
+        .alert
+          %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+          = alert
 
 
-    = yield
+      - if notice
+        .alert.alert-info
+          %a.close{ "data-dismiss" => "alert", title: t(:close) } ×
+          = notice
 
-    %footer
-      %nav.foot-links
-        %ul
-          - %w(en fr).each do |l|
-            %li= link_to t(:locale_label, locale: l), { locale: l }, hreflang: l, title: t(:locale_title, locale: l)
 
-          - if current_user.kind_of?(AdminUser)
-            %li= link_to "admin", admin_dashboard_path
+      = yield
+
+      %footer
+        %nav.foot-links
+          %ul
+            - %w(en fr).each do |l|
+              %li= link_to t(:locale_label, locale: l), { locale: l }, hreflang: l, title: t(:locale_title, locale: l)
+
+            - if current_user.kind_of?(AdminUser)
+              %li= link_to "admin", admin_dashboard_path
 
 
 
