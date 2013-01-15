@@ -212,15 +212,7 @@ nav.auth {
 }
 
 
-// Fetching
-
-.page-container {
-  @include transition(opacity 1s ease);
-
-  .fetching & {
-    opacity: .3;
-  }
-}
+// Fetching spinner
 
 .navbar .fresh {
   margin: 10px 0;
