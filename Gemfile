@@ -12,6 +12,7 @@ gem 'dalli'
 gem 'thin'
 gem 'exception_notification'
 
+# Rails 4
 gem 'strong_parameters'
 gem 'turbolinks'
 gem 'cache_digests'
