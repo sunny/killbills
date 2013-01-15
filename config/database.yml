@@ -2,14 +2,16 @@ development:
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: localhost
+  database: killbills_development
   username: postgres
   password:
-  database: killbills_development
 
 test:
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: localhost
+  database: killbills_test
   username: postgres
   password:
-  database: killbills_test
