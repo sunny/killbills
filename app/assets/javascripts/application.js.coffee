@@ -16,11 +16,6 @@
 #= require i18n
 #= require i18n/translations
 #
-#// Vendor
-#= require raphael
-#= require g.raphael
-#= require g.pie
-#
 #// Helpers
 #= require pies
 #= require helpers
