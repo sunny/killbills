@@ -19,9 +19,8 @@ module ApplicationHelper
     precision_defaults = I18n.translate(:'number.precision.format', :locale => options[:locale], :default => {})
     defaults           = defaults.merge(precision_defaults)
     options = options.reverse_merge(defaults)
-
     escaped_separator = Regexp.escape(options[:separator])
-    formatted_number.to_s.sub(/(#{escaped_separator})00/, '\1').sub(/#{escaped_separator}/, '')
+    formatted_number.to_s.sub(/#{escaped_separator}00/, '')
   end
 
   def variation(amount)

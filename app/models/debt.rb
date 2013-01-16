@@ -32,11 +32,11 @@ class Debt
   end
 
   def from_person
-    Person.find(from)
+    from.kind_of?(Person) ? from : Person.find(from)
   end
 
   def to_person
-    Person.find(to)
+    to.kind_of?(Person) ? to : Person.find(to)
   end
 end
 

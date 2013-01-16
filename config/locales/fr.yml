@@ -48,7 +48,7 @@ fr:
     summary:
       you_owe: "Vous devez %{amount} à %{to}"
       owes_you: "%{from} vous doit %{amount}"
-      owed: "%{from} doit %{amount} à %{to}"
+      owes: "%{from} doit %{amount} à %{to}"
     friend:
       you_owe: "Vous devez %{amount}"
       owes_you: "Vous doit %{amount}"
