@@ -1,9 +1,5 @@
 # encoding: utf-8
 module ApplicationHelper
-  def ratio(amount)
-    number_to_percentage(amount*100, :precision => 0)
-  end
-
   # Rely on current user to show an amount in the correct unit
   def user_number_to_currency(number, options = {})
     unit = current_user_or_guest.currency.try(:text) || "$"
