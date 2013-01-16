@@ -5,6 +5,18 @@ class FriendsController < ApplicationController
     @friends = current_user_or_guest.friends.order(:name) \
       .includes(bills: :participations)
 
+    debts = @friends.map { |friend| [friend, friend.debt] }
+    owe_you = debts.select { |_, debt| debt > 0 }
+    @owe_you         = owe_you.map(&:last).sum
+    @owe_you_friends = owe_you.sort_by(&:last).map(&:first)
+
+    you_owe = debts.select { |_, debt| debt < 0 }
+    @you_owe         = you_owe.map(&:last).sum.abs
+    @you_owe_friends = you_owe.sort_by(&:last).map(&:first)
+
+    even = debts.select { |_, debt| debt == 0 }
+    @even_friends = even.map(&:first).sort_by(&:name)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render xml: @friends }

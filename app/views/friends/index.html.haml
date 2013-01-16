@@ -5,8 +5,28 @@
   %p= t('.empty')
   %p= link_to t('bills.new.title'), new_bill_path, class: "btn btn-primary"
 
-- else
+- if @owe_you_friends.any?
 
-  #friends.article-list
-    = render @friends
+  %h2
+    Owe you
+    = user_number_to_currency @owe_you
 
+  .friends
+    = render @owe_you_friends, total_owed: @owe_you, you_owe: false
+
+- if @you_owe_friends.any?
+
+  %h2
+    You owe
+    = user_number_to_currency @you_owe
+
+  .friends
+    = render @you_owe_friends, total_owed: @you_owe, you_owe: true
+
+- if @even_friends.any?
+
+  %h2
+    Even
+
+  .friends
+    = render @even_friends, total_owed: 0
