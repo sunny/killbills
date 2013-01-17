@@ -55,5 +55,11 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 5, incrementer(:foo)
   end
 
+  test '#current_currency' do
+    @user = build(:user, currency: nil)
+    assert_equal "$", current_currency
 
+    @user = build(:user, currency: "EUR")
+    assert_equal "€", current_currency
+  end
 end
