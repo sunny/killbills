@@ -1,32 +1,7 @@
 %h1= t('.title')
 
-h2 Sign in with Persona
+%h2 Sign in with Persona
 
-p
-  a.persona-button href="#" data-persona-login=true
-    span Sign in with Persona
-
-h2 Or if you have a password here
-
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-
-  .control-group
-    = f.label :email
-    = f.email_field :email
-
-  .control-group
-    = f.label :password
-    = f.password_field :password
-
-  .control-group
-    = f.label :remember_me, class: "checkbox" do
-      = f.check_box :remember_me
-      = t '.remember_me'
-
-  .form-actions
-    = f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
-
-h2 Or
-
-= render :partial => "devise/shared/links"
-
+%p
+  %a.persona-button{"href" => "#", "data-persona-login"=>true}
+    %span Sign in with Persona

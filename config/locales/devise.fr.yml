@@ -21,8 +21,8 @@ fr:
       inactive: "Votre compte n'est pas encore activé."
     sessions:
       user:
-        signed_in: "Connecté."
-        signed_out: "Déconnecté."
+        signed_in: Connecté.
+        signed_out: Déconnecté.
     passwords:
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'
       updated: 'Votre mot de passe a été édité avec succès, vous êtes maintenant connecté'
@@ -78,10 +78,6 @@ fr:
         current_password_help: (on a besoin que vous confirmiez votre mot de passe actuel pour valider les changements)
         submit: Mettre à jour mon compte
         submitting: Mise à jour…
-        destroy: Supprimer mon compte
-        destroy_submit: "Supprimer mon compte, vider ma liste d'amis, effacer toutes mes notes"
-        destroy_confirm: "Êtes-vous vraiment sûr de ce que vous faites ? Passé cette étape on ne peut rien annuler !"
-        destroy_submitting: "Destruction de compte en cours…"
 
     passwords:
       new:

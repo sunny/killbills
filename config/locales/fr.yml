@@ -1,5 +1,4 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale for starting points.
-
 fr:
   locale: fr
   locale_label: Français
@@ -20,11 +19,13 @@ fr:
   cancelling: Annulation…
   close: Fermer
 
-  create_account: Créer un compte
   sign_in: Connexion
+  sign_in_with_persona: Se connecter avec Persona
   sign_out: Déconnexion
   sign_out_help: Se déconnecter de Kill Bills
-  sign_in_with_persona: Se connecter avec Persona
+
+  anonymous_warning: "Vous êtes actuellement anonyme. Vous devriez %{link} si vous voulez que ce site se souvienne de vos notes pour la prochaine fois."
+  anonymous_warning_link: vous connecter
 
   payment: Payment
   share: Share
@@ -36,15 +37,12 @@ fr:
     new_participant: Nouveau…
     new_participation_prompt: "Nom de votre ami :"
 
-  anonymous_warning: "Vous êtes actuellement anonyme. Vous devriez %{link} si vous voulez que ce site se souvienne de vos notes pour la prochaine fois."
-  anonymous_warning_link: vous connecter
-
-
   debt:
     name:
       from: "%{genre} de %{friends}"
       to: "%{genre} à %{friends}"
       with: "%{genre} avec %{friends}"
+      other: "%{genre}"
     summary:
       you_owe: "Vous devez %{amount} à %{to}"
       owes_you: "%{from} vous doit %{amount}"
@@ -62,7 +60,6 @@ fr:
     index:
       title: Notes
       empty: Aucune note d'enregistrée pour l'instant.
-
     show:
       title: Note
       confirm_delete: Êtes-vous certain de vouloir supprimer cette note?
@@ -76,8 +73,6 @@ fr:
       title: Éditer note
     form:
       errors: "Oups, %{errors} :"
-
-
 
 
   # Friends
@@ -106,22 +101,16 @@ fr:
       updated: Options enregistrées !
       submit: Enregistrer l'option
       submitting: Enregistrement…
+      destroy: Supprimer mon compte
+      destroy_submit: "Supprimer mon compte, vider ma liste d'amis, effacer toutes mes notes"
+      destroy_confirm: "Êtes-vous vraiment sûr de ce que vous faites ? Passé cette étape on ne peut rien annuler !"
+      destroy_submitting: "Destruction de compte en cours…"
     update:
       title: Options
 
   sessions:
     new:
       title: Qui êtes-vous ?
-
-  registrations:
-    new:
-      title: Créer un compte
-    create:
-      title: Créer un compte
-    edit:
-      title: Compte
-    update:
-      title: Compte
 
   activerecord:
     models:
@@ -143,22 +132,6 @@ fr:
         person: Participant
       user:
         currency: Unité monétaire
-
-
-    errors:
-      messages:
-      models:
-        bill:
-          attributes:
-            participations:
-              person:
-                blank: "fooo"
-        participation:
-          attributes:
-            person_id:
-              blank: "666 %{model}: %{attribute}"
-      messages:
-        empty: "doit exister"
 
   enumerize:
     bill:

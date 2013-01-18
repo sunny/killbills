@@ -1,4 +1,6 @@
 class OptionsController < ApplicationController
+  before_filter :redirect_guests
+
   def edit
     @user = current_user_or_guest
   end
@@ -22,5 +24,9 @@ class OptionsController < ApplicationController
 
     def user_params
       params.require(:user).permit(:currency)
+    end
+
+    def redirect_guests
+      redirect_to root_path if current_user_or_guest.kind_of?(Guest)
     end
 end

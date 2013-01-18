@@ -8,7 +8,7 @@
     <%= I18n.t('you') %>
     <input id="bill_participations_attributes_<%= @index %>_person_id"
            name="bill[participations_attributes][<%= @index %>][person_id]"
-           type="hidden" value="<%= KillBills.user_id %>">
+           type="hidden" value="<%= Settings.user_id %>">
   </div>
 
 <% else: %>

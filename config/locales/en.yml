@@ -20,11 +20,13 @@ en:
   cancelling: Cancelling…
   close: Close
 
-  create_account: Create an account
   sign_in: Sign in
+  sign_in_with_persona: Sign in with Persona
   sign_out: Sign out
   sign_out_help: Sign out from Kill Bills
-  sign_in_with_persona: Sign in with Persona
+
+  anonymous_warning: "You are currently anonymous. Please %{link} in if you want the site to remember your bills."
+  anonymous_warning_link: sign in
 
   payment: Payment
   share: Share
@@ -35,9 +37,6 @@ en:
   bill_form:
     new_participant: New…
     new_participation_prompt: "Name of your friend:"
-
-  anonymous_warning: "You are currently anonymous. Please %{link} in if you want the site to remember your bills."
-  anonymous_warning_link: sign in
 
   debt:
     name:
@@ -103,22 +102,16 @@ en:
       updated: Options saved!
       submit: Save your option
       submitting: Saving…
+      destroy: Destroy
+      destroy_submit: "Delete my account, remove friends, and kill all bills"
+      destroy_confirm: "Are you really sure? This cannot be undone!"
+      destroy_submitting: "Killing bills…"
     update:
       title: Options
 
   sessions:
     new:
       title: Who are you?
-
-  registrations:
-    new:
-      title: Create an account
-    create:
-      title: Create an account
-    edit:
-      title: Account
-    update:
-      title: Account
 
   activerecord:
     models:
@@ -138,7 +131,8 @@ en:
         owed_amount: Owed amount
         person_id: Participant
         person: Participant
-
+      user:
+        currency: Currency
 
   enumerize:
     bill:

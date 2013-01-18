@@ -76,10 +76,6 @@ en:
         current_password_help: (we need to check your current password to change your details)
         submit: Save your account settings
         submitting: Saving…
-        destroy: Destroy
-        destroy_submit: "Delete my account, remove friends, and kill all bills"
-        destroy_confirm: "Are you really sure? This cannot be undone!"
-        destroy_submitting: "Killing bills…"
 
     passwords:
       new:

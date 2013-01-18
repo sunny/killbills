@@ -15,3 +15,14 @@
 
   .form-actions
     = f.submit t('.submit'), class: "btn btn-primary", data: { "disable-with" => t('.submitting') }
+
+%h2.title= t('.destroy')
+
+.form-actions
+  = link_to t('.destroy_submit'), registration_path(current_user), |
+    method: :delete, |
+    class: "btn btn-danger", |
+    data: { |
+      confirm: t('.destroy_confirm'), |
+      "disable-with" => t('.destroy_submitting') |
+    } |

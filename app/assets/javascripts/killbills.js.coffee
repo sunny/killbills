@@ -1,6 +1,8 @@
-# Bill form
 
+# Bill form
 $(document).ready ->
+  I18n.locale = Settings.locale
+
   # Setup
   if $('#bill-form').length >= 1
     KillBills.topView = new KillBills.Views.BillForm()

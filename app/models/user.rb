@@ -4,7 +4,7 @@ class User < Person
   has_many :friends, dependent: :destroy
 
   # Attributes
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable
 
   # Scopes
   scope :users, -> { where(type: "User") }

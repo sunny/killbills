@@ -4,7 +4,7 @@
 
 # Number with it's currency
 @currencize = (number) ->
-  I18n.toCurrency(number, unit: KillBills.currency, strip_insignificant_zeros: true)
+  I18n.toCurrency(number, unit: Settings.currency, strip_insignificant_zeros: true)
 
 # Rounding a number with a given number of decimals
 @round = (number, decimals = 2) ->

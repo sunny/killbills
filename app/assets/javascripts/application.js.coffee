@@ -27,9 +27,9 @@
 #= require_tree ./templates
 #= require killbills
 
-@KillBills ||= {}
-@KillBills.Models ||= {}
-@KillBills.Collections ||= {}
-@KillBills.Routers ||= {}
-@KillBills.Views ||= {}
-@KillBills.topView ||= null
+@KillBills =
+  Models: {}
+  Collections: {}
+  Routers: {}
+  Views: {}
+  topView: null
