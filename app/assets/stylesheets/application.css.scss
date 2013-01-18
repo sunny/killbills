@@ -237,19 +237,25 @@ nav.auth {
 
 // Fetching spinner
 
-.navbar .fresh {
-  margin: 10px 0;
+.fresh {
+  color: $grey;
   font-size: 22px;
-  color: transparent;
+  text-align: center;
+  position: absolute;
+  left: 49%;
 
-  @media (max-width: 500px) {
-    display: none;
-  }
+  display: none;
+  opacity: 0;
+  @include single-transition(opacity, 2s, ease);
 
   .fetching & {
-    .icon-refresh {
-      color: darken($color, 20%);
-    }
+    display: block;
+    opacity: .4;
   }
 
+}
+
+.fetching .page-container {
+  @include transition(opacity .5s);
+  opacity: 0;
 }

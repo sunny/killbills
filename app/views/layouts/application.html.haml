@@ -22,10 +22,7 @@
             %li= link_to t('bills.index.title'), bills_path
             %li= link_to t('friends.index.title'), friends_path
 
-
           %ul.nav.pull-right
-            %li.fresh
-              %i.icon-refresh.icon-spin
 
             - if not user_signed_in?
 
@@ -59,6 +56,8 @@
                       %i.icon-off
                       = t :sign_out
 
+    .fresh
+      %i.icon-refresh.icon-spin
 
     .container.page-container
 
