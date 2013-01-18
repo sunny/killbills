@@ -42,15 +42,11 @@ $(document).on 'click', '[data-persona-logout]', ->
 # Generic
 
 # Add js class
-$(document).one 'ready', -> $('html').removeClass('nojs').addClass('js')
+$(document).one 'ready', -> $('html').addClass('js')
 
 # Add a downloading class while turbolink operates
 $(document).on 'page:fetch', -> $('html').addClass('fetching')
 $(document).on 'page:change', -> $('html').removeClass('fetching')
-
-$(document).ready ->
-  # Turbo-enabled bootstrap dropdown (data-toggler instead of data-toggle)
-  $('[data-toggler]').each -> $(@).dropdown({ toggle: $(@).data('toggler') })
 
 # Make sure hitting "Previous page" does not show the disabled text
 $(document).ready -> $('input[data-disable-with]').attr('autocomplete', 'off')

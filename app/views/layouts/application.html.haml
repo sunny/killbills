@@ -1,22 +1,15 @@
 !!!
-%html.nojs{ lang: t(:locale) }
+%html{ lang: t(:locale) }
   %head
     %title= page_title
-    = stylesheet_link_tag "application"
     = csrf_meta_tag
     %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
 
-    = javascript_include_tag "application",                                  |
-        debug: Rails.env.development?,                                       |
-        data: (Rails.env.production? ? { "turbolinks-track" => true } : nil) |
-    = browserid_js_tag
+    = stylesheet_link_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true, async: true
+    = browserid_js_tag async: true
 
   %body
-
-    %script
-      I18n.locale = "#{I18n.locale}"
-      KillBills.user_id = #{current_user_or_guest.id}
-      KillBills.currency = "#{current_currency}"
 
     %nav.navbar
       .navbar-inner
@@ -99,4 +92,9 @@
               %li= link_to "admin", admin_dashboard_path
 
 
-
+    %script
+      this.I18n || (this.I18n = {})
+      this.KillBills || (this.KillBills = {})
+      this.I18n.locale = "#{I18n.locale}"
+      this.KillBills.user_id = #{current_user_or_guest.id}
+      this.KillBills.currency = "#{current_currency}"
