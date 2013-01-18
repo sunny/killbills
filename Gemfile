@@ -6,7 +6,7 @@ gem 'pg'
 gem 'activeadmin'
 gem 'enumerize'
 gem 'devise'
-gem 'devise_browserid_authenticatable'
+gem 'devise_browserid_authenticatable', github: "sunny/devise_browserid_authenticatable"
 gem 'haml'
 gem 'dalli'
 gem 'thin'
