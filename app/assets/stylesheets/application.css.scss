@@ -1,13 +1,14 @@
+@import "compass/css3";
+
 @import "config";
 @import "mixins";
 @import "fonts";
 
 @import "bootstrap";
 @import "bootstrap-responsive";
-@import "font-awesome";
 @import "bootstrap-fix";
-@import "compass/css3/images";
 
+@import "font-awesome";
 @import "persona-button";
 @import "bills";
 @import "friends";

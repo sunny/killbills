@@ -1,9 +1,16 @@
 @mixin font-sans {
- font-family: 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ font-family: "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @mixin font-impact {
-  font-family: Impact, Futura, 'Arial Black', Arial, sans-serif;
+  font-family: Impact, Futura, "Arial Black", Arial, sans-serif;
   text-transform: uppercase;
   font-weight: normal;
 }
+
+@include font-face(FontAwesome,
+  inline-font-files(
+    "fontawesome-webfont.woff", woff,
+    "fontawesome-webfont.ttf", ttf
+  )
+);

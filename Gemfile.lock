@@ -119,9 +119,6 @@ GEM
       faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
     ffi (1.0.11)
-    font-awesome-sass-rails (3.0.0.1)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     fssm (0.2.9)
@@ -293,7 +290,6 @@ DEPENDENCIES
   enumerize
   exception_notification
   factory_girl_rails
-  font-awesome-sass-rails
   guard-livereload
   guard-pow
   guard-test

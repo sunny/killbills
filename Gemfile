@@ -22,7 +22,6 @@ group :assets do
   gem 'sass-rails'
   gem 'compass-rails'
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass-rails'
   gem 'yui-compressor'
 
   # JS
