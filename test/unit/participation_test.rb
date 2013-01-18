@@ -11,7 +11,7 @@ class ParticipationTest < ActiveSupport::TestCase
     zero = create :participation, owed_type: "zero"
     all = create :participation, owed_type: "all"
 
-    assert_equal Participation.unshared, [zero, all]
+    assert_equal Participation.unshared.sort, [zero, all].sort
     assert_equal Participation.shared, [even]
   end
 
