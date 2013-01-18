@@ -1,23 +1,10 @@
-- cache [friend, total_owed, current_user_or_guest] do
+- cache [friend, current_user_or_guest.currency] do
   %article.friend
-    = link_to friend do
+    - if friend.debt != 0
+      %span{ class: "label label-#{variation(friend.debt)}" }
+        - if friend.debt < 0
+          = user_number_to_currency(friend.debt.abs)
+        - elsif friend.debt > 0
+          = user_number_to_currency(friend.debt)
 
-      - if total_owed != 0
-        %meter{ |
-          value: friend.debt.abs, |
-          min: 0, |
-          max: total_owed, |
-          title: current_user_or_guest.currency.text, |
-          optimum: you_owe ? 0 : nil, |
-          high: you_owe ? 0 : nil, |
-          low: 0.01, |
-          style: "display:inline-block" |
-        } |
-
-        %span.owed{ class: variation(friend.debt) }
-          - if friend.debt < 0
-            = user_number_to_currency(friend.debt.abs)
-          - if friend.debt > 0
-            = user_number_to_currency(friend.debt.abs)
-
-      %span.friend-name= friend.name
+    = link_to friend.name, friend

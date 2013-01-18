@@ -82,17 +82,41 @@ h2.title {
 .negative {
   color: $red;
 }
+.badge-negative,
+.label-negative {
+  background-color: $red;
+}
 
 .zero {
   color: $grey;
 }
+.badge-zero,
+.label-zero {
+  background-color: $grey;
+}
 .positive {
   color: $green;
 }
+.badge-positive,
+.label-positive {
+  background-color: $green;
+}
+
 .translation_missing {
   color: red !important;
 }
 
+.big-badge {
+  color: white;
+  font-size: .9em;
+  padding: .2ex .5ex;
+  font-weight: bold;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  @include border-radius(1ex);
+}
 
 // Bill result with arrow
 // -----------------------

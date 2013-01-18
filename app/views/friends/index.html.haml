@@ -9,7 +9,8 @@
 
   %h2
     Owe you
-    = user_number_to_currency @owe_you
+    %span.big-badge.badge-positive
+      = user_number_to_currency @owe_you
 
   .friends
     = render @owe_you_friends, total_owed: @owe_you, you_owe: false
@@ -18,7 +19,8 @@
 
   %h2
     You owe
-    = user_number_to_currency @you_owe
+    %span.big-badge.badge-negative
+      = user_number_to_currency @you_owe
 
   .friends
     = render @you_owe_friends, total_owed: @you_owe, you_owe: true
