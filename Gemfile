@@ -48,10 +48,6 @@ group :development do
   gem 'guard-test'
   gem 'guard-livereload'
   gem 'guard-pow'
-
-  # Maintenance
-  gem 'heroku'
-  gem 'taps'
 end
 
 group :test do

@@ -69,8 +69,12 @@ Heroku
 
 Pull in the database from heroku:
 
-    $ bundle exec heroku db:pull
-    $ rake db:migrate
+    $ heroku pgbackups:capture
+    $ curl `heroku pgbackups:url` | pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d killbills_development
+
+### Clear cache
+
+    $ heroku run rails runner Rails.cache.clear
 
 TODO
 ----
