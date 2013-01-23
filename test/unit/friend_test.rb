@@ -9,6 +9,18 @@ class FriendTest < ActiveSupport::TestCase
     assert_equal "Gogo", build(:friend, :name => "Gogo").display_name
   end
 
+  should "destroy bills" do
+    user = create :user
+    friend = create :friend, user: user
+    bill = create :bill, user: user
+    participation = create :participation, person: friend, bill: bill
+
+    friend.destroy
+
+    assert Participation.where(id: participation).empty?
+    assert Bill.where(id: bill).empty?
+  end
+
   context "A friend with debts" do
     setup {
       @bill = create :bill

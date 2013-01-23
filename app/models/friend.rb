@@ -20,7 +20,7 @@ class Friend < Person
   private
 
     def destroy_bills
-      bills.destroy_all
+      Bill.where(id: bills).destroy_all
     end
 end
 
