@@ -25,12 +25,12 @@ module ActiveRecord
     # ==== Examples
     #
     #   # Updates updated_at/on
-    #   Products.touch_all("category = 'Design'")
+    #   Product.visible.touch_all("category = 'Design'")
     #
     #   # Updates the designed_on attribute and updated_at/on
-    #   Products.touch_all("category = 'Design'", :designed_on)
+    #   Product.visible.touch_all("category = 'Design'", :designed_on)
     def touch_all(conditions = {}, name = nil)
-      attributes = [:created_at, :created_on].select { |c| column_names.include?(c.to_s) }
+      attributes = [:updated_at, :updated_on].select { |c| column_names.include?(c.to_s) }
       attributes << name if name
 
       unless attributes.empty?
@@ -46,40 +46,4 @@ module ActiveRecord
     end
   end
 
-  class Associations::Builder::HasMany
-    def valid_options
-      super + [:primary_key, :dependent, :as, :through, :source, :source_type, :inverse_of, :touch]
-    end
-
-    def build
-      reflection = super
-      add_touch_callbacks if options[:touch]
-      configure_dependency
-      reflection
-    end
-
-    private
-
-      def add_touch_callbacks
-        name        = self.name
-        method_name = "has_many_touch_after_save_or_destroy_for_#{name}"
-        touch       = options[:touch]
-
-        mixin.redefine_method(method_name) do
-          records = send(name)
-
-          unless record.nil?
-            if touch == true
-              records.touch_all
-            else
-              records.touch_all(touch)
-            end
-          end
-        end
-
-        model.after_save(method_name)
-        model.after_touch(method_name)
-        model.after_destroy(method_name)
-      end
-  end
 end
