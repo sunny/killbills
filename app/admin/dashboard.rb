@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Dashboard" do
     section "Recent Bills" do
       ul do
         Bill.last(5).reverse.collect do |bill|
-          li link_to("\"#{bill.title}\"", admin_bill_path(bill)) + " by " + link_to(bill.user.display_name, admin_user_path(bill.user))
+          li link_to(bill.title.inspect, admin_bill_path(bill)) + " by " + link_to(bill.user.display_name, admin_user_path(bill.user))
         end
       end
     end
