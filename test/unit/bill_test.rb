@@ -12,36 +12,6 @@ class BillTest < ActiveSupport::TestCase
     assert_false build(:bill, genre: :foo).valid?
   end
 
-  context "A Payment Bill" do
-    context "with a paying friend" do
-      setup {
-        @bill = create :bill, genre: :payment
-        create(:participation, bill: @bill, payment: 42)
-        create(:participation, bill: @bill, payment: 0, person: @bill.user)
-      }
-      should("generate #title") { assert_equal "Payment from Friend", @bill.title }
-    end
-
-    context "with a paying user" do
-      setup {
-        @bill = create :bill, genre: :payment
-        create(:participation, bill: @bill, payment: 42, person: @bill.user)
-        create(:participation, bill: @bill, payment: 0)
-      }
-      should("generate #title") { assert_equal "Payment to Friend", @bill.title }
-    end
-  end
-
-  context "A Shared Bill" do
-    setup { @bill = create :bill, :shared, :with_paying_user, :with_friend, :with_friend, :with_friend }
-    should("generate #title") { assert_equal "Shared with Friend, Friend, and Friend", @bill.title }
-  end
-
-  should "accept a title" do
-    bill = build :bill, title: "New title"
-    assert_equal "New title", bill.title
-  end
-
   should "calculate #total" do
     bill = create :bill
     create :participation, bill: bill, payment: 40
@@ -78,10 +48,6 @@ class BillTest < ActiveSupport::TestCase
       create :participation, bill: @bill, person: vernita, payment: 8
     }
 
-    should "generate #title" do
-      assert_equal "Payment from Vernita", @bill.title
-    end
-
     should "return #debts" do
       debts = @bill.debts
       assert_equal 1,         debts.size
@@ -102,10 +68,6 @@ class BillTest < ActiveSupport::TestCase
       create :participation, bill: @bill, person: bb,     owed_amount: 4
       create :participation, bill: @bill, person: paimei, owed_amount: 2
     }
-
-    should "generate #title" do
-      assert_equal "Debt to Pai-Mei", @bill.title
-    end
 
     should "return #debts" do
       debts = @bill.debts
@@ -135,10 +97,6 @@ class BillTest < ActiveSupport::TestCase
       create :participation, :even, bill: @bill, payment: 0,   person: hattori
     }
 
-    should "generate #title" do
-      assert_equal "Shared with Hattori and Sofie", @bill.title
-    end
-
     should "return #debts" do
       debts = @bill.debts.sort_by { |d| d.from_person.name } # Sorted for our asserts
 
@@ -153,5 +111,6 @@ class BillTest < ActiveSupport::TestCase
       assert_equal 33.33,     debts[1].amount
     end
   end
+
 end
 

@@ -30,5 +30,23 @@ module BillsHelper
       amount: amount).html_safe
   end
 
+  # Title based on the participations.
+  #
+  # Examples:
+  # - "Payment from O-Ren"
+  # - "Payment with Budd"
+  # - "Payment to Beatrix"
+  # - "Debt from Pai-Mei"
+  # - "Debt with B.B."
+  # - "Debt to Bill"
+  # - "Shared to Vernita and Nikki"
+  def bill_title(bill)
+    if bill.title.blank?
+      I18n.t("debt.name.#{bill.direction}", genre: bill.genre.text, friends: bill.friend_names.to_sentence)
+    else
+      bill.title
+    end
+  end
+
 end
 

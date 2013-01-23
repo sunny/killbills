@@ -25,25 +25,6 @@ class Bill < ActiveRecord::Base
   # validate :ensure_payments_add_up
   # validate :ensure_creates_debt
 
-  # Title based on the participations.
-  #
-  # Examples:
-  # - "Payment from O-Ren"
-  # - "Payment with Budd"
-  # - "Payment to Beatrix"
-  # - "Debt from Pai-Mei"
-  # - "Debt with B.B."
-  # - "Debt to Bill"
-  # - "Shared to Vernita and Nikki"
-  def title
-    title = self.read_attribute(:title)
-    if title.blank?
-      I18n.t("debt.name.#{direction}", genre: genre.text, friends: friend_names.to_sentence)
-    else
-      title
-    end
-  end
-
   # String representing the direction of the bill
   # relative to the bill user.
   #

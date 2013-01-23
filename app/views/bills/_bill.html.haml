@@ -2,7 +2,7 @@
   %article.bill
     = link_to bill_path(bill), class: "row" do
       .title
-        %h2= bill.title
+        %h2= bill_title(bill)
 
       %ul.debts
         - for debt in bill.debts
