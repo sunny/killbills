@@ -28,7 +28,7 @@ class FriendsController < ApplicationController
     @friend = current_user_or_guest.friends \
       .includes(bills: :participations) \
       .find(params[:id])
-    @bills = current_user_or_guest.bills_with_friend(@friend)
+    @bills = current_user_or_guest.bills_with_friend(@friend).decorate
 
     respond_to do |format|
       format.html # show.html.erb
