@@ -8,7 +8,7 @@ class DebtDecorator < Draper::Decorator
   end
 
   def summary(options = {})
-    amount = h.user_number_to_currency(source.amount)
+    amount = h.currencize(source.amount)
     from = source.from_person
     to = source.to_person
 

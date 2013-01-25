@@ -80,4 +80,4 @@
       Settings = {}
       Settings.locale = "#{I18n.locale}"
       Settings.user_id = #{current_user_or_guest.id}
-      Settings.currency = "#{current_currency}"
+      Settings.currency = "#{current_user_or_guest.currency_unit}"

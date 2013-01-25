@@ -30,16 +30,16 @@
               - for participation in @bill.participations
                 %tr
                   %th= link_to_friend participation.person
-                  %td= user_number_to_currency(participation.payment)
-                  %td= user_number_to_currency(participation.owed_total)
+                  %td= currencize(participation.payment)
+                  %td= currencize(participation.owed_total)
                   %td.debt-row{ class: variation(-participation.debt) }
-                    = user_number_to_currency(participation.debt)
+                    = currencize(participation.debt)
                   %td.credit-row{ class: variation(-participation.debt) }
-                    = user_number_to_currency(-participation.debt)
+                    = currencize(-participation.debt)
 
               %tr.bill-total
                 %th= t :total
-                %td= user_number_to_currency(@bill.total)
+                %td= currencize(@bill.total)
                 %td
                 %td
                 %td

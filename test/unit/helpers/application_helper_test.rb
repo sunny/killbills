@@ -8,14 +8,14 @@ class ApplicationHelperTest < ActionView::TestCase
     @user
   end
 
-  test "#user_number_to_currency" do
+  test "#currencize" do
     @user = build(:user, currency: "EUR")
-    assert_equal "€8.80",  user_number_to_currency(8.8)
-    assert_equal "€88.88", user_number_to_currency(88.88)
-    assert_equal "€88",    user_number_to_currency(87.999)
+    assert_equal "€8.80",  currencize(8.8)
+    assert_equal "€88.88", currencize(88.88)
+    assert_equal "€88",    currencize(87.999)
 
     @user = build(:user, currency: "USD")
-    assert_equal "$8", user_number_to_currency(8.00)
+    assert_equal "$8", currencize(8.00)
   end
 
   test "#number_to_currency_without_double_zeros" do
@@ -61,13 +61,5 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 2, incrementer
     assert_equal 2, incrementer
     assert_equal 5, incrementer(:foo)
-  end
-
-  test '#current_currency' do
-    @user = build(:user, currency: nil)
-    assert_equal "$", current_currency
-
-    @user = build(:user, currency: "EUR")
-    assert_equal "€", current_currency
   end
 end

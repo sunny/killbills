@@ -3,8 +3,8 @@
     - if friend.debt != 0
       %span{ class: "label label-#{variation(friend.debt)}" }
         - if friend.debt < 0
-          = user_number_to_currency(friend.debt.abs)
+          = currencize(friend.debt.abs)
         - elsif friend.debt > 0
-          = user_number_to_currency(friend.debt)
+          = currencize(friend.debt)
 
     = link_to friend.name, friend

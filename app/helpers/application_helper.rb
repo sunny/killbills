@@ -1,13 +1,7 @@
-# encoding: utf-8
 module ApplicationHelper
-  # Current user's currency unit symbol
-  def current_currency
-    current_user_or_guest.currency.try(:text) || "$"
-  end
-
-  # Rely on current user to show an amount in the correct unit
-  def user_number_to_currency(number, options = {})
-    options = options.merge({ unit: current_currency })
+  # Show an amount in the current user's currency
+  def currencize(number, options = {})
+    options = options.merge({ unit: current_user_or_guest.currency_unit })
     number_to_currency_without_double_zeros(number, options)
   end
 
@@ -34,7 +28,11 @@ module ApplicationHelper
   end
 
   def link_to_friend(person)
-    person == current_user_or_guest ? t(:you) : link_to(person.name, person)
+    if current_user_or_guest == person
+      t(:you)
+    else
+      link_to(person.name, person)
+    end
   end
 
   # Increment and return an integer, starting at 1.
