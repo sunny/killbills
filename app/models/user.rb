@@ -19,4 +19,8 @@ class User < Person
       .where(participations: { person_id: friend.id }) \
       .order("date DESC")
   end
+
+  def display_name
+    email
+  end
 end

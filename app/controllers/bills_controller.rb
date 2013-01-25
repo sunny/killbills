@@ -9,7 +9,7 @@ class BillsController < ApplicationController
       .order("bills.date DESC, bills.created_at DESC")
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { @bills = @bills.decorate }
       format.xml  { render xml: @bills }
       format.json { render json: @bills }
     end
@@ -23,7 +23,7 @@ class BillsController < ApplicationController
       .find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { @bill = @bill.decorate }
       format.xml  { render xml: @bill }
       format.json { render json: @bill }
     end

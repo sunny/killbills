@@ -6,7 +6,7 @@ class FriendTest < ActiveSupport::TestCase
   end
 
   should "return name as #display_name" do
-    assert_equal "Gogo", build(:friend, :name => "Gogo").display_name
+    assert_equal "Gogo", build(:friend, name: "Gogo").display_name
   end
 
   should "destroy bills" do

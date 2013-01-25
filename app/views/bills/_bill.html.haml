@@ -2,14 +2,13 @@
   %article.bill
     = link_to bill_path(bill), class: "row" do
       .title
-        %h2= bill_title(bill)
+        %h2= bill.title
 
       %ul.debts
         - for debt in bill.debts
-          %li{ class: "owed #{variation -debt.diff_for(bill.user_id)}"}
-            = debt_summary debt
+          %li.owed{ class: debt.variation_to(bill.user) }
+            = debt.summary
 
-      %time{ datetime: datetime(bill.date), title: bill.date }
-        = t 'time_ago', time: time_ago_in_words(bill.date)
+      = bill.time_ago
 
 

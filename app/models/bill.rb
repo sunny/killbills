@@ -1,5 +1,3 @@
-include ApplicationHelper
-
 class Bill < ActiveRecord::Base
   # Associations
   belongs_to :user
@@ -24,35 +22,6 @@ class Bill < ActiveRecord::Base
   # validate :ensure_payments
   # validate :ensure_payments_add_up
   # validate :ensure_creates_debt
-
-  # String representing the direction of the bill
-  # relative to the bill user.
-  #
-  # - "from" : if friend is in debt
-  # - "to" : if user is in debt
-  # - "with" : if more than one friend
-  # - "other"
-  def direction
-    if debt.nil?
-      "other"
-    elsif genre.debt?
-      debt.to == user_id ? "from" : "to"
-    elsif genre.payment?
-      debt.to == user_id ? "to" : "from"
-    else
-      "with"
-    end
-  end
-
-  # Array of names of participating friends.
-  #
-  # Equivalent to `participations.friends.map(&:name)`
-  # but does not trigger an n+1 when already using
-  # `includes(:participations)`.
-  def friend_names
-    friends = participations.reject { |p| p.person_id == user_id }.map(&:person)
-    friends.map(&:name).sort
-  end
 
   #### Participations
 

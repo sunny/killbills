@@ -33,8 +33,8 @@ module ApplicationHelper
     end
   end
 
-  def datetime(date)
-    date.strftime('%Y-%m-%dT%H:%MZ')
+  def link_to_friend(person)
+    person == current_user_or_guest ? t(:you) : link_to(person.name, person)
   end
 
   # Increment and return an integer, starting at 1.

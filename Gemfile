@@ -11,6 +11,8 @@ gem 'haml'
 gem 'dalli'
 gem 'thin'
 gem 'exception_notification'
+gem 'draper'
+
 
 # Rails 4
 gem 'strong_parameters'
@@ -53,4 +55,5 @@ group :test do
   gem 'shoulda-context'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
+  gem 'mocha'
 end

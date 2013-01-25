@@ -75,10 +75,12 @@ class Participation < ActiveRecord::Base
     owed_total - payment.to_f
   end
 
-  def remove_unused_attributes
-    if bill
-      self.owed_amount = nil if bill.genre.payment?
-      self.payment = nil     if bill.genre.debt?
+  private
+
+    def remove_unused_attributes
+      if bill
+        self.owed_amount = nil if bill.genre.payment?
+        self.payment = nil     if bill.genre.debt?
+      end
     end
-  end
 end

@@ -1,6 +1,8 @@
 # A Debt represents what a person owes to someone else.
 # For example, that your friend Hattori owes you 5 €
 class Debt
+  include Draper::Decoratable
+
   # TODO rename:
   #   from -> from_id
   #   from_person -> from

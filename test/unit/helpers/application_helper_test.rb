@@ -40,6 +40,14 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal :zero,     variation(0)
   end
 
+  test "#link_to_friend" do
+    @user = build(:user)
+    friend = build(:friend, name: "Cottonmouth")
+
+    assert_equal "You", link_to_friend(@user)
+    assert_match %r{<a.*>Cottonmouth</a>}, link_to_friend(friend)
+  end
+
   test '#incrementer!' do
     assert_equal 1, incrementer!
     assert_equal 1, incrementer!(:foo)

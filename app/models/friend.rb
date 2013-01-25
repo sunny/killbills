@@ -17,6 +17,10 @@ class Friend < Person
     end
   end
 
+  def display_name
+    name
+  end
+
   private
 
     def destroy_bills
