@@ -4,8 +4,6 @@ development:
   pool: 5
   host: localhost
   database: killbills_development
-  username: postgres
-  password:
 
 test:
   adapter: postgresql
@@ -13,5 +11,3 @@ test:
   pool: 5
   host: localhost
   database: killbills_test
-  username: postgres
-  password:
