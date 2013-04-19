@@ -19,6 +19,10 @@ gem 'strong_parameters'
 gem 'turbolinks'
 gem 'cache_digests'
 
+# Asset libraries needed in production
+gem 'jquery-rails-cdn'
+
+# Asset libraries not needed in production
 group :assets do
   # CSS
   gem 'sass-rails'
@@ -29,7 +33,6 @@ group :assets do
   # JS
   gem 'uglifier'
   gem 'coffee-rails'
-  gem 'jquery-rails-cdn'
   gem 'jquery-turbolinks'
   gem 'rails-backbone'
   gem 'eco'
