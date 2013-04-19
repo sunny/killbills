@@ -29,7 +29,7 @@ group :assets do
   # JS
   gem 'uglifier'
   gem 'coffee-rails'
-  gem 'jquery-rails'
+  gem 'jquery-rails-cdn'
   gem 'jquery-turbolinks'
   gem 'rails-backbone'
   gem 'eco'

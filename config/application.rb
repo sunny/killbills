@@ -52,6 +52,9 @@ module KillBills
     # https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar#troubleshooting
     config.assets.initialize_on_precompile = false
 
+    # Because of jquery-rails-cdn
+    config.assets.precompile += ['jquery.js']
+
     # Default generators
     config.generators.stylesheet_engine = :sass
   end
