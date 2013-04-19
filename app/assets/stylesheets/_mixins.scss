@@ -9,13 +9,13 @@
   background-image: -webkit-linear-gradient(top, $color1 $stop1, $color2 $stop2);
   background-image: -moz-linear-gradient(top, $color1 $stop1, $color2 $stop2);
   background-image: linear-gradient(top, $color1 $stop1, $color2 $stop2);
-  
+
   background-image: -webkit-gradient(
-	  linear,
-	  left top,
-	  left bottom,
-	  color-stop($stop1, $color1),
-	  color-stop($stop2, $color2)
+    linear,
+    left top,
+    left bottom,
+    color-stop($stop1, $color1),
+    color-stop($stop2, $color2)
   );
 }
 
@@ -28,38 +28,38 @@
 @mixin transform($transform) {
   -webkit-transform: $transform;
   -moz-transform: $transform;
-  -o-transform: $transform;
   -ms-transform: $transform;
+  -o-transform: $transform;
   transform: $transform;
 }
 
 @mixin named-animation($name, $duration, $iterations, $direction) {
   -webkit-animation-name: $name;
-  -webkit-animation-duration: $duration;
-  -webkit-animation-iteration-count: $iterations;
-  -webkit-animation-direction: $direction;
   -moz-animation-name: $name;
-  -moz-animation-duration: $duration;
-  -moz-animation-iteration-count: $iterations;
-  -moz-animation-direction: $direction;
-  -o-animation-name: $name;
-  -o-animation-duration: $duration;
-  -o-animation-iteration-count: $iterations;
-  -o-animation-direction: $direction;
   -ms-animation-name: $name;
-  -ms-animation-duration: $duration;
-  -ms-animation-iteration-count: $iterations;
-  -ms-animation-direction: $direction;
+  -o-animation-name: $name;
   animation-name: $name;
+  -webkit-animation-duration: $duration;
+  -moz-animation-duration: $duration;
+  -ms-animation-duration: $duration;
+  -o-animation-duration: $duration;
   animation-duration: $duration;
+  -webkit-animation-iteration-count: $iterations;
+  -moz-animation-iteration-count: $iterations;
+  -ms-animation-iteration-count: $iterations;
+  -o-animation-iteration-count: $iterations;
   animation-iteration-count: $iterations;
+  -webkit-animation-direction: $direction;
+  -moz-animation-direction: $direction;
+  -ms-animation-direction: $direction;
+  -o-animation-direction: $direction;
   animation-direction: $direction;
 }
 
 @mixin animation-delay($delay) {
   -webkit-animation-delay: $delay;
   -moz-animation-delay: $delay;
-  -o-animation-delay: $delay;
   -ms-animation-delay: $delay;
+  -o-animation-delay: $delay;
 }
 

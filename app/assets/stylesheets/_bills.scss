@@ -19,8 +19,8 @@ article.bill > a {
   time {
     @extend .span3;
     display: block;
-    line-height: 33px;
     color: $textColor;
+    line-height: 33px;
   }
 }
 
@@ -78,18 +78,18 @@ article.bill > a {
     // Below portrait tablet (without columns)
     @media (max-width: 767px) {
       > div {
-        padding: 1em 1em;
-        margin-bottom: 1em;
-        background: #efefef;
         @include border-radius(3px);
+        margin-bottom: 1em;
+        padding: 1em 1em;
+        background: #efefef;
       }
     }
 
     .people {
       .you {
         padding: 6px 0;
-        font-weight: bold;
         color: #666;
+        font-weight: bold;
       }
       select {
         width: 100%;
@@ -106,9 +106,9 @@ article.bill > a {
     }
     .owed {
       .owed-result {
-        line-height: 29px;
-        margin-left: 1ex;
         float: left;
+        margin-left: 1ex;
+        line-height: 29px;
       }
     }
   }
@@ -139,16 +139,14 @@ article.bill > a {
   }
 
   .participations {
-    width: 100%;
     margin: 1em 0;
+    width: 100%;
 
     th, td {
+      padding: 1ex;
       text-align: right;
-      padding: 10%;
       font-weight: normal;
       font-size: 1.2em;
-      text-align: right;
-      padding: 1ex;
     }
 
     thead {
