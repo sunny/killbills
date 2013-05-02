@@ -5,3 +5,5 @@ require 'rails/test_help'
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 end
+
+require 'mocha/setup'

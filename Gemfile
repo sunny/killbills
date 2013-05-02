@@ -47,6 +47,7 @@ group :development do
   # gem 'rack-mini-profiler'
   # gem 'bullet'
   # gem 'debugger'
+  # gem 'xray-rails'
 
   # Guard
   gem 'guard-test'
@@ -58,5 +59,5 @@ group :test do
   gem 'shoulda-context'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'mocha'
+  gem 'mocha', require: false
 end
