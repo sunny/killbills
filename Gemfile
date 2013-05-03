@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.11'
 gem 'pg'
-gem 'activeadmin'
+gem 'activeadmin', '~> 0.5.0'
 gem 'enumerize'
 gem 'devise'
 gem 'devise_browserid_authenticatable', '~> 1.2.0'
@@ -13,16 +13,15 @@ gem 'thin'
 gem 'exception_notification'
 gem 'draper'
 
-
 # Rails 4
 gem 'strong_parameters'
 gem 'turbolinks'
 gem 'cache_digests'
 
-# Asset libraries needed in production
+# Asset gems needed in production
 gem 'jquery-rails-cdn'
 
-# Asset libraries not needed in production
+# Asset gems not needed in production
 group :assets do
   # CSS
   gem 'sass-rails'
