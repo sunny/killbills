@@ -18,25 +18,20 @@ gem 'strong_parameters'
 gem 'turbolinks'
 gem 'cache_digests'
 
-# Asset gems needed in production
+# CSS
+gem 'sass-rails'
+gem 'compass-rails'
+gem 'bootstrap-sass'
+gem 'yui-compressor'
+
+# JS
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-turbolinks'
+gem 'rails-backbone'
+gem 'eco'
+gem 'i18n-js'
 gem 'jquery-rails-cdn'
-
-# Asset gems not needed in production
-group :assets do
-  # CSS
-  gem 'sass-rails'
-  gem 'compass-rails'
-  gem 'bootstrap-sass'
-  gem 'yui-compressor'
-
-  # JS
-  gem 'uglifier'
-  gem 'coffee-rails'
-  gem 'jquery-turbolinks'
-  gem 'rails-backbone'
-  gem 'eco'
-  gem 'i18n-js'
-end
 
 group :development do
   # Debugging
