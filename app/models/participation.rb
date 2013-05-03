@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
   has_one :user, through: :bill
 
   # Attributes
-  include Enumerize
+  extend Enumerize
   include ActiveModel::ForbiddenAttributesProtection
   enumerize :owed_type, in: [:even, :zero, :all, :fixed], default: :even
 

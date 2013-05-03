@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
 
   # Attributes
   include ActiveModel::ForbiddenAttributesProtection
-  include Enumerize
+  extend Enumerize
   enumerize :currency, in: %w(USD EUR), default: 'USD'
 
   def currency_unit

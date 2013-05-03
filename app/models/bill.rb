@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
 
   # Attributes
   include ActiveModel::ForbiddenAttributesProtection
-  include Enumerize
+  extend Enumerize
   enumerize :genre, in: [:debt, :payment, :shared], default: :debt
   accepts_nested_attributes_for :participations
 
