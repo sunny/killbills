@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class BillDecoratorTest < Draper::TestCase
-  def sign_in(user)
-    warden.stubs(:authenticate!).returns(user)
-    controller.stubs(:current_user).returns(user)
-  end
-
   test '#title' do
     beatrix = create :user
     vernita = create :friend, name: "Vernita"
