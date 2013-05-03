@@ -5,7 +5,9 @@ KillBills::Application.configure do
 
   config.action_controller.perform_caching = true
 
-  config.cache_store = :dalli_store
+  config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"].to_s.split(","), {
+                           username: ENV["MEMCACHIER_USERNAME"],
+                           password: ENV["MEMCACHIER_PASSWORD"] }
 
   # Use Rack Cache with Dalli
   # https://devcenter.heroku.com/articles/rack-cache-memcached-static-assets-rails31
