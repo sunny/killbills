@@ -55,3 +55,12 @@ group :test do
   gem 'factory_girl_rails'
   gem 'mocha', require: false
 end
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# gem 'jbuilder', '~> 1.0.1'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
