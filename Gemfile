@@ -2,7 +2,7 @@ ruby '2.0.0'
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.11'
-gem 'pg'
+gem 'mysql2'
 gem 'activeadmin', '~> 0.5.0'
 gem 'enumerize'
 gem 'devise'
@@ -55,7 +55,7 @@ group :test do
   gem 'shoulda-context'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'mocha', :require => false
+  gem 'mocha', require: false
 end
 
 # Use ActiveModel has_secure_password

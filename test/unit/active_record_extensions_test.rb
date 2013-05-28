@@ -16,7 +16,7 @@ class ActiveRecordExtensionsTest < ActiveSupport::TestCase
   end
 
   should "#touch_all on relations" do
-    bill = create(:bill)
+    bill = create(:bill, updated_at: 2.days.ago)
     old_updated_at = bill.updated_at
 
     relation = Bill.where(id: bill)

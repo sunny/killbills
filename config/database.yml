@@ -1,13 +1,20 @@
 development:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  adapter: mysql2
+  encoding: utf8
   host: localhost
   database: killbills_development
+  pool: 5
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  adapter: mysql2
+  encoding: utf8
   host: localhost
   database: killbills_test
+  pool: 5
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  host: localhost
+  database: killbills_production
+  pool: 5

@@ -170,7 +170,7 @@ private
     end
 
     def touch_people
-      people.touch_all
+      Person.where(id: people).touch_all
     end
 end
 
