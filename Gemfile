@@ -55,7 +55,7 @@ group :test do
   gem 'shoulda-context'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'mocha', require: false
+  gem 'mocha', :require => false
 end
 
 # Use ActiveModel has_secure_password
