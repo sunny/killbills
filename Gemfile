@@ -10,8 +10,10 @@ gem 'devise_browserid_authenticatable', '~> 1.2.0'
 gem 'haml'
 gem 'dalli'
 gem 'thin'
-gem 'exception_notification'
 gem 'draper'
+gem 'exception_notification'
+gem 'raise_js'
+gem 'rateaux'
 
 # Rails 4
 gem 'strong_parameters'
