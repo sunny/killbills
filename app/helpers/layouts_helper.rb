@@ -1,8 +1,10 @@
 module LayoutsHelper
+  # Set title
   def title(title)
     content_for(:page_title){ title }
   end
 
+  # Show title
   def page_title
     if content_for?(:page_title)
       title = content_for(:page_title)
