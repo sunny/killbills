@@ -11,10 +11,3 @@ test:
   host: localhost
   database: killbills_test
   pool: 5
-
-production:
-  adapter: mysql2
-  encoding: utf8
-  host: localhost
-  database: killbills_production
-  pool: 5
