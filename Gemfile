@@ -23,7 +23,11 @@ gem 'cache_digests'
 # CSS
 gem 'sass-rails'
 gem 'compass-rails'
-gem 'bootstrap-sass'
+
+# Bootstrap-sass
+# Forced at 2.3.1.0 because of error while bundling with:
+#   $ bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile --trace
+gem 'bootstrap-sass', '2.3.1.0'
 gem 'yui-compressor'
 
 # JS
