@@ -1,2 +1,4 @@
+rvm:
+  - "2.0.0-p0"
 before_script:
   - bundle exec rake db:create db:schema:load RAILS_ENV=test
