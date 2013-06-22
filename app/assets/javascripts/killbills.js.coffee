@@ -33,6 +33,7 @@ $(document).on 'click', '[data-persona-login]', ->
         data:
           assertion: assertion
         success: (data, status) ->
+          $('html').addClass('fetching')
           window.location.href = '/'+I18n.locale
   off
 

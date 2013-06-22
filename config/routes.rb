@@ -5,7 +5,8 @@ KillBills::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   scope "/(:locale)", locale: /en|fr/ do
-    devise_for :users
+    devise_for :users, controllers: { sessions: "sessions" }
+
     resources :friends
     resources :bills
     resource :options, only: [:edit, :update]
