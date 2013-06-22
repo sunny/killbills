@@ -13,9 +13,10 @@ class OptionsControllerTest < ActionController::TestCase
   end
 
   test "should get update" do
+    assert_equal 'USD', @user.currency
     get :update, user: { currency: 'EUR' }
     assert_redirected_to edit_options_path
-    assert_equal 'EUR', assigns(:user).currency
+    assert_equal 'EUR', User.find(@user).currency
   end
 
 end
