@@ -1,8 +1,8 @@
 class BillsController < ApplicationController
+  # TODO respond_with
   before_filter :show_anonymous_warning
 
-  # GET /bills
-  # GET /bills.xml
+  # GET /bills (.xml .json)
   def index
     @bills = current_user_or_guest.bills \
       .includes(:user, participations: :person) \
@@ -15,8 +15,7 @@ class BillsController < ApplicationController
     end
   end
 
-  # GET /bills/1
-  # GET /bills/1.xml
+  # GET /bills/1 (.xml .json)
   def show
     @bill = current_user_or_guest.bills \
       .includes(participations: :person) \
@@ -29,8 +28,7 @@ class BillsController < ApplicationController
     end
   end
 
-  # GET /bills/new
-  # GET /bills/new.xml
+  # GET /bills/new (.xml .json)
   def new
     friend = params[:friend] ? current_user_or_guest.friends.where(name: params[:friend]).first : nil
     @bill = current_user_or_guest.bills.new
@@ -49,8 +47,7 @@ class BillsController < ApplicationController
     @bill = current_user_or_guest.bills.find(params[:id])
   end
 
-  # POST /bills
-  # POST /bills.xml
+  # POST /bills (.xml .json)
   def create
     @bill = current_user_or_guest.bills.new(bill_params)
 
@@ -67,8 +64,7 @@ class BillsController < ApplicationController
     end
   end
 
-  # PUT /bills/1
-  # PUT /bills/1.xml
+  # PUT /bills/1 (.xml .json)
   def update
     @bill = current_user_or_guest.bills.find(params[:id])
 
@@ -76,17 +72,16 @@ class BillsController < ApplicationController
       if @bill.update_attributes(bill_params)
         format.html { redirect_to(@bill, notice: t('bill.updated')) }
         format.xml  { head :ok }
-        format.json  { head :ok }
+        format.json { head :ok }
       else
         format.html { render action: "edit" }
         format.xml  { render xml: @bill.errors, status: :unprocessable_entity }
-        format.json  { render json: @bill.errors, status: :unprocessable_entity }
+        format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /bills/1
-  # DELETE /bills/1.xml
+  # DELETE /bills/1 (.xml)
   def destroy
     @bill = current_user_or_guest.bills.find(params[:id])
     @bill.destroy
@@ -102,25 +97,26 @@ class BillsController < ApplicationController
 private
 
   def bill_params
-    # Sanitize params
+    # Strong parameters
     bill_params = params.require(:bill).permit(:title, :date, :genre,
       participations_attributes: [:person_id, :payment, :owed_type, :owed_amount, :owed_percent, :id]
     )
 
-    # Create friends if given a name instead of a person_id
-    participations_attributes = bill_params[:participations_attributes]
+    # Create friends if needed
+    participations_attributes_change(bill_params[:participations_attributes])
+    bill_params
+  end
 
-    if participations_attributes
-      participations_attributes.each do |index, participation|
-        person_id = participation[:person_id]
-        if person_id !~ /^([0-9]+|)$/
-          friend = current_user_or_guest.friends.where(name: person_id).first_or_create!
-          participations_attributes[index][:person_id] = friend.id
-        end
+  # Create friends if given a name instead of a person_id
+  def participations_attributes_change(attributes)
+    return unless attributes
+    attributes.each do |index, participation|
+      person_id = participation[:person_id]
+      if person_id !~ /^([0-9]+|)$/
+        friend = current_user_or_guest.friends.where(name: person_id).first_or_create!
+        attributes[index][:person_id] = friend.id
       end
     end
-
-    bill_params
   end
 end
 

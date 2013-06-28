@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_user_or_guest
 
-
   private
+
+    # I18n
 
     def set_locale
       I18n.locale = params[:locale] || I18n.default_locale
@@ -15,7 +16,9 @@ class ApplicationController < ActionController::Base
       { locale: I18n.locale }
     end
 
-    # if user is logged in, return current_user, else return guest_user
+    # Identification
+
+    # If user is logged in, return current_user, else return guest_user
     def current_user_or_guest
       if current_user
         if session[:guest_user_id]
@@ -29,7 +32,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # find guest_user object associated with the current session,
+    # Find guest_user object associated with the current session,
     # creating one as needed
     def guest_user
       if session[:guest_user_id]
@@ -40,17 +43,16 @@ class ApplicationController < ActionController::Base
       guest
     end
 
-    # called (once) when the user logs in, insert any code your application needs
-    # to hand off from guest_user to current_user.
+    # Called when the user logs in
     def logging_in
+      # TODO merge friends with the same name
       guest_user.friends.update_all(user_id: current_user.id)
       guest_user.bills.update_all(user_id: current_user.id)
       guest_user.participations.update_all(person_id: current_user.id)
     end
 
+    # Notice that tells you why should be signing-in
     def show_anonymous_warning
-      if current_user.nil?
-        flash.now[:anonymous_warning] = true
-      end
+      flash.now[:anonymous_warning] = true if current_user.nil?
     end
 end

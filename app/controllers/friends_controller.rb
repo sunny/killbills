@@ -1,7 +1,7 @@
 class FriendsController < ApplicationController
   before_filter :show_anonymous_warning
 
-  # GET /friends/
+  # GET /friends/ (.xml .json)
   def index
     @friends = current_user_or_guest.friends.order(:name) \
       .includes(bills: :participations)
@@ -21,10 +21,11 @@ class FriendsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render xml: @friends }
+      format.json { render json: @friends }
     end
   end
 
-  # GET /friends/1
+  # GET /friends/1 (.xml .json)
   def show
     @friend = current_user_or_guest.friends \
       .includes(bills: :participations) \
@@ -34,16 +35,18 @@ class FriendsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render xml: @friend }
+      format.json { render json: @friend }
     end
   end
 
-  # GET /friends/new
+  # GET /friends/new (.xml .json)
   def new
     @friend = current_user_or_guest.friends.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render xml: @friend }
+      format.json { render json: @friend }
     end
   end
 
@@ -60,9 +63,11 @@ class FriendsController < ApplicationController
       if @friend.save
         format.html { redirect_to(@friend, notice: t('friend.created')) }
         format.xml  { render xml: @friend, status: :created, location: @friend }
+        format.json { render json: @friend, status: :created, location: @friend }
       else
         format.html { render action: "new" }
         format.xml  { render xml: @friend.errors, status: :unprocessable_entity }
+        format.json { render json: @friend.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -75,9 +80,11 @@ class FriendsController < ApplicationController
       if @friend.update_attributes(friend_params)
         format.html { redirect_to(@friend, notice: t('friend.updated')) }
         format.xml  { head :ok }
+        format.json { head :ok }
       else
         format.html { render action: "edit" }
         format.xml  { render xml: @friend.errors, status: :unprocessable_entity }
+        format.json { render json: @friend.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -90,6 +97,7 @@ class FriendsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(friends_url) }
       format.xml  { head :ok }
+      format.json { head :ok }
     end
   end
 
